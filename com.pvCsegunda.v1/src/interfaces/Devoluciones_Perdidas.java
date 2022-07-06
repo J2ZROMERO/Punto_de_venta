@@ -26,8 +26,9 @@ public class Devoluciones_Perdidas extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_id;
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txt_fecha_inicial;
+	private JTextField txt_fecha_final;
+	private JTextField txt_id_cliente;
 
 	/**
 	 * Launch the application.
@@ -66,12 +67,12 @@ public class Devoluciones_Perdidas extends JFrame {
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_id.setBounds(10, 47, 70, 18);
+		lbl_id.setBounds(10, 46, 70, 18);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		txt_id.setBounds(90, 45, 110, 20);
+		txt_id.setBounds(90, 45, 133, 20);
 		panel.add(txt_id);
 		txt_id.setColumns(10);
 		
@@ -106,65 +107,74 @@ public class Devoluciones_Perdidas extends JFrame {
 		JLabel lbl_motivo = new JLabel("MOTIVO");
 		lbl_motivo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_motivo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_motivo.setBounds(10, 241, 93, 20);
+		lbl_motivo.setBounds(244, 205, 93, 20);
 		panel.add(lbl_motivo);
 		
 		JComboBox cbx_motivo = new JComboBox();
-		cbx_motivo.setModel(new DefaultComboBoxModel(new String[] {"DEVOLUCION", "CADUCADO", "ABIERTO", "MAL ESTADO", "INSERVIBLE ", "INCOMPLETO"}));
+		cbx_motivo.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "DEVOLUCION", "CADUCADO", "ABIERTO", "MAL ESTADO", "INSERVIBLE ", "INCOMPLETO"}));
 		cbx_motivo.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		cbx_motivo.setBounds(113, 240, 145, 22);
+		cbx_motivo.setBounds(347, 204, 145, 22);
 		panel.add(cbx_motivo);
 		
 		JLabel lbl_cantidad = new JLabel("CANTIDAD");
 		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_cantidad.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_cantidad.setBounds(10, 200, 93, 29);
+		lbl_cantidad.setBounds(10, 201, 93, 29);
 		panel.add(lbl_cantidad);
 		
 		JButton btn_devolver = new JButton("DEVOLVER");
 		btn_devolver.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_devolver.setBounds(113, 293, 110, 23);
+		btn_devolver.setBounds(184, 308, 110, 23);
 		panel.add(btn_devolver);
 		
 		JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
 		lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_inicial.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_inicial.setBounds(10, 379, 122, 18);
+		lbl_fecha_inicial.setBounds(66, 376, 122, 18);
 		panel.add(lbl_fecha_inicial);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		textField.setColumns(10);
-		textField.setBounds(142, 377, 145, 20);
-		panel.add(textField);
+		txt_fecha_inicial = new JTextField();
+		txt_fecha_inicial.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+		txt_fecha_inicial.setColumns(10);
+		txt_fecha_inicial.setBounds(198, 374, 145, 20);
+		panel.add(txt_fecha_inicial);
 		
 		JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 		lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_final.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_final.setBounds(10, 447, 122, 18);
+		lbl_fecha_final.setBounds(66, 444, 122, 18);
 		panel.add(lbl_fecha_final);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		textField_1.setColumns(10);
-		textField_1.setBounds(142, 445, 145, 20);
-		panel.add(textField_1);
+		txt_fecha_final = new JTextField();
+		txt_fecha_final.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+		txt_fecha_final.setColumns(10);
+		txt_fecha_final.setBounds(198, 442, 145, 20);
+		panel.add(txt_fecha_final);
 		
 		JLabel lbl_calendario = new JLabel("");
 		lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_calendario.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
-		lbl_calendario.setBounds(299, 356, 70, 58);
+		lbl_calendario.setBounds(355, 353, 70, 58);
 		panel.add(lbl_calendario);
 		
 		JLabel lbl_calendario_1 = new JLabel("");
 		lbl_calendario_1.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
 		lbl_calendario_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_calendario_1.setBounds(299, 423, 70, 58);
+		lbl_calendario_1.setBounds(355, 420, 70, 58);
 		panel.add(lbl_calendario_1);
 		
 		JButton btn_ver_movimiento = new JButton("VER MOVIMIENTOS");
 		btn_ver_movimiento.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_ver_movimiento.setBounds(82, 505, 176, 23);
+		btn_ver_movimiento.setBounds(167, 505, 176, 23);
+		btn_ver_movimiento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Devoluciones_Perdidas_Tabla_Ver_Movimientos tvm = new Devoluciones_Perdidas_Tabla_Ver_Movimientos();
+				tvm.setVisible(true);
+				tvm.setLocationRelativeTo(null);
+				tvm.setFocusable(true);
+			}
+		});
 		panel.add(btn_ver_movimiento);
 		
 		JButton btn_regresar = new JButton("");
@@ -182,5 +192,17 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		panel.add(btn_regresar);
+		
+		JLabel lbl_id_cliente = new JLabel("ID CLIENTE");
+		lbl_id_cliente.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_id_cliente.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_id_cliente.setBounds(113, 263, 113, 18);
+		panel.add(lbl_id_cliente);
+		
+		txt_id_cliente = new JTextField();
+		txt_id_cliente.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_id_cliente.setColumns(10);
+		txt_id_cliente.setBounds(236, 262, 133, 20);
+		panel.add(txt_id_cliente);
 	}
 }
