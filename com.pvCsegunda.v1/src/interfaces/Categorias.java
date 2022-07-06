@@ -111,9 +111,12 @@ public class Categorias extends JFrame {
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				if(!txt_categoria.equals("")) {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR LOS CAMPOS..." );
+				if(!txt_categoria.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "CATEGORIA AGREGADA CORRECTAMENTE");
+					txt_categoria.setText("");
+					txt_categoria.setFocusable(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_categoria.setFocusable(true);
 				}
 			}
@@ -127,8 +130,14 @@ public class Categorias extends JFrame {
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR LOS CAMPOS...");
-				txt_categoria.setFocusable(true);
+				if(!txt_categoria.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "CATEGORIA ELIMINADA CORRECTAMENTE");
+					txt_categoria.setText("");
+					txt_categoria.setFocusable(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					txt_categoria.setFocusable(true);
+				}
 			}
 		});
 		panel.add(btn_eliminar);

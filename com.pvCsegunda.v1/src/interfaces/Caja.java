@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class Caja extends JFrame {
 
@@ -25,15 +27,20 @@ public class Caja extends JFrame {
 	private JTextField txt_saldo_total_del_dia;
 	private JTextField txt_fecha_inicial;
 	private JTextField txt_fecha_final;
+	private static Caja frame;
 
 	/**
 	 * Launch the application.
 	 */
+	public void Activar_Botones() {
+		
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					Caja frame = new Caja();
+				try {					
+					frame = new Caja();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					frame.setFocusable(true);
@@ -72,6 +79,7 @@ public class Caja extends JFrame {
 		lbl_saldo_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txt_saldo_inicial = new JTextField();
+		txt_saldo_inicial.setEnabled(false);
 		txt_saldo_inicial.setBounds(196, 55, 192, 22);
 		panel.add(txt_saldo_inicial);
 		txt_saldo_inicial.setFont(new Font("Roboto Slab", Font.BOLD, 12));
@@ -83,10 +91,11 @@ public class Caja extends JFrame {
 		lbl_movimiento.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_movimiento.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		
-		JComboBox txt_movimiento = new JComboBox();
-		txt_movimiento.setBounds(196, 100, 192, 22);
-		panel.add(txt_movimiento);
-		txt_movimiento.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+		JComboBox cbx_movimiento = new JComboBox();
+		cbx_movimiento.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "SALIDA DE EFECTIVO", "ENTRADA DE EFECTIVO"}));
+		cbx_movimiento.setBounds(196, 100, 192, 22);
+		panel.add(cbx_movimiento);
+		cbx_movimiento.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		
 		JLabel lbl_motivo = new JLabel("MOTIVO");
 		lbl_motivo.setBounds(10, 143, 159, 22);
@@ -115,6 +124,22 @@ public class Caja extends JFrame {
 		JButton btn_cargar_movimiento = new JButton("CARGAR MOVIMIENTO");
 		btn_cargar_movimiento.setBounds(196, 241, 192, 23);
 		panel.add(btn_cargar_movimiento);
+		
+		btn_cargar_movimiento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(cbx_movimiento.getSelectedIndex() > 0 && !txt_motivo.getText().equals("") && !txt_monto.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"MOVIMIENTO CARGADO CORRECTAMENTE");
+					cbx_movimiento.setSelectedIndex(0);
+					txt_motivo.setText("");
+					txt_monto.setText("");
+					frame.requestFocus();
+				}else{
+					JOptionPane.showMessageDialog(null,"MOVIMIENTO, MOTIVO Y MONTON DEBEN SER LLENADOS");
+					frame.requestFocus();
+				}
+			}
+		});
 		btn_cargar_movimiento.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		
 		JLabel lbl_saldo_total_del_dia = new JLabel("<html><center>SALDO TOTAL DEL DIA</center></html>");
@@ -172,10 +197,15 @@ public class Caja extends JFrame {
 		btn_ver_movimientos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Caja_Tabla_Ver_Movimientos ver= new Caja_Tabla_Ver_Movimientos();
-				ver.setLocationRelativeTo(null);
-				ver.setVisible(true);
-				ver.setFocusable(true);
+				if(!txt_fecha_inicial.getText().equals("") && !txt_fecha_final.getText().equals("")) {
+					Caja_Tabla_Ver_Movimientos ver= new Caja_Tabla_Ver_Movimientos();
+					ver.setLocationRelativeTo(null);
+					ver.setVisible(true);
+					ver.setFocusable(true);
+				}else {
+					JOptionPane.showMessageDialog(null,"ES NECESARIO SELECCIONAR UN RANGO DE FECHAS...");
+				}
+				
 			}
 		});
 		btn_ver_movimientos.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));

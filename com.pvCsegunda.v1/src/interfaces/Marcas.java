@@ -110,12 +110,13 @@ public class Marcas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_marca.equals("")) {
-					JOptionPane.showMessageDialog(null, "MARCA AGREGADA" );
+				if(!txt_marca.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
+					txt_marca.setText("");
 					txt_marca.setFocusable(true);
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR LOS CAMPOS..." );
+					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.setFocusable(true);
 				}
 			}
@@ -131,8 +132,12 @@ public class Marcas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_marca.equals("")) {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR LOS CAMPOS..." );
+				if(!txt_marca.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
+					txt_marca.setText("");
+					txt_marca.setFocusable(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.setFocusable(true);
 				}
 				

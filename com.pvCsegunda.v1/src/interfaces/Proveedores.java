@@ -37,6 +37,7 @@ public class Proveedores extends JFrame {
 	private JTextField txt_contacto_del_supervisor;
 	private JTable tbl_proveedores;
 	private JButton btn_regresar;
+	private static Proveedores frame;
 
 	/**
 	 * Launch the application.
@@ -45,7 +46,7 @@ public class Proveedores extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Proveedores frame = new Proveedores();
+					frame = new Proveedores();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
