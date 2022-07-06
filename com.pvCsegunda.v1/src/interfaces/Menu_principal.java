@@ -346,10 +346,10 @@ public class Menu_principal extends JFrame {
 		lbl_marcas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Categorias Cat = new Categorias();
-				Cat.setVisible(true);
-				Cat.setFocusable(true);
-				Cat.setLocationRelativeTo(null);
+				Marcas m = new Marcas();
+				m.setVisible(true);
+				m.setFocusable(true);
+				m.setLocationRelativeTo(null);
 				dispose();
 			}
 		});

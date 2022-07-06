@@ -42,6 +42,7 @@ public class Linea_de_Produccion extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
@@ -111,9 +112,13 @@ public class Linea_de_Produccion extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_linea_de_produccion.equals("")) {
+				if(!txt_linea_de_produccion.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION AGREGADA CORRECTAMENTE");
+					txt_linea_de_produccion.setText("");
+					txt_linea_de_produccion.requestFocus();
+				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
-					txt_linea_de_produccion.setFocusable(true);
+					txt_linea_de_produccion.requestFocus();
 				}
 				
 			}
@@ -129,9 +134,13 @@ public class Linea_de_Produccion extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_linea_de_produccion.equals("")) {
+				if(!txt_linea_de_produccion.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION ELIMINADA CORRECTAMENTE");
+					txt_linea_de_produccion.setText("");
+					txt_linea_de_produccion.requestFocus();
+				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
-					txt_linea_de_produccion.setFocusable(true);
+					txt_linea_de_produccion.requestFocus();
 				}
 				
 			}
