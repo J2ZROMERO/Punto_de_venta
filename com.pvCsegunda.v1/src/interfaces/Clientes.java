@@ -22,10 +22,10 @@ public class Clientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_id;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txt_nombre;
+	private JTextField txt_apellido;
+	private JTextField txt_nick_name;
+	private JTextField txt_telefono;
 	private JTable tbl_clientes;
 
 	/**
@@ -94,11 +94,11 @@ public class Clientes extends JFrame {
 		lbl_nombre.setBounds(10, 103, 102, 20);
 		panel.add(lbl_nombre);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField.setColumns(10);
-		textField.setBounds(122, 103, 163, 20);
-		panel.add(textField);
+		txt_nombre = new JTextField();
+		txt_nombre.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_nombre.setColumns(10);
+		txt_nombre.setBounds(122, 103, 163, 20);
+		panel.add(txt_nombre);
 		
 		JLabel lbl_apellido = new JLabel("APELLIDO");
 		lbl_apellido.setHorizontalAlignment(SwingConstants.CENTER);
@@ -106,23 +106,23 @@ public class Clientes extends JFrame {
 		lbl_apellido.setBounds(10, 149, 102, 20);
 		panel.add(lbl_apellido);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField_1.setColumns(10);
-		textField_1.setBounds(122, 149, 163, 20);
-		panel.add(textField_1);
+		txt_apellido = new JTextField();
+		txt_apellido.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_apellido.setColumns(10);
+		txt_apellido.setBounds(122, 149, 163, 20);
+		panel.add(txt_apellido);
 		
-		JLabel lbl_nikname = new JLabel("NIK-NAME");
-		lbl_nikname.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_nikname.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_nikname.setBounds(10, 195, 102, 20);
-		panel.add(lbl_nikname);
+		JLabel lbl_nik_name = new JLabel("NIK NAME");
+		lbl_nik_name.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_nik_name.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_nik_name.setBounds(10, 195, 102, 20);
+		panel.add(lbl_nik_name);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField_2.setColumns(10);
-		textField_2.setBounds(122, 195, 163, 20);
-		panel.add(textField_2);
+		txt_nick_name = new JTextField();
+		txt_nick_name.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_nick_name.setColumns(10);
+		txt_nick_name.setBounds(122, 195, 163, 20);
+		panel.add(txt_nick_name);
 		
 		JLabel lbl_telefono = new JLabel("TELEFONO");
 		lbl_telefono.setHorizontalAlignment(SwingConstants.CENTER);
@@ -130,11 +130,11 @@ public class Clientes extends JFrame {
 		lbl_telefono.setBounds(10, 239, 102, 20);
 		panel.add(lbl_telefono);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField_3.setColumns(10);
-		textField_3.setBounds(122, 239, 163, 20);
-		panel.add(textField_3);
+		txt_telefono = new JTextField();
+		txt_telefono.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_telefono.setColumns(10);
+		txt_telefono.setBounds(122, 239, 163, 20);
+		panel.add(txt_telefono);
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));

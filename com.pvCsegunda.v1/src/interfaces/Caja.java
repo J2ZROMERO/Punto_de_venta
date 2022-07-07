@@ -218,7 +218,7 @@ public class Caja extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				Cierre_Total_De_Caja cierre = new Cierre_Total_De_Caja();
+				Caja_Cierre_Total_De_Caja cierre = new Caja_Cierre_Total_De_Caja();
 				cierre.setFocusable(true);
 				cierre.setLocationRelativeTo(null);
 				cierre.setVisible(true);
