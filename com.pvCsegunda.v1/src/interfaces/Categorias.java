@@ -25,6 +25,7 @@ public class Categorias extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_categoria;
 	private JTable tbl_categoria;
+	private static Categorias frame;
 
 	/**
 	 * Launch the application.
@@ -33,9 +34,8 @@ public class Categorias extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Categorias frame = new Categorias();
+					frame = new Categorias();
 					frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -115,9 +115,10 @@ public class Categorias extends JFrame {
 					JOptionPane.showMessageDialog(null, "CATEGORIA AGREGADA CORRECTAMENTE");
 					txt_categoria.setText("");
 					txt_categoria.setFocusable(true);
+					txt_categoria.requestFocus();
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_categoria.setFocusable(true);
+					txt_categoria.requestFocus();
 				}
 			}
 		});
@@ -131,12 +132,17 @@ public class Categorias extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_categoria.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "CATEGORIA ELIMINADA CORRECTAMENTE");
-					txt_categoria.setText("");
-					txt_categoria.setFocusable(true);
+					
+			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?", "SELECCIONA UNA OPCION",JOptionPane.YES_NO_CANCEL_OPTION);
+					if(opcion == 0) {
+						JOptionPane.showMessageDialog(null, "CATEGORIA ELIMINADA CORRECTAMENTE");
+						txt_categoria.setText("");
+						txt_categoria.setFocusable(true);
+						txt_categoria.requestFocus();
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_categoria.setFocusable(true);
+					txt_categoria.requestFocus();
 				}
 			}
 		});

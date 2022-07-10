@@ -76,12 +76,12 @@ public class Cambiar_Usuario extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Menu_principal mp = new Menu_principal();
-				if(cbx_selecciona_usuario.getSelectedIndex() >=1) {
-					
-					mp.txt_cambiar_usuario.setText(cbx_selecciona_usuario.getSelectedItem().toString());
+				if(cbx_selecciona_usuario.getSelectedIndex() >0) {
+					dispose();
+					mp.txt_usuario.setText(cbx_selecciona_usuario.getSelectedItem().toString());
 					mp.setVisible(true);
-					mp.frame.setFocusable(true);
-					
+					mp.setFocusable(true);
+					mp.setLocationRelativeTo(null);
 					
 					dispose();
 					//JOptionPane.showMessageDialog(null,cbx_selecciona_usuario.getSelectedItem());

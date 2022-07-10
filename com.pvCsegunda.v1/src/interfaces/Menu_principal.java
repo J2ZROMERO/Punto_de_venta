@@ -27,8 +27,7 @@ import javax.swing.JTextField;
 public class Menu_principal extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField txt_cambiar_usuario;
-    public static Menu_principal frame ;
+	JTextField txt_usuario;
 	
 	/**
 	 * Launch the application.
@@ -37,7 +36,7 @@ public class Menu_principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Menu_principal();
+					Menu_principal frame = new Menu_principal();
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
@@ -447,11 +446,12 @@ public class Menu_principal extends JFrame {
 		
 		JButton btn_cambiar_usuario = new JButton("CAMBIAR USUARIO");
 		btn_cambiar_usuario.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_cambiar_usuario.setBounds(237, 11, 184, 23);
+		btn_cambiar_usuario.setBounds(237, 10, 184, 23);
 		
 		btn_cambiar_usuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				dispose();
 				Cambiar_Usuario cu = new Cambiar_Usuario();
 				cu.setVisible(true);
 				cu.setFocusable(true);
@@ -516,15 +516,12 @@ public class Menu_principal extends JFrame {
 		});
 		panel.add(lbl_proveedores);
 		
-		txt_cambiar_usuario = new JTextField();
-		txt_cambiar_usuario.setSelectedTextColor(Color.BLACK);
-		txt_cambiar_usuario.setSelectionColor(Color.WHITE);
-		txt_cambiar_usuario.setForeground(Color.BLACK);
-		txt_cambiar_usuario.setEnabled(false);
-		txt_cambiar_usuario.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_cambiar_usuario.setFont(new Font("Dialog", Font.BOLD, 12));
-		txt_cambiar_usuario.setBounds(10, 13, 217, 20);
-		panel.add(txt_cambiar_usuario);
-		txt_cambiar_usuario.setColumns(10);
+		txt_usuario = new JTextField();
+		txt_usuario.setFont(new Font("Dialog", Font.BOLD, 13));
+		txt_usuario.setEditable(false);
+		txt_usuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_usuario.setBounds(42, 11, 185, 20);
+		panel.add(txt_usuario);
+		txt_usuario.setColumns(10);
 	}
 }

@@ -33,13 +33,10 @@ public class Usuarios extends JFrame {
 	private JTextField txt_segundo_apellido;
 	private JTextField txt_nick_name;
 	private JTable tbl_usuarios;
-	/**
-	 * @wbp.nonvisual location=-29,79
-	*/
-	private final JTable table = new JTable();
 	private JTable table_1;
 	private JPasswordField txt_password;
-	
+	private JComboBox cbx_tipo_de_rol;
+	private static Usuarios frame;
 	
 	/**
 	 * Launch the application.
@@ -48,11 +45,10 @@ public class Usuarios extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Usuarios frame = new Usuarios();
+					frame = new Usuarios();
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,14 +56,17 @@ public class Usuarios extends JFrame {
 		});
 	}
 	
+	public void Limpiar_Campos() {
+		cbx_tipo_de_rol.setSelectedIndex(0);
+		txt_id.setText("");
+		txt_nombre.setText("");
+		txt_apellido.setText("");
+		txt_segundo_apellido.setText("");
+		txt_nick_name.setText("");
+		txt_password.setText("");
+	}
+	
 	public Usuarios() {
-		/*DefaultTableModel modelo;
-		modelo = new DefaultTableModel();
-		modelo.addColumn("ROL");
-		modelo.addColumn("ID");
-		modelo.addColumn("NICK NAME");
-		this.tbl_usuarios.setModel(modelo);*/
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 808, 498);
 		contentPane = new JPanel();
@@ -86,7 +85,7 @@ public class Usuarios extends JFrame {
 		lbl_tipo_de_rol.setBounds(10, 56, 121, 22);
 		panel.add(lbl_tipo_de_rol);
 		
-		JComboBox cbx_tipo_de_rol = new JComboBox();
+		cbx_tipo_de_rol = new JComboBox();
 		cbx_tipo_de_rol.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONA UN ROL", "ADMINISTRADOR", "INVITADO"}));
 		cbx_tipo_de_rol.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_tipo_de_rol.setBounds(149, 56, 230, 22);
@@ -165,18 +164,8 @@ public class Usuarios extends JFrame {
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				cbx_tipo_de_rol.setSelectedIndex(0);
-				txt_id.setText("");
-				txt_nombre.setText("");
-				txt_apellido.setText("");
-				txt_segundo_apellido.setText("");
-				txt_nick_name.setText("");
-				txt_password.setText("");
-				
-				Usuarios Us= new Usuarios();
-				Us.setFocusable(true);	
-				
+				Limpiar_Campos();
+				txt_id.requestFocus();
 			}		
 		});
 		panel.add(btn_limpiar_campos);
@@ -189,7 +178,11 @@ public class Usuarios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(cbx_tipo_de_rol.getSelectedItem().toString().equals("SELECCIONA UN ROL") && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
+					JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
+					Limpiar_Campos();
+					txt_id.requestFocus();
+				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
 				}
 				
@@ -205,10 +198,14 @@ public class Usuarios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_id.equals("")) {
-					JOptionPane.showMessageDialog(null, "FAVOR DE INGRESAR IDENTIFICADORES...");
-				}	
-				
+				if(!txt_id.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "LLENANDO CAMPOS CON LOS DATOS CORRESPONDIENTES");
+				}else {	
+					Usuarios_Tabla_Buscar tb = new Usuarios_Tabla_Buscar();
+					tb.setVisible(true);
+					tb.setLocationRelativeTo(null);
+					tb.setFocusable(true);
+				}
 			}
 		});
 		panel.add(btn_buscar);
@@ -216,11 +213,37 @@ public class Usuarios extends JFrame {
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
 		btn_actualizar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_actualizar.setBounds(511, 102, 164, 23);
+		
+		btn_actualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
+					JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO CORRECTAMENTE");
+					Limpiar_Campos();
+					txt_id.requestFocus();
+				}else {
+					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+				}
+			}
+		});
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(511, 146, 164, 23);
+		
+		btn_eliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
+					JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CORRECTAMENTE");
+					Limpiar_Campos();
+					txt_id.requestFocus();
+				}else {
+					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+				}
+			}
+		});
 		panel.add(btn_eliminar);
 		
 		JScrollPane scroll = new JScrollPane();

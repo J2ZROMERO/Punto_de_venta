@@ -140,7 +140,7 @@ public class Login extends JFrame {
 	
 		if(cbx_nickname.getName().equals("")) {
 				if (pass.equalsIgnoreCase("12345") && nombre.equalsIgnoreCase(cbx_nickname.getName())) {
-					Caja_Inicial ci = new Caja_Inicial(); 
+					Caja_Inicial ci = new Caja_Inicial();
 					ci.setVisible(true);
 					ci.setFocusable(true);
 					ci.setLocationRelativeTo(null);
@@ -185,8 +185,8 @@ public class Login extends JFrame {
 			//String contra = String.valueOf(txt_password.getPassword());
 			//String user = cbx_nickname.getSelectedItem().toString();
 			
-		    System.out.println(usuario);
-		    System.out.println(password);
+		    //System.out.println(usuario);
+		    //System.out.println(password);
 			
 			if((usuario.equals(us1) && password.equals(pass1)) || (usuario.equals(us2) && password.equals(pass2)) || (usuario.equals(us3) && password.equals(pass3)) ||(usuario.equals(us4) && password.equals(pass4) )) {                        
 				JOptionPane.showMessageDialog(null, "DATOS CORRECTOS...");
