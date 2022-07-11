@@ -175,7 +175,9 @@ public class Estadisticas extends JFrame {
 					cbx_estadisticas_por_1.setModel(new DefaultComboBoxModel(getEstadisticas(cbx_estadisticas_por.getSelectedItem().toString())));
 				}
 				else {
-					cbx_estadisticas_por_1.setSelectedIndex(0);
+					cbx_estadisticas_por_1.setSelectedIndex(-1);
+					cbx_estadisticas_por_1.removeAllItems();
+					Desactivar_Bontones();
 				}
 			}
 			}

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -17,13 +18,15 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Bar_Code extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_id;
 	private JTable tbl_bar_code;
-	private JTextField textField;
+	private JTextField txt_cantidad;
 	private JTable tbl_etiquetas;
 
 	/**
@@ -106,16 +109,39 @@ public class Bar_Code extends JFrame {
 		lbl_id_1.setBounds(10, 146, 147, 35);
 		panel.add(lbl_id_1);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField.setColumns(10);
-		textField.setBounds(10, 190, 44, 35);
-		panel.add(textField);
+		txt_cantidad = new JTextField();
+		txt_cantidad.setText("0");
+		txt_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_cantidad.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_cantidad.setColumns(10);
+		txt_cantidad.setBounds(10, 190, 44, 35);
+		
+		txt_cantidad.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				int key = e.getKeyChar();
+				boolean numeros = key >= 48 && key <= 57;
+				if (!numeros)
+			    {
+			        e.consume();
+			    }
+				if(txt_cantidad.getText().trim().length() == 4) {
+					e.consume();
+				}
+			}
+		});
+		panel.add(txt_cantidad);
 		
 		JButton btn_mas = new JButton("+");
 		btn_mas.setFont(new Font("Dialog", Font.BOLD, 15));
 		btn_mas.setBounds(64, 190, 44, 35);
+		
+		btn_mas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		panel.add(btn_mas);
 		
 		JButton btn_menos = new JButton("-");
@@ -142,11 +168,28 @@ public class Bar_Code extends JFrame {
 		JButton btn_ejecutar = new JButton("EJECUTAR");
 		btn_ejecutar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ejecutar.setBounds(34, 268, 122, 23);
+		
+		btn_ejecutar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null,"AÑADIENDO ELEMENTOS A LA HOJA");
+			}
+		});
 		panel.add(btn_ejecutar);
 		
 		JButton btn_limpiar_hoja = new JButton("LIMPIAR HOJA");
 		btn_limpiar_hoja.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_limpiar_hoja.setBounds(192, 268, 141, 23);
+		
+		btn_limpiar_hoja.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JOptionPane.showMessageDialog(null,"LIMPIANDO HOJA");
+				txt_id.setText("");
+				txt_cantidad.setText("");
+				txt_id.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_hoja);
 		
 		JButton btn_buscar = new JButton("BUSCAR");
@@ -156,10 +199,19 @@ public class Bar_Code extends JFrame {
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Bar_Code_Buscar bcb = new Bar_Code_Buscar();
-				bcb.setVisible(true);
-				bcb.setFocusable(true);
-				bcb.setLocationRelativeTo(null);
+				
+				if (!txt_id.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"LLENANDO CAMPOS");
+					txt_id.setText("");
+					txt_cantidad.setText("");
+					txt_id.requestFocus();
+				}
+				else {
+					Bar_Code_Buscar bcb = new Bar_Code_Buscar();
+					bcb.setVisible(true);
+					bcb.setFocusable(true);
+					bcb.setLocationRelativeTo(null);
+				}
 			}
 		});
 		panel.add(btn_buscar);
