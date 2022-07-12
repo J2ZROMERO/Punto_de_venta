@@ -146,7 +146,7 @@ public class Bar_Code extends JFrame {
 		
 		JButton btn_menos = new JButton("-");
 		btn_menos.setFont(new Font("Dialog", Font.BOLD, 22));
-		btn_menos.setBounds(118, 192, 44, 33);
+		btn_menos.setBounds(118, 190, 44, 35);
 		panel.add(btn_menos);
 		
 		JLabel lbl_añadir_precio_a_etiquetas = new JLabel("<html><center>AÑADIR PRECIO A ETIQUETAS</center></html>");

@@ -278,6 +278,13 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		JButton btn_regresar = new JButton("");
 		btn_regresar.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/flecha.png")));
 		btn_regresar.setBounds(0, 0, 44, 35);
+		
+		btn_regresar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		panel.add(btn_regresar);
 	}
 }

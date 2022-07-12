@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
@@ -20,6 +22,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Devoluciones_Perdidas extends JFrame {
 
@@ -29,6 +35,9 @@ public class Devoluciones_Perdidas extends JFrame {
 	private JTextField txt_fecha_inicial;
 	private JTextField txt_fecha_final;
 	private JTextField txt_id_cliente;
+	private JButton btn_devolver;
+	private JComboBox cbx_motivo;
+	private JSpinner sp_cantidad;
 
 	/**
 	 * Launch the application.
@@ -51,6 +60,24 @@ public class Devoluciones_Perdidas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Desactivar_Boton() {
+		int numero = Integer.parseInt(sp_cantidad.getValue().toString());
+		//JOptionPane.showMessageDialog(null, numero);
+		if ( !txt_id.getText().equals("") && cbx_motivo.getSelectedIndex() > 0 && numero > 0) {
+			btn_devolver.setEnabled(true);
+		}
+		
+	}
+	
+	public void Activar_Boton() {
+		int numero = Integer.parseInt(sp_cantidad.getValue().toString());
+		JOptionPane.showMessageDialog(null, numero);
+		if ( !txt_id.getText().equals("") && cbx_motivo.getSelectedIndex() > 0 && numero > 0) {
+			btn_devolver.setEnabled(false);
+		}
+	}
+	
 	public Devoluciones_Perdidas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 519, 599);
@@ -74,15 +101,43 @@ public class Devoluciones_Perdidas extends JFrame {
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(90, 45, 133, 20);
 		panel.add(txt_id);
+		
+		txt_id.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Activar_Boton();
+			}
+		});
 		txt_id.setColumns(10);
 		
 		JButton btn_buscar = new JButton("BUSCAR");
 		btn_buscar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_buscar.setBounds(269, 44, 100, 23);
+		
+		btn_buscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"LLENANDO CAMPOS");
+				}else {
+					Devoluciones_Perdidas_Buscar b = new Devoluciones_Perdidas_Buscar();
+					b.setVisible(true);
+					b.setLocationRelativeTo(null);
+					b.setFocusable(true);
+				}
+			}
+		});
 		panel.add(btn_buscar);
 		
-		JSpinner sp_cantidad = new JSpinner();
+		sp_cantidad = new JSpinner();
 		sp_cantidad.setBounds(113, 201, 50, 29);
+		
+		sp_cantidad.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Activar_Boton();
+			}
+		});
 		panel.add(sp_cantidad);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -110,10 +165,23 @@ public class Devoluciones_Perdidas extends JFrame {
 		lbl_motivo.setBounds(244, 205, 93, 20);
 		panel.add(lbl_motivo);
 		
-		JComboBox cbx_motivo = new JComboBox();
+		cbx_motivo = new JComboBox();
 		cbx_motivo.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "DEVOLUCION", "CADUCADO", "ABIERTO", "MAL ESTADO", "INSERVIBLE ", "INCOMPLETO"}));
 		cbx_motivo.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_motivo.setBounds(347, 204, 145, 22);
+		
+		cbx_motivo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					if(cbx_motivo.getSelectedIndex()>0) {
+						Activar_Boton();
+					}
+					else {
+						Desactivar_Boton();
+					}
+				}
+			}
+		});
 		panel.add(cbx_motivo);
 		
 		JLabel lbl_cantidad = new JLabel("CANTIDAD");
@@ -122,7 +190,8 @@ public class Devoluciones_Perdidas extends JFrame {
 		lbl_cantidad.setBounds(10, 201, 93, 29);
 		panel.add(lbl_cantidad);
 		
-		JButton btn_devolver = new JButton("DEVOLVER");
+		btn_devolver = new JButton("DEVOLVER");
+		btn_devolver.setEnabled(false);
 		btn_devolver.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_devolver.setBounds(184, 308, 110, 23);
 		panel.add(btn_devolver);
@@ -169,10 +238,16 @@ public class Devoluciones_Perdidas extends JFrame {
 		btn_ver_movimiento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Devoluciones_Perdidas_Tabla_Ver_Movimientos tvm = new Devoluciones_Perdidas_Tabla_Ver_Movimientos();
-				tvm.setVisible(true);
-				tvm.setLocationRelativeTo(null);
-				tvm.setFocusable(true);
+				
+				if(!txt_fecha_inicial.getText().equals("") && !txt_fecha_final.getText().equals("")) {
+					Devoluciones_Perdidas_Tabla_Ver_Movimientos tvm = new Devoluciones_Perdidas_Tabla_Ver_Movimientos();
+					tvm.setVisible(true);
+					tvm.setLocationRelativeTo(null);
+					tvm.setFocusable(true);
+				}else {
+					JOptionPane.showMessageDialog(null,"DEBES SELECCIONAR UN RANGO DE FECHAS");
+				}
+				
 			}
 		});
 		panel.add(btn_ver_movimiento);
