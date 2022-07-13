@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -74,6 +75,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setBounds(10, 68, 126, 23);
 		panel.add(txt_id);
 		txt_id.setColumns(10);
@@ -90,6 +92,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_producto);
 		
 		txt_producto = new JTextField();
+		txt_producto.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_producto.setBounds(288, 68, 167, 23);
 		txt_producto.setColumns(10);
 		panel.add(txt_producto);
@@ -101,7 +104,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Tabla_Bucar vt = new Ventas_Tabla_Bucar();
+				Ventas_Tabla_Buscar vt = new Ventas_Tabla_Buscar();
 				vt.setVisible(true);
 				vt.setFocusable(true);
 				vt.setLocationRelativeTo(null);
@@ -116,6 +119,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_distintivo1);
 		
 		txt_distintivo_1 = new JTextField();
+		txt_distintivo_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_distintivo_1.setBounds(10, 163, 159, 23);
 		txt_distintivo_1.setColumns(10);
 		panel.add(txt_distintivo_1);
@@ -127,6 +131,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(notas_a_cerca_del_producto);
 		
 		txt_notas_a_cerca_del_producto = new JTextField();
+		txt_notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_a_cerca_del_producto.setBounds(218, 163, 184, 23);
 		txt_notas_a_cerca_del_producto.setColumns(10);
 		panel.add(txt_notas_a_cerca_del_producto);
@@ -138,6 +143,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_marca);
 		
 		txt_marca = new JTextField();
+		txt_marca.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_marca.setBounds(10, 238, 140, 23);
 		txt_marca.setColumns(10);
 		panel.add(txt_marca);
@@ -149,6 +155,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_proveedor);
 		
 		txt_proveedor = new JTextField();
+		txt_proveedor.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_proveedor.setBounds(233, 238, 140, 23);
 		txt_proveedor.setColumns(10);
 		panel.add(txt_proveedor);
@@ -160,6 +167,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_categoria);
 		
 		txt_categoria = new JTextField();
+		txt_categoria.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_categoria.setBounds(457, 238, 140, 23);
 		txt_categoria.setColumns(10);
 		panel.add(txt_categoria);
@@ -171,6 +179,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_linea);
 		
 		txt_linea_de_produccion = new JTextField();
+		txt_linea_de_produccion.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_linea_de_produccion.setBounds(681, 239, 140, 21);
 		txt_linea_de_produccion.setColumns(10);
 		panel.add(txt_linea_de_produccion);
@@ -182,6 +191,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_atributos_del_contenido);
 		
 		JComboBox cbx_atributos_de_contenido = new JComboBox();
+		cbx_atributos_de_contenido.setFont(new Font("Dialog", Font.BOLD, 12));
 		cbx_atributos_de_contenido.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "MEDIDA", "MILILITROS", "COLOR", "TAMAÑO", "KILOGRAMOS"}));
 		cbx_atributos_de_contenido.setBounds(10, 373, 140, 23);
 		panel.add(cbx_atributos_de_contenido);
@@ -193,6 +203,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_stock);
 		
 		txt_stock = new JTextField();
+		txt_stock.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_stock.setBounds(272, 373, 140, 23);
 		txt_stock.setColumns(10);
 		panel.add(txt_stock);
@@ -204,6 +215,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_precio_de_venta);
 		
 		txt_precio_de_venta = new JTextField();
+		txt_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_venta.setBounds(462, 373, 140, 23);
 		txt_precio_de_venta.setColumns(10);
 		panel.add(txt_precio_de_venta);
@@ -215,6 +227,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_precio_de_compra);
 		
 		txt_precio_de_compra = new JTextField();
+		txt_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_compra.setBounds(662, 373, 140, 23);
 		txt_precio_de_compra.setColumns(10);
 		panel.add(txt_precio_de_compra);
@@ -226,6 +239,7 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		panel.add(lbl_notas_a_cerca_de_su_seleccion);
 		
 		txt_notas_a_cerca_de_su_seleccion = new JTextField();
+		txt_notas_a_cerca_de_su_seleccion.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_a_cerca_de_su_seleccion.setBounds(10, 480, 140, 23);
 		txt_notas_a_cerca_de_su_seleccion.setColumns(10);
 		panel.add(txt_notas_a_cerca_de_su_seleccion);
@@ -233,46 +247,150 @@ public class Devoluciones_Perdidas_Buscar extends JFrame {
 		JButton btn_limpiar_marca = new JButton("");
 		btn_limpiar_marca.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_marca.setBounds(160, 217, 46, 35);
+		
+		btn_limpiar_marca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_marca.setText("");
+				txt_marca.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_marca);
 		
 		JButton btn_limpiar_proveedor = new JButton("");
 		btn_limpiar_proveedor.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_proveedor.setBounds(383, 217, 46, 35);
+		
+		btn_limpiar_proveedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_proveedor.setText("");
+				txt_proveedor.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_proveedor);
 		
 		JButton btn_limpiar_categoria = new JButton("");
 		btn_limpiar_categoria.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_categoria.setBounds(607, 217, 46, 35);
+		
+		btn_limpiar_categoria.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_categoria.setText("");
+				txt_categoria.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_categoria);
 		
 		JButton btn_limpiar_linea_de_produccion = new JButton("");
 		btn_limpiar_linea_de_produccion.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_linea_de_produccion.setBounds(831, 217, 46, 35);
+		
+		btn_limpiar_linea_de_produccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_linea_de_produccion.setText("");
+				txt_linea_de_produccion.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_linea_de_produccion);
 		
 		JButton btn_limpiar_atributos_de_contenido = new JButton("");
 		btn_limpiar_atributos_de_contenido.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_atributos_de_contenido.setBounds(160, 350, 46, 35);
+		
+		btn_limpiar_atributos_de_contenido.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cbx_atributos_de_contenido.setSelectedIndex(0);
+				cbx_atributos_de_contenido.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_atributos_de_contenido);
 		
 		JButton btn_buscar_marca = new JButton("");
 		btn_buscar_marca.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_marca.setBounds(58, 272, 46, 43);
+		
+		btn_buscar_marca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_marca.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO MARCA VACIO...");
+					txt_marca.requestFocus();
+				}else {
+					Devoluciones_Perdidas_Tabla_Buscar_Marca m = new Devoluciones_Perdidas_Tabla_Buscar_Marca();
+					m.setVisible(true);
+					m.setLocationRelativeTo(null);
+					m.setFocusable(true);
+					txt_marca.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_marca);
 		
 		JButton btn_buscar_proveedor = new JButton("");
 		btn_buscar_proveedor.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_proveedor.setBounds(283, 272, 46, 43);
+		
+		btn_buscar_proveedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_proveedor.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO PROVEEDOR VACIO...");
+					txt_proveedor.requestFocus();
+				}else {
+					Devoluciones_Perdidas_Tabla_Buscar_Proveedor p = new Devoluciones_Perdidas_Tabla_Buscar_Proveedor();
+					p.setVisible(true);
+					p.setLocationRelativeTo(null);
+					p.setFocusable(true);
+					txt_proveedor.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_proveedor);
 		
 		JButton btn_buscar_categoria = new JButton("");
 		btn_buscar_categoria.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_categoria.setBounds(508, 272, 46, 43);
+		
+		btn_buscar_categoria.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_categoria.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO CATEGORIA VACIO...");
+					txt_categoria.requestFocus();
+				}else {
+					Devoluciones_Perdidas_Tabla_Buscar_Categoria c = new Devoluciones_Perdidas_Tabla_Buscar_Categoria();
+					c.setVisible(true);
+					c.setLocationRelativeTo(null);
+					c.setFocusable(true);
+					txt_categoria.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_categoria);
 		
 		JButton btn_buscar_linea_de_produccion = new JButton("");
 		btn_buscar_linea_de_produccion.setIcon(new ImageIcon(Devoluciones_Perdidas_Buscar.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_linea_de_produccion.setBounds(732, 271, 46, 43);
+		
+		btn_buscar_linea_de_produccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_linea_de_produccion.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO LINEA DE PRODUCCION VACIO...");
+					txt_linea_de_produccion.requestFocus();
+				}else {
+					Devoluciones_Perdidas_Tabla_Buscar_Linea_De_Produccion l = new Devoluciones_Perdidas_Tabla_Buscar_Linea_De_Produccion();
+					l.setVisible(true);
+					l.setLocationRelativeTo(null);
+					l.setFocusable(true);
+					txt_linea_de_produccion.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_linea_de_produccion);
 		
 		JButton btn_regresar = new JButton("");

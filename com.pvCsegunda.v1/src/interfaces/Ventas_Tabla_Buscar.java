@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Ventas_Tabla_Bucar extends JFrame {
+public class Ventas_Tabla_Buscar extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tbl_productos;
@@ -26,7 +26,7 @@ public class Ventas_Tabla_Bucar extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventas_Tabla_Bucar frame = new Ventas_Tabla_Bucar();
+					Ventas_Tabla_Buscar frame = new Ventas_Tabla_Buscar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +38,7 @@ public class Ventas_Tabla_Bucar extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Ventas_Tabla_Bucar() {
+	public Ventas_Tabla_Buscar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 801, 515);
 		contentPane = new JPanel();

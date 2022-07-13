@@ -104,7 +104,7 @@ public class Ventas_Buscar extends JFrame {
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Tabla_Bucar vt = new Ventas_Tabla_Bucar();
+				Ventas_Tabla_Buscar vt = new Ventas_Tabla_Buscar();
 				vt.setVisible(true);
 				vt.setFocusable(true);
 				vt.setLocationRelativeTo(null);
