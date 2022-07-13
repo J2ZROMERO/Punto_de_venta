@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -22,18 +23,18 @@ public class Productos extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_fecha_inicial;
 	private JTextField txt_fecha_final;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
+	private JTextField txt_notas_a_cerca_del_producto;
+	private JTextField txt_distintivo_1;
+	private JTextField txt_marca;
+	private JTextField txt_proveedor;
+	private JTextField txt_categoria;
+	private JTextField txt_linea_de_produccion;
+	private JTextField txt_stock;
+	private JTextField txt_precio_de_venta;
+	private JTextField txt_precio_de_compra;
+	private JTextField txt_notas_a_cerca_de_su_seleccion;
+	private JTextField txt_id;
+	private JTextField txt_producto;
 
 	/**
 	 * Launch the application.
@@ -122,6 +123,21 @@ public class Productos extends JFrame {
 		JButton btn_ver_movimientos = new JButton("VER MOVIMIENTOS");
 		btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_movimientos.setBounds(441, 508, 161, 23);
+		
+		btn_ver_movimientos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_fecha_inicial.getText().equals("") && !txt_fecha_inicial.getText().equals("")) {
+					Productos_Tabla_Ver_Movimientos p = new Productos_Tabla_Ver_Movimientos();
+					p.setVisible(true);
+					p.setLocationRelativeTo(null);
+					p.setFocusable(true);
+					
+				}else {
+					JOptionPane.showMessageDialog(null,"SELECCIONA UN RANGO DE FECHAS");
+				}
+			}
+		});
 		panel.add(btn_ver_movimientos);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
@@ -158,18 +174,20 @@ public class Productos extends JFrame {
 		JLabel notas_a_cerca_del_producto = new JLabel("<html><center>NOTAS A CERCA DEL PRODUCTO</center></html>");
 		notas_a_cerca_del_producto.setHorizontalAlignment(SwingConstants.CENTER);
 		notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 13));
-		notas_a_cerca_del_producto.setBounds(289, 98, 217, 46);
+		notas_a_cerca_del_producto.setBounds(289, 97, 217, 46);
 		panel.add(notas_a_cerca_del_producto);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(288, 145, 218, 23);
-		panel.add(textField);
+		txt_notas_a_cerca_del_producto = new JTextField();
+		txt_notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_notas_a_cerca_del_producto.setColumns(10);
+		txt_notas_a_cerca_del_producto.setBounds(288, 145, 218, 23);
+		panel.add(txt_notas_a_cerca_del_producto);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(10, 145, 227, 23);
-		panel.add(textField_1);
+		txt_distintivo_1 = new JTextField();
+		txt_distintivo_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_distintivo_1.setColumns(10);
+		txt_distintivo_1.setBounds(10, 145, 227, 23);
+		panel.add(txt_distintivo_1);
 		
 		JLabel lbl_marca = new JLabel("MARCA");
 		lbl_marca.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,10 +195,11 @@ public class Productos extends JFrame {
 		lbl_marca.setBounds(10, 198, 140, 23);
 		panel.add(lbl_marca);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(10, 220, 140, 23);
-		panel.add(textField_2);
+		txt_marca = new JTextField();
+		txt_marca.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_marca.setColumns(10);
+		txt_marca.setBounds(10, 220, 140, 23);
+		panel.add(txt_marca);
 		
 		JButton btn_buscar_marca = new JButton("");
 		btn_buscar_marca.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
@@ -190,6 +209,14 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_marca = new JButton("");
 		btn_limpiar_marca.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_marca.setBounds(160, 199, 46, 35);
+		
+		btn_limpiar_marca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_marca.setText("");
+				txt_marca.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_marca);
 		
 		JLabel lbl_proveedor = new JLabel("PROVEEDOR");
@@ -198,10 +225,11 @@ public class Productos extends JFrame {
 		lbl_proveedor.setBounds(233, 198, 140, 23);
 		panel.add(lbl_proveedor);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(233, 220, 140, 23);
-		panel.add(textField_3);
+		txt_proveedor = new JTextField();
+		txt_proveedor.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_proveedor.setColumns(10);
+		txt_proveedor.setBounds(233, 220, 140, 23);
+		panel.add(txt_proveedor);
 		
 		JButton btn_buscar_proveedor = new JButton("");
 		btn_buscar_proveedor.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
@@ -211,6 +239,14 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_proveedor = new JButton("");
 		btn_limpiar_proveedor.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_proveedor.setBounds(383, 199, 46, 35);
+		
+		btn_limpiar_proveedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_proveedor.setText("");
+				txt_proveedor.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_proveedor);
 		
 		JLabel lbl_categoria = new JLabel("CATEGORIA");
@@ -219,10 +255,11 @@ public class Productos extends JFrame {
 		lbl_categoria.setBounds(457, 198, 140, 23);
 		panel.add(lbl_categoria);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(457, 220, 140, 23);
-		panel.add(textField_4);
+		txt_categoria = new JTextField();
+		txt_categoria.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_categoria.setColumns(10);
+		txt_categoria.setBounds(457, 220, 140, 23);
+		panel.add(txt_categoria);
 		
 		JButton btn_buscar_categoria = new JButton("");
 		btn_buscar_categoria.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
@@ -232,6 +269,14 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_categoria = new JButton("");
 		btn_limpiar_categoria.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_categoria.setBounds(607, 199, 46, 35);
+		
+		btn_limpiar_categoria.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_categoria.setText("");
+				txt_categoria.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_categoria);
 		
 		JLabel lbl_linea = new JLabel("LINEA PRODUCCION");
@@ -240,10 +285,11 @@ public class Productos extends JFrame {
 		lbl_linea.setBounds(681, 198, 140, 23);
 		panel.add(lbl_linea);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(681, 221, 140, 21);
-		panel.add(textField_5);
+		txt_linea_de_produccion = new JTextField();
+		txt_linea_de_produccion.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_linea_de_produccion.setColumns(10);
+		txt_linea_de_produccion.setBounds(681, 221, 140, 21);
+		panel.add(txt_linea_de_produccion);
 		
 		JButton btn_buscar_linea_de_produccion = new JButton("");
 		btn_buscar_linea_de_produccion.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
@@ -253,6 +299,14 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_linea_de_produccion = new JButton("");
 		btn_limpiar_linea_de_produccion.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_linea_de_produccion.setBounds(831, 199, 46, 35);
+		
+		btn_limpiar_linea_de_produccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txt_linea_de_produccion.setText("");
+				txt_linea_de_produccion.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_linea_de_produccion);
 		
 		JLabel lbl_atributos_del_contenido = new JLabel("<html><center>ATRIBUTOS DE CONTENIDO</center></html>");
@@ -262,6 +316,7 @@ public class Productos extends JFrame {
 		panel.add(lbl_atributos_del_contenido);
 		
 		JComboBox cbx_atributos_de_contenido = new JComboBox();
+		cbx_atributos_de_contenido.setFont(new Font("Dialog", Font.BOLD, 12));
 		cbx_atributos_de_contenido.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "MEDIDA", "MILILITROS", "COLOR ", "TAMAÑO", "KILOGRAMO"}));
 		cbx_atributos_de_contenido.setBounds(10, 355, 140, 23);
 		panel.add(cbx_atributos_de_contenido);
@@ -269,12 +324,20 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_atributos_de_contenido = new JButton("");
 		btn_limpiar_atributos_de_contenido.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_atributos_de_contenido.setBounds(160, 332, 46, 35);
+		
+		btn_limpiar_atributos_de_contenido.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cbx_atributos_de_contenido.setSelectedIndex(0);
+			}
+		});
 		panel.add(btn_limpiar_atributos_de_contenido);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(272, 355, 140, 23);
-		panel.add(textField_6);
+		txt_stock = new JTextField();
+		txt_stock.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_stock.setColumns(10);
+		txt_stock.setBounds(272, 355, 140, 23);
+		panel.add(txt_stock);
 		
 		JLabel lbl_stock = new JLabel("STOCK");
 		lbl_stock.setHorizontalAlignment(SwingConstants.CENTER);
@@ -288,10 +351,11 @@ public class Productos extends JFrame {
 		lbl_precio_de_venta.setBounds(462, 308, 140, 47);
 		panel.add(lbl_precio_de_venta);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(462, 355, 140, 23);
-		panel.add(textField_7);
+		txt_precio_de_venta = new JTextField();
+		txt_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_precio_de_venta.setColumns(10);
+		txt_precio_de_venta.setBounds(462, 355, 140, 23);
+		panel.add(txt_precio_de_venta);
 		
 		JLabel lbl_precio_de_compra = new JLabel("PRECIO DE COMPRA");
 		lbl_precio_de_compra.setHorizontalAlignment(SwingConstants.CENTER);
@@ -299,10 +363,11 @@ public class Productos extends JFrame {
 		lbl_precio_de_compra.setBounds(662, 308, 140, 47);
 		panel.add(lbl_precio_de_compra);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(662, 355, 140, 23);
-		panel.add(textField_8);
+		txt_precio_de_compra = new JTextField();
+		txt_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_precio_de_compra.setColumns(10);
+		txt_precio_de_compra.setBounds(662, 355, 140, 23);
+		panel.add(txt_precio_de_compra);
 		
 		JLabel lbl_notas_a_cerca_de_su_seleccion = new JLabel("<html><center>NOTAS A CERCA DE SU SELECCION</center></html>");
 		lbl_notas_a_cerca_de_su_seleccion.setHorizontalAlignment(SwingConstants.CENTER);
@@ -310,10 +375,11 @@ public class Productos extends JFrame {
 		lbl_notas_a_cerca_de_su_seleccion.setBounds(10, 404, 140, 57);
 		panel.add(lbl_notas_a_cerca_de_su_seleccion);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(10, 462, 140, 23);
-		panel.add(textField_9);
+		txt_notas_a_cerca_de_su_seleccion = new JTextField();
+		txt_notas_a_cerca_de_su_seleccion.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_notas_a_cerca_de_su_seleccion.setColumns(10);
+		txt_notas_a_cerca_de_su_seleccion.setBounds(10, 462, 140, 23);
+		panel.add(txt_notas_a_cerca_de_su_seleccion);
 		
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
@@ -321,10 +387,11 @@ public class Productos extends JFrame {
 		lbl_id.setBounds(10, 40, 126, 23);
 		panel.add(lbl_id);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(10, 64, 126, 23);
-		panel.add(textField_10);
+		txt_id = new JTextField();
+		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_id.setColumns(10);
+		txt_id.setBounds(10, 64, 126, 23);
+		panel.add(txt_id);
 		
 		JButton btn_generar_qr = new JButton("");
 		btn_generar_qr.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/cargando.png")));
@@ -338,9 +405,10 @@ public class Productos extends JFrame {
 		lbl_producto.setBounds(288, 42, 167, 21);
 		panel.add(lbl_producto);
 		
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(288, 64, 167, 23);
-		panel.add(textField_11);
+		txt_producto = new JTextField();
+		txt_producto.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_producto.setColumns(10);
+		txt_producto.setBounds(288, 64, 167, 23);
+		panel.add(txt_producto);
 	}
 }
