@@ -1,4 +1,5 @@
 package interfaces;
+import  conexionDB.Maria_db;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -21,11 +22,17 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
 
 public class Marcas extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField txt_marca;
 	private JTable tbl_marcas;
@@ -102,15 +109,32 @@ public class Marcas extends JFrame {
 		});
 		
 		JButton btn_añadir = new JButton("AÑADIR");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		
+					 
+				
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setBounds(406, 132, 117, 35);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
+
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
+
+           try {
+	Maria_db.anadir_marca(txt_marca.getText());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.setFocusable(true);
@@ -145,6 +169,7 @@ public class Marcas extends JFrame {
 		});
 		panel.add(btn_eliminar);
 		
+		
 		JLabel lbl_imagen = new JLabel("");
 		lbl_imagen.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/marca_1.png")));
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,5 +193,10 @@ public class Marcas extends JFrame {
 		panel.add(btn_regresar);
 		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
+	
 	}
+
+	
 }
+
+
