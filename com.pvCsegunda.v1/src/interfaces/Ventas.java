@@ -20,7 +20,7 @@ public class Ventas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_id_cliente;
-	private JTextField txt_id;
+	public  JTextField txt_id;
 	private JTextField txt_existencia;
 	private JTextField txt_precio;
 	private JTextField txt_notas_extra;
@@ -29,7 +29,7 @@ public class Ventas extends JFrame {
 	private JTextField txt_extra;
 	private JTextField txt_total;
 	private JTextField txt_paga_con;
-	private JTextField textField_2;
+	private JTextField txt_cambio;
 
 	/**
 	 * Launch the application.
@@ -218,11 +218,11 @@ public class Ventas extends JFrame {
 		lbl_cambio.setBounds(594, 483, 157, 22);
 		panel.add(lbl_cambio);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("Dialog", Font.BOLD, 12));
-		textField_2.setColumns(10);
-		textField_2.setBounds(594, 505, 157, 22);
-		panel.add(textField_2);
+		txt_cambio = new JTextField();
+		txt_cambio.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_cambio.setColumns(10);
+		txt_cambio.setBounds(594, 505, 157, 22);
+		panel.add(txt_cambio);
 		
 		JButton btn_generar_venta = new JButton("GENERAR VENTA");
 		btn_generar_venta.setFont(new Font("Dialog", Font.BOLD, 13));
