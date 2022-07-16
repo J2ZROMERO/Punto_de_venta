@@ -15,6 +15,9 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JCheckBox;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Ventas extends JFrame {
 
@@ -66,35 +69,53 @@ public class Ventas extends JFrame {
 		JLabel lbl_id_cliente = new JLabel("ID CLIENTE");
 		lbl_id_cliente.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_id_cliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_id_cliente.setBounds(10, 11, 112, 22);
+		lbl_id_cliente.setBounds(120, 11, 112, 22);
 		panel.add(lbl_id_cliente);
 		
 		txt_id_cliente = new JTextField();
 		txt_id_cliente.setFont(new Font("Dialog", Font.BOLD, 12));
-		txt_id_cliente.setBounds(132, 11, 157, 22);
+		txt_id_cliente.setBounds(242, 11, 157, 22);
 		panel.add(txt_id_cliente);
 		txt_id_cliente.setColumns(10);
 		
 		JButton btn_buscar_clientes = new JButton("BUSCAR CLIENTES");
+		btn_buscar_clientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
+				b.setVisible(true);
+				b.setFocusable(true);
+				b.setLocationRelativeTo(null);
+			}
+		});
 		btn_buscar_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar_clientes.setBounds(313, 11, 179, 22);
+		btn_buscar_clientes.setBounds(423, 11, 179, 22);
 		panel.add(btn_buscar_clientes);
 		
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id.setBounds(10, 61, 112, 22);
+		lbl_id.setBounds(120, 61, 112, 22);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setColumns(10);
-		txt_id.setBounds(132, 61, 157, 22);
+		txt_id.setBounds(242, 61, 157, 22);
 		panel.add(txt_id);
 		
 		JButton btn_buscar_productos = new JButton("BUSCAR PRODUCTOS");
+		btn_buscar_productos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Ventas_Buscar b = new Ventas_Buscar();
+				b.setVisible(true);
+				b.setFocusable(true);
+				b.setLocationRelativeTo(null);
+			}
+		});
 		btn_buscar_productos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar_productos.setBounds(313, 61, 179, 22);
+		btn_buscar_productos.setBounds(423, 61, 179, 22);
 		panel.add(btn_buscar_productos);
 		
 		JLabel lbl_existencia = new JLabel("EXISTENCIA");
@@ -242,7 +263,23 @@ public class Ventas extends JFrame {
 		
 		JButton btn_cancelar_pedido = new JButton("CANCELAR PEDIDO");
 		btn_cancelar_pedido.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_cancelar_pedido.setBounds(544, 61, 179, 22);
+		btn_cancelar_pedido.setBounds(654, 61, 179, 22);
 		panel.add(btn_cancelar_pedido);
+		
+		JButton btn_regresar = new JButton("");
+		btn_regresar.setIcon(new ImageIcon(Ventas.class.getResource("/imagenes/flecha.png")));
+		btn_regresar.setBounds(0, 0, 44, 35);
+		
+		btn_regresar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Menu_principal mp = new Menu_principal();
+				mp.setVisible(true);
+				mp.setFocusable(true);
+				mp.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+		panel.add(btn_regresar);
 	}
 }

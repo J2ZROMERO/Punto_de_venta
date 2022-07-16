@@ -396,10 +396,6 @@ public class Ventas_Buscar extends JFrame {
 		btn_regresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Menu_principal mp = new Menu_principal();
-				mp.setVisible(true);
-				mp.setFocusable(true);
-				mp.setLocationRelativeTo(null);
 				dispose();
 			}
 		});

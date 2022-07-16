@@ -90,7 +90,7 @@ public class Menu_principal extends JFrame {
 		lbl_ventas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Buscar v = new Ventas_Buscar();
+				Ventas v = new Ventas();
 				v.setVisible(true);
 				v.setFocusable(true);
 				v.setLocationRelativeTo(null);
