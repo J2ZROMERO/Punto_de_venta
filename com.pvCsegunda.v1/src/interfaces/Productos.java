@@ -35,6 +35,7 @@ public class Productos extends JFrame {
 	private JTextField txt_notas_a_cerca_de_su_seleccion;
 	private JTextField txt_id;
 	private JTextField txt_producto;
+	private JComboBox cbx_atributos_de_contenido;
 
 	/**
 	 * Launch the application.
@@ -204,6 +205,22 @@ public class Productos extends JFrame {
 		JButton btn_buscar_marca = new JButton("");
 		btn_buscar_marca.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_marca.setBounds(58, 254, 46, 43);
+		
+		btn_buscar_marca.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_marca.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO MARCA VACIO...");
+					txt_marca.requestFocus();
+				}else {
+					Bar_Code_Tabla_Buscar_Marca m = new Bar_Code_Tabla_Buscar_Marca();
+					m.setVisible(true);
+					m.setLocationRelativeTo(null);
+					m.setFocusable(true);
+					txt_marca.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_marca);
 		
 		JButton btn_limpiar_marca = new JButton("");
@@ -234,6 +251,22 @@ public class Productos extends JFrame {
 		JButton btn_buscar_proveedor = new JButton("");
 		btn_buscar_proveedor.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_proveedor.setBounds(283, 254, 46, 43);
+		
+		btn_buscar_proveedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_proveedor.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO PROVEEDOR VACIO...");
+					txt_proveedor.requestFocus();
+				}else {
+					Bar_Code_Tabla_Buscar_Proveedor p = new Bar_Code_Tabla_Buscar_Proveedor();
+					p.setVisible(true);
+					p.setLocationRelativeTo(null);
+					p.setFocusable(true);
+					txt_proveedor.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_proveedor);
 		
 		JButton btn_limpiar_proveedor = new JButton("");
@@ -264,6 +297,22 @@ public class Productos extends JFrame {
 		JButton btn_buscar_categoria = new JButton("");
 		btn_buscar_categoria.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_categoria.setBounds(508, 254, 46, 43);
+		
+		btn_buscar_categoria.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_categoria.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO CATEGORIA VACIO...");
+					txt_categoria.requestFocus();
+				}else {
+					Bar_Code_Tabla_Buscar_Categoria c = new Bar_Code_Tabla_Buscar_Categoria();
+					c.setVisible(true);
+					c.setLocationRelativeTo(null);
+					c.setFocusable(true);
+					txt_categoria.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_categoria);
 		
 		JButton btn_limpiar_categoria = new JButton("");
@@ -294,6 +343,22 @@ public class Productos extends JFrame {
 		JButton btn_buscar_linea_de_produccion = new JButton("");
 		btn_buscar_linea_de_produccion.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar.png")));
 		btn_buscar_linea_de_produccion.setBounds(732, 253, 46, 43);
+		
+		btn_buscar_linea_de_produccion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(txt_linea_de_produccion.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CAMPO LINEA DE PRODUCCION VACIO...");
+					txt_linea_de_produccion.requestFocus();
+				}else {
+					Bar_Code_Tabla_Buscar_Linea_De_Produccion l = new Bar_Code_Tabla_Buscar_Linea_De_Produccion();
+					l.setVisible(true);
+					l.setLocationRelativeTo(null);
+					l.setFocusable(true);
+					txt_linea_de_produccion.requestFocus();
+				}
+			}
+		});
 		panel.add(btn_buscar_linea_de_produccion);
 		
 		JButton btn_limpiar_linea_de_produccion = new JButton("");
@@ -315,7 +380,7 @@ public class Productos extends JFrame {
 		lbl_atributos_del_contenido.setBounds(10, 308, 140, 47);
 		panel.add(lbl_atributos_del_contenido);
 		
-		JComboBox cbx_atributos_de_contenido = new JComboBox();
+		cbx_atributos_de_contenido = new JComboBox();
 		cbx_atributos_de_contenido.setFont(new Font("Dialog", Font.BOLD, 12));
 		cbx_atributos_de_contenido.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "MEDIDA", "MILILITROS", "COLOR ", "TAMAÑO", "KILOGRAMO"}));
 		cbx_atributos_de_contenido.setBounds(10, 355, 140, 23);
@@ -397,6 +462,16 @@ public class Productos extends JFrame {
 		btn_generar_qr.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/cargando.png")));
 		btn_generar_qr.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_generar_qr.setBounds(146, 30, 59, 57);
+		
+		btn_generar_qr.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Productos_Generador b= new Productos_Generador();
+				b.setVisible(true);
+				b.setFocusable(true);
+				b.setLocationRelativeTo(null);
+			}
+		});
 		panel.add(btn_generar_qr);
 		
 		JLabel lbl_producto = new JLabel("PRODUCTO");
