@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -94,16 +95,33 @@ public class Marcas extends JFrame {
 		tbl_marcas.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
+		ver_datos_tabla(tbl_marcas);
 		scrollPane.setViewportView(tbl_marcas);
 		
+		//we use this for put the value of each cell 
+
+		tbl_marcas.addMouseListener(new MouseAdapter() {
+	
+		public void mousePressed(MouseEvent e) {
+			   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
+	            txt_marca.setText(selectedCellValue);
+	            
+		};
 		
-		try {
-			tbl_marcas.setModel(DB_marcas.model_view_marcas());
-			
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
+		
+		
+		
+		
+		});
+		
+		
+		
+		
+		
+		
+
+		
+		
 		
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.addActionListener(new ActionListener() {
@@ -128,6 +146,7 @@ public class Marcas extends JFrame {
 
            try {
 	DB_marcas.anadir_marca(txt_marca.getText());
+	ver_datos_tabla(tbl_marcas);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -156,9 +175,22 @@ public class Marcas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
-					txt_marca.setText("");
-					txt_marca.setFocusable(true);
+					try {
+						DB_marcas.eliminar_marcas(txt_marca.getText());
+						ver_datos_tabla(tbl_marcas);
+						JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
+						txt_marca.setText("");
+						txt_marca.setFocusable(true);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				
+					
+					
+					
+					
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.setFocusable(true);
@@ -197,7 +229,23 @@ public class Marcas extends JFrame {
 
 	
 
+	
+	
+	public void ver_datos_tabla(JTable tabla) {
 
+		try {
+			tabla.setModel(DB_marcas.model_view_marcas());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		
+			
+	}
+	
 	
 }
 

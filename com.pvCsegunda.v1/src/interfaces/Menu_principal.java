@@ -72,7 +72,7 @@ public class Menu_principal extends JFrame {
 		lbl_ventas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Buscar v = new Ventas_Buscar();
+				Ventas v = new Ventas();
 				v.setVisible(true);
 				v.setFocusable(true);
 				v.setLocationRelativeTo(null);
@@ -90,7 +90,7 @@ public class Menu_principal extends JFrame {
 		lbl_ventas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Buscar v = new Ventas_Buscar();
+				Ventas v = new Ventas();
 				v.setVisible(true);
 				v.setFocusable(true);
 				v.setLocationRelativeTo(null);
@@ -138,7 +138,7 @@ public class Menu_principal extends JFrame {
 		lbl_proveedores_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_proveedores_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_proveedores_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_proveedores_titulo.setBounds(450, 637, 109, 31);
+		lbl_proveedores_titulo.setBounds(450, 638, 109, 31);
 		
 		lbl_proveedores_titulo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -285,7 +285,7 @@ public class Menu_principal extends JFrame {
 		lbl_marcas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_marcas.setIcon(new ImageIcon(Menu_principal.class.getResource("/imagenes/marca.png")));
 		lbl_marcas.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_marcas.setBounds(240, 558, 109, 85);
+		lbl_marcas.setBounds(240, 559, 109, 85);
 		
 		lbl_marcas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -303,7 +303,7 @@ public class Menu_principal extends JFrame {
 		lbl_linea_de_produccion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_linea_de_produccion.setIcon(new ImageIcon(Menu_principal.class.getResource("/imagenes/linea_de_produccion.png")));
 		lbl_linea_de_produccion.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_linea_de_produccion.setBounds(451, 392, 109, 85);
+		lbl_linea_de_produccion.setBounds(451, 393, 109, 85);
 		
 		lbl_linea_de_produccion.addMouseListener(new MouseAdapter() {
 			@Override
@@ -340,7 +340,7 @@ public class Menu_principal extends JFrame {
 		lbl_marcas_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_marcas_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_marcas_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_marcas_titulo.setBounds(240, 642, 109, 20);
+		lbl_marcas_titulo.setBounds(240, 643, 109, 20);
 		
 		lbl_marcas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -358,7 +358,7 @@ public class Menu_principal extends JFrame {
 		lbl_linea_de_produccion_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_linea_de_produccion_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_linea_de_produccion_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_linea_de_produccion_titulo.setBounds(451, 476, 109, 42);
+		lbl_linea_de_produccion_titulo.setBounds(451, 466, 109, 42);
 		
 		lbl_linea_de_produccion_titulo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -377,7 +377,7 @@ public class Menu_principal extends JFrame {
 		lbl_devoluciones_o_perdidas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_devoluciones_o_perdidas.setIcon(new ImageIcon(Menu_principal.class.getResource("/imagenes/devoluciones_o_perdidas.png")));
 		lbl_devoluciones_o_perdidas.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_devoluciones_o_perdidas.setBounds(244, 396, 109, 85);
+		lbl_devoluciones_o_perdidas.setBounds(244, 393, 109, 85);
 		
 		lbl_devoluciones_o_perdidas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -395,7 +395,7 @@ public class Menu_principal extends JFrame {
 		lbl_caja.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_caja.setIcon(new ImageIcon(Menu_principal.class.getResource("/imagenes/caja.png")));
 		lbl_caja.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_caja.setBounds(444, 64, 109, 85);
+		lbl_caja.setBounds(444, 60, 109, 85);
 		
 		lbl_caja.addMouseListener(new MouseAdapter() {
 			@Override
@@ -413,7 +413,7 @@ public class Menu_principal extends JFrame {
 		lbl_devoluciones_o_perdidas_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_devoluciones_o_perdidas_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_devoluciones_o_perdidas_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_devoluciones_o_perdidas_titulo.setBounds(244, 483, 109, 31);
+		lbl_devoluciones_o_perdidas_titulo.setBounds(244, 472, 109, 31);
 		
 		lbl_devoluciones_o_perdidas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -431,7 +431,7 @@ public class Menu_principal extends JFrame {
 		lbl_caja_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_caja_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_caja_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_caja_titulo.setBounds(444, 149, 109, 20);
+		lbl_caja_titulo.setBounds(444, 148, 109, 20);
 		lbl_caja_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

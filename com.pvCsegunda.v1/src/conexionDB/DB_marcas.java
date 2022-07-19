@@ -59,6 +59,18 @@ modelo.setDataVector(data, columnNames);
 		return modelo;
 		
 	}
+	
+	public static void eliminar_marcas(String marca) throws SQLException {
+		
+		try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass);
+				CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_marca(?) }")){
+		
+			cstm.setString(1, marca);
+			cstm.executeUpdate();
+		}
+		
+	}
+	
     
 private	static DefaultTableModel modelo = new DefaultTableModel();
 }
