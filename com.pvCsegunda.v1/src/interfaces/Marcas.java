@@ -1,4 +1,5 @@
 package interfaces;
+import conexionDB.DB_marcas;
 import  conexionDB.Maria_db;
 
 import java.awt.BorderLayout;
@@ -36,7 +37,7 @@ public class Marcas extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_marca;
 	private JTable tbl_marcas;
-	DefaultTableModel modelo = new DefaultTableModel();
+
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -55,6 +56,7 @@ public class Marcas extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
 	public Marcas() {
 		
@@ -93,20 +95,15 @@ public class Marcas extends JFrame {
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
 		scrollPane.setViewportView(tbl_marcas);
-		tbl_marcas.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"MARCAS"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+		
+		
+		try {
+			tbl_marcas.setModel(DB_marcas.model_view_marcas());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.addActionListener(new ActionListener() {
@@ -120,16 +117,17 @@ public class Marcas extends JFrame {
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setBounds(406, 132, 117, 35);
-		
+
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
+		
 
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
 
            try {
-	Maria_db.anadir_marca(txt_marca.getText());
+	DB_marcas.anadir_marca(txt_marca.getText());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -145,6 +143,7 @@ public class Marcas extends JFrame {
 				}
 			}
 		});
+		
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
@@ -195,6 +194,9 @@ public class Marcas extends JFrame {
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
 	
 	}
+
+	
+
 
 	
 }

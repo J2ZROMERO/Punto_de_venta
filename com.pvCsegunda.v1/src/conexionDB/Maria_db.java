@@ -1,5 +1,9 @@
 package conexionDB;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
 
 public class Maria_db {
 	
@@ -13,27 +17,18 @@ Este procedimiento getNamesSalary ejecuta una sentencia de selección y, por lo 
 *
 *
 */
-    			    
+    			   public static void main (String args[]) throws SQLException {
+
+    			
+    			    }
 
 			   
-	public  static void anadir_marca(String marca) throws SQLException{
-	      
-	       try(Connection con = DriverManager.getConnection(URL,"root",null); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_marca(?) }"))   // dentro statement connection and resulset
-	        
 
-	       {	       
-cstm.setString(1, marca);	 
-cstm.executeUpdate();
-System.out.println("datos insertados");	       
-	       }
-		
-		
-	}
 	
-	
-    
-			   
-private static final String URL = "jdbc:mariadb://localhost:3306/pv_canoa_segunda";
-    private Connection conn;	
+
+ static final String URL = "jdbc:mariadb://localhost:3306/pv_canoa_segunda";
+ static final String user = "root";
+ static final String pass = "";
+ 
+private Connection conn;	
 }
