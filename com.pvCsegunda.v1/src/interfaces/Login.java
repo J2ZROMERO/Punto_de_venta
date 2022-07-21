@@ -26,6 +26,7 @@ public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField txt_password;
+	public JComboBox cbx_nickname;
 
 	/**
 	 * Launch the application.
@@ -111,8 +112,8 @@ public class Login extends JFrame {
 		lbl_password.setBounds(10, 200, 100, 22);
 		panel.add(lbl_password);
 		
-		JComboBox cbx_nickname = new JComboBox();
-		cbx_nickname.setModel(new DefaultComboBoxModel(new String[] {"selecciona un usuario", "luis", "pedro", "marco", "antonio"}));
+		cbx_nickname = new JComboBox();
+		cbx_nickname.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "LUIS", "ANTONIO", "JOSE", "PEDRO"}));
 		cbx_nickname.setName("");
 		cbx_nickname.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_nickname.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -1,12 +1,13 @@
 package interfaces;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -17,7 +18,8 @@ import java.awt.event.MouseEvent;
 public class Caja_Inicial extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txt_monto;
+	public static Caja_Inicial frame;
 
 	/**
 	 * Launch the application.
@@ -26,7 +28,7 @@ public class Caja_Inicial extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Caja_Inicial frame = new Caja_Inicial();
+					frame = new Caja_Inicial();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,10 +59,10 @@ public class Caja_Inicial extends JFrame {
 		lbl_caja_inicial.setBounds(48, 11, 361, 24);
 		panel.add(lbl_caja_inicial);
 		
-		textField = new JTextField();
-		textField.setBounds(73, 73, 162, 24);
-		panel.add(textField);
-		textField.setColumns(10);
+		txt_monto = new JTextField();
+		txt_monto.setBounds(73, 73, 162, 24);
+		panel.add(txt_monto);
+		txt_monto.setColumns(10);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -68,12 +70,16 @@ public class Caja_Inicial extends JFrame {
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
+				if(!txt_monto.getText().equals("")) {
 				Menu_principal mp = new Menu_principal();
 				mp.setVisible(true);
 				mp.setFocusable(true);
 				mp.setLocationRelativeTo(null);
 				dispose();
-				
+				}else {
+					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+					frame.requestFocus();
+				}
 			}
 		});
 		panel.add(btn_añadir);

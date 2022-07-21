@@ -62,34 +62,40 @@ public class Cambiar_Usuario extends JFrame {
 		lbl_selecciona_usuario.setBounds(10, 11, 118, 114);
 		panel.add(lbl_selecciona_usuario);
 		
-		/*JComboBox*/cbx_selecciona_usuario = new JComboBox();
+		cbx_selecciona_usuario = new JComboBox();
 		cbx_selecciona_usuario.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "LUIS", "ANTONIO", "JOSE", "PEDRO"}));
 		cbx_selecciona_usuario.setFont(new Font("Dialog", Font.BOLD, 12));
-		cbx_selecciona_usuario.setBounds(138, 53, 256, 29);
+		cbx_selecciona_usuario.setBounds(138, 54, 256, 29);
 		panel.add(cbx_selecciona_usuario);
 		
-		JButton btn_confirmar_usuario = new JButton("CONFIRMAR USUARIO");
-		btn_confirmar_usuario.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_confirmar_usuario.setBounds(448, 50, 205, 32);
+		JButton btn_confirmar = new JButton("CONFIRMAR");
+		btn_confirmar.setFont(new Font("Dialog", Font.BOLD, 13));
+		btn_confirmar.setBounds(448, 52, 205, 32);
 		
-		btn_confirmar_usuario.addMouseListener(new MouseAdapter() {
+		btn_confirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Login l = new Login();
 				Menu_principal mp = new Menu_principal();
-				if(cbx_selecciona_usuario.getSelectedIndex() >0) {
+				if(cbx_selecciona_usuario.getSelectedIndex() > 0) {
 					dispose();
-					mp.txt_usuario.setText(cbx_selecciona_usuario.getSelectedItem().toString());
-					mp.setVisible(true);
-					mp.setFocusable(true);
-					mp.setLocationRelativeTo(null);
+					l.setVisible(true);
+					l.cbx_nickname.setSelectedIndex(cbx_selecciona_usuario.getSelectedIndex());
+		            //String elementoSeleccionado = cbx_selecciona_usuario.getSelectedItem().toString();
+		            
+		            //l.cbx_nickname.addItem(elementoSeleccionado);
+					//l.cbx_nickname.setSelectedItem(cbx_selecciona_usuario.getSelectedItem());
+					l.setFocusable(true);
+					l.setLocationRelativeTo(null);
 					
 					dispose();
-					//JOptionPane.showMessageDialog(null,cbx_selecciona_usuario.getSelectedItem());
+					
 				}else {
 					JOptionPane.showMessageDialog(null,"SELECCIONA UN USUARIO");
+					frame.requestFocus();
 				}
 			}
-		});
-		panel.add(btn_confirmar_usuario);
+	 });
+		panel.add(btn_confirmar);
 	}
 }
