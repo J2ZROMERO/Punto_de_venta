@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 public class Menu_principal extends JFrame {
 
 	private JPanel contentPane;
-	JTextField txt_usuario;
+	public JTextField txt_usuario;
 	
 	/**
 	 * Launch the application.

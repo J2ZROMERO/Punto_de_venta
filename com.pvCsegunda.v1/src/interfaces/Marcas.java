@@ -130,8 +130,7 @@ public class Marcas extends JFrame {
 			}
 		});
 		
-					 
-				
+
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setBounds(406, 132, 117, 35);
