@@ -143,12 +143,7 @@ while(rs.next()) {
 dat[0]=(rs.getString(1));	
 dat[1]=(rs.getString(4));	
 dat[2]=(rs.getString(5));
-
-
 n_clientes.add(dat);
-
-
-
     }
 String[] columnNames = {"Id" ,"Nickname","Telefono"};
 
@@ -162,17 +157,12 @@ for (int j =  0; j < n_clientes.size();j++) {
 	}	
 }
 
-
 modelo.setDataVector(data_row, columnNames);	
 	       }
 	       
-
-
-		return modelo;
-		
+		return modelo;	
 	}
 	
-
 private static Object[][] data_row;	
 private static Object[] datos;
 private	static DefaultTableModel modelo = new DefaultTableModel();
