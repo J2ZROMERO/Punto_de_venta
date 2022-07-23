@@ -17,7 +17,7 @@ public class DB_categoria {
 	public  static void anadir_marca(String linea) throws SQLException{
 	      
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_linea(?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_categoria(?) }"))   // dentro statement connection and resulset
 	        
 
 	       {	       
@@ -29,26 +29,26 @@ System.out.println("datos insertados");
 		
 	}
 	
-	public static DefaultTableModel model_view_linea() throws SQLException {
-		List<String> n_linea = new ArrayList<String>();
+	public static DefaultTableModel model_view_categoria() throws SQLException {
+		List<String> n_categoria = new ArrayList<String>();
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_lineas()}"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_categoria()}"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset
 	       
 	       {	       
 while(rs.next()) {
 
-n_linea.add(rs.getString(1));	
+n_categoria.add(rs.getString(1));	
 	
 }
     }
 		
 		String[] columnNames = {"Marcas"};
-		Object[][] data = new Object[n_linea.size()][1];
+		Object[][] data = new Object[n_categoria.size()][1];
 
 		for(int i = 0; i < 1;i++) {
-	for(int j = 0; j <n_linea.size();j++) {
-		data[j][i] = n_linea.get(j);
+	for(int j = 0; j <n_categoria.size();j++) {
+		data[j][i] = n_categoria.get(j);
 	} 	
 }
 
@@ -63,7 +63,7 @@ modelo.setDataVector(data, columnNames);
 	public static void eliminar_lineas(String linea) throws SQLException {
 		
 		try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass);
-				CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_linea(?) }")){		
+				CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_categoria(?) }")){		
 			cstm.setString(1, linea);
 			cstm.executeUpdate();
 		}

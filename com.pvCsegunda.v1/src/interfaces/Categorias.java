@@ -17,8 +17,13 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_categoria;
+import conexionDB.DB_marcas;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class Categorias extends JFrame {
 
@@ -83,13 +88,21 @@ public class Categorias extends JFrame {
 		
 		tbl_categoria = new JTable();
 		tbl_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		tbl_categoria.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"CATEGORIA"
-			}
-		));
+		ver_datos_tabla(tbl_categoria);
+		tbl_categoria.addMouseListener(new MouseAdapter() {
+			
+			public void mousePressed(MouseEvent e) {
+				   String selectedCellValue = (String) tbl_categoria.getValueAt(tbl_categoria.getSelectedRow() , tbl_categoria.getSelectedColumn());
+				   txt_categoria.setText(selectedCellValue);
+		            
+			};
+			
+			
+			
+			
+			
+			});
+			
 		scrollPane.setViewportView(tbl_categoria);
 		
 		JLabel lbl_categoria = new JLabel("CATEGORIA");
@@ -112,6 +125,14 @@ public class Categorias extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_categoria.getText().equals("")) {
+					
+					try {
+						DB_categoria.anadir_marca(txt_categoria.getText());
+						ver_datos_tabla(tbl_categoria);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					JOptionPane.showMessageDialog(null, "CATEGORIA AGREGADA CORRECTAMENTE");
 					txt_categoria.setText("");
 					txt_categoria.setFocusable(true);
@@ -135,6 +156,14 @@ public class Categorias extends JFrame {
 					
 			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?", "SELECCIONA UNA OPCION",JOptionPane.YES_NO_CANCEL_OPTION);
 					if(opcion == 0) {
+						
+						try {
+							DB_categoria.eliminar_lineas(txt_categoria.getText());
+						ver_datos_tabla(tbl_categoria);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null, "CATEGORIA ELIMINADA CORRECTAMENTE");
 						txt_categoria.setText("");
 						txt_categoria.setFocusable(true);
@@ -154,5 +183,19 @@ public class Categorias extends JFrame {
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
 	}
+	public void ver_datos_tabla(JTable tabla) {
 
+		try {
+			tabla.setModel(DB_categoria.model_view_categoria());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		
+			
+	}
+	
 }
