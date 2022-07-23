@@ -60,6 +60,7 @@ public class Caja_Inicial extends JFrame {
 		panel.add(lbl_caja_inicial);
 		
 		txt_monto = new JTextField();
+		txt_monto.setFont(new Font("Dialog", Font.BOLD, 13));
 		txt_monto.setBounds(73, 73, 162, 24);
 		panel.add(txt_monto);
 		txt_monto.setColumns(10);

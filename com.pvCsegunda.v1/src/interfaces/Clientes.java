@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -44,6 +45,13 @@ public class Clientes extends JFrame {
 		});
 	}
 
+	public void Limpiar_Campos() {
+		txt_id.setText("");
+		txt_nombre.setText("");
+		txt_apellido.setText("");
+		txt_nick_name.setText("");
+		txt_telefono.setText("");
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -139,31 +147,110 @@ public class Clientes extends JFrame {
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_limpiar_campos.setBounds(73, 314, 154, 23);
+		
+		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Limpiar_Campos();
+				txt_id.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("VER CLIENTES");
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_clientes.setBounds(73, 376, 154, 23);
+		
+		btn_ver_clientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
+				
+				c.setVisible(true);
+				c.setFocusable(true);
+				c.setLocationRelativeTo(null);
+			}
+		});
 		panel.add(btn_ver_clientes);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_añadir.setBounds(449, 56, 154, 23);
+		
+		btn_añadir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+						   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+							JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
+							txt_nombre.requestFocus();
+							Limpiar_Campos();
+						}else {
+							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
+							txt_nombre.requestFocus();
+						}
+			}
+		});
 		panel.add(btn_añadir);
 		
 		JButton btn_buscar = new JButton("BUSCAR");
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_buscar.setBounds(449, 100, 154, 23);
+		
+		btn_buscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!txt_id.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
+					Limpiar_Campos();
+				} else {
+					JOptionPane.showMessageDialog(null, "DA CLICK EN BUSQUEDA DE CLIENTES");
+				}
+			}
+		});
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_actualizar.setBounds(449, 146, 154, 23);
+		
+		btn_actualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
+					Limpiar_Campos();
+				}else {
+					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				}
+			}
+		});
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_eliminar.setBounds(449, 192, 154, 23);
+		
+		btn_eliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+				   
+					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL CLIENTE");
+					
+					if(opcion == 0) {
+						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
+						Limpiar_Campos();
+						txt_id.requestFocus();
+					}
+					
+				}else {
+				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				}
+		 	}
+		});
 		panel.add(btn_eliminar);
 		
 		JScrollPane scrollPane = new JScrollPane();
