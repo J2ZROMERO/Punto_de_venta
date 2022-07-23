@@ -17,8 +17,13 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_linea;
+import conexionDB.DB_marcas;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class Linea_de_Produccion extends JFrame {
 
@@ -94,13 +99,27 @@ public class Linea_de_Produccion extends JFrame {
 		
 		tbl_linea_de_produccion = new JTable();
 		tbl_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		tbl_linea_de_produccion.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"LINEA DE PRODUCCION"
-			}
-		));
+		tbl_linea_de_produccion.addMouseListener(new MouseAdapter() {
+			
+			public void mousePressed(MouseEvent e) {
+				   String selectedCellValue = (String) tbl_linea_de_produccion.getValueAt(tbl_linea_de_produccion.getSelectedRow() , tbl_linea_de_produccion.getSelectedColumn());
+		            txt_linea_de_produccion.setText(selectedCellValue);
+		            
+			};
+			
+			
+			
+			
+			
+			});
+		try {
+			tbl_linea_de_produccion.setModel(DB_linea.model_view_linea());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		scrollPane.setViewportView(tbl_linea_de_produccion);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
@@ -112,7 +131,16 @@ public class Linea_de_Produccion extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
+				
 				if(!txt_linea_de_produccion.getText().equals("")) {
+				try {
+					DB_linea.anadir_marca(txt_linea_de_produccion.getText());
+					ver_datos_tabla(tbl_linea_de_produccion);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION AGREGADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
@@ -135,6 +163,14 @@ public class Linea_de_Produccion extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_linea_de_produccion.getText().equals("")) {
+					try {
+						DB_linea.eliminar_lineas(txt_linea_de_produccion.getText());
+						ver_datos_tabla(tbl_linea_de_produccion);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION ELIMINADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
@@ -152,5 +188,19 @@ public class Linea_de_Produccion extends JFrame {
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
+	}
+	public void ver_datos_tabla(JTable tabla) {
+
+		try {
+			tabla.setModel(DB_linea.model_view_linea());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		
+			
 	}
 }
