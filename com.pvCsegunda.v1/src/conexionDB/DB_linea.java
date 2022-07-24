@@ -14,6 +14,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class DB_linea {
 
+
+	public static void main(String args[]) throws SQLException {
+		//DB_linea.anadir_marca("ss");
+	}
 	public  static void anadir_marca(String linea) throws SQLException{
 	      
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 

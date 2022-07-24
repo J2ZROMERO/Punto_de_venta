@@ -16,10 +16,10 @@ public class DB_clientes {
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 
-	
+	/*
 Object values[] = {6,"sdfasd","jghjgy","",""};
 	DB_clientes.actualizar(values);
-
+*/
 	
 
 	

@@ -127,7 +127,7 @@ public class Categorias extends JFrame {
 				if(!txt_categoria.getText().equals("")) {
 					
 					try {
-						DB_categoria.anadir_marca(txt_categoria.getText());
+						DB_categoria.anadir_categoria(txt_categoria.getText());
 						ver_datos_tabla(tbl_categoria);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -158,7 +158,7 @@ public class Categorias extends JFrame {
 					if(opcion == 0) {
 						
 						try {
-							DB_categoria.eliminar_lineas(txt_categoria.getText());
+							DB_categoria.eliminar_categoria( Integer.parseInt( txt_categoria.getText()))  ;
 						ver_datos_tabla(tbl_categoria);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block

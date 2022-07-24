@@ -17,11 +17,22 @@ Este procedimiento getNamesSalary ejecuta una sentencia de selección y, por lo 
 *
 *
 */
-    			   public static void main (String args[]) throws SQLException {
+   /* 		
+    * 
+    * TEST	   public static void main (String args[]) throws SQLException {
 
-    			
+    			       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+    			    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_clientes() }"); ResultSet rs = cstm.executeQuery())   // dentro statement connection and resulset
+    			        
+
+    			       {	       
+while(rs.next()) {
+	System.out.println(rs.getString(1));	       
+}
+    		
+    			       }
     			    }
-
+*/
 			   
 
 	
@@ -32,3 +43,4 @@ Este procedimiento getNamesSalary ejecuta una sentencia de selección y, por lo 
  
 private Connection conn;	
 }
+;
