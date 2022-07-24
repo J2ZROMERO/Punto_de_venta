@@ -1,6 +1,4 @@
 package interfaces;
-import conexionDB.DB_marcas;
-import  conexionDB.Maria_db;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -23,22 +21,15 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-
 
 public class Marcas extends JFrame {
 
-	
 	private JPanel contentPane;
 	private JTextField txt_marca;
 	private JTable tbl_marcas;
-
+	DefaultTableModel modelo = new DefaultTableModel();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,7 +48,6 @@ public class Marcas extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
 	 */
 	public Marcas() {
 		
@@ -95,62 +85,34 @@ public class Marcas extends JFrame {
 		tbl_marcas.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
-		ver_datos_tabla(tbl_marcas);
 		scrollPane.setViewportView(tbl_marcas);
-		
-		//we use this for put the value of each cell 
-
-		tbl_marcas.addMouseListener(new MouseAdapter() {
-	
-		public void mousePressed(MouseEvent e) {
-			   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
-	            txt_marca.setText(selectedCellValue);
-	            
-		};
-		
-		
-		
-		
-		
+		tbl_marcas.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"MARCAS"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
-		
-		
-		
-		
-		
-		
-
 		
 		
 		
 		JButton btn_añadir = new JButton("AÑADIR");
-		btn_añadir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
-
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setBounds(406, 132, 117, 35);
-
+		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
-		
-
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
-
-           try {
-	DB_marcas.anadir_marca(txt_marca.getText());
-	ver_datos_tabla(tbl_marcas);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-			
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.setFocusable(true);
@@ -161,7 +123,6 @@ public class Marcas extends JFrame {
 				}
 			}
 		});
-		
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
@@ -174,22 +135,9 @@ public class Marcas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
-					try {
-						DB_marcas.eliminar_marcas(txt_marca.getText());
-						ver_datos_tabla(tbl_marcas);
-						JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
-						txt_marca.setText("");
-						txt_marca.setFocusable(true);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
-				
-					
-					
-					
-					
+					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
+					txt_marca.setText("");
+					txt_marca.setFocusable(true);
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.setFocusable(true);
@@ -198,7 +146,6 @@ public class Marcas extends JFrame {
 			}
 		});
 		panel.add(btn_eliminar);
-		
 		
 		JLabel lbl_imagen = new JLabel("");
 		lbl_imagen.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/marca_1.png")));
@@ -223,29 +170,5 @@ public class Marcas extends JFrame {
 		panel.add(btn_regresar);
 		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
-	
 	}
-
-	
-
-	
-	
-	public void ver_datos_tabla(JTable tabla) {
-
-		try {
-			tabla.setModel(DB_marcas.model_view_marcas());
-			
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		
-		
-			
-	}
-	
-	
 }
-
-

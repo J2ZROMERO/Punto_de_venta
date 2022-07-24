@@ -1,5 +1,5 @@
 package interfaces;
-import interfaces_no_graficas.CRUD;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -10,11 +10,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -22,13 +19,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
-import conexionDB.DB_clientes;
-import conexionDB.DB_marcas;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-public class Clientes extends JFrame implements CRUD{
+public class Clientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_id;
@@ -54,6 +45,13 @@ public class Clientes extends JFrame implements CRUD{
 		});
 	}
 
+	public void Limpiar_Campos() {
+		txt_id.setText("");
+		txt_nombre.setText("");
+		txt_apellido.setText("");
+		txt_nick_name.setText("");
+		txt_telefono.setText("");
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -149,202 +147,124 @@ public class Clientes extends JFrame implements CRUD{
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_limpiar_campos.setBounds(73, 314, 154, 23);
+		
+		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Limpiar_Campos();
+				txt_id.requestFocus();
+			}
+		});
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("VER CLIENTES");
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_clientes.setBounds(73, 376, 154, 23);
+		
+		btn_ver_clientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
+				
+				c.setVisible(true);
+				c.setFocusable(true);
+				c.setLocationRelativeTo(null);
+			}
+		});
 		panel.add(btn_ver_clientes);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
-		btn_añadir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Object campos_txt[] = new Object[4];
-			campos_txt[0] = txt_nombre.getText(); 
-			campos_txt[1] = txt_apellido.getText();
-			campos_txt[2] = txt_nick_name.getText();
-			campos_txt[3] = txt_telefono.getText();
-			
-				anadir(campos_txt);
-			    ver_datos_tabla(tbl_clientes);
-			}
-		});
-		
-		
-	
-			
-		
-		
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_añadir.setBounds(449, 56, 154, 23);
+		
+		btn_añadir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+						   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+							JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
+							txt_nombre.requestFocus();
+							Limpiar_Campos();
+						}else {
+							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
+							txt_nombre.requestFocus();
+						}
+			}
+		});
 		panel.add(btn_añadir);
 		
 		JButton btn_buscar = new JButton("BUSCAR");
-		btn_buscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			Object datos [] =	buscar(Integer.parseInt(txt_id.getText()));
-			txt_id.setText(datos[0].toString());
-			txt_nombre.setText(datos[1].toString());
-			txt_apellido.setText(datos[2].toString());
-			txt_nick_name.setText(datos[3].toString());
-			txt_telefono.setText(datos[4].toString());
-			
-			}
-		});
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_buscar.setBounds(449, 100, 154, 23);
+		
+		btn_buscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!txt_id.getText().equals("")){
+					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
+					Limpiar_Campos();
+				} else {
+					JOptionPane.showMessageDialog(null, "DA CLICK EN BUSQUEDA DE CLIENTES");
+				}
+			}
+		});
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
-		btn_actualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Object campos_txt[] = new Object[5];
-				campos_txt[0] = txt_id.getText();
-				campos_txt[1] = txt_nombre.getText(); 
-				campos_txt[2] = txt_apellido.getText();
-				campos_txt[3] = txt_nick_name.getText();
-				campos_txt[4] = txt_telefono.getText();
-				
-				actualizar(campos_txt);
-					
-				  ver_datos_tabla(tbl_clientes);
-			}
-		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_actualizar.setBounds(449, 146, 154, 23);
+		
+		btn_actualizar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
+					Limpiar_Campos();
+				}else {
+					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				}
+			}
+		});
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_eliminar.setBounds(449, 192, 154, 23);
-		panel.add(btn_eliminar);
-	btn_eliminar.addActionListener(new ActionListener() {
 		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-	eliminar(Integer.parseInt(txt_id.getText()));
-			ver_datos_tabla(tbl_clientes);
-		}
-	});
+		btn_eliminar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+				   
+					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL CLIENTE");
+					
+					if(opcion == 0) {
+						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
+						Limpiar_Campos();
+						txt_id.requestFocus();
+					}
+					
+				}else {
+				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				}
+		 	}
+		});
+		panel.add(btn_eliminar);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(319, 239, 392, 242);
 		panel.add(scrollPane);
 		
 		tbl_clientes = new JTable();
-	tbl_clientes.addMouseListener(new MouseAdapter() {
-			
-			public void mousePressed(MouseEvent e) {
-				   String selectedCellValue = (String) tbl_clientes.getValueAt(tbl_clientes.getSelectedRow() , tbl_clientes.getSelectedColumn());
-		            txt_id.setText(selectedCellValue);
-		            
-			};
-			
-			
-			
-			
-			
-			});
-	    ver_datos_tabla(tbl_clientes);
+		tbl_clientes.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"<html><center>ID</center></html>", "<html><center>NOMBRE</center></html>", "<html><center>TELEFONO</center></html>"
+			}
+		));
 		scrollPane.setViewportView(tbl_clientes);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public void ver_datos_tabla(JTable tabla) {
-
-		try {
-			tabla.setModel(DB_clientes.model_view_clientes());
-			
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		
-		
-			
-	}
-
-	@Override
-	public void actualizar(Object t[]) {
-		// 
-		try {
-			DB_clientes.actualizar(t);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-	@Override
-	public void anadir(Object[] campos)  {
-try {
-	DB_clientes.anadir(campos);
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
 }
-		
-	}
-
-	@Override
-	public Object []buscar(int id) {
-		// TODO Auto-generated method stub
-	Object data[] = null;
-		try {
-			data = DB_clientes.buscar(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return data;
-	}
-
-	@Override
-	public void eliminar(int id) {
-		// 
-		try {
-			DB_clientes.eliminar(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-
-
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
