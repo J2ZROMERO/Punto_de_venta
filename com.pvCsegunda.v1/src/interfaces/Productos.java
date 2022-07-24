@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.JobAttributes;
+
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -56,6 +58,16 @@ public class Productos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public void Limpiar_Campos() {
+		txt_producto.setText("");
+		txt_distintivo_1.setText("");
+		txt_notas_a_cerca_de_su_seleccion.setText("");
+		txt_stock.setText("");
+		txt_precio_de_venta.setText("");
+		txt_precio_de_compra.setText("");
+		txt_notas_a_cerca_del_producto.setText("");
+	}
+	
 	public Productos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1089, 598);
@@ -149,6 +161,20 @@ public class Productos extends JFrame {
 		JButton btn_buscar = new JButton("BUSCAR");
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_buscar.setBounds(907, 97, 156, 23);
+		
+		btn_buscar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(!txt_id.getText().equals("")) {
+				Ventas_Buscar b= new Ventas_Buscar();
+				b.setVisible(true);
+				b.setFocusable(true);
+				b.setLocationRelativeTo(null);
+				}else {
+					JOptionPane.showMessageDialog(null,"FAVOR DE LLENAR EL CAMPO ID");
+				}
+			}
+		});
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
@@ -164,6 +190,13 @@ public class Productos extends JFrame {
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_limpiar_campos.setBounds(907, 241, 156, 23);
+		
+		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+			}
+		});
 		panel.add(btn_limpiar_campos);
 		
 		JLabel lbl_distintivo1 = new JLabel("DISTINTIVO 1");
