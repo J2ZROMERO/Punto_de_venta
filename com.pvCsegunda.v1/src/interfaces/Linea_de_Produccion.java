@@ -45,6 +45,7 @@ public class Linea_de_Produccion extends JFrame {
 				}
 			}
 		});
+		
 	}
 
 	

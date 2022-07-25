@@ -46,6 +46,7 @@ public class Categorias extends JFrame {
 				}
 			}
 		});
+	
 	}
 
 	/**
