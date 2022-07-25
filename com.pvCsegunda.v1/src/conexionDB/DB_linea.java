@@ -52,7 +52,7 @@ n_linea.add(dat);
 }
     }
 		
-		String[] columnNames = {"id","Marcas"};
+		String[] columnNames = {"id","Linea"};
 		Object[][] data = new Object[n_linea.size()][columnNames.length];
 
 		data_row = new Object[n_linea.size()][columnNames.length];

@@ -30,31 +30,42 @@ System.out.println("datos insertados");
 	}
 	
 	public static DefaultTableModel model_view_marcas() throws SQLException {
-		List<String> n_marcas = new ArrayList<String>();
-		
+		List<Object> n_marcas = new ArrayList<Object>();
+		Object dat[];
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_marcas() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset
 	       
 	       {	       
 while(rs.next()) {
-
-n_marcas.add(rs.getString(1));	
+	dat = new Object[2];
+	dat[0]=	rs.getInt(1);	
+	dat[1]=	rs.getString(2);
+	n_marcas.add(dat);	
 	
+
+
 }
     }
 		
-		String[] columnNames = {"Marcas"};
-		Object[][] data = new Object[n_marcas.size()][1];
+			String[] columnNames = {"id","Marca"};
+			Object[][] data = new Object[n_marcas.size()][columnNames.length];
 
-		for(int i = 0; i < 1;i++) {
-	for(int j = 0; j <n_marcas.size();j++) {
-		data[j][i] = n_marcas.get(j);
-	} 	
-}
+			data_row = new Object[n_marcas.size()][columnNames.length];
+		      
+			for (int j =  0; j < n_marcas.size();j++) {
+				datos = (Object[]) n_marcas.get(j);
+				for (int i =  0; i < datos.length;i++) {
+					data_row[j][i] =datos[i];
+				}	
+			}
 
+
+
+
+				
 
 			
-modelo.setDataVector(data, columnNames);
+		modelo.setDataVector(data_row, columnNames);
 
 		return modelo;
 		
@@ -70,7 +81,9 @@ modelo.setDataVector(data, columnNames);
 		}
 		
 	}
-	
-    
+	private static Object[][] data_row;	
+	private static Object[] datos;
 private	static DefaultTableModel modelo = new DefaultTableModel();
+
+
 }

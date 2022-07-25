@@ -12,6 +12,10 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_linea;
+import conexionDB.DB_marcas;
+
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import javax.swing.JList;
@@ -21,6 +25,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -86,23 +91,15 @@ public class Marcas extends JFrame {
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
 		scrollPane.setViewportView(tbl_marcas);
-		tbl_marcas.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"MARCAS"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+	
+		tbl_marcas.addMouseListener( new MouseAdapter() {
+				
+			public void mousePressed(MouseEvent e) {
+				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
+		            txt_marca.setText(selectedCellValue);
 		
-		
-		
+			}});
+		ver_datos_tabla(tbl_marcas);
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -113,6 +110,14 @@ public class Marcas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
+					try {
+						DB_marcas.anadir_marca(txt_marca.getText());
+						ver_datos_tabla(tbl_marcas);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.setFocusable(true);
@@ -126,6 +131,7 @@ public class Marcas extends JFrame {
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
+		
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(406, 224, 117, 35);
@@ -135,6 +141,13 @@ public class Marcas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
+					try {
+						DB_marcas.eliminar_marcas(txt_marca.getText());
+						ver_datos_tabla(tbl_marcas);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.setFocusable(true);
@@ -170,5 +183,19 @@ public class Marcas extends JFrame {
 		panel.add(btn_regresar);
 		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
+	}
+	public void ver_datos_tabla(JTable tabla) {
+
+		try {
+			tabla.setModel(DB_marcas.model_view_marcas());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		
+			
 	}
 }

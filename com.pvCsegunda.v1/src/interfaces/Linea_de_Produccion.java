@@ -113,14 +113,7 @@ public class Linea_de_Produccion extends JFrame {
 			
 			
 			});
-		try {
-			tbl_linea_de_produccion.setModel(DB_linea.model_view_linea());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		
+ver_datos_tabla(tbl_linea_de_produccion);
 		scrollPane.setViewportView(tbl_linea_de_produccion);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
