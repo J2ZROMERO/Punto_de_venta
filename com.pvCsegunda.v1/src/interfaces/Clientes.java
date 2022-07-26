@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -18,6 +20,9 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_clientes;
+import conexionDB.DB_marcas;
 
 public class Clientes extends JFrame {
 
@@ -51,6 +56,8 @@ public class Clientes extends JFrame {
 		txt_apellido.setText("");
 		txt_nick_name.setText("");
 		txt_telefono.setText("");
+	
+
 	}
 	/**
 	 * Create the frame.
@@ -93,6 +100,7 @@ public class Clientes extends JFrame {
 		txt_id = new JTextField();
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setBounds(122, 59, 163, 20);
+		txt_id.setEnabled(false);;
 		panel.add(txt_id);
 		txt_id.setColumns(10);
 		
@@ -180,9 +188,18 @@ public class Clientes extends JFrame {
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
-						   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
-							JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
+				
+				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals("") && txt_apellido.getText().equals("")
+						&& txt_telefono.getText().equals(""))) {
+					Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
+					try {
+						DB_clientes.anadir(datos);
+						ver_datos_tabla(tbl_clientes);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
 							txt_nombre.requestFocus();
 							Limpiar_Campos();
 						}else {
@@ -201,8 +218,23 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (!txt_id.getText().equals("")){
+		try {
+			Object datos[]=    DB_clientes.buscar(Integer.parseInt(txt_id.getText()));
+			
+			txt_id.setText(datos[0].toString());
+			txt_nombre.setText((String) datos[1]);
+			txt_apellido.setText((String) datos[2]);
+			txt_nick_name.setText((String) datos[3]);
+			txt_telefono.setText((String) datos[4]);
+			
+			
+			
+		} catch (NumberFormatException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
-					Limpiar_Campos();
+					//Limpiar_Campos();
 				} else {
 					JOptionPane.showMessageDialog(null, "DA CLICK EN BUSQUEDA DE CLIENTES");
 				}
@@ -217,8 +249,17 @@ public class Clientes extends JFrame {
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
+				if( !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
 				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+					Object datos[] = {Integer.parseInt(  txt_id.getText()), txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
+					
+					try {
+						DB_clientes.actualizar(datos);
+						ver_datos_tabla(tbl_clientes);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
 					Limpiar_Campos();
 				}else {
@@ -235,12 +276,24 @@ public class Clientes extends JFrame {
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
-				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+				if(!txt_id.getText().equals("") ) {
 				   
 					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL CLIENTE");
 					
 					if(opcion == 0) {
+						try {
+						
+						
+							DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
+							ver_datos_tabla(tbl_clientes);
+							
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
 						Limpiar_Campos();
 						txt_id.requestFocus();
@@ -258,13 +311,50 @@ public class Clientes extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_clientes = new JTable();
-		tbl_clientes.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"<html><center>ID</center></html>", "<html><center>NOMBRE</center></html>", "<html><center>TELEFONO</center></html>"
-			}
-		));
+		ver_datos_tabla(tbl_clientes);
 		scrollPane.setViewportView(tbl_clientes);
+		tbl_clientes.addMouseListener( new MouseAdapter() {
+				
+			public void mousePressed(MouseEvent e) {
+				   String selectedCellValue = (String) tbl_clientes.getValueAt(tbl_clientes.getSelectedRow() , 0);
+		            txt_id.setText(selectedCellValue);
+		            
+		     
+		            
+			        	Object datos[];
+						try {
+							datos = DB_clientes.buscar(Integer.parseInt(txt_id.getText()));
+							
+							txt_nombre.setText((String) datos[1]);
+							txt_apellido.setText((String) datos[2]);
+							txt_nick_name.setText((String) datos[3]);
+							txt_telefono.setText((String) datos[4]);
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				
+		           
+		            			
+		
+		
+			}});
+}
+	public void ver_datos_tabla(JTable tabla) {
+
+		try {
+			tabla.setModel(DB_clientes.model_view_clientes());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		
+			
 	}
 }
