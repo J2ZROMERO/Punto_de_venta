@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_clientes;
 import conexionDB.DB_marcas;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Clientes extends JFrame {
 
@@ -32,7 +34,6 @@ public class Clientes extends JFrame {
 	private JTextField txt_apellido;
 	private JTextField txt_nick_name;
 	private JTextField txt_telefono;
-	private JTable tbl_clientes;
 
 	/**
 	 * Launch the application.
@@ -64,7 +65,7 @@ public class Clientes extends JFrame {
 	 */
 	public Clientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 737, 531);
+		setBounds(100, 100, 612, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -154,7 +155,7 @@ public class Clientes extends JFrame {
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(73, 314, 154, 23);
+		btn_limpiar_campos.setBounds(399, 241, 154, 23);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -166,14 +167,19 @@ public class Clientes extends JFrame {
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("VER CLIENTES");
+		btn_ver_clientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+			}
+		});
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_clientes.setBounds(73, 376, 154, 23);
+		btn_ver_clientes.setBounds(122, 281, 154, 23);
 		
 		btn_ver_clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
-				
+		c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
 				c.setVisible(true);
 				c.setFocusable(true);
 				c.setLocationRelativeTo(null);
@@ -183,7 +189,7 @@ public class Clientes extends JFrame {
 		
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_añadir.setBounds(449, 56, 154, 23);
+		btn_añadir.setBounds(399, 59, 154, 23);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -194,7 +200,7 @@ public class Clientes extends JFrame {
 					Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					try {
 						DB_clientes.anadir(datos);
-						ver_datos_tabla(tbl_clientes);
+						//ver_datos_tabla(tbl_clientes);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -212,7 +218,7 @@ public class Clientes extends JFrame {
 		
 		JButton btn_buscar = new JButton("BUSCAR");
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(449, 100, 154, 23);
+		btn_buscar.setBounds(399, 103, 154, 23);
 		
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -243,19 +249,23 @@ public class Clientes extends JFrame {
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_actualizar.setBounds(449, 146, 154, 23);
+		btn_actualizar.setBounds(399, 149, 154, 23);
 		
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if( !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
-				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+				   || txt_apellido.getText().equals("") ||  txt_telefono.getText().equals("")) {
 					Object datos[] = {Integer.parseInt(  txt_id.getText()), txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					
 					try {
 						DB_clientes.actualizar(datos);
-						ver_datos_tabla(tbl_clientes);
+					//	ver_datos_tabla(tbl_clientes);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -271,7 +281,7 @@ public class Clientes extends JFrame {
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_eliminar.setBounds(449, 192, 154, 23);
+		btn_eliminar.setBounds(399, 195, 154, 23);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -285,7 +295,7 @@ public class Clientes extends JFrame {
 						
 						
 							DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
-							ver_datos_tabla(tbl_clientes);
+						//	ver_datos_tabla(tbl_clientes);
 							
 						} catch (NumberFormatException e1) {
 							// TODO Auto-generated catch block
@@ -306,55 +316,6 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_eliminar);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(319, 239, 392, 242);
-		panel.add(scrollPane);
-		
-		tbl_clientes = new JTable();
-		ver_datos_tabla(tbl_clientes);
-		scrollPane.setViewportView(tbl_clientes);
-		tbl_clientes.addMouseListener( new MouseAdapter() {
-				
-			public void mousePressed(MouseEvent e) {
-				   String selectedCellValue = (String) tbl_clientes.getValueAt(tbl_clientes.getSelectedRow() , 0);
-		            txt_id.setText(selectedCellValue);
-		            
-		     
-		            
-			        	Object datos[];
-						try {
-							datos = DB_clientes.buscar(Integer.parseInt(txt_id.getText()));
-							
-							txt_nombre.setText((String) datos[1]);
-							txt_apellido.setText((String) datos[2]);
-							txt_nick_name.setText((String) datos[3]);
-							txt_telefono.setText((String) datos[4]);
-						} catch (NumberFormatException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-				
-		           
-		            			
-		
-		
-			}});
 }
-	public void ver_datos_tabla(JTable tabla) {
 
-		try {
-			tabla.setModel(DB_clientes.model_view_clientes());
-			
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		
-		
-			
-	}
 }

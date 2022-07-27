@@ -127,31 +127,33 @@ System.out.println("datos actualizados");
 		
 	}
 	
-	
-	
-	public static DefaultTableModel model_view_clientes() throws SQLException {
-		List<Object> n_clientes = new ArrayList<Object>();
-		Object[] dat ;
+
+	public static DefaultTableModel model_view_clientes_boton() throws SQLException {
+		List<Object> n_clientes_boton = new ArrayList<Object>();
+		Object[] dat_boton ;
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_todo_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
 	       {	       
 	    	   
   	   
 while(rs.next()) {
-	dat = new Object[3];
-dat[0]=(rs.getString(1));	
-dat[1]=(rs.getString(4));	
-dat[2]=(rs.getString(5));
-n_clientes.add(dat);
+	dat_boton = new Object[6];
+dat_boton[0]=(rs.getInt(1));	
+dat_boton[1]=(rs.getString(2));	
+dat_boton[2]=(rs.getString(3));
+dat_boton[3]=(rs.getString(4));
+dat_boton[4]=(rs.getString(5));
+dat_boton[5]=(rs.getString(6));
+n_clientes_boton.add(dat_boton);
     }
-String[] columnNames = {"Id" ,"Nickname","Telefono"};
+String[] columnNames = {"Id" ,"Nombre","Apellido","Nickname","Telefono", "Fecha"};
 
 
-data_row = new Object[n_clientes.size()][columnNames.length];
+data_row = new Object[n_clientes_boton.size()][columnNames.length];
       
-for (int j =  0; j < n_clientes.size();j++) {
-	datos = (Object[]) n_clientes.get(j);
+for (int j =  0; j < n_clientes_boton.size();j++) {
+	datos = (Object[]) n_clientes_boton.get(j);
 	for (int i =  0; i < datos.length;i++) {
 		data_row[j][i] =datos[i];
 	}	
@@ -163,6 +165,8 @@ modelo.setDataVector(data_row, columnNames);
 		return modelo;	
 	}
 	
+	
+
 private static Object[][] data_row;	
 private static Object[] datos;
 private	static DefaultTableModel modelo = new DefaultTableModel();
