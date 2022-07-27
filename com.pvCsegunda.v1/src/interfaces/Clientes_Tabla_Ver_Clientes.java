@@ -64,6 +64,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_ver_clientes= new JTable();
+	
 		
 		scrollPane.setViewportView(tbl_ver_clientes);
 	
@@ -85,7 +86,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 
 		try {
 			
-			tbl_ver_clientes.setModel(DB_clientes.model_view_clientes_boton());
+			tbl_ver_clientes.setModel(DB_clientes.model_view_clientes());
 			
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -98,19 +99,22 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 				String selectedCellValue = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 0).toString();
 		        
 				id.setText(selectedCellValue);
-		            
 		     
 			     if(e.getClickCount()==2) {
 			    	 
 			    	 
-			    	 	Object datos[];
+			    	 	
 						try {
-							datos = DB_clientes.buscar(Integer.parseInt(id.getText()));
+						Object	datos[] = DB_clientes.buscar(Integer.parseInt(id.getText()));
 							
-							nombre.setText((String) datos[1]);
-							apellido.setText((String) datos[2]);
-							nickname.setText((String) datos[3]);
-							telefono.setText((String) datos[4]);
+						for(Object t: DB_clientes.buscar(Integer.parseInt(id.getText()))) {
+							System.out.println(t);
+						}
+							nombre.setText( datos[1].toString());
+							apellido.setText( datos[2].toString());
+							nickname.setText( datos[3].toString());
+							telefono.setText(datos[4].toString());
+							
 							dispose();
 						} catch (NumberFormatException e1) {
 							// TODO Auto-generated catch block

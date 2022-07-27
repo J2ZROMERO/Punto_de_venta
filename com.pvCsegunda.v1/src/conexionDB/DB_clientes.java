@@ -16,10 +16,9 @@ public class DB_clientes {
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 
-	/*
-Object values[] = {6,"sdfasd","jghjgy","",""};
-	DB_clientes.actualizar(values);
-*/
+ System.out.println(DB_clientes.model_view_clientes());
+
+
 	
 
 	
@@ -128,12 +127,12 @@ System.out.println("datos actualizados");
 	}
 	
 
-	public static DefaultTableModel model_view_clientes_boton() throws SQLException {
+	public static DefaultTableModel model_view_clientes() throws SQLException {
 		List<Object> n_clientes_boton = new ArrayList<Object>();
 		Object[] dat_boton ;
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_todo_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
 	       {	       
 	    	   
   	   
