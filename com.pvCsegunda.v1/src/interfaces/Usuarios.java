@@ -16,11 +16,18 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_clientes;
+import conexionDB.DB_usuarios;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.sql.SQLException;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 
@@ -33,8 +40,6 @@ public class Usuarios extends JFrame {
 	private JTextField txt_segundo_apellido;
 	private JTextField txt_nick_name;
 	private JTable tbl_usuarios;
-	private JTable table_1;
-	private JPasswordField txt_password;
 	private JComboBox cbx_tipo_de_rol;
 	private static Usuarios frame;
 	
@@ -63,7 +68,8 @@ public class Usuarios extends JFrame {
 		txt_apellido.setText("");
 		txt_segundo_apellido.setText("");
 		txt_nick_name.setText("");
-		txt_password.setText("");
+		txt_pass.setText("");
+		txt_fecha.setText("");
 	}
 	
 	public Usuarios() {
@@ -86,7 +92,8 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_tipo_de_rol);
 		
 		cbx_tipo_de_rol = new JComboBox();
-		cbx_tipo_de_rol.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONA UN ROL", "ADMINISTRADOR", "INVITADO"}));
+		cbx_tipo_de_rol.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONA UN ROL", "ADMINISTRADOR", "EMPLEADO"}));
+		
 		cbx_tipo_de_rol.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_tipo_de_rol.setBounds(149, 56, 230, 22);
 		panel.add(cbx_tipo_de_rol);
@@ -158,30 +165,63 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_password);
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		btn_limpiar_campos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_limpiar_campos.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(111, 398, 164, 23);
+		btn_limpiar_campos.setBounds(111, 409, 164, 23);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
 				txt_id.requestFocus();
+
+				// campos que se bloquean cuando se selecciona algun dato a editar
+				//txt_pass.setEnabled(true);
+				txt_id.setEnabled(true);
+			//	cbx_tipo_de_rol.setEnabled(true);
+				//
+
 			}		
 		});
 		panel.add(btn_limpiar_campos);
 	
 		JButton btn_añadir = new JButton("AÑADIR");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_añadir.setBounds(511, 12, 164, 23);
+		btn_añadir.setBounds(511, 56, 164, 23);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Object datos[] = new Object[7];
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_pass.equals("")) {
+				datos[0] = txt_id.getText();
+				datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
+				datos[2] = txt_nombre.getText();
+				datos[3] = txt_apellido.getText();
+				datos[4] = txt_segundo_apellido.getText();
+				datos[5] = txt_nick_name.getText();
+				datos[6] = txt_pass.getText();
+						
+					
+					
+					try {
+						DB_usuarios.anadir(datos);
+						JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
+						Limpiar_Campos();
+						txt_id.requestFocus();
+						ver_datos_tabla(tbl_usuarios);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
-					JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
-					Limpiar_Campos();
-					txt_id.requestFocus();
 				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
 				}
@@ -190,37 +230,41 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_buscar = new JButton(" BUSCAR");
-		btn_buscar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_buscar.setBounds(511, 56, 164, 23);
-		
-		btn_buscar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				if(!txt_id.getText().equals("")) {
-					JOptionPane.showMessageDialog(null, "LLENANDO CAMPOS CON LOS DATOS CORRESPONDIENTES");
-				}else {	
-					Usuarios_Tabla_Buscar tb = new Usuarios_Tabla_Buscar();
-					tb.setVisible(true);
-					tb.setLocationRelativeTo(null);
-					tb.setFocusable(true);
-				}
+		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel.add(btn_buscar);
-		
-		JButton btn_actualizar = new JButton("ACTUALIZAR");
 		btn_actualizar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_actualizar.setBounds(511, 102, 164, 23);
 		
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
+				
+				Object datos[] = new Object[7];
+				datos[0] = txt_id.getText();
+				datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
+				datos[2] = txt_nombre.getText();
+				datos[3] = txt_apellido.getText();
+				datos[4] = txt_segundo_apellido.getText();
+				datos[5] = txt_nick_name.getText();
+				datos[6] = txt_pass.getText();
+				
+						
+					
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_pass.equals("")) {
+				try {
+					DB_usuarios.actualizar(datos);
 					JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO CORRECTAMENTE");
 					Limpiar_Campos();
 					txt_id.requestFocus();
+					ver_datos_tabla(tbl_usuarios);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
 				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
 				}
@@ -229,16 +273,32 @@ public class Usuarios extends JFrame {
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(511, 146, 164, 23);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
+			
 			public void mouseClicked(MouseEvent e) {
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_password.equals("")) {
-					JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CORRECTAMENTE");
-					Limpiar_Campos();
-					txt_id.requestFocus();
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_pass.equals("")) {
+					
+					try {
+						DB_usuarios.eliminar(Integer.parseInt( txt_id.getText() ));
+						ver_datos_tabla(tbl_usuarios);
+						JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CORRECTAMENTE");
+						Limpiar_Campos();
+						txt_id.requestFocus();
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
 				}
@@ -246,33 +306,112 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_eliminar);
 		
+		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(401, 192, 370, 256);
 		panel.add(scroll);
-//// tabla		
+	
 		tbl_usuarios = new JTable();
-		tbl_usuarios.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"administrador", "1", "admin1"},
-				{"invitado","2","invitado2"},
-				{"invitado","3","invitado3"}
-			},
-			new String[] {
-				"ROL", "ID", "NICK_NAME"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, String.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		
-		
-		///
-		tbl_usuarios.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+tbl_usuarios.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		scroll.setViewportView(tbl_usuarios);
+		ver_datos_tabla(tbl_usuarios);
+	
+tbl_usuarios.addMouseListener( new MouseAdapter() {
+
+	
+			public void mousePressed(MouseEvent e) {
+				
+				String selectedCellValue = tbl_usuarios.getValueAt(tbl_usuarios.getSelectedRow() , 0).toString();
+		        
+				txt_id.setText(selectedCellValue);
+		
+		     
+		
+			    	 Object datos[];
+						try {
+							datos = DB_usuarios.buscar(Integer.parseInt(txt_id.getText()));
+							
+							
+
+							 
+							txt_id.setText(datos[0].toString());
+							
+							for(int i = 0; i < (cbx_tipo_de_rol.getItemCount());i++) {
+	
+								if(cbx_tipo_de_rol.getItemAt(i).toString().equals(datos[1].toString())) {
+									cbx_tipo_de_rol.setSelectedIndex(i);
+								}
+								
+								
+							};
+							
+	
+													
+						
+							
+										
+										if(datos[3] == null || datos[4] == null) {
+											txt_nombre.setText(datos[2].toString());	
+											txt_apellido.setText("");
+											txt_segundo_apellido.setText("");
+											txt_nick_name.setText(datos[5].toString());
+											txt_pass.setText((String)datos[6]);											
+											txt_fecha.setText((String)datos[7]);
+
+											// campos que se bloquean cuando se selecciona algun dato a editar
+										//	txt_pass.setEnabled(false);
+											txt_id.setEnabled(false);
+											//cbx_tipo_de_rol.setEnabled(false);
+											//
+
+											
+										}else {
+											txt_nombre.setText(datos[2].toString());	
+											txt_apellido.setText(datos[3].toString());
+											txt_segundo_apellido.setText(datos[4].toString());
+											txt_nick_name.setText(datos[5].toString());
+											txt_pass.setText((String)datos[6]);
+											txt_fecha.setText((String)datos[7]);
+
+											// campos que se bloquean cuando se selecciona algun dato a editar
+											//txt_pass.setEnabled(false);
+											txt_id.setEnabled(false);
+											//cbx_tipo_de_rol.setEnabled(false);
+											//
+										}
+										
+						
+						
+						
+						
+						}
+
+											
+							
+								
+							
+							
+						
+							
+							
+						 catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				
+			    	 
+			     
+				
+			       
+		           
+		            			
+		
+		}                              });
+		
+
 		
 		JButton btn_regresar = new JButton("");
 		btn_regresar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/flecha.png")));
@@ -290,16 +429,40 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_regresar);
 		
-		table_1 = new JTable();
-		table_1.setBounds(347, 423, 221, -100);
-		panel.add(table_1);
+		JLabel lbl_fecha = new JLabel("REGISTRO");
+		lbl_fecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_fecha.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_fecha.setBounds(10, 376, 121, 22);
+		panel.add(lbl_fecha);
 		
-		txt_password = new JPasswordField();
-		txt_password.setFont(new Font("Roboto Slab Black", Font.BOLD, 14));
-		txt_password.setBounds(149, 334, 230, 22);
-		panel.add(txt_password);
+		txt_pass = new JTextField();
+		txt_pass.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_pass.setColumns(10);
+		txt_pass.setBounds(149, 334, 230, 22);
+		panel.add(txt_pass);
+		
+		txt_fecha = new JTextField();
+		txt_fecha.setEnabled(false);
+		txt_fecha.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_fecha.setColumns(10);
+		txt_fecha.setBounds(149, 376, 230, 22);
+		panel.add(txt_fecha);
 		
 	}
+	
+	
+	private void ver_datos_tabla(JTable tabla){
+try {
+	tabla.setModel(DB_usuarios.model_view_usuarios());
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+		
+	}
+	
+	private JTextField txt_pass;
+	private JTextField txt_fecha;
 }
 
 
