@@ -1,13 +1,13 @@
--- MariaDB dump 10.19  Distrib 10.6.5-MariaDB, for Win64 (AMD64)
+-- MySQL dump 10.13  Distrib 5.5.62, for Win64 (AMD64)
 --
 -- Host: localhost    Database: pv_canoa_segunda
 -- ------------------------------------------------------
--- Server version	10.6.5-MariaDB
+-- Server version	5.5.5-10.6.5-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -41,7 +41,7 @@ CREATE TABLE `caja` (
   KEY `caja_FK_1` (`fk_ventas`),
   CONSTRAINT `caja_FK` FOREIGN KEY (`fk_provedores`) REFERENCES `provedores` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `caja_FK_1` FOREIGN KEY (`fk_ventas`) REFERENCES `ventas` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `caja_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `caja_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -51,7 +51,7 @@ CREATE TABLE `caja` (
 
 LOCK TABLES `caja` WRITE;
 /*!40000 ALTER TABLE `caja` DISABLE KEYS */;
-INSERT INTO `caja` VALUES (2,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',43,NULL,NULL),(3,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',43,NULL,NULL),(4,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',43,NULL,NULL),(5,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',43,NULL,NULL),(7,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',413,NULL,NULL),(8,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',413,NULL,NULL),(10,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',43,NULL,NULL),(23,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-06 20:51:38',43,NULL,NULL),(24,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:17:15',43,NULL,NULL),(25,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:34:00',43,NULL,NULL),(26,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:34:00',43,NULL,NULL),(27,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:35:00',43,NULL,NULL),(28,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:04:11',43,NULL,NULL),(29,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:04:16',43,NULL,NULL),(30,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 08:00:56',43,NULL,NULL),(31,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 07:17:25',43,NULL,NULL),(32,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:20:25',43,NULL,NULL),(33,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:27:54',43,NULL,NULL),(34,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 20:05:11',43,NULL,NULL);
+INSERT INTO `caja` VALUES (2,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(3,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(4,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(5,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(7,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(8,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(10,5000,'entrada',5000,3000,'gastos',5000,NULL,'2022-06-03 00:00:00',NULL,NULL,NULL),(23,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-06 20:51:38',NULL,NULL,NULL),(24,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:17:15',NULL,NULL,NULL),(25,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:34:00',NULL,NULL,NULL),(26,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:34:00',NULL,NULL,NULL),(27,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 18:35:00',NULL,NULL,NULL),(28,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:04:11',NULL,NULL,NULL),(29,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:04:16',NULL,NULL,NULL),(30,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 08:00:56',NULL,NULL,NULL),(31,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 07:17:25',NULL,NULL,NULL),(32,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:20:25',NULL,NULL,NULL),(33,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 19:27:54',NULL,NULL,NULL),(34,500450,'entrada',5000,3000,'gastos',5000,6541,'2022-06-09 20:05:11',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -66,7 +66,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +75,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (5,'ganso');
+INSERT INTO `categoria` VALUES (5,'ganso'),(6,'otr catedoria');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `cierre_caja` (
   `fk_usuarios` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cierre_caja_FK` (`fk_usuarios`),
-  CONSTRAINT `cierre_caja_FK` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`)
+  CONSTRAINT `cierre_caja_FK` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,7 +106,7 @@ CREATE TABLE `cierre_caja` (
 
 LOCK TABLES `cierre_caja` WRITE;
 /*!40000 ALTER TABLE `cierre_caja` DISABLE KEYS */;
-INSERT INTO `cierre_caja` VALUES (1,1500,500,250,1750,'2022-06-13 19:25:02',43);
+INSERT INTO `cierre_caja` VALUES (1,1500,500,250,1750,'2022-06-13 19:25:02',NULL);
 /*!40000 ALTER TABLE `cierre_caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (2,'dara','gachu','jjjjjjjjjjjjjjjjj','22280010101','2022-06-29 18:19:05'),(5,'asasasas','aa','dddddddddddddd','aa','2022-07-19 19:22:15'),(9,'','','','','2022-07-22 17:05:17'),(10,'Jose ','Juan ','Zepeda','Romero...','2022-07-22 17:06:41'),(12,'Carlos Juarez','Sanchez ','domignuees','2228103004','2022-07-22 17:10:28'),(14,'zxczxcxcx','xc<<<<<<<<<','aaa','543534534','2022-07-22 17:59:32'),(15,'jsope nja ','sdasdad','dsadas','dasd','2022-07-22 18:08:55'),(18,'zxczxcxcx','xc<<<<<<<<<','aaa','543534534','2022-07-22 18:10:53'),(21,'jose juan zepeda romero','castilo','fsdf','rojas','2022-07-25 18:58:16');
+INSERT INTO `clientes` VALUES (2,'dara','gachu','jjjjjjjjjjjjjjjjj','22280010101','2022-06-29 18:19:05'),(5,'asasasas','aa','dddddddddddddd','aa','2022-07-19 19:22:15'),(10,'Jose ','Juan ','Zepeda','Romero...','2022-07-22 17:06:41'),(12,'Carlos Juarez','Sanchez ','domignuees','2228103004','2022-07-22 17:10:28'),(15,'jsope nja ','zepeda','','','2022-07-22 18:08:55');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,7 @@ CREATE TABLE `devoluciones` (
   KEY `devoluciones_FK_2` (`fk_usuario`),
   CONSTRAINT `devoluciones_FK` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `devoluciones_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `devoluciones_FK_2` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `devoluciones_FK_2` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -169,7 +169,7 @@ CREATE TABLE `devoluciones` (
 
 LOCK TABLES `devoluciones` WRITE;
 /*!40000 ALTER TABLE `devoluciones` DISABLE KEYS */;
-INSERT INTO `devoluciones` VALUES (1,5,'no los quiso','2022-06-22 17:02:04',NULL,NULL,NULL),(3,5,'no los quiso','2022-06-22 17:02:23',NULL,NULL,413),(5,5,'no los quiso','2022-06-22 17:04:03',31475,NULL,413),(6,5,'nuevoprudcot','2022-06-23 20:05:17',31456,NULL,413),(7,5,'omitido','2022-06-28 20:46:51',65,NULL,413),(8,78,'omitido','2022-06-28 22:00:49',65,NULL,413);
+INSERT INTO `devoluciones` VALUES (1,5,'no los quiso','2022-06-22 17:02:04',NULL,NULL,NULL),(3,5,'no los quiso','2022-06-22 17:02:23',NULL,NULL,NULL),(5,5,'no los quiso','2022-06-22 17:04:03',31475,NULL,NULL),(6,5,'nuevoprudcot','2022-06-23 20:05:17',31456,NULL,NULL),(7,5,'omitido','2022-06-28 20:46:51',65,NULL,NULL),(8,78,'omitido','2022-06-28 22:00:49',65,NULL,NULL);
 /*!40000 ALTER TABLE `devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,6 @@ CREATE TABLE `estadisticas` (
   CONSTRAINT `estadisticas_FK` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `estadisticas_FK_1` FOREIGN KEY (`fk_devoluciones`) REFERENCES `devoluciones` (`id`),
   CONSTRAINT `estadisticas_FK_2` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`),
-  CONSTRAINT `estadisticas_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `estadisticas_FK_4` FOREIGN KEY (`fk_caja`) REFERENCES `caja` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `estadisticas_FK_5` FOREIGN KEY (`fk_ventas`) REFERENCES `ventas` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -222,7 +221,7 @@ CREATE TABLE `linea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linea` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -231,7 +230,7 @@ CREATE TABLE `linea` (
 
 LOCK TABLES `linea` WRITE;
 /*!40000 ALTER TABLE `linea` DISABLE KEYS */;
-INSERT INTO `linea` VALUES (7,'otr'),(8,'what about'),(10,'good');
+INSERT INTO `linea` VALUES (7,'otr'),(8,'what about'),(10,'good'),(11,'otra linea ,as');
 /*!40000 ALTER TABLE `linea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +245,7 @@ CREATE TABLE `marcas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +254,7 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (3,'otra nueva marca'),(4,'gansito');
+INSERT INTO `marcas` VALUES (3,'otra nueva marca'),(4,'gansito'),(5,'nueva marca');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -296,7 +295,7 @@ CREATE TABLE `productos` (
   CONSTRAINT `productos_FK_1` FOREIGN KEY (`fk_linea`) REFERENCES `linea` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `productos_FK_2` FOREIGN KEY (`fk_marca`) REFERENCES `marcas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `productos_FK_3` FOREIGN KEY (`fk_provedores`) REFERENCES `provedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `productos_FK_4` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `productos_FK_4` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='just id,name,stock,purchase sale,selling price can not be empty';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -306,7 +305,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (65,'panes de dulce','chocolate','con chispas muchas chispas',80,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 20:41:53',NULL,NULL,NULL,NULL,413,'anadido'),(78,'panes de dulce','chocolate','con chispas muchas chispas',75,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 22:00:35',NULL,NULL,NULL,NULL,413,'anadido'),(3145,'panes de dulce','de colores','',0,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:07',NULL,NULL,NULL,NULL,413,'anadido'),(31456,' dulce','de','',0,156,1233,0,'0',0,56,2555,'2022-06-23 20:01:52',NULL,NULL,NULL,NULL,413,'anadido'),(31475,'panes de dulce','de colores','',5,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:08',NULL,NULL,NULL,NULL,413,'anadido');
+INSERT INTO `productos` VALUES (65,'panes de dulce','chocolate','con chispas muchas chispas',80,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 20:41:53',NULL,NULL,NULL,NULL,NULL,'anadido'),(78,'panes de dulce','chocolate','con chispas muchas chispas',75,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 22:00:35',NULL,NULL,NULL,NULL,NULL,'anadido'),(3145,'panes de dulce','de colores','',0,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:07',NULL,NULL,NULL,NULL,NULL,'anadido'),(31456,' dulce','de','',0,156,1233,0,'0',0,56,2555,'2022-06-23 20:01:52',NULL,NULL,NULL,NULL,NULL,'anadido'),(31475,'panes de dulce','de colores','',5,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:08',NULL,NULL,NULL,NULL,NULL,'anadido');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +325,7 @@ CREATE TABLE `productos_eliminados` (
   `fecha` datetime DEFAULT NULL,
   KEY `productos_eliminados_FK` (`fk_usuario`),
   KEY `productos_eliminados_FK_1` (`fk_producto`),
-  CONSTRAINT `productos_eliminados_FK` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `productos_eliminados_FK` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL,
   CONSTRAINT `productos_eliminados_FK_1` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -337,7 +336,7 @@ CREATE TABLE `productos_eliminados` (
 
 LOCK TABLES `productos_eliminados` WRITE;
 /*!40000 ALTER TABLE `productos_eliminados` DISABLE KEYS */;
-INSERT INTO `productos_eliminados` VALUES (413,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:32:12'),(413,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:33:54'),(413,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 16:03:06'),(413,NULL,' dulce','de','Eliminado','2022-06-22 16:03:42'),(413,NULL,' dulce','de','Eliminado','2022-06-23 20:02:17');
+INSERT INTO `productos_eliminados` VALUES (NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:32:12'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:33:54'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 16:03:06'),(NULL,NULL,' dulce','de','Eliminado','2022-06-22 16:03:42'),(NULL,NULL,' dulce','de','Eliminado','2022-06-23 20:02:17');
 /*!40000 ALTER TABLE `productos_eliminados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,12 +351,12 @@ CREATE TABLE `provedores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `apellido1` varchar(20) DEFAULT NULL,
-  `apellido2` varchar(20) DEFAULT NULL,
+  `contacto` varchar(20) DEFAULT NULL,
   `empresa` varchar(20) DEFAULT NULL,
   `nombreSupervisor` varchar(50) DEFAULT NULL,
   `contactoSupervisor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +365,7 @@ CREATE TABLE `provedores` (
 
 LOCK TABLES `provedores` WRITE;
 /*!40000 ALTER TABLE `provedores` DISABLE KEYS */;
-INSERT INTO `provedores` VALUES (4,'jose','zeepda','romero','bimbo','carlos joaquin','2228103004'),(5,'jose','zeepda','romero','bimbo','carlos joaquin','2228103004'),(6,'jose','zeepda','romero','bimbo','carlos joaquin','2228103004');
+INSERT INTO `provedores` VALUES (4,'jose','zeepda','romero','bimbo','carlos joaquin','2228103004'),(5,'asdasdsadas ','sdas','sdadsa','sas',NULL,NULL),(6,'asdasdddddddsadas ','sdas','sdadsa','sas',NULL,NULL),(8,'dsadasdasd','asdasdasd','asdasdasd','sadasdasdasd','asdsadasd','fgfgzxcf');
 /*!40000 ALTER TABLE `provedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +393,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'jose juan ','zepeda','romero','jhosep','ÔøΩÔøΩn`\0≈∂ÔøΩ>s$ÔøΩÔøΩ~'),(2,'carlos','zepeda','romero','carlangas','ÔøΩÔøΩ{ÔøΩÔøΩÔøΩ◊∑ÔøΩU0QÔøΩ'),(4,'carlosgfs','zepeda','romero','car','ÔøΩÔøΩ{ÔøΩÔøΩÔøΩ◊∑ÔøΩU0QÔøΩ');
+INSERT INTO `users` VALUES (1,'jose juan ','zepeda','romero','jhosep','ÔøΩÔøΩn`\0≈∂ÔøΩ>s$ÔøΩÔøΩ~'),(2,'carlos','zepeda','romero','carlangas','ÔøΩÔøΩ{ÔøΩÔøΩÔøΩ◊∑ÔøΩU0QÔøΩ'),(4,'carlosgfs','zepeda','romero','car','ÔøΩÔøΩ{ÔøΩÔøΩÔøΩ◊∑ÔøΩU0QÔøΩ'),(56,'jose','zepeda','roemro','carlos','Jm\"ÿN∏Nbö¯ø¨Œb¯');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +423,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (43,'jefe','hernand11ez',NULL,NULL,'men','KÔøΩÔøΩÔøΩ’ó7ÔøΩUÔøΩ2ÔøΩÔøΩ6Io','2022-05-26 00:00:00'),(413,'empleado','jose juan','zepeda',' romero','jhosep','ÔøΩÔøΩ{ÔøΩÔøΩÔøΩ◊∑ÔøΩU0QÔøΩ','2022-05-27 00:00:00');
+INSERT INTO `usuarios` VALUES (80,'ADMINISTRADOR','perla','vnues','de los sanos','perlangas','ß√%Moö}¿Å\Z(√”<','2022-07-27 16:48:13'),(123,'EMPLEADO','juan perez','carlos ','domginjue','eserengo232','—Jàº7JD\nœß˚ÜÉc%C','2022-07-27 14:37:43');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +450,7 @@ CREATE TABLE `ventas` (
   KEY `ventas_FK_1` (`fk_usuarios`),
   KEY `ventas_FK_2` (`fk_productos`),
   CONSTRAINT `ventas_FK` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `ventas_FK_1` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `ventas_FK_1` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -461,7 +460,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,'1',NULL,NULL,78,NULL,'2022-06-29 00:00:00',NULL,413,3145),(2,'1',NULL,NULL,3,NULL,'2022-06-29 00:00:00',NULL,413,3145),(3,'1',NULL,NULL,0,NULL,'2022-06-29 19:10:59',NULL,413,3145),(4,'1',NULL,NULL,40,NULL,'2022-06-29 19:31:58',NULL,413,3145),(5,'1',NULL,NULL,40,NULL,'2022-06-29 19:32:22',NULL,413,3145),(6,'1',NULL,NULL,3,NULL,'2022-06-29 19:32:34',NULL,413,3145),(7,'1',NULL,NULL,3,NULL,'2022-06-29 19:34:56',NULL,413,3145),(8,'1',NULL,NULL,5,NULL,'2022-06-29 20:00:34',NULL,413,78),(9,'1',NULL,NULL,5,NULL,'2022-06-29 20:01:12',NULL,413,3145),(10,'1',NULL,NULL,5,NULL,'2022-06-29 20:09:34',NULL,413,31456),(11,'1','ollas de barro',NULL,0,NULL,'2022-06-30 19:31:32',NULL,43,31456),(12,'gansito','ollas de barro',NULL,0,NULL,'2022-06-30 19:32:09',NULL,43,31456);
+INSERT INTO `ventas` VALUES (1,'1',NULL,NULL,78,NULL,'2022-06-29 00:00:00',NULL,NULL,3145),(2,'1',NULL,NULL,3,NULL,'2022-06-29 00:00:00',NULL,NULL,3145),(3,'1',NULL,NULL,0,NULL,'2022-06-29 19:10:59',NULL,NULL,3145),(4,'1',NULL,NULL,40,NULL,'2022-06-29 19:31:58',NULL,NULL,3145),(5,'1',NULL,NULL,40,NULL,'2022-06-29 19:32:22',NULL,NULL,3145),(6,'1',NULL,NULL,3,NULL,'2022-06-29 19:32:34',NULL,NULL,3145),(7,'1',NULL,NULL,3,NULL,'2022-06-29 19:34:56',NULL,NULL,3145),(8,'1',NULL,NULL,5,NULL,'2022-06-29 20:00:34',NULL,NULL,78),(9,'1',NULL,NULL,5,NULL,'2022-06-29 20:01:12',NULL,NULL,3145),(10,'1',NULL,NULL,5,NULL,'2022-06-29 20:09:34',NULL,NULL,31456),(11,'1','ollas de barro',NULL,0,NULL,'2022-06-30 19:31:32',NULL,NULL,31456),(12,'gansito','ollas de barro',NULL,0,NULL,'2022-06-30 19:32:09',NULL,NULL,31456);
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -646,37 +645,23 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_provedores`(idDB int,nombreDB varchar(50),apellido1DB varchar(20),apellido2DB varchar(20), empresaDB varchar(20),nombresupervisorDB varchar(50), contactosupervisorDB varchar(50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_provedores`(idDB int,nombreDB varchar(50),apellido1DB varchar(20),contactoDB varchar(20), empresaDB varchar(20),nombresupervisorDB varchar(50), contactosupervisorDB varchar(50))
 begin
 
-	
-
+	/*
 	declare idVAR int;
-
 declare aviso varchar(20);	
-
 set idVAR = (select id from pv_canoa_segunda.provedores where  id  = idDB);
-
-
-
 if(idVAR = idDB)then
-
 	update pv_canoa_segunda.provedores set nombre = nombreDB ,apellido1 = apellido1DB ,apellido2  = apellido2DB ,empresa = empresaDB , nombreSupervisor = nombresupervisorDB ,contactoSupervisor = contactosupervisorDB where id = idDB ; 
-
-	
-
 else
-
 set aviso = "no coinciden";
-
 select aviso;
-
-
-
-
-
 end if;
 
+*/
+UPDATE pv_canoa_segunda.provedores
+set nombre = nombreDB ,apellido1 = apellido1DB ,contacto  = contactoDB  ,empresa = empresaDB , nombreSupervisor = nombresupervisorDB ,contactoSupervisor = contactosupervisorDB where id = idDB; 
 
 
 
@@ -866,7 +851,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_provedores`(in idDB int(20))
 begin
 
 	
-
+/*
 	declare provedorVAR int;
 
 	set provedorVAR  =(select pv_canoa_segunda.provedores.id from pv_canoa_segunda.provedores where id = idDB);
@@ -884,8 +869,9 @@ select id,nombre,empresa from pv_canoa_segunda.provedores ;
 end if;
 
 	
+*/SELECT id, nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor
+FROM pv_canoa_segunda.provedores where id = idDB ;
 
-	
 
 	
 
@@ -905,12 +891,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_usuario`(idDB int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_usuario`(idDB int,out passDB varchar(100))
 begin
 
 	
 
-	SELECT id, rol, nombre, apellido1, apellido2, nickname, pass, fecha
+ 
+
+ declare  passvar varchar (100) ;
+
+	declare salt varchar(50);
+
+set salt = '153624'; 
+
+
+
+
+
+
+	
+
+    SET  passDB  = (select (cast (aes_decrypt( pv_canoa_segunda.usuarios.pass  ,153624) as char)) from pv_canoa_segunda.usuarios  where  pv_canoa_segunda.usuarios.id  = idDB);
+
+
+   	
+   
+	SELECT id, rol, nombre, apellido1, apellido2, nickname, pass , fecha
 
 FROM pv_canoa_segunda.usuarios where id = idDB;
 
@@ -1232,6 +1238,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `elimina_provedores` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `elimina_provedores`(idDB int)
+begin
+	DELETE FROM pv_canoa_segunda.provedores
+WHERE id=idDB;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `estadisticas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1508,16 +1535,15 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_provedores`(in nombreDB varchar(50),in apellido1DB varchar(20),in apellido2DB varchar(20),in empresaDB varchar(20),in nombreSupervisorDB varchar(50),in contactoSupervisorDB varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertar_provedores`(in nombreDB varchar(50),in apellido1DB varchar(20),in contactoDB varchar(20),in empresaDB varchar(20),in nombreSupervisorDB varchar(50),in contactoSupervisorDB varchar(20))
 begin
 
 	
 
-	INSERT INTO pv_canoa_segunda.provedores
+INSERT INTO pv_canoa_segunda.provedores
+(nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor)
 
-(nombre, apellido1, apellido2, empresa, nombreSupervisor, contactoSupervisor)
-
-VALUES(nombreDB, apellido1DB, apellido2DB, empresaDB, nombreSupervisorDB, contactoSupervisorDB);
+VALUES(nombreDB, apellido1DB, contactoDB, empresaDB, nombreSupervisorDB, contactoSupervisorDB);
 
 
 
@@ -1547,18 +1573,6 @@ declare salt varchar(50);
 
 
 set salt = '153624'; 
-
-	
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1812,8 +1826,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_clientes`()
 begin
 
-	SELECT id, nombre, apellido, nickname, telefono, fecha
-
+SELECT id, nombre, apellido, nickname, telefono, fecha
 FROM pv_canoa_segunda.clientes;
 
 
@@ -1926,6 +1939,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ver_provedores` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_provedores`()
+begin
+SELECT id, nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor
+FROM pv_canoa_segunda.provedores;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ver_ventas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2008,4 +2042,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-26 15:31:40
+-- Dump completed on 2022-07-27 20:10:56

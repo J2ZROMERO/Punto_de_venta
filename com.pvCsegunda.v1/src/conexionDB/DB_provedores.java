@@ -10,41 +10,31 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-public class DB_usuarios {
-/** campos id,rol,nombre,nickname son obligatorios  ---- solo en este campo se podra asignar el id manualmente "no habra muchos usuarios"*/
-/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		try {
-			Object e[] =  DB_usuarios.buscar(154);
-		
-			for(Object d : e) {
-			System.out.println(d);		
-		};
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+public class DB_provedores {
 
-		
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
 	}
-	*/
+
+	
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 	      
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_usuarios(?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_provedores(?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	       
 	        
 
 	       
 	       {	       
 
-cstm.setInt( 1,Integer.parseInt(datos_campos[0].toString()));
+
+cstm.setString(1, datos_campos[0].toString() );	 
 cstm.setString(2, datos_campos[1].toString() );	 
-cstm.setString(3, datos_campos[2].toString() );	 
-cstm.setString(4, datos_campos[3].toString() );
+cstm.setString(3, datos_campos[2].toString() );
+cstm.setString(4, datos_campos[3].toString() );	 
 cstm.setString(5, datos_campos[4].toString() );	 
 cstm.setString(6, datos_campos[5].toString() );	 
-cstm.setInt(7, Integer.parseInt(  datos_campos[6].toString() ));	 
 
 
 cstm.executeUpdate();
@@ -58,17 +48,16 @@ System.out.println("datos insertados");
 	      
 		Object valores_campos[] = new Object[8];
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_usuario(?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_provedores(?)  }"))   // dentro statement connection and resulset
 	        
 
 	       {	       
 
 	    	   
 cstm.setInt(1,id );
-cstm.registerOutParameter(2, java.sql.Types.VARCHAR);
 
 ResultSet rs = cstm.executeQuery();
-  String pass = cstm.getString("passDB");
+
 
 while(rs.next()) {
 	valores_campos[0]= rs.getInt(1);
@@ -77,8 +66,8 @@ while(rs.next()) {
 	valores_campos[3]= rs.getString(4);
 	valores_campos[4]= rs.getString(5);
 	valores_campos[5]= rs.getString(6);
-	valores_campos[6]= pass;
-	valores_campos[7]= rs.getDate(8).toString();
+	valores_campos[6]= rs.getString(7);
+
 
 		       	
 }
@@ -93,7 +82,8 @@ while(rs.next()) {
 	      
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_usuario(?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.elimina_provedores(:idDB)}"))   // dentro statement connection and resulset
+	       
 	        
 
 	       {	       
@@ -117,7 +107,7 @@ System.out.println("datos eliminados");
 	public  static void actualizar(Object datos_campos[]) throws SQLException{
 	    // use los 5 paramtros pero solo el id no sirve para la comparacion de la consulta en la base de datos  
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.actualizar_usuarios(?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.actualizar_provedores(?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
 
 	       {	       
@@ -137,12 +127,12 @@ System.out.println("datos actualizados");
 	}
 	
 
-	public static DefaultTableModel model_view_usuarios() throws SQLException {
+	public static DefaultTableModel model_view_provedores() throws SQLException {
 		List<Object> n_usuarios = new ArrayList<Object>();
 		Object[] dat ;
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_provedores() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
 	       {	       
 	    	   
   	   
@@ -150,11 +140,11 @@ while(rs.next()) {
 	dat = new Object[3];
 dat[0]=(rs.getInt(1));	
 dat[1]=(rs.getString(2));	
-dat[2]=(rs.getString(6));
+dat[2]=(rs.getString(5));
 
 n_usuarios.add(dat);
     }
-String[] columnNames = {"Id" ,"Rol","Nick_name"};
+String[] columnNames = {"Id" ,"Nombre","Empresa"};
 
 
 data_row = new Object[n_usuarios.size()][columnNames.length];
