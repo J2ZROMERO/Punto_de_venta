@@ -82,7 +82,7 @@ while(rs.next()) {
 	      
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.elimina_provedores(:idDB)}"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.elimina_provedores(?)}"))   // dentro statement connection and resulset
 	       
 	        
 

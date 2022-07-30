@@ -63,7 +63,8 @@ public class Proveedores extends JFrame {
 	}
 	
 	public void Limpiar_Campos() {
-		txt_id.setEnabled(false);;
+		txt_id.setEnabled(false);
+		txt_id.setText("");
 		txt_nombre.setText("");
 		txt_apellido.setText("");
 		txt_contacto.setText("");
@@ -174,6 +175,10 @@ public class Proveedores extends JFrame {
 		panel.add(txt_contacto_del_supervisor);
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		btn_limpiar_campos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 12));
 		btn_limpiar_campos.setBounds(97, 460, 159, 23);
 		
@@ -182,6 +187,7 @@ public class Proveedores extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
 				txt_id.requestFocus();
+				
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -192,7 +198,7 @@ public class Proveedores extends JFrame {
 			}
 		});
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_añadir.setBounds(470, 14, 159, 23);
+		btn_añadir.setBounds(470, 59, 159, 23);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -215,6 +221,7 @@ public class Proveedores extends JFrame {
 						JOptionPane.showMessageDialog(null,"USUARIO AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_id.requestFocus();
+						ver_datos_tabla(tbl_proveedores);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -228,26 +235,11 @@ public class Proveedores extends JFrame {
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_buscar = new JButton("BUSCAR");
-		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_buscar.setBounds(470, 60, 159, 23);
-		
-		btn_buscar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(!txt_id.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,"CAMPOS RELLENADOS");
-				}else {
-					Proveedores_Tabla_Buscar pt = new Proveedores_Tabla_Buscar();
-					pt.setVisible(true);
-					pt.setFocusable(true);
-					pt.setLocationRelativeTo(null);
-				}
+		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel.add(btn_buscar);
-		
-		JButton btn_actualizar = new JButton("ACTUALIZAR");
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btn_actualizar.setBounds(470, 106, 159, 23);
 		
@@ -258,9 +250,27 @@ public class Proveedores extends JFrame {
 				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
 						   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
 						   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
-							JOptionPane.showMessageDialog(null,"USUARIO ACTUALIZADO CORRECTAMENTE");
+							
+				Object datos [] =  new Object[7];
+				datos[0] =txt_id.getText().toString();
+						datos[1] =txt_nombre.getText().toString();
+								datos[2] =txt_apellido.getText().toString();
+										datos[3] =txt_contacto.getText().toString();
+												datos[4] =txt_empresa_para_la_que_trabaja.getText().toString();
+														datos[5] =txt_nombre_supervisor.getText().toString();
+																datos[6] =txt_contacto_del_supervisor.getText().toString();
+				try {
+					DB_provedores.actualizar(datos);
+					
+					JOptionPane.showMessageDialog(null,"USUARIO ACTUALIZADO CORRECTAMENTE");
 							Limpiar_Campos();
 							txt_id.requestFocus();
+							ver_datos_tabla(tbl_proveedores);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 						}
@@ -279,9 +289,21 @@ public class Proveedores extends JFrame {
 				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
 						   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
 						   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
-							JOptionPane.showMessageDialog(null,"USUARIO ELIMINADO CORRECTAMENTE");
-							Limpiar_Campos();
-							txt_id.requestFocus();
+		
+					try {
+						DB_provedores.eliminar(  Integer.parseInt( txt_id.getText()));
+						Limpiar_Campos();
+						txt_id.requestFocus();
+						ver_datos_tabla(tbl_proveedores);
+					} catch (NumberFormatException e1) {
+						// 	JOptionPane.showMessageDialog(null,"USUARIO ELIMINADO CORRECTAMENTE");
+					
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 						}
