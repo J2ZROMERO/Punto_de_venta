@@ -186,8 +186,7 @@ public class Proveedores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
-				txt_id.requestFocus();
-				
+				txt_id.requestFocus();				
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -289,7 +288,9 @@ public class Proveedores extends JFrame {
 				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
 						   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
 						   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
-		
+                int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR EL PROVEEDOR?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
+					
+					if (opcion == 0) {
 					try {
 						DB_provedores.eliminar(  Integer.parseInt( txt_id.getText()));
 						Limpiar_Campos();
@@ -303,7 +304,7 @@ public class Proveedores extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-				
+					}
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 						}
