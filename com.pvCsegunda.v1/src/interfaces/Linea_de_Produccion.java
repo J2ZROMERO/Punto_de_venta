@@ -109,9 +109,6 @@ public class Linea_de_Produccion extends JFrame {
 			};
 			
 			
-			
-			
-			
 			});
 ver_datos_tabla(tbl_linea_de_produccion);
 		scrollPane.setViewportView(tbl_linea_de_produccion);
@@ -157,6 +154,8 @@ ver_datos_tabla(tbl_linea_de_produccion);
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_linea_de_produccion.getText().equals("")) {
+					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA LINEA DE PRODUCCION?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
+					if(opcion == 0) {
 					try {
 						DB_linea.eliminar_lineas(txt_linea_de_produccion.getText());
 						ver_datos_tabla(tbl_linea_de_produccion);
@@ -168,6 +167,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION ELIMINADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
 					txt_linea_de_produccion.requestFocus();

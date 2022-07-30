@@ -141,6 +141,10 @@ public class Marcas extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_marca.getText().equals("")) {
+					
+					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA MARCA?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
+					
+					if (opcion == 0) {
 					try {
 						DB_marcas.eliminar_marcas(txt_marca.getText());
 						ver_datos_tabla(tbl_marcas);
@@ -151,11 +155,11 @@ public class Marcas extends JFrame {
 					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.setFocusable(true);
+					}
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.setFocusable(true);
 				}
-				
 			}
 		});
 		panel.add(btn_eliminar);
