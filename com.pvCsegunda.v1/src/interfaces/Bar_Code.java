@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JToggleButton;
 
 public class Bar_Code extends JFrame {
 
@@ -28,6 +29,7 @@ public class Bar_Code extends JFrame {
 	private JTable tbl_bar_code;
 	private JTextField txt_cantidad;
 	private JTable tbl_etiquetas;
+	public static Bar_Code frame;
 
 	/**
 	 * Launch the application.
@@ -36,7 +38,7 @@ public class Bar_Code extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Bar_Code frame = new Bar_Code();
+					frame = new Bar_Code();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,13 +82,30 @@ public class Bar_Code extends JFrame {
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id.setBounds(10, 64, 69, 20);
+		lbl_id.setBounds(10, 82, 69, 20);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
-		txt_id.setBounds(89, 64, 86, 20);
+		txt_id.setBounds(89, 82, 108, 20);
 		panel.add(txt_id);
+		
+		txt_id.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				int key = e.getKeyChar();
+
+			    boolean numeros = key >= 48 && key <= 57;
+			    
+			    if (!numeros)
+			    {
+			        e.consume();
+			    }
+			    /*if (txt_id.getText().trim().length() == 10) {
+			        e.consume();
+			    }*/
+			}
+		});
 		txt_id.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -110,9 +129,10 @@ public class Bar_Code extends JFrame {
 		panel.add(lbl_id_1);
 		
 		txt_cantidad = new JTextField();
+		txt_cantidad.setEditable(false);
 		txt_cantidad.setText("0");
 		txt_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_cantidad.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_cantidad.setFont(new Font("Dialog", Font.BOLD, 14));
 		txt_cantidad.setColumns(10);
 		txt_cantidad.setBounds(10, 190, 44, 35);
 		
@@ -139,14 +159,36 @@ public class Bar_Code extends JFrame {
 		btn_mas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				//aumento de los numeros de la caja de texto txt_cantidad
+				String Valor = txt_cantidad.getText() ;
+				int valor = Integer.parseInt(Valor) ;
+				valor++;
+				txt_cantidad.setText(""+valor);
+				frame.requestFocus();
 			}
 		});
 		panel.add(btn_mas);
 		
 		JButton btn_menos = new JButton("-");
+		btn_menos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String Valor = txt_cantidad.getText() ;
+				int valor = Integer.parseInt(Valor) ;
+				
+				if(valor > 0) {
+				valor--;
+				txt_cantidad.setText(""+valor);
+				frame.requestFocus();
+				}else {
+					txt_cantidad.setText("0");
+					frame.requestFocus();
+				}
+			}
+		});
 		btn_menos.setFont(new Font("Dialog", Font.BOLD, 22));
 		btn_menos.setBounds(118, 190, 44, 35);
+		
 		panel.add(btn_menos);
 		
 		JLabel lbl_añadir_precio_a_etiquetas = new JLabel("<html><center>AÑADIR PRECIO A ETIQUETAS</center></html>");
@@ -232,7 +274,7 @@ public class Bar_Code extends JFrame {
 		panel.add(btn_guardar_pdf);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 330, 600, 218);
+		scrollPane_1.setBounds(10, 320, 600, 228);
 		panel.add(scrollPane_1);
 		
 		tbl_etiquetas = new JTable();
