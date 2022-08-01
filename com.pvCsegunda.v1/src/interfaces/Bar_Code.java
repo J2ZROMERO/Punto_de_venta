@@ -21,6 +21,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JToggleButton;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class Bar_Code extends JFrame {
 
@@ -28,7 +30,9 @@ public class Bar_Code extends JFrame {
 	private JTextField txt_id;
 	private JTable tbl_bar_code;
 	private JTextField txt_cantidad;
-	private JTable tbl_etiquetas;
+	private JLabel lbl_bar_code;
+	private JLabel lbl_cantidad;
+	private JLabel lbl_precio;
 	public static Bar_Code frame;
 
 	/**
@@ -82,12 +86,12 @@ public class Bar_Code extends JFrame {
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id.setBounds(10, 82, 69, 20);
+		lbl_id.setBounds(10, 70, 69, 20);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
-		txt_id.setBounds(89, 82, 108, 20);
+		txt_id.setBounds(89, 70, 108, 20);
 		panel.add(txt_id);
 		
 		txt_id.addKeyListener(new KeyAdapter() {
@@ -226,10 +230,18 @@ public class Bar_Code extends JFrame {
 		btn_limpiar_hoja.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				int resp = JOptionPane.showConfirmDialog(null, "¿ESTAS SEGURO DE LIMPIAR LA HOJA?", "¡ALERTA!", JOptionPane.YES_NO_OPTION);
+				
+				if(resp == 0) {
 				JOptionPane.showMessageDialog(null,"LIMPIANDO HOJA");
+				lbl_bar_code.setIcon(null);
+				lbl_cantidad.setText("");
+				lbl_precio.setText("");
 				txt_id.setText("");
 				txt_cantidad.setText("");
 				txt_id.requestFocus();
+				}
 			}
 		});
 		panel.add(btn_limpiar_hoja);
@@ -273,19 +285,40 @@ public class Bar_Code extends JFrame {
 		btn_guardar_pdf.setBounds(402, 279, 180, 23);
 		panel.add(btn_guardar_pdf);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 320, 600, 228);
-		panel.add(scrollPane_1);
+		JPanel pnl_vista = new JPanel();
+		pnl_vista.setBorder(new LineBorder(new Color(0, 0, 0)));
+		pnl_vista.setBounds(10, 318, 600, 230);
+		panel.add(pnl_vista);
+		pnl_vista.setLayout(null);
 		
-		tbl_etiquetas = new JTable();
-		tbl_etiquetas.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"<html><center>ETIQUETAS</center></html>"
-			}
-		));
-		tbl_etiquetas.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		scrollPane_1.setViewportView(tbl_etiquetas);
+		JLabel lbl_titulo_etiqueta = new JLabel("<html><center>ETIQUETAS</center></html>");
+		lbl_titulo_etiqueta.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_titulo_etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_titulo_etiqueta.setBounds(7, 11, 583, 22);
+		pnl_vista.add(lbl_titulo_etiqueta);
+		
+		lbl_bar_code = new JLabel("");
+		lbl_bar_code.setIcon(new ImageIcon("D:\\PROGRAMACION\\IMAGENES\\barcode.gif"));
+		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_bar_code.setBounds(180, 44, 234, 101);
+		pnl_vista.add(lbl_bar_code);
+		
+		lbl_cantidad = new JLabel("35");
+		lbl_cantidad.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_cantidad.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl_cantidad.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_cantidad.setBounds(180, 152, 111, 28);
+		pnl_vista.add(lbl_cantidad);
+		
+		lbl_precio = new JLabel("1500");
+		lbl_precio.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_precio.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl_precio.setBounds(301, 152, 113, 28);
+		pnl_vista.add(lbl_precio);
 	}
 }
