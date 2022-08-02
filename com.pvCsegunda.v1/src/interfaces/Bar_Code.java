@@ -239,7 +239,6 @@ public class Bar_Code extends JFrame {
 				lbl_cantidad.setText("");
 				lbl_precio.setText("");
 				txt_id.setText("");
-				txt_cantidad.setText("");
 				txt_id.requestFocus();
 				}
 			}
@@ -285,10 +284,13 @@ public class Bar_Code extends JFrame {
 		btn_guardar_pdf.setBounds(402, 279, 180, 23);
 		panel.add(btn_guardar_pdf);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 318, 600, 230);
+		panel.add(scrollPane_1);
+		
 		JPanel pnl_vista = new JPanel();
+		scrollPane_1.setViewportView(pnl_vista);
 		pnl_vista.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pnl_vista.setBounds(10, 318, 600, 230);
-		panel.add(pnl_vista);
 		pnl_vista.setLayout(null);
 		
 		JLabel lbl_titulo_etiqueta = new JLabel("<html><center>ETIQUETAS</center></html>");
@@ -298,7 +300,7 @@ public class Bar_Code extends JFrame {
 		pnl_vista.add(lbl_titulo_etiqueta);
 		
 		lbl_bar_code = new JLabel("");
-		lbl_bar_code.setIcon(new ImageIcon("D:\\PROGRAMACION\\IMAGENES\\barcode.gif"));
+		lbl_bar_code.setIcon(new ImageIcon(Bar_Code.class.getResource("/imagenes/barcode.gif")));
 		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
