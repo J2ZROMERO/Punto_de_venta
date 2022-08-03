@@ -30,9 +30,9 @@ public class Bar_Code extends JFrame {
 	private JTextField txt_id;
 	private JTable tbl_bar_code;
 	public JTextField txt_cantidad;
-	private JLabel lbl_bar_code;
-	private JLabel lbl_cantidad;
-	private JLabel lbl_precio;
+	public JLabel lbl_bar_code;
+	public JLabel lbl_cantidad;
+	public JLabel lbl_precio;
 	public static Bar_Code frame;
 
 	/**

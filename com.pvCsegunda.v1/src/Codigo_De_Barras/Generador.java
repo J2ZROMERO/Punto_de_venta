@@ -1,5 +1,6 @@
 package Codigo_De_Barras;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
@@ -13,6 +14,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import interfaces.Bar_Code;
+
 public class Generador {
 
 	public static void main(String []args) throws DocumentException {
@@ -22,6 +25,11 @@ public class Generador {
 		    Document doc=new Document();
 		    //ruta de guardado del documento
 		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		    
+		    /**/
+		    /**/
+		    Bar_Code B = new Bar_Code();
+		    
 		          
 		    //se abre el documento
 		    doc.open();
