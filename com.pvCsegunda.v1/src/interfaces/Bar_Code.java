@@ -29,7 +29,7 @@ public class Bar_Code extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_id;
 	private JTable tbl_bar_code;
-	private JTextField txt_cantidad;
+	public JTextField txt_cantidad;
 	private JLabel lbl_bar_code;
 	private JLabel lbl_cantidad;
 	private JLabel lbl_precio;
@@ -300,14 +300,14 @@ public class Bar_Code extends JFrame {
 		pnl_vista.add(lbl_titulo_etiqueta);
 		
 		lbl_bar_code = new JLabel("");
-		lbl_bar_code.setIcon(new ImageIcon(Bar_Code.class.getResource("/imagenes/barcode.gif")));
+		lbl_bar_code.setIcon(null);
 		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_bar_code.setBounds(180, 44, 234, 101);
 		pnl_vista.add(lbl_bar_code);
 		
-		lbl_cantidad = new JLabel("35");
+		lbl_cantidad = new JLabel("");
 		lbl_cantidad.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_cantidad.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_cantidad.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -315,7 +315,7 @@ public class Bar_Code extends JFrame {
 		lbl_cantidad.setBounds(180, 152, 111, 28);
 		pnl_vista.add(lbl_cantidad);
 		
-		lbl_precio = new JLabel("1500");
+		lbl_precio = new JLabel("");
 		lbl_precio.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
