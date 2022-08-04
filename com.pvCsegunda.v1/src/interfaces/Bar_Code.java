@@ -16,8 +16,19 @@ import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.Barcode39;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JToggleButton;
@@ -27,7 +38,7 @@ import java.awt.Color;
 public class Bar_Code extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt_id;
+	public JTextField txt_id;
 	private JTable tbl_bar_code;
 	public JTextField txt_cantidad;
 	public JLabel lbl_bar_code;
@@ -44,6 +55,7 @@ public class Bar_Code extends JFrame {
 				try {
 					frame = new Bar_Code();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,7 +65,58 @@ public class Bar_Code extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws DocumentException 
 	 */
+	
+	public void Generar_Codigo() throws DocumentException {
+		try {
+			//se crea el documento pdf
+		    Document doc=new Document();
+		    //ruta de guardado del documento
+		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		    
+		    //se abre el documento
+		    doc.open();
+		    
+		    if (doc.isOpen() == true) {
+		    	
+		    JOptionPane.showMessageDialog(null, "CODIGO DE BARRAS GENERADO");
+		    
+		    for (int i = 0 ; i < Integer.parseInt(txt_cantidad.getText()) ; i++) {
+		    //se crea el codigo de barras de tipo 39
+		    Barcode39 code = new Barcode39();
+		    //se le añade un codigo para mostrar
+		    code.setCode(txt_id.getText());
+		    //se le da color al codigo de barras
+		    Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
+		    //se le puede dar un tamaño al condigo de barras
+		    img.scalePercent(125);
+		    
+		    //insercion de la imagen con la posicion
+		    img.setAlignment(Chunk.ALIGN_CENTER);
+		    
+		    
+		    //se agrega el codigo de barras al documento
+		    doc.add(img);
+		    
+		    
+		    //se usa para generar un espacio o salto de linea 
+		    doc.add(new Paragraph(" "));
+		    
+		    //para generar un espacio mas grande utilizamos (doc.add(Chunk.NEWLINE);)
+		    }
+		    }else {
+		    	JOptionPane.showMessageDialog(null, "ERROR AL GENERA CODIGO DE BARRAS");
+		    }
+		    	
+		    //se cierra el documento
+		    doc.close();
+		    
+		}catch(FileNotFoundException ex) {
+		   System.out.println(ex);
+		}
+	}
+	
 	public Bar_Code() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 636, 598);
@@ -219,6 +282,16 @@ public class Bar_Code extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JOptionPane.showMessageDialog(null,"AÑADIENDO ELEMENTOS A LA HOJA");
+				lbl_cantidad.setText(txt_cantidad.getText());
+				try {
+					Generar_Codigo();
+					txt_id.setText("");
+					txt_cantidad.setText("0");
+					txt_id.requestFocus();
+				} catch (DocumentException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		panel.add(btn_ejecutar);
@@ -304,7 +377,7 @@ public class Bar_Code extends JFrame {
 		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_bar_code.setBounds(180, 44, 234, 101);
+		lbl_bar_code.setBounds(180, 44, 234, 108);
 		pnl_vista.add(lbl_bar_code);
 		
 		lbl_cantidad = new JLabel("");
@@ -312,7 +385,7 @@ public class Bar_Code extends JFrame {
 		lbl_cantidad.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_cantidad.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cantidad.setBounds(180, 152, 111, 28);
+		lbl_cantidad.setBounds(180, 163, 111, 28);
 		pnl_vista.add(lbl_cantidad);
 		
 		lbl_precio = new JLabel("");
@@ -320,7 +393,7 @@ public class Bar_Code extends JFrame {
 		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbl_precio.setBounds(301, 152, 113, 28);
+		lbl_precio.setBounds(301, 163, 113, 28);
 		pnl_vista.add(lbl_precio);
 	}
 }
