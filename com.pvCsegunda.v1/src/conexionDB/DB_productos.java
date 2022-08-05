@@ -726,6 +726,7 @@ while(rs_movimientos.next()) {
 	dat[6]=(rs_movimientos.getString(7));
 	dat[7]=(rs_movimientos.getString(8));
 	n_ver_movimientos.add(dat);	
+	System.out.println(dat[6]);
 }
 
 
