@@ -10,9 +10,14 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_marcas;
+import conexionDB.DB_productos;
+
 import javax.swing.JScrollPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class Productos_Tabla_Buscar_Marca extends JFrame {
 
@@ -57,13 +62,7 @@ public class Productos_Tabla_Buscar_Marca extends JFrame {
 		
 		tbl_proveedor = new JTable();
 		scrollPane.setViewportView(tbl_proveedor);
-		tbl_proveedor.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"<html><center>ID</center></html>", "<html><center>PRODUCTO</center></html>", "<html><center>DISTINTIVO 1</center></html>", "<html><center>PROVEEDOR</center></html>"
-			}
-		));
+	//	ver_datos_tabla(tbl_proveedor);
 		
 		JButton btn_ok = new JButton("OK");
 		btn_ok.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -77,5 +76,18 @@ public class Productos_Tabla_Buscar_Marca extends JFrame {
 		});
 		panel.add(btn_ok);
 	}
-
+//	public void ver_datos_tabla(JTable tabla) {
+//
+//		try {
+//			tabla.setModel(DB_productos.model_view_marcas());
+//			
+//		} catch (SQLException e2) {
+//			// TODO Auto-generated catch block
+//			e2.printStackTrace();
+//		}
+//		
+//		
+//		
+//			
+//	}
 }

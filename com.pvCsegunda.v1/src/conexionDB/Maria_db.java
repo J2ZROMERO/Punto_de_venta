@@ -35,7 +35,7 @@ while(rs.next()) {
 
 	
 
- static final String URL = "jdbc:mariadb://localhost:3307/pv_canoa_segunda";
+ static final String URL = "jdbc:mariadb://localhost:3306/pv_canoa_segunda";
  static final String user = "root";
  static final String pass = "";
  
