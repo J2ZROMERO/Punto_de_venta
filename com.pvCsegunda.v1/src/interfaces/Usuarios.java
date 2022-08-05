@@ -30,6 +30,8 @@ import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Usuarios extends JFrame {
 
@@ -108,6 +110,23 @@ public class Usuarios extends JFrame {
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(149, 100, 230, 22);
 		panel.add(txt_id);
+		
+		txt_id.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				int key = e.getKeyChar();
+
+			    boolean numeros = key >= 48 && key <= 57;
+			    
+			    if (!numeros)
+			    {
+			        e.consume();
+			    }
+			    /*if (txt_id.getText().trim().length() == 10) {
+			        e.consume();
+			    }*/
+			}
+		});
 		txt_id.setColumns(10);
 		
 		JLabel lbl_nombre = new JLabel("NOMBRE");
@@ -284,8 +303,11 @@ public class Usuarios extends JFrame {
 			@Override
 			
 			public void mouseClicked(MouseEvent e) {
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_pass.equals("")) {
+				if(!txt_id.equals("")) {
 					
+                int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL USUARIO?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
+					
+					if (opcion == 0) {
 					try {
 						DB_usuarios.eliminar(Integer.parseInt( txt_id.getText() ));
 						ver_datos_tabla(tbl_usuarios);
@@ -298,6 +320,7 @@ public class Usuarios extends JFrame {
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
+					}
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
@@ -432,7 +455,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		
 		JLabel lbl_fecha = new JLabel("REGISTRO");
 		lbl_fecha.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_fecha.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_fecha.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_fecha.setBounds(10, 376, 121, 22);
 		panel.add(lbl_fecha);
 		
@@ -440,6 +463,23 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		txt_pass.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_pass.setColumns(10);
 		txt_pass.setBounds(149, 334, 230, 22);
+		
+		txt_pass.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				int key = e.getKeyChar();
+
+			    boolean numeros = key >= 48 && key <= 57;
+			    
+			    if (!numeros)
+			    {
+			        e.consume();
+			    }
+			    /*if (txt_id.getText().trim().length() == 10) {
+			        e.consume();
+			    }*/
+			}
+		});
 		panel.add(txt_pass);
 		
 		txt_fecha = new JTextField();

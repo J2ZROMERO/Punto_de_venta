@@ -161,10 +161,15 @@ public class Categorias extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_categoria.getText().equals("")) {
 					
+<<<<<<< HEAD
 			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?", "SELECCIONA UNA OPCION",JOptionPane.YES_NO_CANCEL_OPTION);
 			System.out.println(opcion);		
 			if(opcion == 0) {
 						System.out.println("this entri");
+=======
+			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
+					if(opcion == 0) {
+>>>>>>> 37b86926c2a3904c7a1350fafcc72af40414c33c
 						try {
 							DB_categoria.eliminar_categoria( Integer.parseInt(txt_categoria.getText()));
 						ver_datos_tabla(tbl_categoria);
