@@ -155,9 +155,8 @@ public class Categorias extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_categoria.getText().equals("")) {
 					
-			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?", "SELECCIONA UNA OPCION",JOptionPane.YES_NO_CANCEL_OPTION);
+			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					if(opcion == 0) {
-						
 						try {
 							DB_categoria.eliminar_categoria(  txt_categoria.getText());
 						ver_datos_tabla(tbl_categoria);

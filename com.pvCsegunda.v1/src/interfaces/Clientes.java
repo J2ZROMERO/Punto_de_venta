@@ -288,8 +288,7 @@ public class Clientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_id.getText().equals("") ) {
 				   
-					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL CLIENTE");
-					
+					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL CLIENTE?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					if(opcion == 0) {
 						try {
 						

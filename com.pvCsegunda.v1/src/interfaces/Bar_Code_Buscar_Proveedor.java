@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 public class Bar_Code_Buscar_Proveedor extends JFrame {
 
 	private JPanel contentPane;
-	private JTable tbl_productos;
+	private JTable tbl_buscar_proveedor;
 
 	/**
 	 * Launch the application.
@@ -55,9 +55,9 @@ public class Bar_Code_Buscar_Proveedor extends JFrame {
 		scrollPane.setBounds(0, 0, 785, 423);
 		panel.add(scrollPane);
 		
-		tbl_productos = new JTable();
-		scrollPane.setViewportView(tbl_productos);
-		tbl_productos.setModel(new DefaultTableModel(
+		tbl_buscar_proveedor = new JTable();
+		scrollPane.setViewportView(tbl_buscar_proveedor);
+		tbl_buscar_proveedor.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
