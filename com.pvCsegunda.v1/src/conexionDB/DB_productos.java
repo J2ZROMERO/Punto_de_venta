@@ -649,11 +649,11 @@ dat[8]=(rs.getString(9));
 dat[9]=(rs.getString(10));	
 dat[10]=(rs.getDouble(11));
 dat[11]=(rs.getDouble(12));
-dat[12]=(rs.getInt(13));	
-dat[13]=(rs.getInt(14));	
-dat[14]=(rs.getInt(15));	
-dat[15]=(rs.getInt(16));	
-dat[16]=(rs.getInt(17));
+dat[12]=(rs.getString(13));	
+dat[13]=(rs.getString(14));	
+dat[14]=(rs.getString(15));	
+dat[15]=(rs.getString(16));	
+dat[16]=(rs.getString(17));
 
 n_ventas_buscar.add(dat);
 
