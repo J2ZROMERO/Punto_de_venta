@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import conexionDB.*;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
