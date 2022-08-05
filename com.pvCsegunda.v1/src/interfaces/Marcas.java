@@ -28,6 +28,8 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Marcas extends JFrame {
 
@@ -95,10 +97,12 @@ public class Marcas extends JFrame {
 		tbl_marcas.addMouseListener( new MouseAdapter() {
 				
 			public void mousePressed(MouseEvent e) {
-				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
+				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , 0);
 		            txt_marca.setText(selectedCellValue);
 		
 			}});
+		
+		
 		ver_datos_tabla(tbl_marcas);
 		JButton btn_añadir = new JButton("AÑADIR");
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
@@ -131,6 +135,10 @@ public class Marcas extends JFrame {
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
@@ -142,7 +150,7 @@ public class Marcas extends JFrame {
 				
 				if(!txt_marca.getText().equals("")) {
 					try {
-						DB_marcas.eliminar_marcas(txt_marca.getText());
+						DB_marcas.eliminar_marcas(Integer.parseInt( txt_marca.getText()));
 						ver_datos_tabla(tbl_marcas);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

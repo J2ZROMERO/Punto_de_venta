@@ -43,7 +43,7 @@ System.out.println("datos insertados");
 	       {	       
 while(rs.next()) {
 	dat = new Object[2];
-	dat[0]=	rs.getInt(1);	
+	dat[0]=	rs.getString(1);	
 	dat[1]=	rs.getString(2);
 n_linea.add(dat);	
 	
@@ -74,11 +74,11 @@ modelo.setDataVector(data_row, columnNames);
 		
 	}
 	
-	public static void eliminar_lineas(String linea) throws SQLException {
+	public static void eliminar_lineas(int linea) throws SQLException {
 		
 		try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass);
 				CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_linea(?) }")){		
-			cstm.setString(1, linea);
+			cstm.setInt(1, linea);
 			cstm.executeUpdate();
 		}
 		

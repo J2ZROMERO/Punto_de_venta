@@ -103,7 +103,7 @@ public class Linea_de_Produccion extends JFrame {
 		tbl_linea_de_produccion.addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent e) {
-				   String selectedCellValue = (String) tbl_linea_de_produccion.getValueAt(tbl_linea_de_produccion.getSelectedRow() , tbl_linea_de_produccion.getSelectedColumn());
+				   String selectedCellValue = (String) tbl_linea_de_produccion.getValueAt(tbl_linea_de_produccion.getSelectedRow() , 0);
 		            txt_linea_de_produccion.setText(selectedCellValue);
 		            
 			};
@@ -158,7 +158,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 				
 				if(!txt_linea_de_produccion.getText().equals("")) {
 					try {
-						DB_linea.eliminar_lineas(txt_linea_de_produccion.getText());
+						DB_linea.eliminar_lineas (  Integer.parseInt( txt_linea_de_produccion.getText()));
 						ver_datos_tabla(tbl_linea_de_produccion);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block

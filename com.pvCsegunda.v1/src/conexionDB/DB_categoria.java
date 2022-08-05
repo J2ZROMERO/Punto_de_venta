@@ -68,11 +68,11 @@ for (int j =  0; j < n_categoria.size();j++) {
 			
 		}
 		
-		public static void eliminar_categoria(String id) throws SQLException {
+		public static void eliminar_categoria(int id) throws SQLException {
 			
 			try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass);
 					CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.eliminar_categoria(?) }")){		
-				cstm.setString(1, id);
+				cstm.setInt(1, id);
 				cstm.executeUpdate();
 			}
 			
