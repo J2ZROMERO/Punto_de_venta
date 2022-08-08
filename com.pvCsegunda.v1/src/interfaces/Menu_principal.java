@@ -27,7 +27,7 @@ import javax.swing.JTextField;
 public class Menu_principal extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField txt_usuario;
+	public JTextField lbl_usuario;
 	
 	/**
 	 * Launch the application.
@@ -40,6 +40,7 @@ public class Menu_principal extends JFrame {
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
+				    frame.nombre();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,6 +51,14 @@ public class Menu_principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void nombre() {
+		Caja_Inicial C = new Caja_Inicial();
+		String nombre = C.txt_usuario.getText();
+		System.out.println(nombre);
+		lbl_usuario.setText(nombre);
+	}
+	
 	public Menu_principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 750);
@@ -516,12 +525,12 @@ public class Menu_principal extends JFrame {
 		});
 		panel.add(lbl_proveedores);
 		
-		txt_usuario = new JTextField();
-		txt_usuario.setFont(new Font("Dialog", Font.BOLD, 13));
-		txt_usuario.setEditable(false);
-		txt_usuario.setHorizontalAlignment(SwingConstants.CENTER);
-		txt_usuario.setBounds(42, 11, 185, 20);
-		panel.add(txt_usuario);
-		txt_usuario.setColumns(10);
+		lbl_usuario = new JTextField();
+		lbl_usuario.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_usuario.setEditable(false);
+		lbl_usuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_usuario.setBounds(42, 11, 185, 20);
+		lbl_usuario.setColumns(10);
+		panel.add(lbl_usuario);
 	}
 }

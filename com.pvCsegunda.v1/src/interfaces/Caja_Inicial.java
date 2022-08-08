@@ -20,6 +20,7 @@ public class Caja_Inicial extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_monto;
 	public static Caja_Inicial frame;
+	public JTextField txt_usuario;
 
 	/**
 	 * Launch the application.
@@ -42,21 +43,21 @@ public class Caja_Inicial extends JFrame {
 	 */
 	public Caja_Inicial() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 466, 184);
+		setBounds(100, 100, 466, 211);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 450, 145);
+		panel.setBounds(0, 0, 450, 172);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lbl_caja_inicial = new JLabel("CAJA INICIAL");
 		lbl_caja_inicial.setFont(new Font("Dialog", Font.BOLD, 16));
 		lbl_caja_inicial.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_caja_inicial.setBounds(48, 11, 361, 24);
+		lbl_caja_inicial.setBounds(48, 11, 361, 32);
 		panel.add(lbl_caja_inicial);
 		
 		txt_monto = new JTextField();
@@ -84,5 +85,13 @@ public class Caja_Inicial extends JFrame {
 			}
 		});
 		panel.add(btn_añadir);
+		
+		txt_usuario = new JTextField();
+		txt_usuario.setFont(new Font("Dialog", Font.BOLD, 16));
+		txt_usuario.setEditable(false);
+		txt_usuario.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_usuario.setBounds(48, 117, 361, 32);
+		panel.add(txt_usuario);
+		txt_usuario.setColumns(10);
 	}
 }

@@ -11,7 +11,7 @@ import net.sourceforge.jbarcodebean.model.Interleaved25;
 
 public class Generar_Img_Codigo {
 
-	public static void main(String[] args) throws IOException, BarcodeException {
+	public static void main(String[] args) {
 
 		
 		

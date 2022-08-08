@@ -25,6 +25,9 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import Codigo_De_Barras.Generar_Img_Codigo;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
@@ -74,6 +77,7 @@ public class Bar_Code extends JFrame {
 		    Document doc=new Document();
 		    //ruta de guardado del documento
 		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		   
 		    
 		    //se abre el documento
 		    doc.open();
