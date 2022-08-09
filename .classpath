@@ -6,13 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/PROYECTO JAVA/reporte pdf/codigo de barras imagen/jbarcodebean-1.2.0.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
 	<classpathentry kind="lib" path="E:/PROYECTO JAVA/reporte pdf/itext5-itextpdf-5.5.11.jar"/>
 	<classpathentry kind="lib" path="E:/PROYECTO JAVA/reporte pdf/itext5-itext-pdfa-5.5.11.jar"/>
+	<classpathentry kind="lib" path="D:/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/jbarcodebean-1.2.0 .jar"/>
 	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
 </classpath>
