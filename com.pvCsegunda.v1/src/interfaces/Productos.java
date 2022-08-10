@@ -61,6 +61,7 @@ private JSpinner spinner_tiempo_limite;
 	private JTextField txt_cm;
 	private JTextField txt_kilos;
 	private JTextField txt_usuario;
+	private JTextField txt_notas_de_venta;
 	/**
 	 * Launch the application.
 	 */
@@ -193,7 +194,7 @@ private JSpinner spinner_tiempo_limite;
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			Object datosDB[] = new Object[17];
+			Object datosDB[] = new Object[18];
 							datosDB[0] = txt_id.getText();
 							datosDB[1] = txt_producto.getText();
 							datosDB[2] = txt_distintivo_1.getText();
@@ -211,7 +212,7 @@ private JSpinner spinner_tiempo_limite;
 							datosDB[14] = txt_linea.getText();
 							datosDB[15] = txt_categoria.getText();
 							datosDB[16] =  txt_usuario.getText();
-					
+							datosDB[17] =  txt_notas_de_venta.getText();
 							
 							try 
 							{
@@ -248,7 +249,7 @@ private JSpinner spinner_tiempo_limite;
 					try {
 				
 				Object datos []=DB_productos.buscar(Long.parseLong(txt_id.getText()));			
-			
+		
 				txt_id.setText(datos[0].toString());
 				txt_producto.setText(datos[1].toString());
 				txt_distintivo_1.setText(datos[2].toString());
@@ -267,7 +268,7 @@ private JSpinner spinner_tiempo_limite;
 						 txt_linea.setText(datos[14].toString());
 					 txt_categoria.setText(datos[15].toString());
 						  txt_usuario.setText(datos[16].toString());
-						  
+						  txt_notas_de_venta.setText(datos[17].toString());
 						  
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -279,7 +280,7 @@ private JSpinner spinner_tiempo_limite;
 					
 				}else {   
 				 
-					Object datos [] = new Object [16];
+					Object datos [] = new Object [17];
 					
 					datos[0] = txt_producto.getText().toString();
 					datos[1] = txt_distintivo_1.getText().toString();
@@ -297,7 +298,7 @@ private JSpinner spinner_tiempo_limite;
 					datos[13] = txt_linea.getText().toString();
 					datos[14] = txt_categoria.getText().toString();
 					datos[15] = txt_usuario.getText().toString();
-					
+					datos[16] = txt_notas_de_venta.getText().toString();
 					
 					Ventas_Buscar b= new Ventas_Buscar();
 					b.setVisible(true);
@@ -337,7 +338,9 @@ private JSpinner spinner_tiempo_limite;
 								 txt_marca.setText(datos[13].toString());
 								 txt_linea.setText(datos[14].toString());
 							 txt_categoria.setText(datos[15].toString());
-								  txt_usuario.setText(datos[16].toString());}
+								  txt_usuario.setText(datos[16].toString());
+								  txt_notas_de_venta.setText(datos[17].toString());
+								  }
 						
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
@@ -370,7 +373,7 @@ private JSpinner spinner_tiempo_limite;
 				
 					
 					try {
-						Object datosDB[] = new Object[17];
+						Object datosDB[] = new Object[18];
 						datosDB[0] = txt_id.getText();
 						datosDB[1] = txt_producto.getText();
 						datosDB[2] = txt_distintivo_1.getText();
@@ -388,7 +391,7 @@ private JSpinner spinner_tiempo_limite;
 						datosDB[14] = txt_linea.getText();
 						datosDB[15] = txt_categoria.getText();
 						datosDB[16] =  txt_usuario.getText();
-				
+						datosDB[17] =  txt_notas_de_venta.getText();
 						DB_productos.actualizar(datosDB);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -440,7 +443,7 @@ private JSpinner spinner_tiempo_limite;
 		lbl_distintivo1.setBounds(490, 30, 227, 23);
 		panel.add(lbl_distintivo1);
 		
-		JLabel notas_a_cerca_del_producto = new JLabel("<html><center>NOTAS A CERCA DEL PRODUCTO</center></html>");
+		JLabel notas_a_cerca_del_producto = new JLabel("<html><center>distintivo2</center></html>");
 		notas_a_cerca_del_producto.setHorizontalAlignment(SwingConstants.CENTER);
 		notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 13));
 		notas_a_cerca_del_producto.setBounds(777, 30, 217, 20);
@@ -740,6 +743,18 @@ private JSpinner spinner_tiempo_limite;
 		
 		
 		panel.add(spinner_tiempo_limite);
+		
+		JLabel lbl_notas_venta = new JLabel("<html><center>Notas de venta </center></html>");
+		lbl_notas_venta.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_notas_venta.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_notas_venta.setBounds(777, 201, 189, 23);
+		panel.add(lbl_notas_venta);
+		
+		txt_notas_de_venta = new JTextField();
+		txt_notas_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_notas_de_venta.setColumns(10);
+		txt_notas_de_venta.setBounds(777, 225, 217, 23);
+		panel.add(txt_notas_de_venta);
 	
 	}
 	

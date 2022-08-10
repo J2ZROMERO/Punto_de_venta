@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +44,9 @@ cstm.setString(3, datos_campos[2].toString() );
 cstm.setString(4, datos_campos[3].toString() );	 
 
 
-cstm.executeUpdate();
+cstm.executeUpdate(); 
+
+
 System.out.println("datos insertados");	       
 	       }
 		

@@ -1,4 +1,7 @@
 /imagenes/
+/.gitignore
 /Codigo_De_Barras/
-/interfaces/
 /conexionDB/
+/events/
+/interfaces/
+/interfaces_no_graficas/
