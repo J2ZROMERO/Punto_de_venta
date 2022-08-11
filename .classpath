@@ -6,10 +6,18 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+=======
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+	<classpathentry kind="lib" path="E:/PROYECTO JAVA/reporte pdf/itext5-itextpdf-5.5.11.jar"/>
+	<classpathentry kind="lib" path="E:/PROYECTO JAVA/reporte pdf/itext5-itext-pdfa-5.5.11.jar"/>
+	<classpathentry kind="lib" path="D:/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/jbarcodebean-1.2.0 .jar"/>
+>>>>>>> 5f5a91af99aa9a676276f245a57712fb8ec78c44
 	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
 </classpath>
