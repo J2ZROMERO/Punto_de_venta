@@ -24,6 +24,9 @@ import conexionDB.DB_marcas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class Linea_de_Produccion extends JFrame {
 
@@ -61,6 +64,7 @@ public class Linea_de_Produccion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(131, 225, 229));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -91,6 +95,22 @@ public class Linea_de_Produccion extends JFrame {
 		txt_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_linea_de_produccion.setColumns(10);
 		txt_linea_de_produccion.setBounds(310, 31, 214, 23);
+		
+		txt_linea_de_produccion.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				//variable para datos de tipo caracter
+				int key = e.getKeyChar();
+				
+				boolean mayuscula = key >= 65 && key <= 90;
+				boolean minuscula = key >= 97 && key <= 122;
+				boolean espacio = key == 32;
+				
+				if(!(mayuscula || minuscula || espacio)) {
+					e.consume();
+				}
+			}
+		});
 		panel.add(txt_linea_de_produccion);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -99,6 +119,8 @@ public class Linea_de_Produccion extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_linea_de_produccion = new JTable();
+		tbl_linea_de_produccion.setGridColor(new Color(170, 177, 186));
+		tbl_linea_de_produccion.setBackground(new Color(253, 223, 127));
 		tbl_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_linea_de_produccion.addMouseListener(new MouseAdapter() {
 			

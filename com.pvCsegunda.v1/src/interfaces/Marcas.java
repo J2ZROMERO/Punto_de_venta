@@ -28,19 +28,22 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Marcas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_marca;
 	private JTable tbl_marcas;
+	public static Marcas frame;
 	DefaultTableModel modelo = new DefaultTableModel();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Marcas frame = new Marcas();
+					frame = new Marcas();
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
@@ -65,7 +68,8 @@ public class Marcas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 602, 510);
+		panel.setBackground(new Color(250, 210, 7));
+		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -79,14 +83,36 @@ public class Marcas extends JFrame {
 		txt_marca.setBounds(263, 30, 214, 23);
 		txt_marca.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		panel.add(txt_marca);
+		
+		txt_marca.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+				//variable para datos de tipo caracter
+				int key = e.getKeyChar();
+				
+				boolean mayuscula = key >= 65 && key <= 90;
+				boolean minuscula = key >= 97 && key <= 122;
+				boolean espacio = key == 32;
+				
+				if(!(mayuscula || minuscula || espacio)) {
+					e.consume();
+				}
+				
+			}
+		});
 		txt_marca.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(240, 255, 240));
 		scrollPane.setToolTipText("");
 		scrollPane.setBounds(28, 64, 297, 435);
 		panel.add(scrollPane);
 		
 		tbl_marcas = new JTable();
+		tbl_marcas.setGridColor(new Color(253, 151, 159));
+		tbl_marcas.setSelectionBackground(new Color(253, 151, 159));
+		tbl_marcas.setBackground(new Color(253, 240, 172));
 		tbl_marcas.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
@@ -96,7 +122,7 @@ public class Marcas extends JFrame {
 				
 			public void mousePressed(MouseEvent e) {
 				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
-		            txt_marca.setText(selectedCellValue);
+		           txt_marca.setText(selectedCellValue);
 		
 			}});
 		ver_datos_tabla(tbl_marcas);
@@ -120,11 +146,11 @@ public class Marcas extends JFrame {
 					
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 			}
 		});
@@ -154,11 +180,11 @@ public class Marcas extends JFrame {
 					}
 					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
 					txt_marca.setText("");
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 			}
 		});
