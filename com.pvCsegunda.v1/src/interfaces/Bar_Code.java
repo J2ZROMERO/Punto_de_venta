@@ -75,13 +75,15 @@ public class Bar_Code extends JFrame {
 	
 	public void Generar_Img_Barras() {
 		barcode.setCodeType(new Interleaved25());
-		barcode.setCode(txt_id.getText());
 		barcode.setCheckDigit(true);
+		barcode.setCode(txt_id.getText()+"34563");
 		
 		imagen = barcode.draw(new BufferedImage(450, 300, BufferedImage.TYPE_INT_BGR));
 		
 		ImageIcon barras = new ImageIcon(imagen);
+		this.lbl_bar_code.setName("31452345");
 		this.lbl_bar_code.setIcon(barras);
+		
 	}
 	
 	public void Generar_Codigo() throws DocumentException {
@@ -89,8 +91,8 @@ public class Bar_Code extends JFrame {
 			//se crea el documento pdf
 		    Document doc=new Document();
 		    //ruta de guardado del documento
-		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
-		   
+		    //PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"));
 		    
 		    //se abre el documento
 		    doc.open();
@@ -421,7 +423,7 @@ public class Bar_Code extends JFrame {
 		lbl_cantidad.setBounds(180, 176, 111, 28);
 		pnl_vista.add(lbl_cantidad);
 		
-		lbl_precio = new JLabel("");
+		lbl_precio = new JLabel("$ 352");
 		lbl_precio.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
