@@ -1,8 +1,6 @@
 package interfaces;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,22 +14,26 @@ import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import jbarcodebean.JBarcodeBean;
+import net.sourceforge.jbarcodebean.model.Interleaved25;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
@@ -68,12 +70,29 @@ public class Bar_Code extends JFrame {
 	 * @throws DocumentException 
 	 */
 	
+	JBarcodeBean barcode = new JBarcodeBean();
+	public static BufferedImage imagen = null;
+	
+	public void Generar_Img_Barras() {
+		barcode.setCodeType(new Interleaved25());
+		barcode.setCheckDigit(true);
+		barcode.setCode(txt_id.getText()+"34563");
+		
+		imagen = barcode.draw(new BufferedImage(450, 300, BufferedImage.TYPE_INT_BGR));
+		
+		ImageIcon barras = new ImageIcon(imagen);
+		this.lbl_bar_code.setName("31452345");
+		this.lbl_bar_code.setIcon(barras);
+		
+	}
+	
 	public void Generar_Codigo() throws DocumentException {
 		try {
 			//se crea el documento pdf
 		    Document doc=new Document();
 		    //ruta de guardado del documento
-		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		    //PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
+		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"));
 		    
 		    //se abre el documento
 		    doc.open();
@@ -84,13 +103,13 @@ public class Bar_Code extends JFrame {
 		    
 		    for (int i = 0 ; i < Integer.parseInt(txt_cantidad.getText()) ; i++) {
 		    //se crea el codigo de barras de tipo 39
-		    Barcode39 code = new Barcode39();
+		    Barcode128 code = new Barcode128();
 		    //se le añade un codigo para mostrar
 		    code.setCode(txt_id.getText());
 		    //se le da color al codigo de barras
 		    Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
 		    //se le puede dar un tamaño al condigo de barras
-		    img.scalePercent(125);
+		    img.scalePercent(120);
 		    
 		    //insercion de la imagen con la posicion
 		    img.setAlignment(Chunk.ALIGN_CENTER);
@@ -267,11 +286,25 @@ public class Bar_Code extends JFrame {
 		JButton btn_encendido = new JButton("ON");
 		btn_encendido.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_encendido.setBounds(218, 197, 61, 23);
+		
+		btn_encendido.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.requestFocus();
+			}
+		});
 		panel.add(btn_encendido);
 		
 		JButton btn_apagado = new JButton("OFF");
 		btn_apagado.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_apagado.setBounds(289, 197, 61, 23);
+		
+		btn_apagado.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frame.requestFocus();
+			}
+		});
 		panel.add(btn_apagado);
 		
 		JButton btn_ejecutar = new JButton("EJECUTAR");
@@ -279,11 +312,13 @@ public class Bar_Code extends JFrame {
 		btn_ejecutar.setBounds(34, 268, 122, 23);
 		
 		btn_ejecutar.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				JOptionPane.showMessageDialog(null,"AÑADIENDO ELEMENTOS A LA HOJA");
+				
 				lbl_cantidad.setText(txt_cantidad.getText());
+				
 				try {
+					Generar_Img_Barras();
 					Generar_Codigo();
 					txt_id.setText("");
 					txt_cantidad.setText("0");
@@ -377,7 +412,7 @@ public class Bar_Code extends JFrame {
 		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_bar_code.setBounds(180, 44, 234, 108);
+		lbl_bar_code.setBounds(180, 44, 234, 121);
 		pnl_vista.add(lbl_bar_code);
 		
 		lbl_cantidad = new JLabel("");
@@ -385,15 +420,15 @@ public class Bar_Code extends JFrame {
 		lbl_cantidad.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lbl_cantidad.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cantidad.setBounds(180, 163, 111, 28);
+		lbl_cantidad.setBounds(180, 176, 111, 28);
 		pnl_vista.add(lbl_cantidad);
 		
-		lbl_precio = new JLabel("");
+		lbl_precio = new JLabel("$ 352");
 		lbl_precio.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbl_precio.setBounds(301, 163, 113, 28);
+		lbl_precio.setBounds(301, 176, 113, 28);
 		pnl_vista.add(lbl_precio);
 	}
 }

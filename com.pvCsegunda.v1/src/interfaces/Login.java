@@ -145,6 +145,7 @@ public class Login extends JFrame {
 					ci.setVisible(true);
 					ci.setFocusable(true);
 					ci.setLocationRelativeTo(null);
+					ci.txt_usuario.setText(cbx_nickname.getSelectedItem().toString());
 					dispose();
 				}
 		}else {
