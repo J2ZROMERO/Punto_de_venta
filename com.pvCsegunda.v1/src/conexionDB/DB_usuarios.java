@@ -11,25 +11,26 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class DB_usuarios {
-/** campos id,rol,nombre,nickname son obligatorios  ---- solo en este campo se podra asignar el id manualmente "no habra muchos usuarios"*/
-/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		try {
-			Object e[] =  DB_usuarios.buscar(154);
+///** campos id,rol,nombre,nickname son obligatorios  ---- solo en este campo se podra asignar el id manualmente "no habra muchos usuarios"*/
+//public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		try {
+//			Object e[] =  DB_usuarios.buscar(80);
+//		
+//			for(Object d : e) {
+//			System.out.println(d);		
+//		};
+//		
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		
+//	}
+	
 		
-			for(Object d : e) {
-			System.out.println(d);		
-		};
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-	}
-	*/
-	public  static void anadir(Object datos_campos[]) throws SQLException{
+		public  static void anadir(Object datos_campos[]) throws SQLException{
 	      
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_usuarios(?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
@@ -84,6 +85,8 @@ while(rs.next()) {
 }
 
 	       }
+	       
+	    
 		return valores_campos;
 		
 	       	
@@ -142,15 +145,15 @@ System.out.println("datos actualizados");
 		Object[] dat ;
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_clientes() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_usuarios() }"); ResultSet rs= cstm.executeQuery())// dentro statement connection and resulset	       
 	       {	       
 	    	   
   	   
 while(rs.next()) {
 	dat = new Object[3];
-dat[0]=(rs.getInt(1));	
+dat[0]=(rs.getString(1));	
 dat[1]=(rs.getString(2));	
-dat[2]=(rs.getString(6));
+dat[2]=(rs.getString(3));
 
 n_usuarios.add(dat);
     }

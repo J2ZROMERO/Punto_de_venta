@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_clientes;
 import conexionDB.DB_productos;
+import conexionDB.DB_ventas;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -93,6 +94,27 @@ private boolean estaActivo = false;
 		
 		panel.add(btn_regresar);
 	}
+	
+	
+	
+	
+	
+	public static void ver_datos_ventas(long id) {
+		
+		try {
+			table.setModel(DB_ventas.model_view_ventas(id));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	// en duda este
+	
 public static void ver_datos_productos_like(Object dato[]) {
 
 

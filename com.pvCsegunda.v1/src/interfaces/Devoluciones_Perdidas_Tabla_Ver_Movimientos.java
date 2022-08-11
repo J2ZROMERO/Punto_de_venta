@@ -9,10 +9,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_devoluciones_perdidas;
+import conexionDB.DB_productos;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 
@@ -59,13 +64,7 @@ public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_ver_movimiento = new JTable();
-		tbl_ver_movimiento.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"<html><center>USUARIO</center></html>", "<html><center>CLIENTE</center></html>New column", "<html><center>FECHA Y HORA</center></html>", "<html><center>ID</center></html>", "<html><center>PRODUCTO</center></html>", "<html><center>DISTINTIVO 1</center></html>", "<html><center>MOTIVO</center></html>", "<html><center>CANTIDAD</center></html>"
-			}
-		));
+	
 		scrollPane.setViewportView(tbl_ver_movimiento);
 		
 		JButton btn_ok = new JButton("OK");
@@ -80,4 +79,15 @@ public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 		});
 		panel.add(btn_ok);
 	}
+	public void ver_datos(String fechaInicial,String fechaFinal) {
+		try {
+			tbl_ver_movimiento.setModel(DB_devoluciones_perdidas.model_view_dev_per(fechaInicial, fechaFinal));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

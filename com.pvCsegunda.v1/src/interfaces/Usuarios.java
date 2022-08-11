@@ -351,12 +351,13 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		     
 		
 			    	 Object datos[];
+			    	 
 						try {
 							datos = DB_usuarios.buscar(Integer.parseInt(txt_id.getText()));
+	for(Object p: datos) {
+		System.out.println(p);
+	}
 							
-							
-
-							 
 							txt_id.setText(datos[0].toString());
 							
 							for(int i = 0; i < (cbx_tipo_de_rol.getItemCount());i++) {

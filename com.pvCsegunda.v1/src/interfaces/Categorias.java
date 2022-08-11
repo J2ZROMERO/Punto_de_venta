@@ -24,9 +24,14 @@ import conexionDB.DB_marcas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+=======
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+>>>>>>> 5388bb1609ec6a5245731295f00bff5b57fc6d1b
 
 public class Categorias extends JFrame {
 
@@ -100,7 +105,7 @@ public class Categorias extends JFrame {
 		tbl_categoria.addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent e) {
-				   String selectedCellValue = (String) tbl_categoria.getValueAt(tbl_categoria.getSelectedRow() , tbl_categoria.getSelectedColumn());
+				   String selectedCellValue = (String) tbl_categoria.getValueAt(tbl_categoria.getSelectedRow() , 0);
 				   txt_categoria.setText(selectedCellValue);
 		            
 			};
@@ -170,6 +175,10 @@ public class Categorias extends JFrame {
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(407, 225, 117, 35);
@@ -178,10 +187,12 @@ public class Categorias extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				if(!txt_categoria.getText().equals("")) {
 					
+
 			int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA CATEGORIA?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					if(opcion == 0) {
+
 						try {
-							DB_categoria.eliminar_categoria(  txt_categoria.getText());
+							DB_categoria.eliminar_categoria( Integer.parseInt(txt_categoria.getText()));
 						ver_datos_tabla(tbl_categoria);
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block

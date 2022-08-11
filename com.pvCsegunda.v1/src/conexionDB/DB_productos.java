@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import conexionDB.*;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -96,7 +99,7 @@ public class DB_productos {
 //		
 //	
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
 
 	       
@@ -168,18 +171,17 @@ if(datos_campos[16].toString().equals("")) {
 }else {
 	cstm.setString(17, datos_campos[16].toString());	                 //int
 }
-
+cstm.setString(18, datos_campos[17].toString() );    
 
 	
 
-//cstm.setInt(14, Integer.parseInt(datos_campos[13].toString() ));	                 //int	
-//cstm.setInt(15, Integer.parseInt(datos_campos[14].toString() ));		                 //int
-//cstm.setInt(16, Integer.parseInt(datos_campos[15].toString() ));		                 //int
-//cstm.setInt(17, Integer.parseInt(datos_campos[16].toString() ));		                 //int
-//cstm.setString(18, datos_campos[17].toString() );		                 //varchar (30)
 
-cstm.executeUpdate();
-System.out.println("datos insertados");	       
+cstm.executeUpdate(); 
+
+
+
+
+System.out.println("datos insertados");	             
 	       }
 		
 		
@@ -187,7 +189,7 @@ System.out.println("datos insertados");
 	
 	public  static Object[] buscar(long id) throws SQLException{
 	     
-		Object valores_campos[] = new Object[17];
+		Object valores_campos[] = new Object[18];
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.busca_producto(?) }"))   // dentro statement connection and resulset
@@ -220,7 +222,7 @@ while(rs.next()) {
 	valores_campos[14]= rs.getString(15);
 	valores_campos[15]= rs.getString(16);
 	valores_campos[16]= rs.getString(17);
-	//valores_campos[16]= rs.getInt(18);
+	valores_campos[17]= rs.getString(18);
 	
 	
     	
@@ -269,7 +271,7 @@ System.out.println("datos eliminados");
 	public  static void actualizar(Object datos_campos[]) throws SQLException{
 	    // id para compararar / campo motivo es agregadoe en la base de datos / razon y fecha no se actualizan eso lo hace la base de datos
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.actualizar_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.actualizar_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
 
 	       {	       
@@ -348,6 +350,8 @@ if(datos_campos[16].toString().equals("")) {
 	cstm.setString(17, datos_campos[16].toString());	                 //int
 
 }
+
+cstm.setString(18, datos_campos[17].toString());	                 //int
 
 cstm.executeUpdate();
 System.out.println("datos actualizados");
@@ -568,7 +572,7 @@ public static DefaultTableModel model_view_ventas_buscar(Object datos_campos[]) 
 	Object[] dat ;
 	
        try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.productos_like(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))// dentro statement connection and resulset	       
+    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.productos_like(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))// dentro statement connection and resulset	       
        {	       
     	 
     	   
@@ -627,14 +631,16 @@ for(int i = 0; i < datos_campos.length;i++) {
     	   		if(datos_campos[14].toString().equals("")) { cstm.setNull(15, java.sql.Types.NULL );
     	   		}else {   									cstm.setString(15, datos_campos[14].toString() ); 		}	
     	   		if(datos_campos[15].toString().equals("")) { cstm.setNull(16, java.sql.Types.NULL );
-    	   		}else {   									cstm.setString(16, datos_campos[15].toString() ); 		}	
+    	   		}else {   									cstm.setString(16, datos_campos[15].toString() ); 		}
+    	   		if(datos_campos[16].toString().equals("")) { cstm.setNull(17, java.sql.Types.NULL );
+    	   		}else {   									cstm.setString(17, datos_campos[16].toString() ); 		}	
     	   									
    ResultSet rs =   cstm.executeQuery();
     	
 
 
 while(rs.next()) {
-dat = new Object[17];
+dat = new Object[18];
 dat[0]=(rs.getBigDecimal(1));	
 dat[1]=(rs.getString(2));	
 dat[2]=(rs.getString(3));	
@@ -647,12 +653,12 @@ dat[8]=(rs.getString(9));
 dat[9]=(rs.getString(10));	
 dat[10]=(rs.getDouble(11));
 dat[11]=(rs.getDouble(12));
-dat[12]=(rs.getInt(13));	
-dat[13]=(rs.getInt(14));	
-dat[14]=(rs.getInt(15));	
-dat[15]=(rs.getInt(16));	
-dat[16]=(rs.getInt(17));
-
+dat[12]=(rs.getString(13));	
+dat[13]=(rs.getString(14));	
+dat[14]=(rs.getString(15));	
+dat[15]=(rs.getString(16));	
+dat[16]=(rs.getString(17));
+dat[17]=(rs.getString(18));
 n_ventas_buscar.add(dat);
 
 for(Object t: dat) {
@@ -660,7 +666,7 @@ System.out.println(t);
 }
 }
 
-String[] columnNames = {"Id" ,"Producto","Caracteristica","Extra distintivo","Stock","Kilogramos","Medida","Mililitros","Color","Tamaño","Precio Compra","Precio Venta","Provedores","Marca","Linea","Categoria","Usuario"};
+String[] columnNames = {"Id" ,"Producto","Caracteristica","Extra distintivo","Stock","Kilogramos","Medida","Mililitros","Color","Tamaño","Precio Compra","Precio Venta","Provedores","Marca","Linea","Categoria","Usuario","Notas de venta"};
 
 
 data_row_ventas_buscar = new Object[n_ventas_buscar.size()][columnNames.length];
@@ -724,6 +730,7 @@ while(rs_movimientos.next()) {
 	dat[6]=(rs_movimientos.getString(7));
 	dat[7]=(rs_movimientos.getString(8));
 	n_ver_movimientos.add(dat);	
+	System.out.println(dat[6]);
 }
 
 
