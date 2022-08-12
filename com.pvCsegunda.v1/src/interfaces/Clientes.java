@@ -25,7 +25,6 @@ import conexionDB.DB_clientes;
 import conexionDB.DB_marcas;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 
 public class Clientes extends JFrame {
 
@@ -35,7 +34,6 @@ public class Clientes extends JFrame {
 	private JTextField txt_apellido;
 	private JTextField txt_nick_name;
 	private JTextField txt_telefono;
-	public static Clientes frame;
 
 	/**
 	 * Launch the application.
@@ -44,7 +42,7 @@ public class Clientes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Clientes();
+					Clientes frame = new Clientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -74,8 +72,7 @@ public class Clientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(85, 212, 255));
-		panel.setBounds(0, 0, 596, 357);
+		panel.setBounds(0, 0, 721, 492);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -170,6 +167,11 @@ public class Clientes extends JFrame {
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("VER CLIENTES");
+		btn_ver_clientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+			}
+		});
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_clientes.setBounds(122, 281, 154, 23);
 		
@@ -177,11 +179,10 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
-		        c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
+		c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
 				c.setVisible(true);
 				c.setFocusable(true);
 				c.setLocationRelativeTo(null);
-				frame.requestFocus();
 			}
 		});
 		panel.add(btn_ver_clientes);
@@ -205,11 +206,11 @@ public class Clientes extends JFrame {
 						e1.printStackTrace();
 					}
 					JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
-					        Limpiar_Campos();
 							txt_nombre.requestFocus();
+							Limpiar_Campos();
 						}else {
 							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
-							frame.requestFocus();
+							txt_nombre.requestFocus();
 						}
 			}
 		});
@@ -240,16 +241,18 @@ public class Clientes extends JFrame {
 		}
 					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
 					//Limpiar_Campos();
-					frame.requestFocus();
 				} else {
-					JOptionPane.showMessageDialog(null, "DA CLICK EN VER CLIENTES");
-					frame.requestFocus();
+					JOptionPane.showMessageDialog(null, "DA CLICK EN BUSQUEDA DE CLIENTES");
 				}
 			}
 		});
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_actualizar.setBounds(399, 149, 154, 23);
 		
@@ -257,7 +260,7 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if( !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
-				   && !txt_apellido.getText().equals("") && !txt_telefono.getText().equals("")) {
+				   || txt_apellido.getText().equals("") ||  txt_telefono.getText().equals("")) {
 					Object datos[] = {Integer.parseInt(  txt_id.getText()), txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					
 					try {
@@ -269,10 +272,8 @@ public class Clientes extends JFrame {
 					}
 					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
 					Limpiar_Campos();
-					txt_nombre.requestFocus();
 				}else {
 					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-					requestFocus();
 				}
 			}
 		});
@@ -304,15 +305,14 @@ public class Clientes extends JFrame {
 						}
 						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
 						Limpiar_Campos();
-						txt_nombre.requestFocus();
-				 	}
+						txt_id.requestFocus();
+					}
 					
-			 	}else {
-				    JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-				    frame.requestFocus();
-				 }
-		 	 }
-		 });
+				}else {
+				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				}
+		 	}
+		});
 		panel.add(btn_eliminar);
 		
 }

@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
@@ -32,6 +33,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 >>>>>>> 5388bb1609ec6a5245731295f00bff5b57fc6d1b
+=======
+>>>>>>> parent of 3b7bde5 (AGREGANDO COLORES EN LAS INTERFACEZ)
 
 public class Categorias extends JFrame {
 
@@ -69,7 +72,6 @@ public class Categorias extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(131, 216, 244));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -97,9 +99,6 @@ public class Categorias extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_categoria = new JTable();
-		tbl_categoria.setGridColor(new Color(255, 152, 17));
-		tbl_categoria.setSelectionBackground(new Color(255, 152, 17));
-		tbl_categoria.setBackground(new Color(255, 230, 130));
 		tbl_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		ver_datos_tabla(tbl_categoria);
 		tbl_categoria.addMouseListener(new MouseAdapter() {
@@ -128,22 +127,6 @@ public class Categorias extends JFrame {
 		txt_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_categoria.setColumns(10);
 		txt_categoria.setBounds(264, 31, 214, 23);
-		
-		txt_categoria.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				//variable para datos de tipo caracter
-				int key = e.getKeyChar();
-				
-				boolean mayuscula = key >= 65 && key <= 90;
-				boolean minuscula = key >= 97 && key <= 122;
-				boolean espacio = key == 32;
-				
-				if(!(mayuscula || minuscula || espacio)) {
-					e.consume();
-				}
-			}
-		});
 		panel.add(txt_categoria);
 		
 		JButton btn_añadir = new JButton("AÑADIR");

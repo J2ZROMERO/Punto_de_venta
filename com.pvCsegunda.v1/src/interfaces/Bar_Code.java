@@ -70,19 +70,18 @@ public class Bar_Code extends JFrame {
 	 * @throws DocumentException 
 	 */
 	
-	@SuppressWarnings("deprecation")
 	JBarcodeBean barcode = new JBarcodeBean();
 	public static BufferedImage imagen = null;
 	
 	public void Generar_Img_Barras() {
 		barcode.setCodeType(new Interleaved25());
 		barcode.setCheckDigit(true);
-		barcode.setCode(txt_id.getText());
+		barcode.setCode(txt_id.getText()+"34563");
 		
 		imagen = barcode.draw(new BufferedImage(450, 300, BufferedImage.TYPE_INT_BGR));
 		
 		ImageIcon barras = new ImageIcon(imagen);
-		//this.lbl_bar_code.setName("31452345");
+		this.lbl_bar_code.setName("31452345");
 		this.lbl_bar_code.setIcon(barras);
 		
 	}
@@ -92,7 +91,6 @@ public class Bar_Code extends JFrame {
 			//se crea el documento pdf
 		    Document doc=new Document();
 		    //ruta de guardado del documento
-		    //ejemplo
 		    //PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
 		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"));
 		    
@@ -104,11 +102,10 @@ public class Bar_Code extends JFrame {
 		    JOptionPane.showMessageDialog(null, "CODIGO DE BARRAS GENERADO");
 		    
 		    for (int i = 0 ; i < Integer.parseInt(txt_cantidad.getText()) ; i++) {
-		    //se crea el codigo de barras de tipo 128
+		    //se crea el codigo de barras de tipo 39
 		    Barcode128 code = new Barcode128();
-		    
 		    //se le añade un codigo para mostrar
-		    code.setCode(txt_id.getText()+lbl_precio.getText());
+		    code.setCode(txt_id.getText());
 		    //se le da color al codigo de barras
 		    Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
 		    //se le puede dar un tamaño al condigo de barras

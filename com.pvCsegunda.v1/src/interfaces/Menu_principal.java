@@ -68,8 +68,7 @@ public class Menu_principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(182, 213, 255));
-		panel.setBounds(0, 0, 597, 711);
+		panel.setBounds(0, 0, 594, 711);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -355,10 +354,10 @@ public class Menu_principal extends JFrame {
 		lbl_marcas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Marcas ma = new Marcas();
-				ma.setVisible(true);
-				ma.setFocusable(true);
-				ma.setLocationRelativeTo(null);
+				Marcas m = new Marcas();
+				m.setVisible(true);
+				m.setFocusable(true);
+				m.setLocationRelativeTo(null);
 				dispose();
 			}
 		});
