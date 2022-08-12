@@ -40,7 +40,6 @@ CREATE TABLE `caja` (
   KEY `caja_FK` (`fk_provedores`),
   KEY `caja_FK_1` (`fk_ventas`),
   CONSTRAINT `caja_FK` FOREIGN KEY (`fk_provedores`) REFERENCES `provedores` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `caja_FK_1` FOREIGN KEY (`fk_ventas`) REFERENCES `ventas` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `caja_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,7 +65,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +74,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (5,'ganso'),(6,'otr catedoria');
+INSERT INTO `categoria` VALUES (5,'ganso'),(9,'leche'),(10,'otra caeoria');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +124,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +133,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (2,'dara','gachu','jjjjjjjjjjjjjjjjj','22280010101','2022-06-29 18:19:05'),(5,'asasasas','aa','dddddddddddddd','aa','2022-07-19 19:22:15'),(10,'Jose ','Juan ','Zepeda','Romero...','2022-07-22 17:06:41'),(12,'Carlos Juarez','Sanchez ','domignuees','2228103004','2022-07-22 17:10:28'),(15,'jsope nja ','zepeda','','','2022-07-22 18:08:55');
+INSERT INTO `clientes` VALUES (2,'dara','gachu','pedrito','22280010101','2022-06-29 18:19:05'),(5,'ppppppppp','aa','dddddddddddddd','aa','2022-07-19 19:22:15'),(10,'Jose ','Juan ','Zepeda','Romero...','2022-07-22 17:06:41'),(12,'Carlos Juarez','Sanchez ','domignuees','2228103004','2022-07-22 17:10:28'),(26,'wer','werwerew','carlos','212121','2022-08-05 18:08:46'),(28,'ghd','hg','h','12121','2022-08-10 07:36:26'),(29,'12','31','31','312','2022-08-10 07:37:30'),(30,'1221','212','212','121','2022-08-10 07:38:26'),(31,'das','dasd','sadas','232','2022-08-10 07:39:01'),(32,'dasdd','dasd','dasd','asdasd','2022-08-10 07:39:45'),(33,'dsad','dsad','asdas','2232','2022-08-10 07:40:57'),(34,'sda','das','dasd','23132','2022-08-10 07:47:20'),(35,'dsads','adsadsa','dsadasd','232','2022-08-10 07:52:39'),(36,'gfdg','gdf','gdfgd','f121','2022-08-10 07:54:19'),(37,'fdsfsd','fsdf','sdfsdf','121','2022-08-10 07:55:33'),(38,'dsa','dasda','sdad','3232','2022-08-10 08:06:12'),(39,'das','d','sadas','322','2022-08-10 08:06:53'),(40,'f','czx','czxc','323','2022-08-10 08:09:41'),(41,'dasdas','dsa','da','222','2022-08-10 08:10:51'),(42,'das','dasdsadasd','asdasd','32','2022-08-10 08:18:17'),(43,'das','dasdsd','sadas','dsadasd','2022-08-10 08:20:56'),(44,'dsa','ds','adasd','2323','2022-08-10 08:27:55'),(45,'das','dsads','adasd','32323','2022-08-10 08:30:45');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,8 +156,8 @@ CREATE TABLE `devoluciones` (
   KEY `devoluciones_FK` (`fk_producto`),
   KEY `devoluciones_FK_1` (`fk_clientes`),
   KEY `devoluciones_FK_2` (`fk_usuario`),
-  CONSTRAINT `devoluciones_FK` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `devoluciones_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `devoluciones_FK` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `devoluciones_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `devoluciones_FK_2` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,7 +168,7 @@ CREATE TABLE `devoluciones` (
 
 LOCK TABLES `devoluciones` WRITE;
 /*!40000 ALTER TABLE `devoluciones` DISABLE KEYS */;
-INSERT INTO `devoluciones` VALUES (1,5,'no los quiso','2022-06-22 17:02:04',NULL,NULL,NULL),(3,5,'no los quiso','2022-06-22 17:02:23',NULL,NULL,NULL),(5,5,'no los quiso','2022-06-22 17:04:03',31475,NULL,NULL),(6,5,'nuevoprudcot','2022-06-23 20:05:17',31456,NULL,NULL),(7,5,'omitido','2022-06-28 20:46:51',65,NULL,NULL),(8,78,'omitido','2022-06-28 22:00:49',65,NULL,NULL);
+INSERT INTO `devoluciones` VALUES (1,5,'no los quiso','2022-06-22 17:02:04',NULL,NULL,NULL),(3,5,'no los quiso','2022-06-22 17:02:23',NULL,NULL,NULL),(5,5,'no los quiso','2022-06-22 17:04:03',31475,NULL,NULL),(6,5,'nuevoprudcot','2022-06-23 20:05:17',31456,NULL,NULL),(7,5,'omitido','2022-06-28 20:46:51',NULL,NULL,NULL),(8,78,'omitido','2022-06-28 22:00:49',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,8 +195,7 @@ CREATE TABLE `estadisticas` (
   CONSTRAINT `estadisticas_FK` FOREIGN KEY (`fk_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `estadisticas_FK_1` FOREIGN KEY (`fk_devoluciones`) REFERENCES `devoluciones` (`id`),
   CONSTRAINT `estadisticas_FK_2` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`),
-  CONSTRAINT `estadisticas_FK_4` FOREIGN KEY (`fk_caja`) REFERENCES `caja` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `estadisticas_FK_5` FOREIGN KEY (`fk_ventas`) REFERENCES `ventas` (`id`)
+  CONSTRAINT `estadisticas_FK_4` FOREIGN KEY (`fk_caja`) REFERENCES `caja` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -221,7 +219,7 @@ CREATE TABLE `linea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linea` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +228,7 @@ CREATE TABLE `linea` (
 
 LOCK TABLES `linea` WRITE;
 /*!40000 ALTER TABLE `linea` DISABLE KEYS */;
-INSERT INTO `linea` VALUES (7,'otr'),(8,'what about'),(10,'good'),(11,'otra linea ,as');
+INSERT INTO `linea` VALUES (8,'what about'),(10,'good');
 /*!40000 ALTER TABLE `linea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +243,7 @@ CREATE TABLE `marcas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -254,8 +252,74 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (3,'otra nueva marca'),(4,'gansito'),(5,'nueva marca');
+INSERT INTO `marcas` VALUES (4,'gansito'),(5,'nueva marca');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `movimientos_productos`
+--
+
+DROP TABLE IF EXISTS `movimientos_productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `movimientos_productos` (
+  `codigo_producto` bigint(20) DEFAULT NULL,
+  `producto` varchar(100) DEFAULT NULL,
+  `distintivo1` varchar(100) DEFAULT NULL,
+  `stock_antiguo` int(11) DEFAULT NULL,
+  `stock_nuevo` int(11) DEFAULT NULL,
+  `motivo` varchar(27) DEFAULT NULL,
+  `usuario` int(11) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `movimientos_productos`
+--
+
+LOCK TABLES `movimientos_productos` WRITE;
+/*!40000 ALTER TABLE `movimientos_productos` DISABLE KEYS */;
+INSERT INTO `movimientos_productos` VALUES (95059279,'dasdas','dsads',3243,0,'eliminado',NULL,'2022-08-04 17:05:49'),(1,'ggggggg','ddddddd',100,1235,'actualizado',80,'2022-08-04 17:08:50'),(1231,'ggggggg','ddddddd',0,1235,'insertado',80,'2022-08-04 17:19:36'),(2393854961446,'dasddsa','dsad',0,21321,'agregado',NULL,'2022-08-05 16:19:17'),(9505927961156,'dasdas','dsads',3243,0,'eliminado',NULL,'2022-08-05 16:19:31'),(3758734962476,'adada','dsafasdfa',0,1312,'agregado',NULL,'2022-08-05 18:11:55'),(2190839452139,'adada','dsafasdfa',0,1312,'agregado',NULL,'2022-08-05 18:12:31'),(1231,'aaaaaaa','ddddddd',1235,1235,'actualizado',NULL,'2022-08-05 18:14:22'),(1231,'aaaaaaa','ddddddd',1235,1235,'actualizado',NULL,'2022-08-05 18:14:23'),(3758734962476,'adada','dsafasdfa',1312,0,'eliminado',NULL,'2022-08-05 18:14:43'),(31475,'fdsfsdfs','de colores',5,5,'actualizado',NULL,'2022-08-05 18:16:36'),(1,'gggggggss','ddddddd',1235,1235,'actualizado',NULL,'2022-08-05 18:17:32'),(54521321,'s','sdfsd',0,546,'agregado',NULL,'2022-08-08 07:40:15'),(9578302976396,'2313','3213',0,123,'agregado',NULL,'2022-08-08 07:40:35'),(9578302976396,'s2222','dfas',123,12321,'actualizado',NULL,'2022-08-08 07:58:35'),(9578302976396,'s2222','dfas',12321,12321,'actualizado',NULL,'2022-08-08 07:59:23'),(9578302976396,'s2222','dfas',12321,12321,'actualizado',NULL,'2022-08-08 08:13:17'),(9578302976396,'s2222','dfas',12321,12321,'actualizado',NULL,'2022-08-08 08:17:51'),(7502278750135,'asd','sdsa',0,14,'agregado',NULL,'2022-08-09 13:15:34'),(7502010421330,'asda','asdd',0,1,'agregado',NULL,'2022-08-09 15:58:26'),(7502010421330,'asda','asdd',1,1,'actualizado',NULL,'2022-08-09 15:58:36'),(1,'gggggggss','ddddddd',1235,235,'actualizado',NULL,'2022-08-09 20:18:56'),(1231,'aaaaaaa','ddddddd',1235,1000,'actualizado',NULL,'2022-08-09 20:24:42'),(6825166629653,'jhgjf','j',0,31,'agregado',NULL,'2022-08-10 07:36:16'),(1231,'aaaaaaa','ddddddd',1000,765,'actualizado',NULL,'2022-08-10 09:16:33'),(1,'gggggggss','ddddddd',235,200,'actualizado',NULL,'2022-08-10 09:54:48'),(7,'asdas','asdas',2,0,'actualizado',NULL,'2022-08-10 10:08:47'),(7,'asdas','asdas',0,-2,'actualizado',NULL,'2022-08-10 10:10:01'),(2,'asdas','asdas',2,1,'actualizado',NULL,'2022-08-10 10:11:58'),(1,'gggggggss','ddddddd',200,165,'actualizado',NULL,'2022-08-10 10:18:52'),(7,'asdas','asdas',-2,-3,'actualizado',NULL,'2022-08-10 10:19:41'),(2,'asdas','asdas',1,0,'actualizado',NULL,'2022-08-10 10:19:41'),(1231,'aaaaaaa','ddddddd',765,758,'actualizado',NULL,'2022-08-10 10:19:41'),(7,'asdas','asdas',-3,0,'actualizado',NULL,'2022-08-10 10:20:49'),(7,'asdas','asdas',0,0,'actualizado',NULL,'2022-08-10 12:44:47'),(1,'gggggggss','ddddddd',165,160,'actualizado',NULL,'2022-08-10 12:44:47'),(2,'asdas','asdas',0,0,'actualizado',NULL,'2022-08-10 12:44:47'),(1,'gggggggss','ddddddd',160,155,'actualizado',NULL,'2022-08-10 13:00:39'),(1,'gggggggss','ddddddd',155,150,'actualizado',NULL,'2022-08-10 13:00:41'),(2,'asdas','asdas',0,0,'actualizado',NULL,'2022-08-10 13:01:02'),(2,'asdas','asdas',0,0,'actualizado',NULL,'2022-08-10 13:01:16'),(1,'gggggggss','ddddddd',150,147,'actualizado',NULL,'2022-08-10 13:09:18'),(1,'gggggggss','ddddddd',147,144,'actualizado',NULL,'2022-08-10 13:09:37'),(1,'gggggggss','ddddddd',144,137,'actualizado',NULL,'2022-08-10 13:09:47'),(1,'gggggggss','ddddddd',137,130,'actualizado',NULL,'2022-08-10 13:09:47'),(1,'gggggggss','ddddddd',130,123,'actualizado',NULL,'2022-08-10 13:09:47'),(1,'gggggggss','ddddddd',123,116,'actualizado',NULL,'2022-08-10 13:09:48'),(1,'gggggggss','ddddddd',116,109,'actualizado',NULL,'2022-08-10 13:09:48'),(1,'gggggggss','ddddddd',109,108,'actualizado',NULL,'2022-08-10 13:11:02'),(1,'gggggggss','ddddddd',108,105,'actualizado',NULL,'2022-08-10 13:12:03'),(1,'gggggggss','ddddddd',105,104,'actualizado',NULL,'2022-08-10 13:13:04'),(1,'gggggggss','ddddddd',104,103,'actualizado',NULL,'2022-08-10 13:14:46'),(1,'gggggggss','ddddddd',103,68,'actualizado',NULL,'2022-08-10 14:20:03'),(1,'gggggggss','ddddddd',68,33,'actualizado',NULL,'2022-08-10 14:35:28'),(1,'gggggggss','ddddddd',33,-2,'actualizado',NULL,'2022-08-10 15:15:49'),(1231,'aaaaaaa','ddddddd',758,754,'actualizado',NULL,'2022-08-10 20:43:53'),(1,'gggggggss','ddddddd',-2,-3,'actualizado',NULL,'2022-08-10 22:49:02');
+/*!40000 ALTER TABLE `movimientos_productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `perdidas_devoluciones`
+--
+
+DROP TABLE IF EXISTS `perdidas_devoluciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `perdidas_devoluciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_producto` bigint(20) DEFAULT NULL,
+  `producto` varchar(100) DEFAULT NULL,
+  `descripcion1` varchar(150) DEFAULT NULL,
+  `descripcion2` varchar(200) DEFAULT NULL,
+  `unidades` int(11) DEFAULT NULL,
+  `cantidad_devolver` double DEFAULT NULL,
+  `motivo` varchar(100) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `fk_cliente` int(11) DEFAULT NULL,
+  `fk_usuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `perdidas_devoluciones_FK` (`fk_cliente`),
+  KEY `perdidas_devoluciones_FK_1` (`fk_usuario`),
+  CONSTRAINT `perdidas_devoluciones_FK` FOREIGN KEY (`fk_cliente`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `perdidas_devoluciones_FK_1` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `perdidas_devoluciones`
+--
+
+LOCK TABLES `perdidas_devoluciones` WRITE;
+/*!40000 ALTER TABLE `perdidas_devoluciones` DISABLE KEYS */;
+INSERT INTO `perdidas_devoluciones` VALUES (5,1,'gggggggss','ddddddd','as',123,321,'omitido','2022-08-05 21:59:24',NULL,NULL),(6,1,'gggggggss','ddddddd','as',3,213,'DEVOLUCION','2022-08-05 21:59:41',NULL,NULL),(7,1231,'aaaaaaa','ddddddd','as',4,212,'DEVOLUCION','2022-08-05 22:08:12',26,NULL),(8,1,'gggggggss','ddddddd','as',3,2122,'MAL ESTADO','2022-08-05 23:12:54',NULL,NULL),(9,1,'gggggggss','ddddddd','as',3,2122,'MAL ESTADO','2022-08-05 23:13:03',26,NULL),(10,1,'gggggggss','ddddddd','as',1,50,'DEVOLUCION','2022-08-10 18:18:28',NULL,NULL);
+/*!40000 ALTER TABLE `perdidas_devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -268,14 +332,14 @@ DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
   `id` bigint(20) NOT NULL,
   `product` varchar(50) NOT NULL,
-  `tipo` varchar(50) DEFAULT NULL,
+  `tipo` varchar(50) NOT NULL,
   `extra_distinctive` varchar(50) DEFAULT NULL,
-  `stock` smallint(6) NOT NULL,
+  `stock` int(11) NOT NULL,
   `kilogramos` double DEFAULT NULL,
   `medida` double DEFAULT NULL,
   `mililitros` double DEFAULT NULL,
   `color` varchar(20) DEFAULT NULL,
-  `tamano` double DEFAULT NULL,
+  `tamano` varchar(17) DEFAULT NULL,
   `precioCompra` double NOT NULL,
   `precioVenta` double NOT NULL,
   `fecha` datetime NOT NULL,
@@ -284,18 +348,18 @@ CREATE TABLE `productos` (
   `fk_linea` int(11) DEFAULT NULL,
   `fk_categoria` int(11) DEFAULT NULL,
   `fk_usuario` int(11) DEFAULT NULL,
-  `razon` varchar(30) DEFAULT NULL,
+  `notas_de_venta` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `productos_FK_3` (`fk_provedores`),
   KEY `productos_FK` (`fk_categoria`),
   KEY `productos_FK_1` (`fk_linea`),
   KEY `productos_FK_2` (`fk_marca`),
   KEY `productos_FK_4` (`fk_usuario`),
-  CONSTRAINT `productos_FK` FOREIGN KEY (`fk_categoria`) REFERENCES `categoria` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `productos_FK` FOREIGN KEY (`fk_categoria`) REFERENCES `categoria` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `productos_FK_1` FOREIGN KEY (`fk_linea`) REFERENCES `linea` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `productos_FK_2` FOREIGN KEY (`fk_marca`) REFERENCES `marcas` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `productos_FK_3` FOREIGN KEY (`fk_provedores`) REFERENCES `provedores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `productos_FK_4` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `productos_FK_4` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='just id,name,stock,purchase sale,selling price can not be empty';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -305,9 +369,74 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (65,'panes de dulce','chocolate','con chispas muchas chispas',80,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 20:41:53',NULL,NULL,NULL,NULL,NULL,'anadido'),(78,'panes de dulce','chocolate','con chispas muchas chispas',75,180,NULL,NULL,NULL,NULL,90,120,'2022-06-28 22:00:35',NULL,NULL,NULL,NULL,NULL,'anadido'),(3145,'panes de dulce','de colores','',0,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:07',NULL,NULL,NULL,NULL,NULL,'anadido'),(31456,' dulce','de','',0,156,1233,0,'0',0,56,2555,'2022-06-23 20:01:52',NULL,NULL,NULL,NULL,NULL,'anadido'),(31475,'panes de dulce','de colores','',5,156,1233,0,'0',0,56,2555,'2022-06-22 16:02:08',NULL,NULL,NULL,NULL,NULL,'anadido');
+INSERT INTO `productos` VALUES (1,'gggggggss','ddddddd','as',-3,432,4324,15646,'sad','gramdD',123,132156,'2022-07-29 16:34:37',4,4,10,5,NULL,'actualizado'),(2,'asdas','asdas','asdas',0,122.12,122.12,122.12,'asdas','122.12',122.12,122.12,'2022-07-29 18:29:25',NULL,NULL,NULL,NULL,NULL,'anadido'),(7,'asdas','asdas','asdas',0,122.12,122.12,122.12,'asdas','122.12',122.12,122.12,'2022-07-29 18:42:03',NULL,NULL,NULL,NULL,NULL,'anadido'),(1231,'aaaaaaa','ddddddd','as',754,432,4324,15646,'sad','gramdD',123,132156,'2022-08-04 17:19:36',4,4,10,5,NULL,'actualizado'),(1434,'sad','sad','as',23,432,4324,4324,'sad','gramdD',123,3213,'2022-08-02 14:01:21',NULL,NULL,NULL,NULL,NULL,'anadido'),(2131,'3213','21312','3123',32,NULL,NULL,NULL,'',NULL,31232131,12312,'2022-07-29 19:13:44',NULL,NULL,NULL,NULL,NULL,'anadido'),(3145,'panes de dulce','de colores','',0,156,1233,0,'0','0',56,2555,'2022-06-22 16:02:07',NULL,NULL,NULL,NULL,NULL,'anadido'),(6565,'46546','45645645','654654',6546,456,6456,4564,'',NULL,64564565,564,'2022-07-29 19:16:18',NULL,NULL,NULL,NULL,NULL,'anadido'),(12312,'231','321','321321',2312314,NULL,NULL,NULL,'',NULL,213123,312312,'2022-07-29 19:42:50',NULL,NULL,NULL,NULL,NULL,'anadido'),(12313,'sda','ffsad','ffsad',25,25,25,25,'25','25',25,25,'2022-08-02 14:17:08',NULL,NULL,NULL,NULL,NULL,'actualizado'),(31456,'nuevos panes e duces','chocolate','con chispas muchas chispas',80,180,NULL,NULL,NULL,NULL,90,120,'2022-06-23 20:01:52',NULL,NULL,NULL,NULL,NULL,'actualizado'),(31475,'fdsfsdfs','de colores','',5,156,1233,NULL,'0','0',56,2555,'2022-06-22 16:02:08',4,5,NULL,NULL,NULL,'actualizado'),(54654,'6546','546546','45454',454,123,123,1321,'1231','1231',54654,6546,'2022-07-29 18:57:10',NULL,NULL,NULL,NULL,NULL,'anadido'),(456546,'45645','6546456','54654654',5465,54654,45654,456546,'',NULL,645654654,54645654,'2022-07-29 19:10:41',NULL,NULL,NULL,NULL,NULL,'anadido'),(999558,'45645','6546456','54654654',5465,NULL,45654,NULL,'',NULL,645654654,54645654,'2022-07-29 19:11:10',NULL,NULL,NULL,NULL,NULL,'anadido'),(3527525,'jhj','gjghj','ghjghj',1231,NULL,NULL,NULL,'',NULL,2312321,231,'2022-07-29 22:36:57',NULL,NULL,NULL,NULL,NULL,'anadido'),(4646513,'sad','sad','as',23,432,4324,4324,'sad','gramdD',123,3213,'2022-08-02 14:01:42',NULL,NULL,NULL,NULL,NULL,'anadido'),(9995586,'45645','6546456','54654654',5465,NULL,4545,NULL,'',NULL,645654654,54645654,'2022-07-29 19:11:49',NULL,NULL,NULL,NULL,NULL,'anadido'),(54521321,'s','sdfsd',NULL,546,NULL,NULL,NULL,NULL,NULL,5464,5464,'2022-08-08 07:40:15',NULL,NULL,NULL,NULL,NULL,'asDasd'),(75925168,'jhj','gjghj','ghjghj',1231,NULL,NULL,NULL,'',NULL,2312321,231,'2022-07-29 22:37:20',NULL,NULL,NULL,NULL,NULL,'anadido'),(2190839452139,'adada','dsafasdfa','fdsafaddfs',1312,4564,6546,4564,'verde','grande',21321,3123,'2022-08-05 18:12:31',16,5,NULL,5,NULL,'anadido'),(2393854961446,'dasddsa','dsad','asdas',21321,NULL,NULL,NULL,'',NULL,21321,3213,'2022-08-05 16:19:17',NULL,NULL,NULL,NULL,NULL,'anadido'),(3576953937339,'<','asdsdasd','sadasdas',2123,12321,3123,123,'ghdfg','gf',321321,21321,'2022-08-02 13:28:54',NULL,NULL,NULL,NULL,NULL,'anadido'),(4420061396957,'gfdg','dfgdfgdf','gdfgdf',345,NULL,NULL,NULL,'',NULL,312,3456,'2022-07-29 22:39:19',NULL,NULL,NULL,NULL,NULL,'anadido'),(6243340423249,'ayyyyy','yyy','yyyyy',232323,432,4324,15646,'sad','gramdD',123.021321,132156.03213,'2022-08-03 15:50:41',NULL,NULL,NULL,NULL,NULL,'anadido'),(6825166629653,'jhgjf','j','ghfj',31,NULL,NULL,NULL,'',NULL,321,13,'2022-08-10 07:36:16',NULL,NULL,NULL,NULL,NULL,''),(7502010421330,'asda','asdd','dasd',1,NULL,NULL,NULL,'',NULL,1,2,'2022-08-09 15:58:26',NULL,NULL,NULL,NULL,NULL,'se veld epor bolsa'),(7502278750135,'asd','sdsa','dsd',14,NULL,NULL,NULL,'',NULL,1414,141,'2022-08-09 13:15:34',NULL,NULL,NULL,NULL,NULL,''),(8915738148233,'saesae','546','54654',654,654,6546,654,'6546','5654',46546,65465,'2022-08-02 14:29:29',5,NULL,8,NULL,NULL,'actualizado'),(9578302976396,'s2222','dfas','',12321,NULL,NULL,NULL,'','231',32131,2131,'2022-08-08 07:40:35',NULL,NULL,NULL,NULL,NULL,'tttttttt');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER anadir_producto_AI
+AFTER INSERT
+ON productos FOR EACH ROW
+INSERT INTO pv_canoa_segunda.movimientos_productos
+(codigo_producto, producto, distintivo1, stock_antiguo, stock_nuevo, motivo, usuario, fecha)
+VALUES(new.id, new.product,  new.tipo, 0, new.stock, "agregado", new.fk_usuario, now()) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER actualiza_productos_BU
+BEFORE update 
+ON productos FOR EACH row
+
+
+
+INSERT INTO pv_canoa_segunda.movimientos_productos
+(codigo_producto, producto, distintivo1, stock_antiguo, stock_nuevo, motivo, usuario, fecha)
+
+VALUES(new.id , new.product, new.tipo, old.stock, new.stock , "actualizado", new.fk_usuario, now()) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER elimina_productos_AD
+AFTER delete
+ON productos FOR EACH row
+
+INSERT INTO pv_canoa_segunda.movimientos_productos
+(codigo_producto, producto, distintivo1, stock_antiguo, stock_nuevo, motivo, usuario, fecha)
+VALUES(old.id, old.product, old.tipo, old.stock, 0 , "eliminado", old.fk_usuario,now()) */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `productos_eliminados`
@@ -336,7 +465,7 @@ CREATE TABLE `productos_eliminados` (
 
 LOCK TABLES `productos_eliminados` WRITE;
 /*!40000 ALTER TABLE `productos_eliminados` DISABLE KEYS */;
-INSERT INTO `productos_eliminados` VALUES (NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:32:12'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:33:54'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 16:03:06'),(NULL,NULL,' dulce','de','Eliminado','2022-06-22 16:03:42'),(NULL,NULL,' dulce','de','Eliminado','2022-06-23 20:02:17');
+INSERT INTO `productos_eliminados` VALUES (NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:32:12'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 15:33:54'),(NULL,NULL,'panes de dulce','de colores','Eliminado','2022-06-22 16:03:06'),(NULL,NULL,' dulce','de','Eliminado','2022-06-22 16:03:42'),(NULL,NULL,' dulce','de','Eliminado','2022-06-23 20:02:17'),(NULL,NULL,'nuevos panes e duces','chocolate','Eliminado','2022-07-28 14:25:01'),(80,NULL,'fds','fdsf','Eliminado','2022-08-03 16:25:33'),(NULL,NULL,'45645','6546456','Eliminado','2022-08-03 16:26:37'),(NULL,NULL,'asdas','asdas','Eliminado','2022-08-03 16:35:06'),(80,NULL,'panes de dulce','chocolate','Eliminado','2022-08-03 16:35:30'),(NULL,NULL,'nuevos panes e duces','chocolate','Eliminado','2022-08-03 16:58:37'),(NULL,NULL,'21321','312321321','Eliminado','2022-08-03 16:59:07'),(80,NULL,'dasdas','dsads','Eliminado','2022-08-04 17:05:49'),(NULL,NULL,'dasdas','dsads','Eliminado','2022-08-05 16:19:31'),(NULL,NULL,'adada','dsafasdfa','Eliminado','2022-08-05 18:14:43');
 /*!40000 ALTER TABLE `productos_eliminados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -356,7 +485,7 @@ CREATE TABLE `provedores` (
   `nombreSupervisor` varchar(50) DEFAULT NULL,
   `contactoSupervisor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -365,7 +494,7 @@ CREATE TABLE `provedores` (
 
 LOCK TABLES `provedores` WRITE;
 /*!40000 ALTER TABLE `provedores` DISABLE KEYS */;
-INSERT INTO `provedores` VALUES (4,'jose','zeepda','romero','bimbo','carlos joaquin','2228103004'),(5,'asdasdsadas ','sdas','sdadsa','sas',NULL,NULL),(6,'asdasdddddddsadas ','sdas','sdadsa','sas',NULL,NULL),(8,'dsadasdasd','asdasdasd','asdasdasd','sadasdasdasd','asdsadasd','fgfgzxcf');
+INSERT INTO `provedores` VALUES (4,'jose','zeepda','romero','bimbo','carlos joaquin','22222222'),(5,'carlos juares','sdas','sdadsa','sas','dsadas','dasdasdas'),(16,'czxc','zxczxczxc','zxczx','czxczx','czxczxczx','czxczxczx');
 /*!40000 ALTER TABLE `provedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -428,14 +557,15 @@ INSERT INTO `usuarios` VALUES (80,'ADMINISTRADOR','perla','vnues','de los sanos'
 UNLOCK TABLES;
 
 --
--- Table structure for table `ventas`
+-- Table structure for table `venta`
 --
 
-DROP TABLE IF EXISTS `ventas`;
+DROP TABLE IF EXISTS `venta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ventas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `venta` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `fk_productos` bigint(20) DEFAULT NULL,
   `producto` varchar(50) DEFAULT NULL,
   `distintivo1` varchar(50) DEFAULT NULL,
   `precio` double DEFAULT NULL,
@@ -444,24 +574,24 @@ CREATE TABLE `ventas` (
   `fecha` datetime NOT NULL,
   `fk_clientes` int(11) DEFAULT NULL,
   `fk_usuarios` int(11) DEFAULT NULL,
-  `fk_productos` bigint(20) DEFAULT NULL,
+  `numero_venta` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ventas_FK` (`fk_clientes`),
   KEY `ventas_FK_1` (`fk_usuarios`),
   KEY `ventas_FK_2` (`fk_productos`),
-  CONSTRAINT `ventas_FK` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `ventas_FK_1` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+  CONSTRAINT `venta_FK` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `venta_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ventas`
+-- Dumping data for table `venta`
 --
 
-LOCK TABLES `ventas` WRITE;
-/*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,'1',NULL,NULL,78,NULL,'2022-06-29 00:00:00',NULL,NULL,3145),(2,'1',NULL,NULL,3,NULL,'2022-06-29 00:00:00',NULL,NULL,3145),(3,'1',NULL,NULL,0,NULL,'2022-06-29 19:10:59',NULL,NULL,3145),(4,'1',NULL,NULL,40,NULL,'2022-06-29 19:31:58',NULL,NULL,3145),(5,'1',NULL,NULL,40,NULL,'2022-06-29 19:32:22',NULL,NULL,3145),(6,'1',NULL,NULL,3,NULL,'2022-06-29 19:32:34',NULL,NULL,3145),(7,'1',NULL,NULL,3,NULL,'2022-06-29 19:34:56',NULL,NULL,3145),(8,'1',NULL,NULL,5,NULL,'2022-06-29 20:00:34',NULL,NULL,78),(9,'1',NULL,NULL,5,NULL,'2022-06-29 20:01:12',NULL,NULL,3145),(10,'1',NULL,NULL,5,NULL,'2022-06-29 20:09:34',NULL,NULL,31456),(11,'1','ollas de barro',NULL,0,NULL,'2022-06-30 19:31:32',NULL,NULL,31456),(12,'gansito','ollas de barro',NULL,0,NULL,'2022-06-30 19:32:09',NULL,NULL,31456);
-/*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
+LOCK TABLES `venta` WRITE;
+/*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (5,2,'asdas','asdas',122.12,1,528746.12,'2022-08-10 10:11:58',NULL,NULL,NULL),(13,1,'gggggg','ollas de barro',123,235,123,'2022-08-09 20:18:56',NULL,NULL,NULL),(14,1231,'gggggg','ollas de barro',123,235,123,'2022-08-09 20:24:42',NULL,NULL,NULL),(15,1231,'gggggg','ollas de barro',123,235,123,'2022-08-10 09:16:33',NULL,NULL,NULL),(50,1,'gggggggss','ddddddd',132156,35,300,'2022-08-10 09:54:48',NULL,NULL,NULL),(51,1,'gggggggss','ddddddd',132156,35,300,'2022-08-10 10:18:52',NULL,NULL,56),(52,7,'asdas','asdas',122.12,1,925336.24,'2022-08-10 10:19:41',NULL,NULL,7),(53,2,'asdas','asdas',122.12,1,925336.24,'2022-08-10 10:19:41',NULL,NULL,7),(54,1231,'aaaaaaa','ddddddd',132156,7,925336.24,'2022-08-10 10:19:41',NULL,NULL,7),(55,7,'asdas','asdas',122.12,0,660780,'2022-08-10 12:44:47',NULL,NULL,10),(56,1,'gggggggss','ddddddd',132156,5,660780,'2022-08-10 12:44:47',NULL,NULL,10),(57,2,'asdas','asdas',122.12,0,660780,'2022-08-10 12:44:47',NULL,NULL,10),(58,1,'gggggggss','ddddddd',132156,5,660780,'2022-08-10 13:00:39',NULL,NULL,13),(59,1,'gggggggss','ddddddd',132156,5,660780,'2022-08-10 13:00:41',NULL,NULL,13),(60,2,'asdas','asdas',122.12,0,528624,'2022-08-10 13:01:02',NULL,NULL,15),(61,2,'asdas','asdas',122.12,0,528624,'2022-08-10 13:01:16',NULL,NULL,15),(62,1,'gggggggss','ddddddd',132156,3,396468,'2022-08-10 13:09:18',NULL,NULL,17),(63,1,'gggggggss','ddddddd',132156,3,396468,'2022-08-10 13:09:37',NULL,NULL,18),(64,1,'gggggggss','ddddddd',132156,7,925092,'2022-08-10 13:09:47',NULL,NULL,18),(65,1,'gggggggss','ddddddd',132156,7,925092,'2022-08-10 13:09:47',NULL,NULL,18),(66,1,'gggggggss','ddddddd',132156,7,925092,'2022-08-10 13:09:47',NULL,NULL,18),(67,1,'gggggggss','ddddddd',132156,7,925092,'2022-08-10 13:09:48',NULL,NULL,18),(68,1,'gggggggss','ddddddd',132156,7,925092,'2022-08-10 13:09:48',NULL,NULL,18),(69,1,'gggggggss','ddddddd',132156,1,132156,'2022-08-10 13:11:02',NULL,NULL,24),(70,1,'gggggggss','ddddddd',132156,3,300000,'2022-08-10 13:12:03',NULL,NULL,25),(71,1,'gggggggss','ddddddd',132156,1,132156,'2022-08-10 13:13:04',NULL,NULL,26),(72,1,'gggggggss','ddddddd',132156,1,153444,'2022-08-10 13:14:46',NULL,NULL,27),(73,1,'gggggggss','ddddddd',132156,35,300,'2022-08-10 14:20:03',NULL,NULL,56),(74,1,'gggggggss','ddddddd',132156,35,300,'2022-08-10 14:35:28',NULL,NULL,56),(75,1,'gggggggss','ddddddd',132156,35,300,'2022-08-10 15:15:49',NULL,80,56),(76,1231,'aaaaaaa','ddddddd',132156,4,660780,'2022-08-10 20:43:53',NULL,NULL,31),(77,1,'gggggggss','ddddddd',132156,1,132156,'2022-08-10 22:49:02',NULL,NULL,32);
+/*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -610,22 +740,32 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB smallint, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB double, precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB int , fk_marcaDB varchar(30), fk_lineaDB varchar(30), fk_categoriaDB varchar(30), fk_usuarioDB int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizar_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB smallint, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB varchar(50), precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB varchar(50) , fk_marcaDB varchar(50), fk_lineaDB varchar(50), fk_categoriaDB varchar(50), fk_usuarioDB varchar(50),notas_ventaDB varchar (300))
 BEGIN
 
+declare	 provedoresDB  int;
+declare	 marcaDB int; 
+declare lineaDB int; 
+declare	 categoriaDB int;
+declare	 usuarioDB int;
+declare razonDB varchar (30);
 
-
-	declare razonDB varchar (30);
-
+set provedoresDB  = (select id from pv_canoa_segunda.provedores where nombre = fk_provedoresDB  );
+set marcaDB = (select id from pv_canoa_segunda.marcas  where marca  = fk_marcaDB   );
+set lineaDB  = (select id from pv_canoa_segunda.linea  where linea  = fk_lineaDB   );
+set categoriaDB  = (select id from pv_canoa_segunda.categoria  where categoria  = fk_categoriaDB   );
+set usuarioDB  = (select id from pv_canoa_segunda.usuarios  where nickname  = fk_usuarioDB  );
 set razonDB = "actualizado";
+
 
 	
 
 	UPDATE pv_canoa_segunda.productos
 
-SET product=productDB , tipo=tipoDB , extra_distinctive=extra_distinctiveDB , stock=stockDB , kilogramos=kilogramosDB , medida= medidaDB , mililitros=mililitrosDB , color=colorDB , tamano=tamanoDB , precioCompra=precioCompraDB , precioVenta=precioVentaDB , fk_provedores=fk_provedoresDB , fk_marca=fk_marcaDB , fk_linea=fk_lineaDB , fk_categoria=fk_categoriaDB, fk_usuario = fk_usuarioDB, razon = razonDB  
+SET product=productDB , tipo=tipoDB , extra_distinctive=extra_distinctiveDB , stock=stockDB , kilogramos=kilogramosDB , medida= medidaDB , mililitros=mililitrosDB , color=colorDB , tamano=tamanoDB , precioCompra=precioCompraDB , precioVenta=precioVentaDB , fk_provedores=provedoresDB , fk_marca=marcaDB , fk_linea=lineaDB , fk_categoria=categoriaDB, fk_usuario = usuarioDB,notas_de_venta = notas_ventaDB 
 
 WHERE id=idDB ;
+
 
 
 
@@ -744,6 +884,37 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `anadir_devoluciones_perdidas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `anadir_devoluciones_perdidas`(id_productoDB bigint,unidadesDB int, cantidadDB double,motivoDB varchar(100),fk_clienteDB varchar(100),fk_usuarioDB varchar(100))
+begin
+declare descripcion1In varchar (100);
+declare descripcion2In varchar (150);
+declare productoIn varchar(100);
+set descripcion1In 	  = (select tipo from pv_canoa_segunda.productos  where id = id_productoDB);
+set descripcion2In  = (select extra_distinctive  from pv_canoa_segunda.productos  where id = id_productoDB);
+set productoIn  = (select product from pv_canoa_segunda.productos where id = id_productoDB);
+	
+INSERT INTO pv_canoa_segunda.perdidas_devoluciones
+(id_producto, producto, descripcion1, descripcion2, unidades, cantidad_devolver, motivo ,fecha, fk_cliente, fk_usuario)
+VALUES(id_productoDB ,productoIn ,descripcion1In  ,descripcion2In  ,unidadesDB ,cantidadDB, motivoDB ,now(), fk_clienteDB ,fk_usuarioDB);
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `añadir_producto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -754,12 +925,23 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `añadir_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB smallint, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB double, precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB int , fk_marcaDB varchar(30), fk_lineaDB varchar(30), fk_categoriaDB varchar(30), fk_usuarioDB int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `añadir_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB int, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB varchar(50), precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB varchar(30) , fk_marcaDB varchar(30), fk_lineaDB varchar(30), fk_categoriaDB varchar(30), fk_usuarioDB varchar(30),notas_ventaDB varchar(300))
 begin
 
 	
 
 	declare razonDB varchar (30);
+declare provedoresCast int;
+declare marcaCast int;
+declare lineaCast int;
+declare categoriaCast int;
+declare usuariosCast int;
+
+set provedoresCast = (select id from pv_canoa_segunda.provedores where nombre = fk_provedoresDB );
+set marcaCast  = (select id from pv_canoa_segunda.marcas  where marca  =  fk_marcaDB) ;
+set lineaCast  = (select id from pv_canoa_segunda.linea  where  linea = fk_lineaDB  );
+set categoriaCast  = (select id from pv_canoa_segunda.categoria  where categoria  = fk_categoriaDB );
+set usuariosCast  = (select id from pv_canoa_segunda.usuarios  where nickname = fk_usuarioDB );
 
 set razonDB = "anadido";
 
@@ -767,11 +949,11 @@ set razonDB = "anadido";
 
 	INSERT INTO pv_canoa_segunda.productos
 
-(id, product, tipo, extra_distinctive, stock, kilogramos, medida, mililitros, color, tamano, precioCompra, precioVenta, fecha, fk_provedores, fk_marca, fk_linea, fk_categoria,fk_usuario,razon)
+(id, product, tipo, extra_distinctive, stock, kilogramos, medida, mililitros, color, tamano, precioCompra, precioVenta, fecha, fk_provedores, fk_marca, fk_linea, fk_categoria,fk_usuario,notas_de_venta)
 
 
 
-VALUES(idDB, productDB, tipoDB, extra_distinctiveDB , stockDB, kilogramosDB, medidaDB, mililitrosDB, colorDB , tamanoDB, precioCompraDB ,precioVentaDB , now() ,  fk_provedoresDB  , fk_marcaDB, fk_lineaDB , fk_categoriaDB,fk_usuarioDB,razonDB);
+VALUES(idDB, productDB, tipoDB, extra_distinctiveDB , stockDB, kilogramosDB, medidaDB, mililitrosDB, colorDB , tamanoDB, precioCompraDB ,precioVentaDB , now() ,  provedoresCast  ,marcaCast , lineaCast  , categoriaCast ,usuariosCast ,notas_ventaDB);
 
 
 
@@ -831,6 +1013,48 @@ FROM pv_canoa_segunda.productos where  id = idDB ;
 
 
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `buscar_id_ventas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_id_ventas`(in idDB bigint)
+begin
+	SELECT id, product, tipo, stock, precioVenta , notas_de_venta 
+FROM pv_canoa_segunda.productos where id  = idDB ;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `buscar_producto_per_dev` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `buscar_producto_per_dev`(idDB int)
+begin
+	SELECT  product, tipo, extra_distinctive, precioVenta
+FROM pv_canoa_segunda.productos where id = idDB ;
+	
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -938,14 +1162,15 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `busca_producto`( idDB bigint)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `busca_producto`(idDB bigint)
 BEGIN
 
 
 
-SELECT id, product, tipo, extra_distinctive, stock, kilogramos, medida, mililitros, color, tamano, precioCompra, precioVenta, fecha, fk_provedores, fk_marca, fk_linea, fk_categoria
 
-FROM pv_canoa_segunda.productos where id  = idDB ;
+SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive, productos.stock, productos.kilogramos, productos.medida, productos.mililitros, productos.color, productos.tamano, productos.precioCompra, productos.precioVenta, provedores.nombre ,marcas.marca , linea.linea , categoria.categoria , usuarios.nickname,productos.notas_de_venta  
+FROM pv_canoa_segunda.productos left join provedores on productos.fk_provedores = provedores.id  left join marcas on productos.fk_marca = marcas.id left join linea on productos.fk_linea = linea.id left join categoria on productos.fk_categoria = categoria.id  left join usuarios on productos.fk_usuario = usuarios.nickname where productos.id  = idDB ;
+
 
 
 
@@ -1049,6 +1274,27 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `conteo_filas_venta_generadas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `conteo_filas_venta_generadas`()
+begin
+	
+	select count(id) from pv_canoa_segunda.venta  ; 
+	
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `delete_clientes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1119,13 +1365,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_categoria`(in categoriaDB varchar(50))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_categoria`(in categoriaDB int)
 BEGIN
 
 
 
 DELETE FROM pv_canoa_segunda.categoria
-WHERE id= categoriaDB ;
+WHERE id = categoriaDB ;
 
 
 	end ;;
@@ -1144,10 +1390,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_linea`(in lineaDB varchar(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_linea`(in lineaDB int)
 BEGIN
 
-DELETE FROM pv_canoa_segunda.linea WHERE linea=lineaDB ;
+DELETE FROM pv_canoa_segunda.linea WHERE id =lineaDB ;
 
 
 
@@ -1167,11 +1413,11 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_marca`(in marcaDB varchar(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_marca`(in marcaDB int)
 begin
 
 DELETE FROM pv_canoa_segunda.marcas
-WHERE marca =  marcaDB ;
+WHERE id =  marcaDB ;
 
 
 
@@ -1191,7 +1437,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_producto`( usuarioDB int,idproductDB  bigint )
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminar_producto`( usuarioDB varchar(50),idproductDB  bigint )
 begin
 
 	
@@ -1199,7 +1445,7 @@ begin
 
 	
 	
-CALL pv_canoa_segunda.tabla_productos_eliminados(usuarioDB,idproductDB);
+/*CALL pv_canoa_segunda.tabla_productos_eliminados(usuarioDB,idproductDB);*/
 	
 
 DELETE FROM pv_canoa_segunda.productos WHERE id=idproductDB ;
@@ -1333,67 +1579,37 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `generar_venta`(productoDB varchar(50), distintivo1DB varchar(50), precioDB double, cantidadDB int, totalDB double, fk_clientesDB int, fk_usuariosDB int, fk_productosDB int)
-begin
+CREATE DEFINER=`root`@`localhost` PROCEDURE `generar_venta`(fk_productosDB int, cantidadDB double, totalDB double, fk_clientesDB int, fk_usuariosDB int,id_venta int)
+begin
+	
+	declare stock_disponible int;
+declare cantidad_recibida double;
+declare total_stock  double;
 
-declare cantidad_total  int;
+declare productoIn varchar(100);
+declare distintivoIn  varchar(150); 
+declare precioIn  double;
+		
+set productoIn = (select product from pv_canoa_segunda.productos where id = fk_productosDB);
+set distintivoIn  = (select tipo from pv_canoa_segunda.productos where id = fk_productosDB);
+set precioIn = (select precioVenta  from pv_canoa_segunda.productos where id = fk_productosDB);
 
-declare stock_database int;
-
-
-
-set stock_database  = (SELECT stock FROM pv_canoa_segunda.productos where id = fk_productosDB  );
-
-set cantidad_total  = (stock_database  - cantidadDB);
-
-
-
-if( cantidad_total  >= 0) then
-
- 
-
-	INSERT INTO pv_canoa_segunda.ventas
-
-(producto, distintivo1, precio, cantidad, total, fecha, fk_clientes, fk_usuarios, fk_productos)
-
-VALUES(productoDB ,distintivo1DB ,precioDB ,cantidadDB ,totalDB ,now(), fk_clientesDB , fk_usuariosDB ,fk_productosDB);
-
-
-
-UPDATE pv_canoa_segunda.productos
-
-SET  stock= cantidad_total 
-
-WHERE id= fk_productosDB ;
-
-
-
-else
-
-
-
-select "no alcansa el stock tienes " , stock_database ;
-
-
-
-end if;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
+INSERT INTO pv_canoa_segunda.venta
+		
+(fk_productos, producto, distintivo1, precio, cantidad, total, fecha, fk_clientes, fk_usuarios,numero_venta)
+VALUES(fk_productosDB ,productoIn  ,distintivoIn  , precioIn  ,cantidadDB ,totalDB ,now(), fk_clientesDB , fk_usuariosDB,id_venta);
+
+set stock_disponible = (select stock from pv_canoa_segunda.productos where  id = fk_productosDB  );
+set cantidad_recibida  = cantidadDB ;
+
+set total_stock  = (stock_disponible - cantidad_recibida );
+
+UPDATE pv_canoa_segunda.productos
+
+SET  stock= total_stock 
+
+WHERE id= fk_productosDB ;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1632,6 +1848,53 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `productos_like` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `productos_like`(in productDB varchar(50),in tipoDB varchar(50) ,in extra_distinctiveDB varchar (100),in stockDB varchar(50),in kilogramosDB varchar(50),in medidaDB varchar(50),in mililitrosDB varchar(50),in colorDB varchar(20),in tamanoDB varchar(20),in precioCompraDB varchar(10) ,in precioVentaDB varchar(10) ,in  fk_provedoresDB varchar(50) ,in fk_marcaDB varchar(50),in fk_lineaDB varchar(50),in fk_categoriaDB varchar(50),in fk_usuarioDB varchar(50),in notas_ventaDB varchar(300))
+begin
+	declare provedoresIn int;
+declare marcaIn int;
+declare lineaIn int;
+declare categoriaIn int;
+declare usuarioIn int;
+
+set provedoresIn  =  (select id from pv_canoa_segunda.provedores  where nombre  = fk_provedoresDB );	
+set marcaIn  =  (select id from pv_canoa_segunda.marcas where marca = fk_marcaDB);
+set lineaIn  =  (select id from pv_canoa_segunda.linea   where linea = fk_lineaDB );	
+set categoriaIn  =  (select id from pv_canoa_segunda.categoria  where categoria  = fk_categoriaDB );	
+set usuarioIn  =  (select id from pv_canoa_segunda.usuarios  where   nickname  = fk_usuarioDB );	
+
+
+
+	SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive, productos.stock, productos.kilogramos, productos.medida, productos.mililitros, productos.color, productos.tamano, productos.precioCompra, productos.precioVenta,  provedores.nombre , marcas.marca  , linea.linea , categoria.categoria , usuarios.nickname,notas_de_venta  
+	FROM pv_canoa_segunda.productos 
+left join provedores on productos.fk_provedores = provedores.id  
+left join marcas on productos.fk_marca = marcas.id   
+left join linea on productos.fk_linea = linea.id
+left join categoria on productos.fk_categoria  = categoria.id
+left join usuarios on productos.fk_usuario = usuarios.id 
+
+where product like concat('%',productDB,'%') || tipo  like concat('%',tipoDB,'%') || extra_distinctive  like concat('%',extra_distinctiveDB,'%') || stock  like concat('%',stockDB ,'%') || kilogramos  like concat('%',kilogramosDB,'%') || medida  like concat('%',medidaDB ,'%') || mililitros  like concat('%',mililitrosDB ,'%') || color  like concat('%',colorDB ,'%') || tamano  like concat('%',tamanoDB ,'%') || precioCompra  like concat('%',precioCompraDB ,'%') || precioVenta  like concat('%',precioVentaDB ,'%') || productos.fk_provedores   = provedoresIn  || productos.fk_marca = marcaIn  || productos.fk_linea = lineaIn  || productos.fk_categoria = categoriaIn || notas_de_venta  like concat("%",notas_ventaDB , "%") ;
+
+
+/*
+ * just i we want  to look for user  write this code at the end  productos.fk_usuario =  usuarioIn */
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `prueba` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1694,20 +1957,20 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `tabla_productos_eliminados`(usuarioDB int, productoDB bigint)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tabla_productos_eliminados`(usuarioDB varchar(50), productoDB bigint)
 BEGIN
 
-
-	declare razonDB varchar (30);
+declare userIn int;
+declare razonDB varchar (30);
 declare Nproducto  varchar(50);
 declare tipoDB varchar(50);
 
    set Nproducto  = (select product from pv_canoa_segunda.productos where id = productoDB); 
    set tipoDB = (select tipo from pv_canoa_segunda.productos where id =  productoDB);
-  
+set userIn = (select id from pv_canoa_segunda.usuarios where nickname = usuarioDB); 
 INSERT INTO pv_canoa_segunda.productos_eliminados (fk_usuario, fk_producto, product, tipo , razon, fecha)
 
-VALUES(usuarioDB , productoDB ,Nproducto  ,tipoDB  ,"Eliminado", now());
+VALUES(userIn  , productoDB ,Nproducto  ,tipoDB  ,"Eliminado", now());
 
 
 	end ;;
@@ -1837,6 +2100,45 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ver_devoluciones_perdidas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_devoluciones_perdidas`(dataInicio varchar(30), dataFin varchar(30))
+begin
+	
+
+declare fechaRecibida1 datetime;
+declare fechaRecibida2 datetime;
+declare intervalo int;
+
+set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s" );
+set fechaRecibida2  = str_to_date(dataFin ,"%Y-%m-%d %H:%i:%s");
+
+set intervalo =  timestampdiff (second,fechaRecibida1,fechaRecibida2); 
+
+if(fechaRecibida1 = fechaRecibida2) then
+
+select id_producto,producto ,descripcion1 ,descripcion2 ,unidades ,cantidad_devolver ,motivo , clientes.nombre, usuarios.nickname, perdidas_devoluciones.fecha from perdidas_devoluciones left join clientes on clientes.id = perdidas_devoluciones.fk_cliente  left join usuarios on usuarios.id = perdidas_devoluciones.fk_usuario  where perdidas_devoluciones.fecha   like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%');
+
+else 
+select id_producto,producto ,descripcion1 ,descripcion2 ,unidades ,cantidad_devolver ,motivo , clientes.nombre, usuarios.nickname,perdidas_devoluciones.fecha  from perdidas_devoluciones left join clientes on clientes.id = perdidas_devoluciones.fk_cliente  left join usuarios on usuarios.id = perdidas_devoluciones.fk_usuario   where perdidas_devoluciones.fecha  >= fechaRecibida1 && perdidas_devoluciones.fecha  <=  date_add( fechaRecibida1, interval  intervalo  second);
+
+
+end if;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `ver_lineas` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1890,7 +2192,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_movimientos_devoluciones`(fechaInicioDB varchar(15), horaInicioDB varchar(15),fechaFinDB varchar(15), horaFinDB varchar(15))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_movimientos_devoluciones`(fechaInicioDB varchar(50),fechaFinDB varchar(50))
 BEGIN
 
 
@@ -1906,21 +2208,22 @@ declare fechaRecibida2 datetime;
 declare diferencia int ;
 
 
-set fechaRecibida1  = str_to_date(concat(fechaInicioDB," ",horaInicioDB),"%Y-%m-%d %H:%i:%s" );
+set fechaRecibida1  = str_to_date(fechaInicioDB,"%Y-%m-%d %H:%i:%s" );
+/*set fechaRecibida2  = str_to_date(concat(fechaFinDB," ",horaFinDB),"%Y-%m-%d %H:%i:%s");*/
+set fechaRecibida2  = str_to_date(fechaFinDB,"%Y-%m-%d %H:%i:%s");
 
-set fechaRecibida2  = str_to_date(concat(fechaFinDB," ",horaFinDB),"%Y-%m-%d %H:%i:%s");
-
-set diferencia = timestampdiff(hour ,fechaRecibida1 ,fechaRecibida2);
+set diferencia = timestampdiff(second  ,fechaRecibida1 ,fechaRecibida2);
 
  
 if(fechaRecibida1 = fechaRecibida2) then
-select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora >= fechaRecibida1 and fecha_hora <= fechaRecibida2;select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%' );
+/*select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora >= fechaRecibida1 and fecha_hora <= fechaRecibida2;*/
+select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%' );
 
 
 else
 
 
-select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora >= fechaRecibida1 and fecha_hora <= date_add( fechaRecibida2, interval  1  hour);
+select usuarios.nickname,clientes.id ,devoluciones.fecha_hora,productos.id,productos.product,productos.tipo,devoluciones.motivo,devoluciones.cantidad  from pv_canoa_segunda.devoluciones left join productos  ON  devoluciones.fk_producto = productos.id  left join usuarios on devoluciones.fk_usuario = usuarios.id left  join clientes  on fk_clientes = clientes.id where fecha_hora >= fechaRecibida1 and fecha_hora <= date_add( fechaRecibida2, interval diferencia  second);
  
 
 end if;
@@ -1934,6 +2237,98 @@ end if;
 	
 
 	END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ver_movimientos_productos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_movimientos_productos`(dataInicio varchar(30), dataFin varchar(30))
+begin
+	
+	
+		declare fechaRecibida1 datetime;
+
+declare fechaRecibida2 datetime;
+
+declare intervalo int;
+
+
+
+
+
+set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s" );
+
+set fechaRecibida2  = str_to_date(dataFin ,"%Y-%m-%d %H:%i:%s");
+
+set intervalo =  timestampdiff (second,fechaRecibida1,fechaRecibida2); 
+
+if(fechaRecibida1 = fechaRecibida2) then
+
+select movimientos_productos.codigo_producto,movimientos_productos.producto , movimientos_productos.distintivo1  ,movimientos_productos.stock_antiguo , movimientos_productos.stock_nuevo ,movimientos_productos.motivo ,usuarios.nickname,movimientos_productos.fecha from movimientos_productos left join usuarios on usuarios.id = movimientos_productos.usuario where movimientos_productos.fecha   like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%');
+
+else 
+select movimientos_productos.codigo_producto,movimientos_productos.producto , movimientos_productos.distintivo1  ,movimientos_productos.stock_antiguo , movimientos_productos.stock_nuevo ,movimientos_productos.motivo ,usuarios.nickname,movimientos_productos.fecha from movimientos_productos left join usuarios on usuarios.id = movimientos_productos.usuario where movimientos_productos.fecha  >= fechaRecibida1 && movimientos_productos.fecha <=  date_add( fechaRecibida1, interval  intervalo  second);
+
+end if;
+
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ver_movimientos_ventas` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_movimientos_ventas`(dataInicio varchar(30), dataFin varchar(30))
+begin
+	
+	
+		declare fechaRecibida1 datetime;
+
+declare fechaRecibida2 datetime;
+
+declare intervalo int;
+
+
+
+
+
+set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s" );
+
+set fechaRecibida2  = str_to_date(dataFin ,"%Y-%m-%d %H:%i:%s");
+
+set intervalo =  timestampdiff (second,fechaRecibida1,fechaRecibida2); 
+
+if(fechaRecibida1 = fechaRecibida2) then
+
+SELECT venta.fk_productos, venta.producto, venta.distintivo1, venta.precio, venta.cantidad, venta.total, venta.fecha,clientes.nombre ,usuarios.nickname , venta.numero_venta 
+FROM pv_canoa_segunda.venta left join clientes on clientes.id = venta.fk_clientes  left join usuarios on usuarios.id = venta.fk_usuarios  where venta.fecha   like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%');
+
+else 
+SELECT venta.fk_productos, venta.producto, venta.distintivo1, venta.precio, venta.cantidad, venta.total, venta.fecha,clientes.nombre ,usuarios.nickname , venta.numero_venta 
+FROM pv_canoa_segunda.venta left join clientes on clientes.id = venta.fk_clientes  left join usuarios on usuarios.id = venta.fk_usuarios  where venta.fecha  >= fechaRecibida1 && venta.fecha <=  date_add( fechaRecibida1, interval  intervalo  second);
+
+end if;
+
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1953,6 +2348,27 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_provedores`()
 begin
 SELECT id, nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor
 FROM pv_canoa_segunda.provedores;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ver_usuarios` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_usuarios`()
+begin
+	SELECT id, rol,nickname
+FROM pv_canoa_segunda.usuarios;
 
 END ;;
 DELIMITER ;
@@ -2042,4 +2458,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-27 20:10:56
+-- Dump completed on 2022-08-12 14:42:28
