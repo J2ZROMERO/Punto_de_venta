@@ -1249,10 +1249,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `elimina_provedores`(idDB int)
-begin
-	DELETE FROM pv_canoa_segunda.provedores
-WHERE id=idDB;
-
+begin
+	DELETE FROM pv_canoa_segunda.provedores
+WHERE id=idDB;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1805,8 +1805,8 @@ begin
 	
 	SELECT id,categoria
 FROM pv_canoa_segunda.categoria;
-
-
+
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1848,10 +1848,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_lineas`()
-begin
+begin
 SELECT id, linea
 FROM pv_canoa_segunda.linea;
-
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1869,11 +1869,11 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_marcas`()
-begin
-	
+begin
+	
 SELECT id, marca
 FROM pv_canoa_segunda.marcas;
-
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1950,10 +1950,10 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_provedores`()
-begin
-SELECT id, nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor
-FROM pv_canoa_segunda.provedores;
-
+begin
+SELECT id, nombre, apellido1, contacto, empresa, nombreSupervisor, contactoSupervisor
+FROM pv_canoa_segunda.provedores;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

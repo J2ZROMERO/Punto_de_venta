@@ -24,17 +24,13 @@ import conexionDB.DB_marcas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
-=======
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
->>>>>>> 5388bb1609ec6a5245731295f00bff5b57fc6d1b
-=======
->>>>>>> parent of 3b7bde5 (AGREGANDO COLORES EN LAS INTERFACEZ)
 
 public class Categorias extends JFrame {
 

@@ -28,16 +28,11 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-=======
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
->>>>>>> 5388bb1609ec6a5245731295f00bff5b57fc6d1b
-=======
->>>>>>> parent of 3b7bde5 (AGREGANDO COLORES EN LAS INTERFACEZ)
+
 
 public class Marcas extends JFrame {
 
@@ -105,17 +100,9 @@ public class Marcas extends JFrame {
 		tbl_marcas.addMouseListener( new MouseAdapter() {
 				
 			public void mousePressed(MouseEvent e) {
-<<<<<<< HEAD
-				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , tbl_marcas.getSelectedColumn());
-<<<<<<< HEAD
-		           txt_marca.setText(selectedCellValue);
-=======
+
 				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , 0);
 		            txt_marca.setText(selectedCellValue);
->>>>>>> 5388bb1609ec6a5245731295f00bff5b57fc6d1b
-=======
-		            txt_marca.setText(selectedCellValue);
->>>>>>> parent of 3b7bde5 (AGREGANDO COLORES EN LAS INTERFACEZ)
 		
 			}});
 		
