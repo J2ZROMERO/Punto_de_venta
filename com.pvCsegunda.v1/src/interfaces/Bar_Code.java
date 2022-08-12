@@ -70,6 +70,7 @@ public class Bar_Code extends JFrame {
 	 * @throws DocumentException 
 	 */
 	
+	//barcode bean
 	JBarcodeBean barcode = new JBarcodeBean();
 	public static BufferedImage imagen = null;
 	

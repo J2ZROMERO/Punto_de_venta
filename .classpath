@@ -6,6 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
@@ -14,4 +15,12 @@
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
 
 	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
+=======
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
+	<classpathentry kind="lib" path="E:/RESPALDO/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+	<classpathentry kind="output" path="bin"/>
+>>>>>>> cd2a42aa11fe0e85a753586889ae64a6b044e171
 </classpath>

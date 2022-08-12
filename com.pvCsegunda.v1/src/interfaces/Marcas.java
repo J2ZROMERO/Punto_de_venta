@@ -28,8 +28,11 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 
 public class Marcas extends JFrame {
 
@@ -97,6 +100,7 @@ public class Marcas extends JFrame {
 		tbl_marcas.addMouseListener( new MouseAdapter() {
 				
 			public void mousePressed(MouseEvent e) {
+
 				   String selectedCellValue = (String) tbl_marcas.getValueAt(tbl_marcas.getSelectedRow() , 0);
 		            txt_marca.setText(selectedCellValue);
 		
