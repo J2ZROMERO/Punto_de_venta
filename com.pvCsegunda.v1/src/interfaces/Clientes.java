@@ -25,6 +25,8 @@ import conexionDB.DB_clientes;
 import conexionDB.DB_marcas;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class Clientes extends JFrame {
 
@@ -64,6 +66,7 @@ public class Clientes extends JFrame {
 	 * Create the frame.
 	 */
 	public Clientes() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 612, 396);
 		contentPane = new JPanel();
@@ -72,7 +75,9 @@ public class Clientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 721, 492);
+		panel.setBackground(new Color(135, 206, 250));
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBounds(0, 0, 596, 357);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -153,9 +158,10 @@ public class Clientes extends JFrame {
 		txt_telefono.setBounds(122, 239, 163, 20);
 		panel.add(txt_telefono);
 		
-		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		JButton btn_limpiar_campos = new JButton("");
+		btn_limpiar_campos.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/escoba.png")));
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(399, 241, 154, 23);
+		btn_limpiar_campos.setBounds(399, 228, 154, 41);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -166,14 +172,15 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_limpiar_campos);
 		
-		JButton btn_ver_clientes = new JButton("VER CLIENTES");
+		JButton btn_ver_clientes = new JButton("");
+		btn_ver_clientes.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/tabla.png")));
 		btn_ver_clientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
 			}
 		});
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_clientes.setBounds(122, 281, 154, 23);
+		btn_ver_clientes.setBounds(122, 281, 163, 41);
 		
 		btn_ver_clientes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -187,9 +194,10 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_ver_clientes);
 		
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_añadir.setBounds(399, 59, 154, 23);
+		btn_añadir.setBounds(399, 41, 154, 41);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -218,7 +226,7 @@ public class Clientes extends JFrame {
 		
 		JButton btn_buscar = new JButton("BUSCAR");
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(399, 103, 154, 23);
+		btn_buscar.setBounds(122, 12, 154, 23);
 		
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -248,13 +256,14 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_buscar);
 		
-		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		JButton btn_actualizar = new JButton("");
+		btn_actualizar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/actualizar.png")));
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_actualizar.setBounds(399, 149, 154, 23);
+		btn_actualizar.setBounds(399, 103, 154, 41);
 		
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -279,9 +288,10 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_actualizar);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_eliminar.setBounds(399, 195, 154, 23);
+		btn_eliminar.setBounds(399, 163, 154, 41);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override

@@ -87,6 +87,7 @@ public class Ventas extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventas() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1026, 705);
 		contentPane = new JPanel();
@@ -95,6 +96,7 @@ public class Ventas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(152, 179, 255));
 		panel.setBounds(0, 0, 1010, 666);
 		contentPane.add(panel);
 		panel.setLayout(null);

@@ -24,6 +24,8 @@ import conexionDB.DB_marcas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class Linea_de_Produccion extends JFrame {
 
@@ -61,6 +63,8 @@ public class Linea_de_Produccion extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(253, 223, 127));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -99,6 +103,8 @@ public class Linea_de_Produccion extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_linea_de_produccion = new JTable();
+		tbl_linea_de_produccion.setSelectionBackground(new Color(170, 177, 186));
+		tbl_linea_de_produccion.setBackground(new Color(131, 225, 229));
 		tbl_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_linea_de_produccion.addMouseListener(new MouseAdapter() {
 			
@@ -113,10 +119,11 @@ public class Linea_de_Produccion extends JFrame {
 ver_datos_tabla(tbl_linea_de_produccion);
 		scrollPane.setViewportView(tbl_linea_de_produccion);
 		
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Linea_de_Produccion.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_añadir.setBounds(407, 133, 117, 35);
+		btn_añadir.setBounds(407, 127, 117, 41);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -144,10 +151,11 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Linea_de_Produccion.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_eliminar.setBounds(407, 225, 117, 35);
+		btn_eliminar.setBounds(407, 219, 117, 41);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override

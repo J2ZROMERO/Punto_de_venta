@@ -25,6 +25,8 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class Proveedores extends JFrame {
 
@@ -77,7 +79,8 @@ public class Proveedores extends JFrame {
 	 * Create the frame.
 	 */
 	public Proveedores() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 780, 571);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,6 +88,8 @@ public class Proveedores extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(255, 191, 0));
 		panel.setBounds(0, 0, 764, 532);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -96,7 +101,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
-		txt_id.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_id.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_id.setBounds(140, 60, 198, 20);
 		txt_id.setEnabled(false);
 		panel.add(txt_id);
@@ -109,7 +114,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_nombre);
 		
 		txt_nombre = new JTextField();
-		txt_nombre.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_nombre.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_nombre.setColumns(10);
 		txt_nombre.setBounds(140, 107, 198, 20);
 		panel.add(txt_nombre);
@@ -121,7 +126,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_apellido);
 		
 		txt_apellido = new JTextField();
-		txt_apellido.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_apellido.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_apellido.setColumns(10);
 		txt_apellido.setBounds(140, 153, 198, 20);
 		panel.add(txt_apellido);
@@ -133,7 +138,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_contacto);
 		
 		txt_contacto = new JTextField();
-		txt_contacto.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_contacto.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_contacto.setColumns(10);
 		txt_contacto.setBounds(140, 216, 198, 20);
 		panel.add(txt_contacto);
@@ -145,7 +150,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_empresa_para_la_que_trabaja);
 		
 		txt_empresa_para_la_que_trabaja = new JTextField();
-		txt_empresa_para_la_que_trabaja.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_empresa_para_la_que_trabaja.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_empresa_para_la_que_trabaja.setColumns(10);
 		txt_empresa_para_la_que_trabaja.setBounds(140, 271, 198, 20);
 		panel.add(txt_empresa_para_la_que_trabaja);
@@ -157,7 +162,7 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_nombre_supervisor);
 		
 		txt_nombre_supervisor = new JTextField();
-		txt_nombre_supervisor.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_nombre_supervisor.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_nombre_supervisor.setColumns(10);
 		txt_nombre_supervisor.setBounds(140, 330, 198, 20);
 		panel.add(txt_nombre_supervisor);
@@ -169,18 +174,19 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_contacto_supervisor);
 		
 		txt_contacto_del_supervisor = new JTextField();
-		txt_contacto_del_supervisor.setFont(new Font("Dialog", Font.PLAIN, 12));
+		txt_contacto_del_supervisor.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_contacto_del_supervisor.setColumns(10);
 		txt_contacto_del_supervisor.setBounds(140, 383, 198, 20);
 		panel.add(txt_contacto_del_supervisor);
 		
-		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		JButton btn_limpiar_campos = new JButton("");
+		btn_limpiar_campos.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/escoba.png")));
 		btn_limpiar_campos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_limpiar_campos.setBounds(97, 460, 159, 23);
+		btn_limpiar_campos.setBounds(97, 447, 159, 46);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -191,13 +197,14 @@ public class Proveedores extends JFrame {
 		});
 		panel.add(btn_limpiar_campos);
 		
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_añadir.setBounds(470, 59, 159, 23);
+		btn_añadir.setBounds(474, 50, 159, 46);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -219,7 +226,7 @@ public class Proveedores extends JFrame {
 						DB_provedores.anadir(datos);
 						JOptionPane.showMessageDialog(null,"USUARIO AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
-						txt_id.requestFocus();
+						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -229,18 +236,20 @@ public class Proveedores extends JFrame {
 					
 				}else {
 					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+					frame.requestFocus();
 				}
 			}
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		JButton btn_actualizar = new JButton("");
+		btn_actualizar.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/actualizar.png")));
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_actualizar.setBounds(470, 106, 159, 23);
+		btn_actualizar.setBounds(577, 127, 159, 46);
 		
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -263,7 +272,7 @@ public class Proveedores extends JFrame {
 					
 					JOptionPane.showMessageDialog(null,"USUARIO ACTUALIZADO CORRECTAMENTE");
 							Limpiar_Campos();
-							txt_id.requestFocus();
+							txt_nombre.requestFocus();
 							ver_datos_tabla(tbl_proveedores);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -272,14 +281,16 @@ public class Proveedores extends JFrame {
 		
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+							frame.requestFocus();
 						}
 			}
 		});
 		panel.add(btn_actualizar);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_eliminar.setBounds(470, 155, 159, 23);
+		btn_eliminar.setBounds(371, 127, 159, 46);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -294,7 +305,7 @@ public class Proveedores extends JFrame {
 					try {
 						DB_provedores.eliminar(  Integer.parseInt( txt_id.getText()));
 						Limpiar_Campos();
-						txt_id.requestFocus();
+						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
 					} catch (NumberFormatException e1) {
 						// 	JOptionPane.showMessageDialog(null,"USUARIO ELIMINADO CORRECTAMENTE");
@@ -307,6 +318,7 @@ public class Proveedores extends JFrame {
 					}
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+							frame.requestFocus();
 						}
 			}
 		});
@@ -317,6 +329,8 @@ public class Proveedores extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_proveedores = new JTable();
+		tbl_proveedores.setSelectionBackground(new Color(255, 191, 0));
+		tbl_proveedores.setBackground(new Color(255, 252, 166));
 		ver_datos_tabla(tbl_proveedores);
 		tbl_proveedores.addMouseListener( new MouseAdapter() {
 
