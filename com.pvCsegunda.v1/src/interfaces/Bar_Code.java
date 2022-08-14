@@ -421,6 +421,7 @@ public class Bar_Code extends JFrame {
 
 						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
+						txt_id.setText("0");
 					}
 					
 					
