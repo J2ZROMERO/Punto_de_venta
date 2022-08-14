@@ -763,5 +763,72 @@ private static Object datos_movimientos[];
 private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel();
 
 
+	public static DefaultTableModel model_view_prod_barcode(long id) throws SQLException {
+		
+		List<Object> n_ver_barcode = new ArrayList<Object>();
+		Object[] dat ;
+		
+	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+	CallableStatement cstm_barcode = con.prepareCall("{ CALL pv_canoa_segunda.view_barcode(?) }"))// dentro statement connection and resulset
+	       
+	    		   {	       
 
+	    	   
+	    	   cstm_barcode.setLong(1, id);
+	    	   
+	    	
+	    	   
+	    	   
+	    	   
+	    	   
+	    	   ResultSet rs_barcode= cstm_barcode.executeQuery();
+	    	   
+	    	   
+	    	   
+	    	   
+	    	   
+	while(rs_barcode.next()) {
+
+		dat = new Object[6];
+		dat[0]=(rs_barcode.getString(1));	
+		dat[1]=(rs_barcode.getString(2));	
+		dat[2]=(rs_barcode.getString(3));
+		dat[3]=(rs_barcode.getString(4));
+		dat[4]=(rs_barcode.getString(5));
+		dat[5]=(rs_barcode.getString(6));
+		
+		n_ver_barcode.add(dat);	
+		
+	}
+
+
+	}
+		
+			String[] columnNames = {"Producto","Distintivo 1","Distintivo 2", "Stock " ,"Precio venta" ,"datos extra"};
+		
+			
+			data_ver_barcode = new Object[n_ver_barcode.size()][columnNames.length];
+			
+			for (int j =  0; j < n_ver_barcode.size();j++) {
+				
+				datos_barcode = (Object[]) n_ver_barcode.get(j);
+				
+				for (int i =  0; i < datos_barcode.length;i++) {
+					data_ver_barcode[j][i] = datos_barcode[i];
+
+				}			
+			}
+				
+
+			
+		modelo_ver_barcode.setDataVector(data_ver_barcode, columnNames);
+
+		return modelo_ver_barcode;
+		
+	}
+	private static Object[][] data_ver_barcode;	
+	private static Object datos_barcode[];
+	private	static DefaultTableModel modelo_ver_barcode = new DefaultTableModel();
 }
+
+
