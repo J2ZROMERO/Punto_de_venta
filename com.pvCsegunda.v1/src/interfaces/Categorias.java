@@ -31,6 +31,7 @@ import java.awt.Color;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 
 public class Categorias extends JFrame {
 
@@ -60,6 +61,7 @@ public class Categorias extends JFrame {
 	 * Create the frame.
 	 */
 	public Categorias() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
 		contentPane = new JPanel();
@@ -68,6 +70,8 @@ public class Categorias extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(255, 218, 68));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -95,6 +99,8 @@ public class Categorias extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_categoria = new JTable();
+		tbl_categoria.setSelectionBackground(new Color(199, 108, 85));
+		tbl_categoria.setBackground(new Color(131, 216, 244));
 		tbl_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		ver_datos_tabla(tbl_categoria);
 		tbl_categoria.addMouseListener(new MouseAdapter() {
@@ -125,10 +131,11 @@ public class Categorias extends JFrame {
 		txt_categoria.setBounds(264, 31, 214, 23);
 		panel.add(txt_categoria);
 		
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_añadir.setBounds(407, 133, 117, 35);
+		btn_añadir.setBounds(407, 133, 117, 41);
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -153,14 +160,15 @@ public class Categorias extends JFrame {
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_eliminar.setBounds(407, 225, 117, 35);
+		btn_eliminar.setBounds(407, 225, 117, 41);
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

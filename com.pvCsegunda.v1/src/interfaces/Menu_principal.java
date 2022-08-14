@@ -60,6 +60,7 @@ public class Menu_principal extends JFrame {
 	}
 	
 	public Menu_principal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 750);
 		contentPane = new JPanel();
@@ -68,7 +69,9 @@ public class Menu_principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 594, 711);
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(255, 196, 116));
+		panel.setBounds(0, 0, 597, 711);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -345,7 +348,7 @@ public class Menu_principal extends JFrame {
 		
 		panel.add(lbl_categorias_titulo);
 		
-		JLabel lbl_marcas_titulo = new JLabel("MARCAS");
+		JLabel lbl_marcas_titulo = new JLabel("MARCA");
 		lbl_marcas_titulo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_marcas_titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_marcas_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));

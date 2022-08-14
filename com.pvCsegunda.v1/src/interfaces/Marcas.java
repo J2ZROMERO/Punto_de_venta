@@ -32,6 +32,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 
 
 public class Marcas extends JFrame {
@@ -60,6 +61,7 @@ public class Marcas extends JFrame {
 	 * Create the frame.
 	 */
 	public Marcas() {
+		setResizable(false);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,13 +72,15 @@ public class Marcas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(253, 100, 111));
 		panel.setBounds(0, 0, 602, 510);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lbl_marca = new JLabel("MARCAS");
+		JLabel lbl_marca = new JLabel("MARCA");
 		lbl_marca.setBounds(180, 30, 73, 23);
-		lbl_marca.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
+		lbl_marca.setFont(new Font("Roboto Slab Black", Font.BOLD, 14));
 		lbl_marca.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lbl_marca);
 		
@@ -92,6 +96,8 @@ public class Marcas extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_marcas = new JTable();
+		tbl_marcas.setSelectionBackground(new Color(255, 165, 0));
+		tbl_marcas.setBackground(new Color(255, 252, 166));
 		tbl_marcas.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		tbl_marcas.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
 		tbl_marcas.setToolTipText("");
@@ -108,10 +114,11 @@ public class Marcas extends JFrame {
 		
 		
 		ver_datos_tabla(tbl_marcas);
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
-		btn_añadir.setBounds(406, 132, 117, 35);
+		btn_añadir.setBounds(406, 126, 117, 41);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -128,17 +135,18 @@ public class Marcas extends JFrame {
 					
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 			}
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -146,7 +154,7 @@ public class Marcas extends JFrame {
 		
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_eliminar.setBounds(406, 224, 117, 35);
+		btn_eliminar.setBounds(406, 218, 117, 41);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -158,7 +166,7 @@ public class Marcas extends JFrame {
 					
 					if (opcion == 0) {
 					try {
-						DB_marcas.eliminar_marcas(Integer.parseInt( txt_marca.getText()));
+						DB_marcas.eliminar_marcas(Integer.parseInt(txt_marca.getText()));
 						ver_datos_tabla(tbl_marcas);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -166,11 +174,11 @@ public class Marcas extends JFrame {
 					}
 					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
 					txt_marca.setText("");
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 					}
 				}else {
 					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
-					txt_marca.setFocusable(true);
+					txt_marca.requestFocus();
 				}
 			}
 		});

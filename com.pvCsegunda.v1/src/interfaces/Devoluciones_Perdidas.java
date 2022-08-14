@@ -30,6 +30,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import conexionDB.DB_devoluciones_perdidas;
+import java.awt.Color;
 
 
 public class Devoluciones_Perdidas extends JFrame {
@@ -87,14 +88,16 @@ public class Devoluciones_Perdidas extends JFrame {
 	
 	public Devoluciones_Perdidas() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 519, 604);
+		setBounds(100, 100, 538, 604);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 11, 502, 560);
+		panel.setBackground(new Color(255, 191, 0));
+		panel.setForeground(new Color(0, 0, 0));
+		panel.setBounds(0, 0, 522, 565);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -134,6 +137,7 @@ public class Devoluciones_Perdidas extends JFrame {
 				
 				if(txt_id.getText().equals("")) {
 					JOptionPane.showMessageDialog(null,"Ingresa ID");
+					txt_id.requestFocus();
 				}else {
 //					Devoluciones_Perdidas_Buscar b = new Devoluciones_Perdidas_Buscar();
 //					b.setVisible(true);
@@ -146,7 +150,8 @@ public class Devoluciones_Perdidas extends JFrame {
 		panel.add(btn_buscar);
 		
 		sp_cantidad = new JSpinner();
-		sp_cantidad.setBounds(180, 198, 145, 29);
+		sp_cantidad.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
+		sp_cantidad.setBounds(206, 200, 145, 29);
 		
 		sp_cantidad.addMouseListener(new MouseAdapter() {
 			@Override
@@ -157,23 +162,24 @@ public class Devoluciones_Perdidas extends JFrame {
 		panel.add(sp_cantidad);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 89, 482, 98);
+		scrollPane.setBounds(10, 89, 502, 98);
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.setBackground(new Color(135, 206, 250));
 
 		scrollPane.setViewportView(table);
 		
 		JLabel lbl_motivo = new JLabel("MOTIVO");
 		lbl_motivo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_motivo.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_motivo.setBounds(10, 278, 93, 20);
+		lbl_motivo.setBounds(10, 278, 175, 20);
 		panel.add(lbl_motivo);
 		
 		cbx_motivo = new JComboBox();
 		cbx_motivo.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "DEVOLUCION", "CADUCADO", "ABIERTO", "MAL ESTADO", "INSERVIBLE ", "INCOMPLETO"}));
 		cbx_motivo.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		cbx_motivo.setBounds(180, 277, 145, 22);
+		cbx_motivo.setBounds(206, 279, 145, 22);
 		
 		cbx_motivo.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -192,7 +198,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		JLabel lbl_cantidad = new JLabel("CANTIDAD");
 		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_cantidad.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_cantidad.setBounds(10, 201, 93, 29);
+		lbl_cantidad.setBounds(10, 201, 175, 29);
 		panel.add(lbl_cantidad);
 		
 		btn_devolver = new JButton("DEVOLVER");
@@ -225,31 +231,31 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		btn_devolver.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_devolver.setBounds(371, 258, 110, 23);
+		btn_devolver.setBounds(371, 238, 141, 23);
 		panel.add(btn_devolver);
 		
 		JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
 		lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_inicial.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_inicial.setBounds(27, 440, 122, 18);
+		lbl_fecha_inicial.setBounds(63, 437, 122, 18);
 		panel.add(lbl_fecha_inicial);
 		
 		JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 		lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_final.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_final.setBounds(210, 440, 122, 18);
+		lbl_fecha_final.setBounds(321, 440, 122, 18);
 		panel.add(lbl_fecha_final);
 		
 		JLabel lbl_calendario = new JLabel("");
 		lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_calendario.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
-		lbl_calendario.setBounds(56, 371, 70, 58);
+		lbl_calendario.setBounds(89, 368, 70, 58);
 		panel.add(lbl_calendario);
 		
 		JLabel lbl_calendario_1 = new JLabel("");
 		lbl_calendario_1.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
 		lbl_calendario_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_calendario_1.setBounds(222, 371, 70, 58);
+		lbl_calendario_1.setBounds(347, 371, 70, 58);
 		panel.add(lbl_calendario_1);
 		
 		JButton btn_ver_movimiento = new JButton("VER MOVIMIENTOS");
@@ -258,7 +264,7 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		btn_ver_movimiento.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_ver_movimiento.setBounds(163, 508, 176, 23);
+		btn_ver_movimiento.setBounds(163, 526, 176, 23);
 		
 		btn_ver_movimiento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -299,29 +305,29 @@ public class Devoluciones_Perdidas extends JFrame {
 		
 		JLabel lbl_id_cliente = new JLabel("ID CLIENTE");
 		lbl_id_cliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_id_cliente.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id_cliente.setBounds(10, 314, 113, 18);
+		lbl_id_cliente.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
+		lbl_id_cliente.setBounds(10, 314, 175, 18);
 		panel.add(lbl_id_cliente);
 		
 		txt_id_cliente = new JTextField();
 		txt_id_cliente.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id_cliente.setColumns(10);
-		txt_id_cliente.setBounds(180, 310, 145, 20);
+		txt_id_cliente.setBounds(206, 312, 145, 20);
 		panel.add(txt_id_cliente);
 		
-		JLabel lbl_cantidad_1 = new JLabel("CANTIDAD a devolver");
+		JLabel lbl_cantidad_1 = new JLabel("CANTIDAD A DEVOLVER");
 		lbl_cantidad_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cantidad_1.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_cantidad_1.setBounds(10, 238, 153, 29);
+		lbl_cantidad_1.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
+		lbl_cantidad_1.setBounds(10, 238, 175, 29);
 		panel.add(lbl_cantidad_1);
 		
 		txt_cantidad_devolver = new JTextField();
 		txt_cantidad_devolver.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_cantidad_devolver.setColumns(10);
-		txt_cantidad_devolver.setBounds(180, 238, 145, 20);
+		txt_cantidad_devolver.setBounds(206, 240, 145, 20);
 		panel.add(txt_cantidad_devolver);
 		
-		JButton btn_clientes = new JButton("ver clientes");
+		JButton btn_clientes = new JButton("VER CLIENTES");
 		btn_clientes.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -331,12 +337,12 @@ public class Devoluciones_Perdidas extends JFrame {
 				       
 			}
 		});
-		btn_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_clientes.setBounds(371, 313, 110, 23);
+		btn_clientes.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
+		btn_clientes.setBounds(371, 293, 141, 23);
 		panel.add(btn_clientes);
 		
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
-		spinner_tiempo_inicial.setBounds(10, 480, 151, 20);
+		spinner_tiempo_inicial.setBounds(49, 477, 151, 20);
 		panel.add(spinner_tiempo_inicial);
 		spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 		
@@ -344,7 +350,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		
 		
 		 spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
-		 spinner_tiempo_limite.setBounds(195, 477, 151, 20);
+		 spinner_tiempo_limite.setBounds(307, 477, 151, 20);
 		 panel.add(spinner_tiempo_limite);
 		 
 		 spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
