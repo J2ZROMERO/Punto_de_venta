@@ -1,7 +1,3 @@
 /imagenes/
-/.gitignore
-/Codigo_De_Barras/
-/conexionDB/
-/events/
 /interfaces/
-/interfaces_no_graficas/
+/Codigo_De_Barras/

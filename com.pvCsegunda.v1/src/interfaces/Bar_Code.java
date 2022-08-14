@@ -121,7 +121,7 @@ public class Bar_Code extends JFrame {
 		    Document doc=new Document();
 		    //ruta de guardado del documento
 		    //PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("D:/PDF/codigo.pdf"));
-		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("E:/Users/windows/Desktop/Nueva carpeta/codigo.pdf"));
+		    PdfWriter pdf=PdfWriter.getInstance(doc,new FileOutputStream("E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"));
 		    
 		    //se abre el documento
 		    doc.open();
@@ -166,15 +166,17 @@ public class Bar_Code extends JFrame {
 	}
 	
 	public Bar_Code() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 957, 712);
+		setBounds(100, 100, 990, 725);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 941, 673);
+		panel.setBackground(new Color(253, 223, 127));
+		panel.setBounds(0, 0, 974, 686);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -226,7 +228,7 @@ public class Bar_Code extends JFrame {
 		txt_id.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(370, 39, 571, 55);
+		scrollPane.setBounds(370, 39, 594, 79);
 		panel.add(scrollPane);
 		
 		tbl_bar_code = new JTable();
@@ -328,13 +330,12 @@ public class Bar_Code extends JFrame {
 		panel.add(btn_ejecutar);
 		
 		JButton btn_limpiar_hoja = new JButton("LIMPIAR HOJA");
-		btn_limpiar_hoja.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_limpiar_hoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_limpiar_hoja.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_limpiar_hoja.setBounds(370, 173, 142, 23);
+		btn_limpiar_hoja.setBounds(596, 173, 142, 23);
 	
 		panel.add(btn_limpiar_hoja);
 		
@@ -378,10 +379,9 @@ public class Bar_Code extends JFrame {
 		panel.add(btn_buscar);
 		
 		JButton btn_imprimir = new JButton("IMPRIMIR");
-		btn_imprimir.setHorizontalAlignment(SwingConstants.LEFT);
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/bin/Codigo_De_Barras/codigo.pdf";
+				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 				File archivo = new File(url);
 				
 				if(archivo.exists()) {
@@ -403,11 +403,11 @@ public class Bar_Code extends JFrame {
 			}
 		});
 		btn_imprimir.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_imprimir.setBounds(370, 139, 142, 23);
+		btn_imprimir.setBounds(596, 139, 142, 23);
 		panel.add(btn_imprimir);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 222, 931, 451);
+		scrollPane_1.setBounds(10, 222, 954, 451);
 		panel.add(scrollPane_1);
 		
 		btn_ejecutar.addActionListener(new ActionListener() {
@@ -416,11 +416,13 @@ public class Bar_Code extends JFrame {
 				try {
 		
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
-						System.out.println("nothing to generate");
+						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
+						frame.requestFocus();
 					}else {
 
 						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
+						frame.requestFocus();
 					}
 					
 					
@@ -461,6 +463,7 @@ public class Bar_Code extends JFrame {
 				//lbl_bar_code.setIcon(null);
 				//lbl_cantidad.setText("");
 				//lbl_precio.setText("");
+				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
 				}
@@ -510,7 +513,7 @@ public class Bar_Code extends JFrame {
 	}
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
 		Document document = new Document();
-	String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/bin/Codigo_De_Barras/codigo.pdf";
+	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
 System.out.println(id+cantidad);
 		if(cantidad == 0) {
@@ -574,7 +577,7 @@ System.out.println(id+cantidad);
 		
 public	  void openpdf(JScrollPane panel){
 	  
-	String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/bin/Codigo_De_Barras/codigo.pdf";
+	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
     try {
            SwingController control=new SwingController();
             SwingViewBuilder factry=new SwingViewBuilder(control);
