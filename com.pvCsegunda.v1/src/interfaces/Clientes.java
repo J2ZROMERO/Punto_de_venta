@@ -36,6 +36,7 @@ public class Clientes extends JFrame {
 	private JTextField txt_apellido;
 	private JTextField txt_nick_name;
 	private JTextField txt_telefono;
+	public static Clientes frame;
 
 	/**
 	 * Launch the application.
@@ -44,7 +45,7 @@ public class Clientes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Clientes frame = new Clientes();
+					frame = new Clientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -161,24 +162,19 @@ public class Clientes extends JFrame {
 		JButton btn_limpiar_campos = new JButton("");
 		btn_limpiar_campos.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/escoba.png")));
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(399, 228, 154, 41);
+		btn_limpiar_campos.setBounds(399, 281, 154, 41);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
-				txt_id.requestFocus();
+				txt_nombre.requestFocus();
 			}
 		});
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("");
 		btn_ver_clientes.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/tabla.png")));
-		btn_ver_clientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		
-			}
-		});
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_clientes.setBounds(122, 281, 163, 41);
 		
@@ -186,10 +182,12 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
-		c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
+				c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
 				c.setVisible(true);
 				c.setFocusable(true);
 				c.setLocationRelativeTo(null);
+				frame.requestFocus();
+				
 			}
 		});
 		panel.add(btn_ver_clientes);
@@ -218,15 +216,16 @@ public class Clientes extends JFrame {
 							Limpiar_Campos();
 						}else {
 							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
-							txt_nombre.requestFocus();
+							frame.requestFocus();
 						}
 			}
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_buscar = new JButton("BUSCAR");
+		JButton btn_buscar = new JButton("");
+		btn_buscar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/buscar_tabla.png")));
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(122, 12, 154, 23);
+		btn_buscar.setBounds(399, 224, 154, 41);
 		
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -248,9 +247,10 @@ public class Clientes extends JFrame {
 			e1.printStackTrace();
 		}
 					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
-					//Limpiar_Campos();
+					frame.requestFocus();
 				} else {
-					JOptionPane.showMessageDialog(null, "DA CLICK EN BUSQUEDA DE CLIENTES");
+					JOptionPane.showMessageDialog(null, "DA CLICK EN VER TABLA DE CLIENTES");
+					txt_nombre.requestFocus();
 				}
 			}
 		});
@@ -258,10 +258,6 @@ public class Clientes extends JFrame {
 		
 		JButton btn_actualizar = new JButton("");
 		btn_actualizar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/actualizar.png")));
-		btn_actualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_actualizar.setBounds(399, 103, 154, 41);
 		
@@ -281,8 +277,10 @@ public class Clientes extends JFrame {
 					}
 					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
 					Limpiar_Campos();
+					txt_nombre.requestFocus();
 				}else {
 					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+					frame.requestFocus();
 				}
 			}
 		});
@@ -302,8 +300,7 @@ public class Clientes extends JFrame {
 					if(opcion == 0) {
 						try {
 						
-						
-							DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
+						DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
 						//	ver_datos_tabla(tbl_clientes);
 							
 						} catch (NumberFormatException e1) {
@@ -315,11 +312,12 @@ public class Clientes extends JFrame {
 						}
 						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
 						Limpiar_Campos();
-						txt_id.requestFocus();
+						txt_nombre.requestFocus();
 					}
 					
 				}else {
 				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+				   frame.requestFocus();
 				}
 		 	}
 		});

@@ -32,6 +32,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 
 public class Usuarios extends JFrame {
 
@@ -76,14 +77,15 @@ public class Usuarios extends JFrame {
 	
 	public Usuarios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 808, 498);
+		setBounds(100, 100, 808, 514);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 792, 459);
+		panel.setBackground(new Color(144, 238, 144));
+		panel.setBounds(0, 0, 792, 475);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -107,6 +109,7 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(149, 100, 230, 22);
 		panel.add(txt_id);
@@ -183,13 +186,14 @@ public class Usuarios extends JFrame {
 		lbl_password.setBounds(10, 334, 121, 22);
 		panel.add(lbl_password);
 		
-		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		JButton btn_limpiar_campos = new JButton("");
+		btn_limpiar_campos.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/escoba.png")));
 		btn_limpiar_campos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_limpiar_campos.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(111, 409, 164, 23);
+		btn_limpiar_campos.setBounds(117, 423, 164, 41);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -207,13 +211,14 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_limpiar_campos);
 	
-		JButton btn_añadir = new JButton("AÑADIR");
+		JButton btn_añadir = new JButton("");
+		btn_añadir.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_añadir.setBounds(511, 56, 164, 23);
+		btn_añadir.setBounds(511, 52, 164, 41);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -249,13 +254,14 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_añadir);
 		
-		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		JButton btn_actualizar = new JButton("");
+		btn_actualizar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/actualizar.png")));
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_actualizar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_actualizar.setBounds(511, 102, 164, 23);
+		btn_actualizar.setBounds(511, 104, 164, 41);
 		
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -291,13 +297,14 @@ public class Usuarios extends JFrame {
 		});
 		panel.add(btn_actualizar);
 		
-		JButton btn_eliminar = new JButton("ELIMINAR");
+		JButton btn_eliminar = new JButton("");
+		btn_eliminar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_eliminar.setBounds(511, 146, 164, 23);
+		btn_eliminar.setBounds(511, 156, 164, 41);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -331,10 +338,12 @@ public class Usuarios extends JFrame {
 		
 		
 		JScrollPane scroll = new JScrollPane();
-		scroll.setBounds(401, 192, 370, 256);
+		scroll.setBounds(399, 208, 383, 256);
 		panel.add(scroll);
 	
 		tbl_usuarios = new JTable();
+		tbl_usuarios.setSelectionBackground(new Color(144, 238, 144));
+		tbl_usuarios.setBackground(new Color(173, 216, 230));
 tbl_usuarios.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		scroll.setViewportView(tbl_usuarios);
 		ver_datos_tabla(tbl_usuarios);
