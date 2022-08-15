@@ -43,6 +43,8 @@ import javax.swing.JTextPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
+import javax.swing.event.CaretListener;
+import javax.swing.event.CaretEvent;
 
 public class Ventas extends JFrame {
 	
@@ -361,6 +363,15 @@ total_txt(txt_total, def_tabla);
 		panel.add(lbl_total);
 		
 		txt_total = new JTextField();
+			txt_total.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent event) {
+	
+			}
+			public void inputMethodTextChanged(InputMethodEvent event) {
+			
+			}
+			
+		});
 		txt_total.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_total.setColumns(10);
 		txt_total.setBounds(329, 456, 157, 22);
@@ -380,19 +391,51 @@ total_txt(txt_total, def_tabla);
 		panel.add(lbl_paga_con);
 		
 		txt_paga_con = new JTextField();
+		txt_paga_con.addCaretListener(new CaretListener() {
+			public void caretUpdate(CaretEvent e) {
+				if (txt_paga_con.getText().equalsIgnoreCase("")  ) {
+					txt_cambio.setText("0");
+				}
+			}
+		});
+		txt_paga_con.addMouseListener(new MouseAdapter() {
+			
+			public void mousePressed(MouseEvent e) {
+			txt_paga_con.setText("");
+			}
+		});
+		txt_paga_con.setText("0");
 		txt_paga_con.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				
-				if(!txt_paga_con.getText().equalsIgnoreCase("")) {
-
+				if(e.getKeyCode() == KeyEvent.VK_DELETE ) {
+					
+				}
+				
+				if(txt_paga_con.getText().equalsIgnoreCase("") || txt_paga_con.getText().equalsIgnoreCase("0")) {
+//
+//					double total_pagar = Double.parseDouble( txt_total.getText());
+//					double efectivo = 0;
+//					double total =   total_pagar-efectivo  ; 
+//					
+//				String h =	String.valueOf(efectivo);
+//					System.out.println( h.length());
+//					
+//					String cambio = String.valueOf(total);
+//					txt_cambio.setText(cambio);
+						
+				}else {
 					double total_pagar = Double.parseDouble( txt_total.getText());
 					double efectivo = Double.parseDouble(txt_paga_con.getText());
-					double total = Math.abs(  total_pagar-efectivo  ); 
+					double total =   total_pagar-efectivo  ; 
+					
+				String h =	String.valueOf(efectivo);
+					System.out.println( h.length());
 					
 					String cambio = String.valueOf(total);
 					txt_cambio.setText(cambio);
-						
+					
 				}
 			}
 		});
@@ -541,7 +584,6 @@ total_txt(txt_total, def_tabla);
 			
 			
 		double desc = Double.parseDouble( txt_descuento.getText());
-	//	double extra = Double.parseDouble( txt_extra.getText());
 		double total_val= Double.parseDouble( txt_total.getText());
 		double total = 0;
 	
@@ -552,6 +594,28 @@ total_txt(txt_total, def_tabla);
 		txt_total.setText(cast);
 		
 		txt_descuento.setText("");
+	
+		
+		
+			
+			
+	
+	    
+	    double paga_con =  Double.parseDouble( txt_paga_con.getText() );
+
+	    if(!txt_paga_con.getText().equalsIgnoreCase("") && paga_con <=0) {
+
+
+}
+	    else {
+double total_pagar = Double.parseDouble( txt_total.getText());
+double efectivo = Double.parseDouble(txt_paga_con.getText());
+double totallast =   total_pagar-efectivo  ; 
+
+String cambio = String.valueOf(totallast);
+txt_cambio.setText(cambio);
+}
+		
 		
 		}
 	});
@@ -573,7 +637,30 @@ total_txt(txt_total, def_tabla);
 			String cast = String.valueOf(total);
 			
 			txt_total.setText(cast);
-		txt_extra.setText("");
+		    txt_extra.setText("");
+		
+		    
+		    double paga_con =  Double.parseDouble( txt_paga_con.getText() );
+
+		    if(!txt_paga_con.getText().equalsIgnoreCase("") && paga_con <=0) {
+
+	
+}else {
+	double total_pagar = Double.parseDouble( txt_total.getText());
+double efectivo = Double.parseDouble(txt_paga_con.getText());
+double totallast =   total_pagar-efectivo  ; 
+
+String cambio = String.valueOf(totallast);
+txt_cambio.setText(cambio);
+}
+	
+//		}
+
+		    
+		    
+			
+				
+		
 			
 		}
 	});
@@ -632,6 +719,8 @@ total_txt(txt_total, def_tabla);
 	panel.add(lbl_calendario_1);
 	
 	spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
+	spinner_tiempo_limite.setSize(135, 26);
+	spinner_tiempo_limite.setLocation(358, 569);
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	
 	panel.add(spinner_tiempo_limite);
@@ -649,6 +738,8 @@ total_txt(txt_total, def_tabla);
 	panel.add(lbl_calendario);
 	
 	 spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
+	 spinner_tiempo_inicial.setSize(135, 27);
+	 spinner_tiempo_inicial.setLocation(66, 569);
 	 spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 	
 	panel.add(spinner_tiempo_inicial);
@@ -659,6 +750,53 @@ total_txt(txt_total, def_tabla);
 	lbl_fecha_inicial.setBounds(66, 541, 135, 32);
 	panel.add(lbl_fecha_inicial);
 
+	txt_total.addCaretListener(new CaretListener() {
+		public void caretUpdate(CaretEvent e) {
+			
+
+			
+//			double billete = 0;
+//			if(txt_paga_con.getText().equalsIgnoreCase("")) {
+//				
+//				 billete = Double.parseDouble(txt_paga_con.getText());	
+//					System.out.println("billete" +  billete);
+//				 if(billete >= 0) {
+//
+//					 
+//						double total_pagar = Double.parseDouble( txt_total.getText());
+//						double efectivo = Double.parseDouble(txt_paga_con.getText());
+//						double total = Math.abs(  total_pagar-efectivo  ); 
+//						
+//						String cambio = String.valueOf(total);
+//						txt_cambio.setText(cambio);
+//						
+//						
+//				}
+//			}
+//			
+
+			
+			if(!txt_paga_con.getText().equalsIgnoreCase("")) {
+				double comparador = Double.parseDouble(txt_paga_con.getText());
+				if(!txt_total.getText().equalsIgnoreCase("") && comparador > 0) {
+					
+					double total_pagar = Double.parseDouble( txt_total.getText());
+					double efectivo = Double.parseDouble(txt_paga_con.getText());
+					double total = Math.abs(  total_pagar-efectivo  ); 
+					
+					String cambio = String.valueOf(total);
+					txt_cambio.setText(cambio);
+				}
+				
+				
+				System.out.println("acualizando");
+				
+			}
+
+			
+			
+		}
+	});
 
 	}	
 				
@@ -668,19 +806,22 @@ total_txt(txt_total, def_tabla);
 	public void total_txt(JTextField total_suma,DefaultTableModel modelo) {
 		
 		 double total_sum=0;
-		
+		 double cantidad_sum = 0;
+			double costo_sum= 0;
 		 for(int i = 0;i < modelo.getRowCount();i++) {
 			 
-			 double costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
-			double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-			
+			costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
+			cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
 			
 			total_sum += (costo_sum * cantidad_sum) ;
 			 
 			 
 			 
 		 }
+		 System.out.println(cantidad_sum + " " + total_sum);
 		 String total_cadena =    String.valueOf(  total_sum);
+		 
+		 
 		 
 		 total_suma.setText(total_cadena);
 		  
