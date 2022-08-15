@@ -203,6 +203,14 @@ public class Bar_Code extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+			if(e.getButton()  == 3 || e.getButton() == 2) {
+				txt_id.setText("");
+			}
+			}
+		});
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setBounds(162, 42, 180, 20);
 		
@@ -266,12 +274,16 @@ public class Bar_Code extends JFrame {
 		panel.add(txt_cantidad);
 		
 		JButton btn_mas = new JButton("+");
+		btn_mas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_mas.setFont(new Font("Dialog", Font.BOLD, 15));
 		btn_mas.setBounds(244, 115, 44, 35);
 		
 		btn_mas.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				//aumento de los numeros de la caja de texto txt_cantidad
 				String Valor = txt_cantidad.getText() ;
 				int valor = Integer.parseInt(Valor) ;
@@ -332,6 +344,7 @@ public class Bar_Code extends JFrame {
 		JButton btn_limpiar_hoja = new JButton("LIMPIAR HOJA");
 		btn_limpiar_hoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 			}
 		});
 		btn_limpiar_hoja.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -354,7 +367,19 @@ public class Bar_Code extends JFrame {
 //			
 				
 				try {
-				tbl_bar_code.setModel(DB_productos.model_view_prod_barcode(Long.parseLong( txt_id.getText())));
+				
+					if(!txt_id.getText().equalsIgnoreCase("")) {
+						int filas =  DB_productos.model_view_prod_barcode(Long.parseLong(txt_id.getText())).getRowCount();
+						
+						if(filas > 0) {
+							tbl_bar_code.setModel(DB_productos.model_view_prod_barcode(Long.parseLong( txt_id.getText())));	
+						}
+						
+					}
+				
+				
+				
+				
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -415,14 +440,23 @@ public class Bar_Code extends JFrame {
 		
 				try {
 		
+<<<<<<< HEAD
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
 						frame.requestFocus();
+=======
+					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
+						System.out.println("nothing to generate");
+>>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
 					}else {
 
 						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
+<<<<<<< HEAD
 						frame.requestFocus();
+=======
+					txt_cantidad.setText("0");	
+>>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
 					}
 					
 					
@@ -451,6 +485,7 @@ public class Bar_Code extends JFrame {
 					try {
 						createPdf("", 0);
 						letras.clear();
+					
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -458,15 +493,41 @@ public class Bar_Code extends JFrame {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					openpdf(scrollPane_1);	
-				JOptionPane.showMessageDialog(null,"LIMPIANDO HOJA");
+					openpdf(scrollPane_1);
+					
+					 DefaultTableModel cleanTable;
+					try {
+						cleanTable = DB_productos.model_view_prod_barcode(Long.parseLong( txt_id.getText()));
+
+						 cleanTable.setRowCount(0);
+						tbl_bar_code.setModel(cleanTable);
+						txt_id.setText("");
+						txt_id.requestFocus();
+					}
+					catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				
 				//lbl_bar_code.setIcon(null);
 				//lbl_cantidad.setText("");
 				//lbl_precio.setText("");
+<<<<<<< HEAD
 				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
+=======
+				
+>>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
 				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {
+		
 			}
 		});
 		/*
@@ -649,6 +710,7 @@ if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 		
 try {
 tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(campo.getText() )));
+
 } catch (NumberFormatException e1) {
 	// TODO Auto-generated catch block
 	e1.printStackTrace();
