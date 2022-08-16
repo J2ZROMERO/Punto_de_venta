@@ -406,7 +406,8 @@ public class Bar_Code extends JFrame {
 		JButton btn_imprimir = new JButton("IMPRIMIR");
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+				String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+//				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
 				File archivo = new File(url);
 				
 				if(archivo.exists()) {
@@ -440,23 +441,18 @@ public class Bar_Code extends JFrame {
 		
 				try {
 		
-<<<<<<< HEAD
+
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
 						frame.requestFocus();
-=======
-					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
-						System.out.println("nothing to generate");
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
+
 					}else {
 
 						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
-<<<<<<< HEAD
+
 						frame.requestFocus();
-=======
-					txt_cantidad.setText("0");	
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
+
 					}
 					
 					
@@ -516,13 +512,11 @@ public class Bar_Code extends JFrame {
 				//lbl_bar_code.setIcon(null);
 				//lbl_cantidad.setText("");
 				//lbl_precio.setText("");
-<<<<<<< HEAD
+
 				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
-=======
-				
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
+
 				}
 			}
 			@Override
@@ -574,7 +568,9 @@ public class Bar_Code extends JFrame {
 	}
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
 		Document document = new Document();
-	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+		String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+		//String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
+		
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
 System.out.println(id+cantidad);
 		if(cantidad == 0) {
@@ -638,7 +634,8 @@ System.out.println(id+cantidad);
 		
 public	  void openpdf(JScrollPane panel){
 	  
-	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+	String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+	// String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
     try {
            SwingController control=new SwingController();
             SwingViewBuilder factry=new SwingViewBuilder(control);
