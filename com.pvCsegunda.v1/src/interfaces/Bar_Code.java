@@ -568,8 +568,7 @@ public class Bar_Code extends JFrame {
 	}
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
 		Document document = new Document();
-		String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
-		//String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
+		String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 		
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
 System.out.println(id+cantidad);
@@ -634,8 +633,8 @@ System.out.println(id+cantidad);
 		
 public	  void openpdf(JScrollPane panel){
 	  
-	String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
-	// String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
+	String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+
     try {
            SwingController control=new SwingController();
             SwingViewBuilder factry=new SwingViewBuilder(control);
