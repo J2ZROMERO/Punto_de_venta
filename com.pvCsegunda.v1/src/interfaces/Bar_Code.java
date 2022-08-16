@@ -108,13 +108,6 @@ public class Bar_Code extends JFrame {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
 	public void Generar_Codigo() throws DocumentException {
 		try {
 			//se crea el documento pdf
@@ -440,26 +433,25 @@ public class Bar_Code extends JFrame {
 		
 				try {
 		
-<<<<<<< HEAD
+
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
-						frame.requestFocus();
-=======
+
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						System.out.println("nothing to generate");
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
+
 					}else {
 
-						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
+						createPdf(txt_id.getText(), Integer.parseInt(txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
-<<<<<<< HEAD
+
 						frame.requestFocus();
-=======
+
 					txt_cantidad.setText("0");	
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
+
 					}
 					
-					
+					}	
 			
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
@@ -472,6 +464,7 @@ public class Bar_Code extends JFrame {
 			e1.printStackTrace();
 		}
 			}
+			
 		});
 		
 		btn_limpiar_hoja.addMouseListener(new MouseAdapter() {
@@ -483,7 +476,7 @@ public class Bar_Code extends JFrame {
 				if(resp == 0) {
 				
 					try {
-						createPdf("", 0);
+						createPdf("",0);
 						letras.clear();
 					
 					} catch (IOException e1) {
@@ -499,7 +492,7 @@ public class Bar_Code extends JFrame {
 					try {
 						cleanTable = DB_productos.model_view_prod_barcode(Long.parseLong( txt_id.getText()));
 
-						 cleanTable.setRowCount(0);
+						cleanTable.setRowCount(0);
 						tbl_bar_code.setModel(cleanTable);
 						txt_id.setText("");
 						txt_id.requestFocus();
@@ -516,13 +509,10 @@ public class Bar_Code extends JFrame {
 				//lbl_bar_code.setIcon(null);
 				//lbl_cantidad.setText("");
 				//lbl_precio.setText("");
-<<<<<<< HEAD
+
 				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
-=======
-				
->>>>>>> 34369b710f16d0786305e6ab16b2d07c211a6f23
 				}
 			}
 			@Override
@@ -572,11 +562,12 @@ public class Bar_Code extends JFrame {
 		txt_id.addKeyListener(eventos);
 		
 	}
+	
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
-		Document document = new Document();
+	Document document = new Document();
 	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
-System.out.println(id+cantidad);
+    System.out.println(id+cantidad);
 		if(cantidad == 0) {
 
 	document.open();
@@ -725,8 +716,6 @@ tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(campo.getTex
 }
 		
 }}
-	
-
 	
 }
 
