@@ -19,7 +19,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import com.itextpdf.text.log.SysoCounter;
+//import com.itextpdf.text.log.SysoCounter;
 
 import conexionDB.DB_productos;
 import conexionDB.DB_ventas;

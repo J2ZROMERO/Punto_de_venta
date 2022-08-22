@@ -18,6 +18,7 @@ Este procedimiento getNamesSalary ejecuta una sentencia de selección y, por lo 
 *
 */
  
+	
      public static void main (String args[]) throws SQLException {
 
     			       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
@@ -41,4 +42,3 @@ while(rs.next()) {
  
 private Connection conn;	
 }
-;

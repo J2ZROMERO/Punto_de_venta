@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import com.itextpdf.text.log.SysoCounter;
+//import com.itextpdf.text.log.SysoCounter;
 
 public class DB_ventas {
 

@@ -27,7 +27,6 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.Barcode;
 import com.itextpdf.text.pdf.Barcode128;
-import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
