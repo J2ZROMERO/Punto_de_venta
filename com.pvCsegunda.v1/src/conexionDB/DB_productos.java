@@ -19,11 +19,8 @@ public class DB_productos {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		
-		
-		
-		
-		
+
+
 //		try {
 //			Object datosDB[] = new Object[17];
 //			datosDB[0] = 12313;
@@ -829,6 +826,30 @@ private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel(
 	private static Object[][] data_ver_barcode;	
 	private static Object datos_barcode[];
 	private	static DefaultTableModel modelo_ver_barcode = new DefaultTableModel();
+
+	public static boolean compara_id(long id) throws SQLException {
+	
+		boolean id_comparado = false;
+	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.id_generado(?,?) }"))	       
+	       {	       
+	    	 
+	    	   cstm.setLong(1, id);
+	    	   cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+	    	   
+	    	   cstm.execute();
+	    	   
+	    	   id_comparado =  cstm.getBoolean(2); 
+	   
+	    	   
+	    	   
+	       }
+		return id_comparado;
+		
+	};
+	
+	
 }
+
 
 

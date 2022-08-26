@@ -115,7 +115,7 @@ public class Marcas extends JFrame {
 		
 		ver_datos_tabla(tbl_marcas);
 		JButton btn_añadir = new JButton("");
-		btn_añadir.setIcon(new ImageIcon(Marcas.class.getResource("C:/Punto_de_venta/com.pvCsegunda.v1/src/imagenes/anadir.png")));
+		btn_añadir.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setBounds(406, 126, 117, 41);
@@ -146,7 +146,7 @@ public class Marcas extends JFrame {
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("");
-		btn_eliminar.setIcon(new ImageIcon(Marcas.class.getResource("C:/Punto_de_venta/com.pvCsegunda.v1/src/imagenes/basura.png")));
+		btn_eliminar.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -185,13 +185,13 @@ public class Marcas extends JFrame {
 		panel.add(btn_eliminar);
 		
 		JLabel lbl_imagen = new JLabel("");
-		lbl_imagen.setIcon(new ImageIcon(Marcas.class.getResource("C:/Punto_de_venta/com.pvCsegunda.v1/src/imagenes/marca_1.png")));
+		lbl_imagen.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/marca_1.png")));
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(343, 287, 249, 212);
 		panel.add(lbl_imagen);
 		
 		JButton btn_regresar = new JButton("");
-		btn_regresar.setIcon(new ImageIcon(Marcas.class.getResource("C:/Punto_de_venta/com.pvCsegunda.v1/src/imagenes/flecha.png")));
+		btn_regresar.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/flecha.png")));
 		btn_regresar.setBounds(0, 0, 44, 35);
 		
 		btn_regresar.addMouseListener(new MouseAdapter() {

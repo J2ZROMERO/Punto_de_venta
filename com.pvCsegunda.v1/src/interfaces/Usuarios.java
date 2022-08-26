@@ -109,7 +109,7 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
-		txt_id.setEditable(false);
+		//txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(149, 100, 230, 22);
 		panel.add(txt_id);

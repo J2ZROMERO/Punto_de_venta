@@ -289,7 +289,7 @@ public class Bar_Code extends JFrame {
 				int valor = Integer.parseInt(Valor) ;
 				valor++;
 				txt_cantidad.setText(""+valor);
-				frame.requestFocus();
+				//frame.requestFocus();
 			}
 		});
 		panel.add(btn_mas);
@@ -406,7 +406,7 @@ public class Bar_Code extends JFrame {
 		JButton btn_imprimir = new JButton("IMPRIMIR");
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String url = "E:/Users/windows/Desktop/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+				String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 //				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
 				File archivo = new File(url);
 				
@@ -451,7 +451,7 @@ public class Bar_Code extends JFrame {
 						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
 
-						frame.requestFocus();
+					//	frame.requestFocus();
 
 					}
 					

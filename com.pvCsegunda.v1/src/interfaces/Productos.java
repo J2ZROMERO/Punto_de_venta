@@ -776,17 +776,48 @@ private JSpinner spinner_tiempo_limite;
 		return  campos;
 	}
 	public  String generar_contraseña() {
+
 		String pas = "";
-	for(int i =0 ; i < 13 ; i++) {
-	int numero =  (int) Math.abs(Math.random()*10);
+		boolean id_similar = false;
+		
+		do {
+			
+			
+			for(int i =0 ; i < 13 ; i++) {
+				int numero =  (int) Math.abs(Math.random()*10);
 
 
-	pas += String.valueOf(numero);	
+				pas += String.valueOf(numero);	
 
 
 
-	}
-	return pas;
+				}
+				
+				long cast_id =  Long.parseLong(pas);
+				try {
+					
+					
+					if(DB_productos.compara_id(cast_id) == true) {
+						id_similar = true;
+					}else {
+						id_similar = false;
+					}
+						
+
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+							
+			
+		}while(id_similar != false);
+		
+		
+		
+
+	
+	return String.valueOf(pas);
 	}
 	private void limpia_campos_detalles_fisicos() {
 		txt_kilos.setText("");
