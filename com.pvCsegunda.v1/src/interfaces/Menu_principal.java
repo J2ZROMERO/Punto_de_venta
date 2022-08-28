@@ -457,6 +457,10 @@ public class Menu_principal extends JFrame {
 		panel.add(lbl_caja_titulo);
 		
 		JButton btn_cambiar_usuario = new JButton("CAMBIAR USUARIO");
+		btn_cambiar_usuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_cambiar_usuario.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_cambiar_usuario.setBounds(237, 10, 184, 23);
 		
@@ -464,11 +468,8 @@ public class Menu_principal extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dispose();
-				Cambiar_Usuario cu = new Cambiar_Usuario();
-				cu.setVisible(true);
-				cu.setFocusable(true);
-				cu.setLocationRelativeTo(null);
-				
+	Login usuarios = new Login();
+	usuarios.setVisible(true);
 			}
 		});
 		panel.add(btn_cambiar_usuario);

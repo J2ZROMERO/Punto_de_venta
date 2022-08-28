@@ -5,17 +5,28 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import conexionDB.DB_productos;
+import conexionDB.DB_ventas;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import java.awt.Cursor;
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -113,7 +124,9 @@ public class Login extends JFrame {
 		panel.add(lbl_password);
 		
 		cbx_nickname = new JComboBox();
-		cbx_nickname.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR", "LUIS", "ANTONIO", "JOSE", "PEDRO"}));
+		
+		lista_usuarios(cbx_nickname);
+		
 		cbx_nickname.setName("");
 		cbx_nickname.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_nickname.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -134,6 +147,7 @@ public class Login extends JFrame {
 		txt_password.setFont(new Font("Roboto Slab", Font.BOLD, 20));
 		txt_password.setBounds(124, 200, 231, 22);
 		txt_password.addKeyListener(new KeyAdapter() {
+			
 			
 		public void keyReleased(KeyEvent e) {
 		String nombre = cbx_nickname.getName();
@@ -158,8 +172,8 @@ public class Login extends JFrame {
 		/*CERRAR CON LA TECLA SCAPE*/
 		
 		txt_password.addKeyListener(new KeyAdapter() {
+	
 			
-				
 			
 		public void keyPressed(KeyEvent e) {
 				
@@ -175,25 +189,20 @@ public class Login extends JFrame {
 		
 		
 		JButton btn_ingresar = new JButton("INGRESAR");
+		
+		
+		
+		
+		
 		btn_ingresar.addActionListener(new ActionListener() {
 		
 		public void actionPerformed(ActionEvent e) {
-		   
-			String usuario,password,us1="luis",us2="pedro",us3="marco",us4="antonio",pass1="12345",pass2="123456",pass3="2311212",pass4="12312343";
 			
-			usuario = cbx_nickname.getSelectedItem().toString();
-			password = String.valueOf(txt_password.getPassword());
 			
-			//String contra = String.valueOf(txt_password.getPassword());
-			//String user = cbx_nickname.getSelectedItem().toString();
-			
-		    //System.out.println(usuario);
-		    //System.out.println(password);
-			
-			if((usuario.equals(us1) && password.equals(pass1)) || (usuario.equals(us2) && password.equals(pass2)) || (usuario.equals(us3) && password.equals(pass3)) ||(usuario.equals(us4) && password.equals(pass4) )) {                        
-				JOptionPane.showMessageDialog(null, "DATOS CORRECTOS...");
-				//cbx_nickname.setSelectedIndex(0);
-				txt_password.setText("");
+			if(acceso_usuario(cbx_nickname, txt_password) == true) {                        
+				Menu_principal acceso_menu = new Menu_principal();
+				acceso_menu.setVisible(true);
+			dispose();
 			}else {
 				JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
 				txt_password.setText("");
@@ -214,7 +223,117 @@ public class Login extends JFrame {
 				System.exit(0);
 			}
 		}
+	
 	    });
 		
+		eventoTeclado_enter tecla_enter = new eventoTeclado_enter(this,cbx_nickname, txt_password);
+		txt_password.addKeyListener(tecla_enter);
+	
+		
 	}
+		public void lista_usuarios(JComboBox users) {
+			
+		try {
+			users.addItem("");
+			for(int i = 1;  i < DB_productos.nicknames().size(); i++) {
+				
+				Object indice_lista[]  =(Object[]) DB_productos.nicknames().get(i);
+				
+			users.addItem(indice_lista[2]);	
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		
+public boolean acceso_usuario(JComboBox cbx, JTextField pass) {
+	
+	boolean confirma_acceso = false;
+	try {
+		confirma_acceso =  DB_productos.acceso(cbx.getSelectedItem().toString(), pass.getText());
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return confirma_acceso;
+	
 }
+		
+		
+		
+}
+
+
+class eventoTeclado_enter implements KeyListener{
+	
+	private JComboBox usuarios;
+	private JTextField pass;
+	private JFrame frame;
+	public eventoTeclado_enter(JFrame frame,JComboBox usuarios, JTextField pass) {
+		
+		 this.usuarios = usuarios;
+		 this.pass = pass;
+		this.frame = frame;
+	}
+	
+	
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		int key = e.getKeyChar();
+		boolean numeros = key >= 48 && key <=57;
+		if(!numeros) {
+			
+		e.consume();	
+		}
+			}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	
+
+
+						
+				}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		
+if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+	
+	Login acceso = new Login();
+	
+	
+	if(acceso.acceso_usuario(usuarios,pass) == true) {                        
+		Menu_principal acceso_menu = new Menu_principal();
+		acceso_menu.lbl_usuario.setText(usuarios.getSelectedItem().toString());
+		
+		
+		acceso_menu.setVisible(true);
+		frame.dispose();
+	
+	}else {
+		JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
+		
+	}
+
+}
+	}		
+			
+
+		
+	}
+	
+
+	
+

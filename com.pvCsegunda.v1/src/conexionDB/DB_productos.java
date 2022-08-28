@@ -14,11 +14,12 @@ import conexionDB.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.log.SysoCounter;
+
 public class DB_productos {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 
 
 //		try {
@@ -848,8 +849,82 @@ private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel(
 		
 	};
 	
+//////// view nickname users
+	
+public static  List<Object> nicknames () throws SQLException {
+	
+	
+	List<Object> n_nickname = new ArrayList<Object>();
+	
+       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_usuarios() }"); ResultSet rs= cstm.executeQuery()
+    		   )// dentro statement connection and resulset
+       
+    		   {	       
+	n_nickname.add("");
+	//id_nickname.add(0L);
+
+	while(rs.next()) {
+		
+		
+		usuario = new Object[3];
+
+usuario[0] =( rs.getString(1));
+usuario[1] = (rs.getString(2));
+usuario[2] = (rs.getString(3));
+
+
+n_nickname.add(usuario);
+	
+	//id_nickname.add(rs.getLong(1));
+
+
+
+}
+
+	
+	
 	
 }
+	
+	
+
+	return n_nickname;
+	
+}
+//private  static List<Long> id_nickname;
+private static Object  usuario[];
+
+
+public static boolean acceso (String nickname, String contrasena_usuario) throws SQLException {
+	boolean acceso_usuario = false;
+	
+    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.validar_usuario(?,?,?) }"))	       
+    {	       
+ 	 
+ 	   cstm.setString(1, nickname);
+ 	   cstm.setString(2, contrasena_usuario);
+ 	   cstm.registerOutParameter(3, java.sql.Types.BOOLEAN);
+ 	   
+ 	   cstm.execute();
+ 	   
+ 	   
+ 	   acceso_usuario = cstm.getBoolean(3);
+ 	   
+ 	   
+
+ 	   System.out.println(acceso_usuario);
+ 	   
+    }
+	return acceso_usuario;
+	
+}
+
+}
+
+
+
 
 
 
