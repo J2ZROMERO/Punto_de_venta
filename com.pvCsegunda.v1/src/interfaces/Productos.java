@@ -36,6 +36,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
+import java.awt.Color;
 
 public class Productos extends JFrame {
 private 	String spinnerTimeInicial ;
@@ -100,13 +101,13 @@ private JSpinner spinner_tiempo_limite;
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 11, 1073, 642);
+		panel.setBackground(new Color(198, 144, 125));
+		panel.setBounds(0, 11, 1073, 631);
 		contentPane.add(panel);
-		panel.setLayout(null);
 		
 		JButton btn_regresar = new JButton("");
-		btn_regresar.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/flecha.png")));
 		btn_regresar.setBounds(0, 0, 44, 35);
+		btn_regresar.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/flecha.png")));
 		
 		btn_regresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -118,33 +119,35 @@ private JSpinner spinner_tiempo_limite;
 				dispose();
 			}
 		});
+		panel.setLayout(null);
 		panel.add(btn_regresar);
 		
 		JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
+		lbl_fecha_inicial.setBounds(297, 501, 135, 32);
 		lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_inicial.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_fecha_inicial.setBounds(297, 501, 135, 32);
 		panel.add(lbl_fecha_inicial);
 		
 		JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
+		lbl_fecha_final.setBounds(579, 501, 135, 32);
 		lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_final.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_fecha_final.setBounds(579, 501, 135, 32);
 		panel.add(lbl_fecha_final);
 		
 		JLabel lbl_calendario = new JLabel("");
+		lbl_calendario.setBounds(442, 501, 76, 60);
 		lbl_calendario.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/calendario.png")));
 		lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_calendario.setBounds(442, 501, 76, 60);
 		panel.add(lbl_calendario);
 		
 		JLabel lbl_calendario_1 = new JLabel("");
+		lbl_calendario_1.setBounds(724, 501, 76, 60);
 		lbl_calendario_1.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/calendario.png")));
 		lbl_calendario_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_calendario_1.setBounds(724, 501, 76, 60);
 		panel.add(lbl_calendario_1);
 		
 		JButton btn_ver_movimientos = new JButton("VER MOVIMIENTOS");
+		btn_ver_movimientos.setBounds(461, 590, 161, 23);
 		btn_ver_movimientos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -162,7 +165,6 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 		btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_movimientos.setBounds(461, 590, 161, 23);
 		
 		/*btn_ver_movimientos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -181,6 +183,7 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_ver_movimientos);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
+		btn_añadir.setBounds(34, 121, 156, 23);
 		btn_añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -189,7 +192,6 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_añadir.setBounds(34, 121, 156, 23);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
@@ -233,12 +235,12 @@ private JSpinner spinner_tiempo_limite;
 		
 		
 		JButton btn_buscar = new JButton("BUSCAR");
+		btn_buscar.setBounds(34, 169, 156, 23);
 		btn_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(34, 169, 156, 23);
 		
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -366,6 +368,7 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("ACTUALIZAR");
+		btn_actualizar.setBounds(34, 217, 156, 23);
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!txt_id.getText().equals("") ) {
@@ -403,10 +406,10 @@ private JSpinner spinner_tiempo_limite;
 			}	
 		});
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_actualizar.setBounds(34, 217, 156, 23);
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("ELIMINAR");
+		btn_eliminar.setBounds(34, 266, 156, 23);
 		btn_eliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -422,12 +425,11 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_eliminar.setBounds(34, 266, 156, 23);
 		panel.add(btn_eliminar);
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
-		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_limpiar_campos.setBounds(34, 313, 156, 23);
+		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -438,40 +440,39 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_limpiar_campos);
 		
 		JLabel lbl_distintivo1 = new JLabel("DISTINTIVO 1");
+		lbl_distintivo1.setBounds(490, 30, 227, 23);
 		lbl_distintivo1.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_distintivo1.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_distintivo1.setBounds(490, 30, 227, 23);
 		panel.add(lbl_distintivo1);
 		
 		JLabel notas_a_cerca_del_producto = new JLabel("<html><center>distintivo2</center></html>");
+		notas_a_cerca_del_producto.setBounds(777, 30, 217, 20);
 		notas_a_cerca_del_producto.setHorizontalAlignment(SwingConstants.CENTER);
 		notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 13));
-		notas_a_cerca_del_producto.setBounds(777, 30, 217, 20);
 		panel.add(notas_a_cerca_del_producto);
 		
 		txt_notas_a_cerca_del_producto = new JTextField();
+		txt_notas_a_cerca_del_producto.setBounds(777, 64, 218, 23);
 		txt_notas_a_cerca_del_producto.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_a_cerca_del_producto.setColumns(10);
-		txt_notas_a_cerca_del_producto.setBounds(777, 64, 218, 23);
 		panel.add(txt_notas_a_cerca_del_producto);
 		
 		txt_distintivo_1 = new JTextField();
+		txt_distintivo_1.setBounds(490, 64, 227, 23);
 		txt_distintivo_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_distintivo_1.setColumns(10);
-		txt_distintivo_1.setBounds(490, 64, 227, 23);
 		panel.add(txt_distintivo_1);
 		
 		JLabel lbl_atributos_basicos = new JLabel("<html><center>ATRIBUTOS PRODUCCION </center></html>");
+		lbl_atributos_basicos.setBounds(490, 201, 189, 23);
 		lbl_atributos_basicos.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_atributos_basicos.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_atributos_basicos.setBounds(490, 201, 189, 23);
 		panel.add(lbl_atributos_basicos);
 		
 		cbx_atributos_produccion = new JComboBox();
+		cbx_atributos_produccion.setBounds(245, 223, 167, 23);
 		cbx_atributos_produccion.setFont(new Font("Dialog", Font.BOLD, 12));
 		cbx_atributos_produccion.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR",  "KILOGRAMO", "MEDIDA","MILILITROS", "COLOR", "TAMAÑO"}));
-		
-		cbx_atributos_produccion.setBounds(245, 223, 167, 23);
 		cbx_atributos_produccion.addActionListener(new ActionListener() {
 
 			@Override
@@ -524,12 +525,12 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(cbx_atributos_produccion);
 		
 		JButton btn_limpiar_atributos_de_contenido = new JButton("");
+		btn_limpiar_atributos_de_contenido.setBounds(568, 406, 33, 32);
 		btn_limpiar_atributos_de_contenido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btn_limpiar_atributos_de_contenido.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
-		btn_limpiar_atributos_de_contenido.setBounds(613, 392, 33, 32);
 		
 		btn_limpiar_atributos_de_contenido.addMouseListener(new MouseAdapter() {
 			@Override
@@ -541,95 +542,97 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_limpiar_atributos_de_contenido);
 		
 		txt_stock = new JTextField();
+		txt_stock.setBounds(245, 146, 167, 23);
 		txt_stock.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_stock.setColumns(10);
-		txt_stock.setBounds(245, 146, 167, 23);
 		panel.add(txt_stock);
 		
 		JLabel lbl_stock = new JLabel("STOCK");
+		lbl_stock.setBounds(243, 122, 113, 20);
 		lbl_stock.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_stock.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_stock.setBounds(243, 122, 113, 20);
 		panel.add(lbl_stock);
 		
 		JLabel lbl_precio_de_venta = new JLabel("PRECIO DE VENTA");
+		lbl_precio_de_venta.setBounds(490, 121, 140, 20);
 		lbl_precio_de_venta.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_precio_de_venta.setBounds(490, 121, 140, 20);
 		panel.add(lbl_precio_de_venta);
 		
 		txt_precio_de_venta = new JTextField();
+		txt_precio_de_venta.setBounds(490, 146, 227, 23);
 		txt_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_venta.setColumns(10);
-		txt_precio_de_venta.setBounds(490, 146, 227, 23);
 		panel.add(txt_precio_de_venta);
 		
 		JLabel lbl_precio_de_compra = new JLabel("PRECIO DE COMPRA");
+		lbl_precio_de_compra.setBounds(777, 115, 140, 32);
 		lbl_precio_de_compra.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_precio_de_compra.setBounds(777, 115, 140, 32);
 		panel.add(lbl_precio_de_compra);
 		
 		txt_precio_de_compra = new JTextField();
+		txt_precio_de_compra.setBounds(777, 146, 217, 23);
 		txt_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_compra.setColumns(10);
-		txt_precio_de_compra.setBounds(777, 146, 217, 23);
 		panel.add(txt_precio_de_compra);
 		
 		JLabel lbl_id = new JLabel("ID");
+		lbl_id.setBounds(34, 30, 44, 23);
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id.setBounds(34, 30, 44, 23);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.setBounds(34, 64, 151, 23);
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setColumns(10);
-		txt_id.setBounds(34, 64, 151, 23);
 		panel.add(txt_id);
 		
 		
 		JButton btn_generar_qr = new JButton("");
+		btn_generar_qr.setBounds(195, 52, 40, 35);
 		btn_generar_qr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txt_id.setText(generar_contraseña());
 			}
 		});
-		btn_generar_qr.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/cargando.png")));
+		btn_generar_qr.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/actualizar.png")));
 		btn_generar_qr.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_generar_qr.setBounds(195, 64, 29, 23);
 		
 	
 		panel.add(btn_generar_qr);
 		
 		JLabel lbl_producto = new JLabel("PRODUCTO");
+		lbl_producto.setBounds(243, 31, 167, 21);
 		lbl_producto.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_producto.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_producto.setBounds(243, 31, 167, 21);
 		panel.add(lbl_producto);
 		
 		txt_producto = new JTextField();
+		txt_producto.setBounds(245, 64, 167, 23);
 		txt_producto.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_producto.setColumns(10);
-		txt_producto.setBounds(245, 64, 167, 23);
 		panel.add(txt_producto);
 		
 		JLabel lbl_detalles = new JLabel("<html><center>DETALLES FISICOS</center></html>");
-		lbl_detalles.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_detalles.setBounds(245, 201, 167, 23);
+		lbl_detalles.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_detalles.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_detalles.setBounds(245, 201, 140, 23);
 		panel.add(lbl_detalles);
 		
 		JButton btn_limpiar_atributos_de_contenido_1 = new JButton("");
+		btn_limpiar_atributos_de_contenido_1.setBounds(336, 406, 33, 32);
+		btn_limpiar_atributos_de_contenido_1.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_atributos_de_contenido_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			limpia_campos_detalles_fisicos();
 			}
 		});
-		btn_limpiar_atributos_de_contenido_1.setBounds(379, 392, 33, 32);
 		panel.add(btn_limpiar_atributos_de_contenido_1);
 		
 		JButton btn_ver_atributos = new JButton("VER ATRIBUTOS");
+		btn_ver_atributos.setBounds(490, 223, 189, 23);
 		btn_ver_atributos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
@@ -637,82 +640,81 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 		btn_ver_atributos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_atributos.setBounds(490, 223, 156, 23);
 		panel.add(btn_ver_atributos);
 		
 		txt_marca = new JTextField();
-		txt_marca.setBounds(490, 257, 156, 20);
+		txt_marca.setBounds(490, 255, 189, 20);
 		panel.add(txt_marca);
 		txt_marca.setColumns(10);
 		
 		txt_linea = new JTextField();
+		txt_linea.setBounds(490, 286, 189, 20);
 		txt_linea.setColumns(10);
-		txt_linea.setBounds(490, 279, 156, 20);
 		panel.add(txt_linea);
 		
 		txt_categoria = new JTextField();
+		txt_categoria.setBounds(490, 313, 189, 20);
 		txt_categoria.setColumns(10);
-		txt_categoria.setBounds(490, 304, 156, 20);
 		panel.add(txt_categoria);
 		
 		txt_provedores = new JTextField();
+		txt_provedores.setBounds(490, 344, 189, 20);
 		txt_provedores.setColumns(10);
-		txt_provedores.setBounds(490, 336, 156, 20);
 		panel.add(txt_provedores);
 		
 		txt_color = new JTextField();
+		txt_color.setBounds(295, 344, 117, 20);
 		txt_color.setColumns(10);
-		txt_color.setBounds(295, 331, 113, 20);
 		panel.add(txt_color);
 		
 		txt_mililitros = new JTextField();
+		txt_mililitros.setBounds(295, 313, 117, 20);
 		txt_mililitros.setColumns(10);
-		txt_mililitros.setBounds(295, 300, 113, 20);
 		panel.add(txt_mililitros);
 		
 		txt_cm = new JTextField();
+		txt_cm.setBounds(295, 286, 117, 20);
 		txt_cm.setColumns(10);
-		txt_cm.setBounds(295, 274, 113, 20);
 		panel.add(txt_cm);
 		
 		txt_kilos = new JTextField();
+		txt_kilos.setBounds(295, 255, 117, 20);
 		txt_kilos.setColumns(10);
-		txt_kilos.setBounds(295, 252, 113, 20);
 		panel.add(txt_kilos);
 		
 		txt_tamano = new JTextField();
+		txt_tamano.setBounds(295, 375, 117, 20);
 				txt_tamano.setColumns(10);
-		txt_tamano.setBounds(295, 362, 113, 20);
 		panel.add(txt_tamano);
 		
 		JLabel lblNewLabel = new JLabel("KG");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(245, 258, 46, 14);
+		lblNewLabel.setBounds(231, 258, 60, 14);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 		
 		JLabel lblCm = new JLabel("CM");
-		lblCm.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCm.setBounds(245, 282, 46, 14);
+		lblCm.setBounds(231, 289, 60, 14);
+		lblCm.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblCm);
 		
 		JLabel lblMl = new JLabel("ML");
-		lblMl.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMl.setBounds(245, 307, 46, 14);
+		lblMl.setBounds(231, 316, 60, 14);
+		lblMl.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblMl);
 		
 		JLabel lblColor = new JLabel("COLOR");
-		lblColor.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblColor.setBounds(245, 339, 46, 14);
+		lblColor.setBounds(231, 347, 60, 14);
+		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblColor);
 		
 		JLabel lblTamao = new JLabel("TAMAÑO");
-		lblTamao.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTamao.setBounds(245, 365, 46, 14);
+		lblTamao.setBounds(231, 378, 60, 14);
+		lblTamao.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblTamao);
 		
 		txt_usuario = new JTextField();
+		txt_usuario.setBounds(490, 375, 189, 20);
 		txt_usuario.setColumns(10);
-		txt_usuario.setBounds(490, 361, 156, 20);
 		panel.add(txt_usuario);
 		
 
@@ -724,8 +726,8 @@ private JSpinner spinner_tiempo_limite;
 
 
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
-		spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 		spinner_tiempo_inicial.setBounds(281, 542, 151, 20);
+		spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 		
 	
 		
@@ -735,9 +737,9 @@ private JSpinner spinner_tiempo_limite;
 		
 		
 		 spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
+		 spinner_tiempo_limite.setBounds(563, 541, 151, 20);
 		
 		spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
-		spinner_tiempo_limite.setBounds(563, 541, 151, 20);
 		
 	
 		
@@ -745,15 +747,15 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(spinner_tiempo_limite);
 		
 		JLabel lbl_notas_venta = new JLabel("<html><center>Notas de venta </center></html>");
+		lbl_notas_venta.setBounds(777, 201, 189, 23);
 		lbl_notas_venta.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_notas_venta.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_notas_venta.setBounds(777, 201, 189, 23);
 		panel.add(lbl_notas_venta);
 		
 		txt_notas_de_venta = new JTextField();
+		txt_notas_de_venta.setBounds(777, 225, 217, 23);
 		txt_notas_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_de_venta.setColumns(10);
-		txt_notas_de_venta.setBounds(777, 225, 217, 23);
 		panel.add(txt_notas_de_venta);
 	
 	}

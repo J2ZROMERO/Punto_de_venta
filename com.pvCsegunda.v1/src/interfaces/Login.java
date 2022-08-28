@@ -1,25 +1,29 @@
 package interfaces;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.geom.RoundRectangle2D;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import java.awt.Cursor;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+
+
 
 
 public class Login extends JFrame {
@@ -40,6 +44,10 @@ public class Login extends JFrame {
 					frame.setFocusable(true);
 					frame.esc();
 					frame.setLocationRelativeTo(null);
+					
+					Shape forma = new RoundRectangle2D.Double(0, 0, frame.getBounds().width, frame.getBounds().height, 30, 30);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
