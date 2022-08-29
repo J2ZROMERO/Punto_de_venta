@@ -95,7 +95,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 191, 0));
+		panel.setBackground(new Color(84, 153, 199));
 		panel.setForeground(new Color(0, 0, 0));
 		panel.setBounds(0, 0, 522, 565);
 		contentPane.add(panel);

@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class Caja extends JFrame {
 
@@ -63,6 +64,7 @@ public class Caja extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(235, 152, 78));
 		panel.setBounds(0, 0, 518, 607);
 		contentPane.add(panel);
 		panel.setLayout(null);

@@ -398,7 +398,7 @@ public class Bar_Code extends JFrame {
 		JButton btn_imprimir = new JButton("IMPRIMIR");
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+				String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 				File archivo = new File(url);
 				
 				if(archivo.exists()) {

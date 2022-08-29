@@ -71,7 +71,7 @@ public class Categorias extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(255, 218, 68));
+		panel.setBackground(new Color(46, 134, 193));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -99,7 +99,7 @@ public class Categorias extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_categoria = new JTable();
-		tbl_categoria.setSelectionBackground(new Color(199, 108, 85));
+		tbl_categoria.setSelectionBackground(new Color(46, 134, 193));
 		tbl_categoria.setBackground(new Color(131, 216, 244));
 		tbl_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		ver_datos_tabla(tbl_categoria);

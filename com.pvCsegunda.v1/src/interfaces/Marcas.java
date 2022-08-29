@@ -73,7 +73,7 @@ public class Marcas extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(253, 100, 111));
+		panel.setBackground(new Color(245, 176, 65));
 		panel.setBounds(0, 0, 602, 510);
 		contentPane.add(panel);
 		panel.setLayout(null);
