@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.Color;
 
 public class Productos_Tabla_Buscar extends JFrame {
 
@@ -63,7 +64,8 @@ public class Productos_Tabla_Buscar extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 785, 476);
+		panel.setBackground(new Color(198, 144, 125));
+		panel.setBounds(0, 0, 642, 476);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		

@@ -626,6 +626,7 @@ total_txt(txt_total, def_tabla);
 			
 		movimientos_generados.ver_datos(spinnerTimeInicial, spinnerTimefinal);
 			movimientos_generados.setVisible(true);
+			movimientos_generados.setLocationRelativeTo(null);
 		
 		}
 	});

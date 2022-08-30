@@ -102,7 +102,7 @@ private JSpinner spinner_tiempo_limite;
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(198, 144, 125));
-		panel.setBounds(0, 11, 1073, 631);
+		panel.setBounds(0, 0, 1073, 642);
 		contentPane.add(panel);
 		
 		JButton btn_regresar = new JButton("");
@@ -161,7 +161,7 @@ private JSpinner spinner_tiempo_limite;
 				System.out.println(spinnerTimeInicial + spinnerTimefinal);
 			movimientos.ver_datos(spinnerTimeInicial, spinnerTimefinal);
 				movimientos.setVisible(true);
-			
+			    movimientos.setLocationRelativeTo(null);
 			}
 		});
 		btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -517,6 +517,12 @@ private JSpinner spinner_tiempo_limite;
 					txt_color.setEnabled(false);
 					txt_tamano.setEnabled(true);
 					
+				}else if (cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR")){
+					txt_kilos.setEnabled(false);
+					txt_cm.setEnabled(false);
+					txt_mililitros.setEnabled(false);
+					txt_color.setEnabled(false);
+					txt_tamano.setEnabled(false);
 				}
 				
 			}
@@ -637,6 +643,7 @@ private JSpinner spinner_tiempo_limite;
 			public void actionPerformed(ActionEvent e) {
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
 				interfaz_busqueda.setVisible(true);
+				interfaz_busqueda.setLocationRelativeTo(null);
 			}
 		});
 		btn_ver_atributos.setFont(new Font("Dialog", Font.BOLD, 13));

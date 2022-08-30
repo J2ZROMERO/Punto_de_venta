@@ -224,7 +224,7 @@ public class Proveedores extends JFrame {
 					
 					try {
 						DB_provedores.anadir(datos);
-						JOptionPane.showMessageDialog(null,"USUARIO AGREGADO CORRECTAMENTE");
+						JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
@@ -270,7 +270,7 @@ public class Proveedores extends JFrame {
 				try {
 					DB_provedores.actualizar(datos);
 					
-					JOptionPane.showMessageDialog(null,"USUARIO ACTUALIZADO CORRECTAMENTE");
+					JOptionPane.showMessageDialog(null,"PROVEEDOR ACTUALIZADO CORRECTAMENTE");
 							Limpiar_Campos();
 							txt_nombre.requestFocus();
 							ver_datos_tabla(tbl_proveedores);
@@ -304,6 +304,7 @@ public class Proveedores extends JFrame {
 					if (opcion == 0) {
 					try {
 						DB_provedores.eliminar(  Integer.parseInt( txt_id.getText()));
+						JOptionPane.showMessageDialog(null,"PROVEEDOR ELIMINADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
