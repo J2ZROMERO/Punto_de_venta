@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.Color;
 
 public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 
@@ -48,19 +49,20 @@ public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 	public Devoluciones_Perdidas_Tabla_Ver_Movimientos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setBounds(100, 100, 870, 416);
+		setBounds(100, 100, 1144, 416);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 875, 377);
+		panel.setBackground(new Color(84, 153, 199));
+		panel.setBounds(0, 0, 1128, 377);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 854, 328);
+		scrollPane.setBounds(10, 11, 1108, 317);
 		panel.add(scrollPane);
 		
 		tbl_ver_movimiento = new JTable();
@@ -69,7 +71,7 @@ public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 		
 		JButton btn_ok = new JButton("OK");
 		btn_ok.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ok.setBounds(381, 339, 102, 27);
+		btn_ok.setBounds(513, 339, 102, 27);
 		
 		btn_ok.addMouseListener(new MouseAdapter() {
 			@Override

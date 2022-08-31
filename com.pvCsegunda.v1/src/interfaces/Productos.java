@@ -63,6 +63,7 @@ private JSpinner spinner_tiempo_limite;
 	private JTextField txt_kilos;
 	private JTextField txt_usuario;
 	private JTextField txt_notas_de_venta;
+	private static Productos frame;
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +71,7 @@ private JSpinner spinner_tiempo_limite;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Productos frame = new Productos();
+					frame = new Productos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,13 +84,25 @@ private JSpinner spinner_tiempo_limite;
 	 * Create the frame.
 	 */
 	public void Limpiar_Campos() {
+		txt_id.setText("");
 		txt_producto.setText("");
 		txt_distintivo_1.setText("");
-		//txt_atributos_produccion.setText("");
-		txt_stock.setText("");
-		txt_precio_de_venta.setText("");
-		txt_precio_de_compra.setText("");
 		txt_notas_a_cerca_del_producto.setText("");
+		txt_stock.setText("");
+		txt_kilos.setText("");
+		txt_cm.setText("");
+		txt_mililitros.setText("");
+		txt_color.setText("");
+		txt_tamano.setText("");
+		txt_precio_de_compra.setText("");
+		txt_precio_de_venta.setText("");
+		txt_provedores.setText("");
+		txt_marca.setText("");
+		txt_linea.setText("");
+		txt_categoria.setText("");
+		txt_usuario.setText("");
+		txt_notas_de_venta.setText("");
+		frame.requestFocus();
 	}
 	
 	public Productos() {
@@ -434,7 +447,7 @@ private JSpinner spinner_tiempo_limite;
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			
+			Limpiar_Campos();
 			}
 		});
 		panel.add(btn_limpiar_campos);
