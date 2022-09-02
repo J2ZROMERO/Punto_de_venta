@@ -67,6 +67,8 @@ public class Ventas extends JFrame {
 	private String spinnerTimefinal;
 	private JSpinner spinner_tiempo_inicial;
 	private JSpinner spinner_tiempo_limite;
+	private static Ventas frame;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +76,7 @@ public class Ventas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Ventas frame = new Ventas();
+					frame = new Ventas();
 					frame.setVisible(true);
 					frame.txt_id.requestFocus();
 					
@@ -90,7 +92,7 @@ public class Ventas extends JFrame {
 	 */
 	public Ventas() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1026, 705);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -119,10 +121,15 @@ public class Ventas extends JFrame {
 		btn_buscar_clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
-				b.setVisible(true);
-				b.setFocusable(true);
-				b.setLocationRelativeTo(null);
+				if(!"".equals(txt_id_cliente.getText())) {
+					Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
+					b.setVisible(true);
+					b.setFocusable(true);
+					b.setLocationRelativeTo(null);
+				}else {
+					JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID CLIENTE");
+				}
+				
 			}
 		});
 		btn_buscar_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -159,7 +166,12 @@ public class Ventas extends JFrame {
 		//	ver_datos_ventas( Long.parseLong( txt_id.getText()));
 				   
 				 try {
-					DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
+					 if(!"".equals(txt_id.getText())) {
+						 DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
+					 }else {
+						 JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID");
+					 }
+					
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -720,6 +732,7 @@ total_txt(txt_total, def_tabla);
 	txt_total.setText("");	
 	txt_notas_extra.setText("");
 	def_tabla.setRowCount(0);
+	frame.requestFocus();
 	}
 }
 

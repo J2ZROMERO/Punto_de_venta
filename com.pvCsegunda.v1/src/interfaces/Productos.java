@@ -84,6 +84,7 @@ private JSpinner spinner_tiempo_limite;
 	 * Create the frame.
 	 */
 	public void Limpiar_Campos() {
+		cbx_atributos_produccion.setSelectedItem(1);
 		txt_id.setText("");
 		txt_producto.setText("");
 		txt_distintivo_1.setText("");
@@ -106,6 +107,7 @@ private JSpinner spinner_tiempo_limite;
 	}
 	
 	public Productos() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1089, 681);
 		contentPane = new JPanel();
@@ -448,6 +450,7 @@ private JSpinner spinner_tiempo_limite;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			Limpiar_Campos();
+			cbx_atributos_produccion.setSelectedIndex(0);
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -708,27 +711,32 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(txt_tamano);
 		
 		JLabel lblNewLabel = new JLabel("KG");
-		lblNewLabel.setBounds(231, 258, 60, 14);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblNewLabel.setBounds(218, 258, 73, 14);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 		
 		JLabel lblCm = new JLabel("CM");
-		lblCm.setBounds(231, 289, 60, 14);
+		lblCm.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblCm.setBounds(218, 289, 73, 14);
 		lblCm.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblCm);
 		
 		JLabel lblMl = new JLabel("ML");
-		lblMl.setBounds(231, 316, 60, 14);
+		lblMl.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblMl.setBounds(218, 316, 73, 14);
 		lblMl.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblMl);
 		
 		JLabel lblColor = new JLabel("COLOR");
-		lblColor.setBounds(231, 347, 60, 14);
+		lblColor.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblColor.setBounds(218, 347, 73, 14);
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblColor);
 		
 		JLabel lblTamao = new JLabel("TAMAÑO");
-		lblTamao.setBounds(231, 378, 60, 14);
+		lblTamao.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblTamao.setBounds(218, 378, 73, 14);
 		lblTamao.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblTamao);
 		
