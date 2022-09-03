@@ -47,6 +47,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
+import java.awt.SystemColor;
 
 public class Ventas extends JFrame {
 	
@@ -95,7 +96,7 @@ public class Ventas extends JFrame {
 	public Ventas() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 1026, 705);
+		setBounds(100, 100, 949, 716);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -103,19 +104,19 @@ public class Ventas extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(152, 179, 255));
-		panel.setBounds(0, 0, 1010, 666);
+		panel.setBounds(0, 0, 933, 666);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lbl_id_cliente = new JLabel("ID CLIENTE");
-		lbl_id_cliente.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id_cliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_id_cliente.setBounds(711, 47, 112, 22);
+		JLabel lbl_id_cliente = new JLabel("CLIENTE");
+		lbl_id_cliente.setFont(new Font("Calibri", Font.BOLD, 18));
+		lbl_id_cliente.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_id_cliente.setBounds(310, 32, 112, 22);
 		panel.add(lbl_id_cliente);
 		
 		txt_id_cliente = new JTextField();
 		txt_id_cliente.setFont(new Font("Dialog", Font.BOLD, 12));
-		txt_id_cliente.setBounds(678, 88, 179, 22);
+		txt_id_cliente.setBounds(310, 61, 179, 22);
 		panel.add(txt_id_cliente);
 		txt_id_cliente.setColumns(10);
 		
@@ -137,20 +138,20 @@ public class Ventas extends JFrame {
 			}
 		});
 		btn_buscar_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar_clientes.setBounds(678, 121, 179, 22);
+		btn_buscar_clientes.setBounds(310, 108, 179, 22);
 		panel.add(btn_buscar_clientes);
 		
-		JLabel lbl_id = new JLabel("ID");
-		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_id.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id.setBounds(32, 105, 79, 22);
+		JLabel lbl_id = new JLabel("PRODUCTO");
+		lbl_id.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_id.setFont(new Font("Calibri", Font.BOLD, 18));
+		lbl_id.setBounds(110, 32, 112, 22);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
 
 		txt_id.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_id.setColumns(10);
-		txt_id.setBounds(138, 105, 157, 22);
+		txt_id.setBounds(110, 59, 179, 22);
 		
 		
 		
@@ -173,7 +174,10 @@ public class Ventas extends JFrame {
 					 if(!"".equals(txt_id.getText())) {
 						 DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
 					 }else {
-						 JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID");
+						 
+						 Productos busca_productos = new Productos();
+						 busca_productos.setVisible(true);
+						 busca_productos.setLocationRelativeTo(null);
 					 }
 					
 				} catch (NumberFormatException e1) {
@@ -187,19 +191,19 @@ public class Ventas extends JFrame {
 			}
 		});
 		btn_buscar_productos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar_productos.setBounds(316, 105, 179, 22);
+		btn_buscar_productos.setBounds(110, 108, 179, 22);
 		panel.add(btn_buscar_productos);
 		
 		JLabel lbl_notas_extra = new JLabel("NOTAS EXTRA");
-		lbl_notas_extra.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_notas_extra.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_notas_extra.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_notas_extra.setFont(new Font("Calibri", Font.BOLD, 18));
 		lbl_notas_extra.setBounds(10, 186, 146, 22);
 		panel.add(lbl_notas_extra);
 		
 		txt_notas_extra = new JTextField();
 		txt_notas_extra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_extra.setColumns(10);
-		txt_notas_extra.setBounds(10, 208, 847, 22);
+		txt_notas_extra.setBounds(10, 208, 622, 22);
 		
 		panel.add(txt_notas_extra);
 		
@@ -318,7 +322,7 @@ if(e.getButton() == 2) {
 			}		}
 		});
 		btn_menos.setFont(new Font("Dialog", Font.BOLD, 18));
-		btn_menos.setBounds(950, 309, 50, 27);
+		btn_menos.setBounds(792, 204, 50, 27);
 		panel.add(btn_menos);
 		
 		JButton btn_mas = new JButton("+");
@@ -345,12 +349,12 @@ total_txt(txt_total, def_tabla);
 			}
 		});
 		btn_mas.setFont(new Font("Dialog", Font.BOLD, 18));
-		btn_mas.setBounds(950, 251, 50, 27);
+		btn_mas.setBounds(707, 204, 50, 27);
 		panel.add(btn_mas);
 		
 		JLabel lbl_descuento = new JLabel("DESCUENTO");
-		lbl_descuento.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_descuento.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_descuento.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_descuento.setFont(new Font("Calibri", Font.BOLD, 18));
 		lbl_descuento.setBounds(10, 423, 137, 22);
 		panel.add(lbl_descuento);
 		
@@ -361,8 +365,8 @@ total_txt(txt_total, def_tabla);
 		panel.add(txt_descuento);
 		
 		JLabel lbl_extra = new JLabel("EXTRA");
-		lbl_extra.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_extra.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_extra.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_extra.setFont(new Font("Calibri", Font.BOLD, 18));
 		lbl_extra.setBounds(189, 423, 137, 22);
 		panel.add(lbl_extra);
 		
@@ -373,8 +377,8 @@ total_txt(txt_total, def_tabla);
 		panel.add(txt_extra);
 		
 		JLabel lbl_total = new JLabel("TOTAL");
-		lbl_total.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_total.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_total.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_total.setFont(new Font("Calibri", Font.BOLD, 18));
 		lbl_total.setBounds(408, 423, 157, 22);
 		panel.add(lbl_total);
 		
@@ -401,9 +405,9 @@ total_txt(txt_total, def_tabla);
 				
 				
 		JLabel lbl_paga_con = new JLabel("PAGA CON");
-		lbl_paga_con.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_paga_con.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_paga_con.setBounds(587, 423, 157, 22);
+		lbl_paga_con.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_paga_con.setFont(new Font("Calibri", Font.BOLD, 18));
+		lbl_paga_con.setBounds(408, 483, 157, 22);
 		panel.add(lbl_paga_con);
 		
 		txt_paga_con = new JTextField();
@@ -457,19 +461,24 @@ total_txt(txt_total, def_tabla);
 		});
 		txt_paga_con.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_paga_con.setColumns(10);
-		txt_paga_con.setBounds(587, 450, 157, 22);
+		txt_paga_con.setBounds(408, 510, 157, 22);
 		panel.add(txt_paga_con);
 		
 		JLabel lbl_cambio = new JLabel("CAMBIO");
-		lbl_cambio.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cambio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_cambio.setBounds(766, 423, 157, 22);
+		lbl_cambio.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_cambio.setFont(new Font("Calibri", Font.BOLD, 18));
+		lbl_cambio.setBounds(623, 423, 90, 22);
 		panel.add(lbl_cambio);
 		
 		txt_cambio = new JTextField();
-		txt_cambio.setFont(new Font("Dialog", Font.BOLD, 12));
+		txt_cambio.setText("0");
+		txt_cambio.setFont(new Font("Arial", Font.BOLD, 25));
 		txt_cambio.setColumns(10);
-		txt_cambio.setBounds(766, 450, 157, 22);
+		txt_cambio.setBounds(623, 474, 101, 37);
+		txt_cambio.setOpaque(false);
+		txt_cambio.repaint();
+		
+		 
 		panel.add(txt_cambio);
 		
 		JButton btn_generar_venta = new JButton("GENERAR VENTA");
@@ -534,12 +543,12 @@ total_txt(txt_total, def_tabla);
 			}
 		});
 		btn_generar_venta.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_generar_venta.setBounds(766, 489, 157, 22);
+		btn_generar_venta.setBounds(766, 510, 157, 22);
 		panel.add(btn_generar_venta);
 		
 		JButton btn_ver_ventas = new JButton("VER VENTAS");
 		btn_ver_ventas.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_ventas.setBounds(766, 528, 157, 22);
+		btn_ver_ventas.setBounds(766, 624, 157, 22);
 		panel.add(btn_ver_ventas);
 		
 		JCheckBox chk_imprimir_recibo = new JCheckBox("IMPRIMIR RECIBO");
@@ -550,7 +559,7 @@ total_txt(txt_total, def_tabla);
 		});
 		chk_imprimir_recibo.setFont(new Font("Dialog", Font.BOLD, 13));
 		chk_imprimir_recibo.setHorizontalAlignment(SwingConstants.CENTER);
-		chk_imprimir_recibo.setBounds(408, 486, 181, 23);
+		chk_imprimir_recibo.setBounds(762, 450, 161, 23);
 		panel.add(chk_imprimir_recibo);
 		
 		JButton btn_cancelar_pedido = new JButton("CANCELAR PEDIDO");
@@ -562,7 +571,7 @@ total_txt(txt_total, def_tabla);
 			}
 		});
 		btn_cancelar_pedido.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_cancelar_pedido.setBounds(678, 175, 179, 22);
+		btn_cancelar_pedido.setBounds(310, 158, 179, 22);
 		panel.add(btn_cancelar_pedido);
 		
 		JButton btn_regresar = new JButton("");
@@ -596,10 +605,10 @@ total_txt(txt_total, def_tabla);
 		}
 	});
 	btn_borrar.setFont(new Font("Dialog", Font.BOLD, 18));
-	btn_borrar.setBounds(950, 370, 50, 27);
+	btn_borrar.setBounds(873, 204, 50, 27);
 	panel.add(btn_borrar);
 	
-	JButton btn_confirma_desc = new JButton("confirmar des");
+	JButton btn_confirma_desc = new JButton("confirmar");
 	btn_confirma_desc.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -641,10 +650,10 @@ txt_cambio.setText(cambio);
 		}
 	});
 	btn_confirma_desc.setFont(new Font("Dialog", Font.BOLD, 13));
-	btn_confirma_desc.setBounds(10, 486, 137, 22);
+	btn_confirma_desc.setBounds(10, 510, 137, 22);
 	panel.add(btn_confirma_desc);
 	
-	JButton btn_confirma_extra = new JButton("confirmar extra");
+	JButton btn_confirma_extra = new JButton("confirmar ");
 	btn_confirma_extra.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -686,21 +695,24 @@ txt_cambio.setText(cambio);
 		}
 	});
 	btn_confirma_extra.setFont(new Font("Dialog", Font.BOLD, 13));
-	btn_confirma_extra.setBounds(189, 486, 137, 22);
+	btn_confirma_extra.setBounds(189, 510, 137, 22);
 	panel.add(btn_confirma_extra);
 	
 	JLabel lbl_numero_venta = new JLabel("");
 	lbl_numero_venta.setBounds(98, 129, 46, 14);
+	
 	panel.add(lbl_numero_venta);
 	
 	 txt_numero_venta = new JTextPane();
-	 txt_numero_venta.setFont(new Font("Dialog", Font.BOLD, 12));
-	txt_numero_venta.setBounds(432, 31, 137, 20);
-	
+	 txt_numero_venta.setBackground(new Color(255, 255, 255));
+	 txt_numero_venta.setFont(new Font("Dialog", Font.BOLD, 29));
+	txt_numero_venta.setBounds(766, 91, 137, 38);
+	txt_numero_venta.setOpaque(false);
+	txt_numero_venta.repaint();
 	long venta_numero;
 	try {
 		venta_numero = DB_ventas.numero_venta() +1 ;
-		txt_numero_venta.setText(String.valueOf( venta_numero) );
+		txt_numero_venta.setText("38" );
 	} catch (SQLException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
@@ -732,18 +744,18 @@ txt_cambio.setText(cambio);
 		}
 	});
 	btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
-	btn_ver_movimientos.setBounds(459, 632, 161, 23);
+	btn_ver_movimientos.setBounds(520, 624, 161, 23);
 	panel.add(btn_ver_movimientos);
 	
 	JLabel lbl_calendario_1 = new JLabel("");
 	lbl_calendario_1.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/calendario.png")));
 	lbl_calendario_1.setHorizontalAlignment(SwingConstants.CENTER);
-	lbl_calendario_1.setBounds(644, 541, 76, 60);
+	lbl_calendario_1.setBounds(413, 595, 76, 60);
 	panel.add(lbl_calendario_1);
 	
 	spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
 	spinner_tiempo_limite.setSize(135, 26);
-	spinner_tiempo_limite.setLocation(358, 569);
+	spinner_tiempo_limite.setLocation(254, 623);
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	
 	panel.add(spinner_tiempo_limite);
@@ -751,18 +763,18 @@ txt_cambio.setText(cambio);
 	JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 	lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_fecha_final.setFont(new Font("Dialog", Font.BOLD, 13));
-	lbl_fecha_final.setBounds(499, 541, 135, 32);
+	lbl_fecha_final.setBounds(268, 595, 135, 32);
 	panel.add(lbl_fecha_final);
 	
 	JLabel lbl_calendario = new JLabel("");
 	lbl_calendario.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/calendario.png")));
 	lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
-	lbl_calendario.setBounds(346, 541, 76, 60);
+	lbl_calendario.setBounds(167, 595, 76, 60);
 	panel.add(lbl_calendario);
 	
 	 spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
 	 spinner_tiempo_inicial.setSize(135, 27);
-	 spinner_tiempo_inicial.setLocation(66, 569);
+	 spinner_tiempo_inicial.setLocation(10, 623);
 	 spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 	
 	panel.add(spinner_tiempo_inicial);
@@ -770,14 +782,20 @@ txt_cambio.setText(cambio);
 	JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
 	lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_fecha_inicial.setFont(new Font("Dialog", Font.BOLD, 13));
-	lbl_fecha_inicial.setBounds(201, 541, 135, 32);
+	lbl_fecha_inicial.setBounds(22, 595, 135, 32);
 	panel.add(lbl_fecha_inicial);
 	
-	JLabel lbl_numero_ventas = new JLabel("NUMERO DE VENTA");
+	JLabel lbl_numero_ventas = new JLabel("Venta #:");
 	lbl_numero_ventas.setHorizontalAlignment(SwingConstants.CENTER);
-	lbl_numero_ventas.setFont(new Font("Dialog", Font.BOLD, 13));
-	lbl_numero_ventas.setBounds(265, 30, 157, 22);
+	lbl_numero_ventas.setFont(new Font("Dialog", Font.BOLD, 35));
+	lbl_numero_ventas.setBounds(590, 91, 169, 39);
 	panel.add(lbl_numero_ventas);
+	
+	JLabel lblNewLabel = new JLabel("$");
+	lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+	lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 18));
+	lblNewLabel.setBounds(560, 481, 53, 26);
+	panel.add(lblNewLabel);
 
 	txt_total.addCaretListener(new CaretListener() {
 		public void caretUpdate(CaretEvent e) {

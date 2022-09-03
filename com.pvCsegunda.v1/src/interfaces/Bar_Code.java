@@ -287,6 +287,10 @@ public class Bar_Code extends JFrame {
 		panel.add(btn_mas);
 		
 		JButton btn_menos = new JButton("-");
+		btn_menos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_menos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -296,7 +300,7 @@ public class Bar_Code extends JFrame {
 				if(valor > 0) {
 				valor--;
 				txt_cantidad.setText(""+valor);
-				frame.requestFocus();
+				//frame.requestFocus();
 				}else {
 					txt_cantidad.setText("0");
 					frame.requestFocus();

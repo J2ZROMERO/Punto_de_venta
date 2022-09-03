@@ -461,6 +461,8 @@ public class Menu_principal extends JFrame {
 		panel.add(lbl_caja_titulo);
 		
 		JButton btn_cambiar_usuario = new JButton("CAMBIAR USUARIO");
+	
+	
 		btn_cambiar_usuario.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -474,6 +476,10 @@ public class Menu_principal extends JFrame {
 				dispose();
 	Login usuarios = new Login();
 	usuarios.setVisible(true);
+	usuarios.setVisible(true);
+	usuarios.setFocusable(true);
+	usuarios.esc();
+	usuarios.setLocationRelativeTo(null);
 			}
 		});
 		panel.add(btn_cambiar_usuario);

@@ -38,6 +38,7 @@ public class Caja_Inicial extends JFrame {
 				try {
 					frame = new Caja_Inicial();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -408,7 +408,7 @@ private JSpinner spinner_tiempo_limite;
 						datosDB[13] = txt_marca.getText();
 						datosDB[14] = txt_linea.getText();
 						datosDB[15] = txt_categoria.getText();
-						datosDB[16] =  txt_usuario.getText();
+						datosDB[16] =  Menu_principal.nombre_usuario;
 						datosDB[17] =  txt_notas_de_venta.getText();
 						DB_productos.actualizar(datosDB);
 					} catch (SQLException e1) {
@@ -429,7 +429,11 @@ private JSpinner spinner_tiempo_limite;
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					DB_productos.eliminar(txt_usuario.getText(), Long.parseLong(txt_id.getText()));
+					DB_productos.eliminar(Menu_principal.nombre_usuario, Long.parseLong(txt_id.getText()));
+					
+					Limpiar_Campos();
+					cbx_atributos_produccion.setSelectedIndex(0);
+					JOptionPane.showMessageDialog(null,"Producto eliminado");
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -443,6 +447,10 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_eliminar);
 		
 		JButton btn_limpiar_campos = new JButton("LIMPIAR CAMPOS");
+		btn_limpiar_campos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_limpiar_campos.setBounds(34, 313, 156, 23);
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
 		

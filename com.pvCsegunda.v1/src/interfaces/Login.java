@@ -100,7 +100,7 @@ public class Login extends JFrame {
 		public Login() {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 665, 389);
+		setBounds(100, 100, 443, 234);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,8 +108,8 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(186, 85, 211));
-		panel.setBounds(0, 0, 649, 350);
+		panel.setBackground(Color.CYAN);
+		panel.setBounds(0, 0, 427, 195);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		panel.addKeyListener(new KeyAdapter() {
@@ -123,22 +123,22 @@ public class Login extends JFrame {
 			}
 		});
 		
-		JLabel lbl_titulo = new JLabel("LOGIN");
+		JLabel lbl_titulo = new JLabel("BIENVENIDO");
 		lbl_titulo.setFont(new Font("Roboto Slab Black", Font.BOLD, 16));
 		lbl_titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titulo.setBounds(74, 11, 186, 22);
+		lbl_titulo.setBounds(147, 27, 171, 22);
 		panel.add(lbl_titulo);
 		
 		JLabel lbl_nickname = new JLabel("NICKNAME");
 		lbl_nickname.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_nickname.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_nickname.setBounds(10, 89, 100, 22);
+		lbl_nickname.setBounds(10, 75, 100, 22);
 		panel.add(lbl_nickname);
 		
 		JLabel lbl_password = new JLabel("PASSWORD");
 		lbl_password.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_password.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_password.setBounds(10, 200, 100, 22);
+		lbl_password.setBounds(10, 116, 100, 22);
 		panel.add(lbl_password);
 		
 		cbx_nickname = new JComboBox();
@@ -148,7 +148,7 @@ public class Login extends JFrame {
 		cbx_nickname.setName("");
 		cbx_nickname.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_nickname.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		cbx_nickname.setBounds(124, 89, 231, 22);
+		cbx_nickname.setBounds(124, 75, 231, 22);
 		cbx_nickname.addKeyListener(new KeyAdapter() {
 			
 			public void keyPressed(KeyEvent e) {
@@ -163,7 +163,7 @@ public class Login extends JFrame {
 		
 		txt_password = new JPasswordField();
 		txt_password.setFont(new Font("Roboto Slab", Font.BOLD, 20));
-		txt_password.setBounds(124, 200, 231, 22);
+		txt_password.setBounds(124, 113, 231, 22);
 		txt_password.addKeyListener(new KeyAdapter() {
 			
 			
@@ -181,6 +181,9 @@ public class Login extends JFrame {
 		   usuario_menu =  cbx_nickname.getSelectedItem().toString();
 			
 			establece_monto.setVisible(true);
+			establece_monto.setFocusable(true);
+			
+			establece_monto.setLocationRelativeTo(null);	
 		dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
@@ -222,9 +225,12 @@ public class Login extends JFrame {
 			
 			if(acceso_usuario(cbx_nickname, txt_password) == true) {
 				Caja_Inicial establece_monto = new Caja_Inicial();
-			   usuario_menu =  cbx_nickname.getSelectedItem().toString();
 				
+				usuario_menu =  cbx_nickname.getSelectedItem().toString();
 				establece_monto.setVisible(true);
+				establece_monto.setFocusable(true);
+				
+				establece_monto.setLocationRelativeTo(null);				
 			dispose();
 			}else {
 				JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
@@ -235,7 +241,7 @@ public class Login extends JFrame {
 		});
 		
 		btn_ingresar.setFont(new Font("Roboto Slab", Font.BOLD, 13));
-		btn_ingresar.setBounds(135, 275, 111, 23);
+		btn_ingresar.setBounds(186, 146, 111, 23);
 		panel.add(btn_ingresar);
 		btn_ingresar.addKeyListener(new KeyAdapter() {
 		

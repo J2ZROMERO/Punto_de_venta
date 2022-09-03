@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_devoluciones_perdidas;
 import java.awt.Color;
@@ -35,6 +36,7 @@ import javax.swing.SpinnerNumberModel;
 
 
 public class Devoluciones_Perdidas extends JFrame {
+	private JScrollPane scrollPane;
 	private 	String spinnerTimeInicial ;
 	private String spinnerTimefinal;
 	private JSpinner spinner_tiempo_inicial;
@@ -164,7 +166,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		});
 		panel.add(sp_cantidad);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		 scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 89, 502, 98);
 		panel.add(scrollPane);
 		
@@ -221,6 +223,20 @@ public class Devoluciones_Perdidas extends JFrame {
 					datos[5] = Menu_principal.nombre_usuario;
 					
 					
+					JOptionPane.showMessageDialog(null,"Transaccion exitosa");
+					
+					txt_cantidad_devolver.setText("");
+					sp_cantidad.setValue(0);
+					txt_id.setText("");
+					txt_id_cliente.setText("");
+					cbx_motivo.setSelectedIndex(0);
+					 table.setModel(new DefaultTableModel(
+								new Object[][] {
+								},
+								new String[] {
+									
+								}
+							));
 					try {
 						DB_devoluciones_perdidas.anadir(datos);
 					} catch (SQLException e1) {
