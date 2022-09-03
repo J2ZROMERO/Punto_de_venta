@@ -89,7 +89,7 @@ public class Proveedores extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(255, 191, 0));
+		panel.setBackground(new Color(186, 104, 200));
 		panel.setBounds(0, 0, 764, 532);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -224,7 +224,7 @@ public class Proveedores extends JFrame {
 					
 					try {
 						DB_provedores.anadir(datos);
-						JOptionPane.showMessageDialog(null,"USUARIO AGREGADO CORRECTAMENTE");
+						JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
@@ -270,7 +270,7 @@ public class Proveedores extends JFrame {
 				try {
 					DB_provedores.actualizar(datos);
 					
-					JOptionPane.showMessageDialog(null,"USUARIO ACTUALIZADO CORRECTAMENTE");
+					JOptionPane.showMessageDialog(null,"PROVEEDOR ACTUALIZADO CORRECTAMENTE");
 							Limpiar_Campos();
 							txt_nombre.requestFocus();
 							ver_datos_tabla(tbl_proveedores);
@@ -304,6 +304,7 @@ public class Proveedores extends JFrame {
 					if (opcion == 0) {
 					try {
 						DB_provedores.eliminar(  Integer.parseInt( txt_id.getText()));
+						JOptionPane.showMessageDialog(null,"PROVEEDOR ELIMINADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
 						ver_datos_tabla(tbl_proveedores);
@@ -329,8 +330,8 @@ public class Proveedores extends JFrame {
 		panel.add(scrollPane);
 		
 		tbl_proveedores = new JTable();
-		tbl_proveedores.setSelectionBackground(new Color(255, 191, 0));
-		tbl_proveedores.setBackground(new Color(255, 252, 166));
+		tbl_proveedores.setSelectionBackground(new Color(186, 104, 200));
+		tbl_proveedores.setBackground(new Color(84, 153, 199));
 		ver_datos_tabla(tbl_proveedores);
 		tbl_proveedores.addMouseListener( new MouseAdapter() {
 
@@ -340,9 +341,7 @@ public class Proveedores extends JFrame {
 				String selectedCellValue = tbl_proveedores.getValueAt(tbl_proveedores.getSelectedRow() , 0).toString();
 				txt_id.setText(selectedCellValue);
 
-		
-		     
-		
+
 			    	 Object datos[];
 
 							try {
@@ -354,9 +353,7 @@ public class Proveedores extends JFrame {
 								txt_empresa_para_la_que_trabaja.setText(datos[4].toString());
 								txt_nombre_supervisor.setText((String)datos[5]);
 								txt_contacto_del_supervisor.setText((String)datos[6]);
-
-
-			
+								
 							} catch (NumberFormatException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -367,7 +364,7 @@ public class Proveedores extends JFrame {
 							
 							
 						
-		}                              });
+		}});
 		tbl_proveedores.setFont(new Font("Dialog", Font.BOLD, 12));
 		scrollPane.setViewportView(tbl_proveedores);
 		

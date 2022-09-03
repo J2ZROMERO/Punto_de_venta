@@ -1,29 +1,30 @@
 package interfaces;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JToggleButton;
-import java.awt.Font;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+<<<<<<< HEAD
 import java.lang.reflect.Array;
 import java.awt.Cursor;
+=======
+import java.awt.geom.RoundRectangle2D;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class Menu_principal extends JFrame {
 
@@ -42,6 +43,7 @@ public class Menu_principal extends JFrame {
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
 				    frame.nombre();
+				    
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,7 +64,6 @@ public class Menu_principal extends JFrame {
 	
 	public Menu_principal() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 613, 750);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,7 +72,7 @@ public class Menu_principal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(255, 196, 116));
+		panel.setBackground(new Color(87, 181, 132));
 		panel.setBounds(0, 0, 597, 711);
 		contentPane.add(panel);
 		panel.setLayout(null);

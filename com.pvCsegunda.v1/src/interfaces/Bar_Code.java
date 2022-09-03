@@ -27,7 +27,6 @@ import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.Barcode;
 import com.itextpdf.text.pdf.Barcode128;
-import com.itextpdf.text.pdf.Barcode39;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -106,13 +105,6 @@ public class Bar_Code extends JFrame {
 		this.lbl_bar_code.setIcon(barras);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public void Generar_Codigo() throws DocumentException {
@@ -407,7 +399,10 @@ public class Bar_Code extends JFrame {
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+<<<<<<< HEAD
 //				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
+=======
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 				File archivo = new File(url);
 				
 				if(archivo.exists()) {
@@ -444,18 +439,30 @@ public class Bar_Code extends JFrame {
 
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
+<<<<<<< HEAD
 						frame.requestFocus();
+=======
+
+					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
+						System.out.println("nothing to generate");
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 
 					}else {
 
-						createPdf(txt_id.getText(), Integer.parseInt( txt_cantidad.getText()));
+						createPdf(txt_id.getText(), Integer.parseInt(txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
 
+<<<<<<< HEAD
 					//	frame.requestFocus();
+=======
+						frame.requestFocus();
+
+					txt_cantidad.setText("0");	
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 
 					}
 					
-					
+					}	
 			
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
@@ -468,6 +475,7 @@ public class Bar_Code extends JFrame {
 			e1.printStackTrace();
 		}
 			}
+			
 		});
 		
 		btn_limpiar_hoja.addMouseListener(new MouseAdapter() {
@@ -479,7 +487,7 @@ public class Bar_Code extends JFrame {
 				if(resp == 0) {
 				
 					try {
-						createPdf("", 0);
+						createPdf("",0);
 						letras.clear();
 					
 					} catch (IOException e1) {
@@ -495,7 +503,7 @@ public class Bar_Code extends JFrame {
 					try {
 						cleanTable = DB_productos.model_view_prod_barcode(Long.parseLong( txt_id.getText()));
 
-						 cleanTable.setRowCount(0);
+						cleanTable.setRowCount(0);
 						tbl_bar_code.setModel(cleanTable);
 						txt_id.setText("");
 						txt_id.requestFocus();
@@ -516,7 +524,10 @@ public class Bar_Code extends JFrame {
 				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 				}
 			}
 			@Override
@@ -566,12 +577,18 @@ public class Bar_Code extends JFrame {
 		txt_id.addKeyListener(eventos);
 		
 	}
+	
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
+<<<<<<< HEAD
 		Document document = new Document();
 		String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 		
+=======
+	Document document = new Document();
+	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+>>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
-System.out.println(id+cantidad);
+    System.out.println(id+cantidad);
 		if(cantidad == 0) {
 
 	document.open();
@@ -721,8 +738,6 @@ tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(campo.getTex
 }
 		
 }}
-	
-
 	
 }
 

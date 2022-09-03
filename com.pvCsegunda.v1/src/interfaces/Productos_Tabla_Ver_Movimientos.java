@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.awt.Color;
 
 public class Productos_Tabla_Ver_Movimientos extends JFrame {
 
@@ -54,21 +55,24 @@ public class Productos_Tabla_Ver_Movimientos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(198, 144, 125));
 		panel.setBounds(0, 0, 875, 377);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 854, 328);
+		scrollPane.setBounds(10, 11, 832, 317);
 		panel.add(scrollPane);
 		
 		tbl_ver_movimiento = new JTable();
+		tbl_ver_movimiento.setSelectionBackground(new Color(245, 176, 65));
+		tbl_ver_movimiento.setBackground(new Color(119, 136, 153));
 
 		scrollPane.setViewportView(tbl_ver_movimiento);
 		
 		JButton btn_ok = new JButton("OK");
 		btn_ok.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ok.setBounds(381, 339, 102, 27);
+		btn_ok.setBounds(375, 339, 102, 27);
 		
 		btn_ok.addMouseListener(new MouseAdapter() {
 			@Override

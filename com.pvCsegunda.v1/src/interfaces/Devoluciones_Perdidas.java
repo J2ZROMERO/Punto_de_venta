@@ -31,6 +31,7 @@ import javax.swing.border.EmptyBorder;
 
 import conexionDB.DB_devoluciones_perdidas;
 import java.awt.Color;
+import javax.swing.SpinnerNumberModel;
 
 
 public class Devoluciones_Perdidas extends JFrame {
@@ -87,7 +88,8 @@ public class Devoluciones_Perdidas extends JFrame {
 	}
 	
 	public Devoluciones_Perdidas() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 538, 604);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,7 +97,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 191, 0));
+		panel.setBackground(new Color(84, 153, 199));
 		panel.setForeground(new Color(0, 0, 0));
 		panel.setBounds(0, 0, 522, 565);
 		contentPane.add(panel);
@@ -150,6 +152,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		panel.add(btn_buscar);
 		
 		sp_cantidad = new JSpinner();
+		sp_cantidad.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		sp_cantidad.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		sp_cantidad.setBounds(206, 200, 145, 29);
 		

@@ -21,6 +21,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class Ventas_movimientos extends JFrame {
 
@@ -48,19 +51,25 @@ public class Ventas_movimientos extends JFrame {
 	 */
 	public Ventas_movimientos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 767, 466);
+		setBounds(100, 100, 928, 466);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(152, 179, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton btn_ver = new JButton("VER");
-		btn_ver.setBounds(345, 393, 111, 23);
+		btn_ver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btn_ver.setBounds(401, 393, 111, 23);
 		contentPane.add(btn_ver);
 		btn_ver.setFont(new Font("Dialog", Font.BOLD, 13));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(52, 33, 652, 297);
+		scrollPane.setBounds(10, 11, 892, 371);
 		contentPane.add(scrollPane);
 		
 		tbl_ver_movimientos = new JTable();

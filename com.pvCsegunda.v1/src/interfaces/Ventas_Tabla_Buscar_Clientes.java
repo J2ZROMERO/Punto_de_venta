@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 public class Ventas_Tabla_Buscar_Clientes extends JFrame {
 
@@ -39,7 +40,8 @@ public class Ventas_Tabla_Buscar_Clientes extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventas_Tabla_Buscar_Clientes() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 605, 467);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -47,12 +49,13 @@ public class Ventas_Tabla_Buscar_Clientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(152, 179, 255));
 		panel.setBounds(0, 0, 589, 428);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 589, 374);
+		scrollPane.setBounds(10, 11, 569, 363);
 		panel.add(scrollPane);
 		
 		tbl_provedores_buscar = new JTable();
@@ -66,7 +69,7 @@ public class Ventas_Tabla_Buscar_Clientes extends JFrame {
 		scrollPane.setViewportView(tbl_provedores_buscar);
 		
 		JButton btn_ok = new JButton("OK");
-		btn_ok.setBounds(214, 394, 127, 23);
+		btn_ok.setBounds(231, 394, 127, 23);
 		btn_ok.setFont(new Font("Dialog", Font.BOLD, 13));
 		
 		btn_ok.addMouseListener(new MouseAdapter() {

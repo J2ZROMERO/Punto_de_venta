@@ -6,6 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barcode4j.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/icepdf-core.jar"/>
@@ -15,5 +16,6 @@
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
 	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+
 	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
 </classpath>
