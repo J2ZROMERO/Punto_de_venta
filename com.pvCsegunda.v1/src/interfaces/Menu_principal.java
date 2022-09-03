@@ -7,12 +7,14 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-<<<<<<< HEAD
+
 import java.lang.reflect.Array;
 import java.awt.Cursor;
-=======
+
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.ImageIcon;
@@ -20,7 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -459,7 +461,7 @@ public class Menu_principal extends JFrame {
 		panel.add(lbl_caja_titulo);
 		
 		JButton btn_cambiar_usuario = new JButton("CAMBIAR USUARIO");
-		btn_cambiar_usuario.addActionListener(new ActionListener() {
+		btn_cambiar_usuario.addActionListener((ActionListener) new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});

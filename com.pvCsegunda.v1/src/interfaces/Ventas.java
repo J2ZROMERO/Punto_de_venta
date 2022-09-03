@@ -127,23 +127,13 @@ public class Ventas extends JFrame {
 		btn_buscar_clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
+
 				Clientes_Tabla_Ver_Clientes b = new Clientes_Tabla_Ver_Clientes();
 				b.ver_clientes_ventas(txt_id_cliente);
 				b.setVisible(true);
 				b.setFocusable(true);
 				b.setLocationRelativeTo(null);
-=======
-				if(!"".equals(txt_id_cliente.getText())) {
-					Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
-					b.setVisible(true);
-					b.setFocusable(true);
-					b.setLocationRelativeTo(null);
-				}else {
-					JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID CLIENTE");
-				}
-				
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+
 			}
 		});
 		btn_buscar_clientes.setFont(new Font("Dialog", Font.BOLD, 13));

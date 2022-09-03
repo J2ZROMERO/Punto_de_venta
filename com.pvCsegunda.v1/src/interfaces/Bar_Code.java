@@ -399,10 +399,7 @@ public class Bar_Code extends JFrame {
 		btn_imprimir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
-<<<<<<< HEAD
-//				String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf"; //leo
-=======
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+
 				File archivo = new File(url);
 				
 				if(archivo.exists()) {
@@ -439,32 +436,21 @@ public class Bar_Code extends JFrame {
 
 					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
 						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
-<<<<<<< HEAD
-						frame.requestFocus();
-=======
-
-					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
-						System.out.println("nothing to generate");
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+		frame.requestFocus();
 
 					}else {
 
 						createPdf(txt_id.getText(), Integer.parseInt(txt_cantidad.getText()));
 						openpdf(scrollPane_1 );	
 
-<<<<<<< HEAD
 					//	frame.requestFocus();
-=======
-						frame.requestFocus();
 
-					txt_cantidad.setText("0");	
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 
 					}
 					
 					}	
 			
-		} catch (NumberFormatException e1) {
+		 catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
@@ -524,10 +510,7 @@ public class Bar_Code extends JFrame {
 				txt_cantidad.setText("0");
 				txt_id.setText("");
 				txt_id.requestFocus();
-<<<<<<< HEAD
 
-=======
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
 				}
 			}
 			@Override
@@ -579,14 +562,11 @@ public class Bar_Code extends JFrame {
 	}
 	
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
-<<<<<<< HEAD
+
 		Document document = new Document();
 		String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
 		
-=======
-	Document document = new Document();
-	String url = "E:/RESPALDO/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
     System.out.println(id+cantidad);
 		if(cantidad == 0) {
