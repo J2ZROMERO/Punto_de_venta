@@ -67,7 +67,7 @@ if(datos_campos[3].equals("")) {
 if(datos_campos[4].equals("")) {
 	cstm.setNull(5, java.sql.Types.NULL);
 }else {
-	cstm.setInt(5, Integer.parseInt(datos_campos[4].toString() ));                //double	
+	cstm.setString(5, datos_campos[4].toString() );                //double	
 }
 cstm.setLong( 6,Long.parseLong(datos_campos[5].toString()));
 	

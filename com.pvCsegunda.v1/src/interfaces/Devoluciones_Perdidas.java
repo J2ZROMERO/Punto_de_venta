@@ -215,7 +215,7 @@ public class Devoluciones_Perdidas extends JFrame {
 					datos[2] = txt_cantidad_devolver.getText();
 					datos[3] =  cbx_motivo.getSelectedItem().toString();
 					datos[4] =  txt_id_cliente.getText();
-					datos[5] = "";
+					datos[5] = Menu_principal.nombre_usuario;
 					
 					
 					try {

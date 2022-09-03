@@ -17,11 +17,13 @@ import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Caja extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt_saldo_inicial;
+	public static  JTextField txt_saldo_inicial;
 	private JTextField txt_motivo;
 	private JTextField txt_monto;
 	private JTextField txt_saldo_total_del_dia;
@@ -85,6 +87,14 @@ public class Caja extends JFrame {
 		txt_saldo_inicial.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_saldo_inicial.setColumns(10);
 		
+		
+		
+		
+		txt_saldo_inicial.setText(Caja_Inicial.monto);
+		
+		
+		//txt_fecha_inicial.setText(  Menu_principal.saldoInicial);
+		
 		JLabel lbl_movimiento = new JLabel("MOVIMIENTO");
 		lbl_movimiento.setBounds(10, 99, 159, 22);
 		panel.add(lbl_movimiento);
@@ -122,6 +132,10 @@ public class Caja extends JFrame {
 		txt_monto.setColumns(10);
 		
 		JButton btn_cargar_movimiento = new JButton("CARGAR MOVIMIENTO");
+		btn_cargar_movimiento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_cargar_movimiento.setBounds(196, 241, 192, 23);
 		panel.add(btn_cargar_movimiento);
 		
@@ -236,5 +250,9 @@ public class Caja extends JFrame {
 				dispose();
 			}
 		});
+	
+
 	}
+
+
 }

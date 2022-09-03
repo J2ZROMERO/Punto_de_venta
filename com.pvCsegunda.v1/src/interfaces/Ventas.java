@@ -116,10 +116,15 @@ public class Ventas extends JFrame {
 		txt_id_cliente.setColumns(10);
 		
 		JButton btn_buscar_clientes = new JButton("BUSCAR CLIENTES");
+		btn_buscar_clientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_buscar_clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
+				Clientes_Tabla_Ver_Clientes b = new Clientes_Tabla_Ver_Clientes();
+				b.ver_clientes_ventas(txt_id_cliente);
 				b.setVisible(true);
 				b.setFocusable(true);
 				b.setLocationRelativeTo(null);
@@ -473,7 +478,7 @@ total_txt(txt_total, def_tabla);
 						datos_venta[1] = def_tabla.getValueAt(i, 5);
 						datos_venta[2] = txt_total.getText();
 						datos_venta[3] =  txt_id_cliente.getText();
-						datos_venta[4] = "";
+						datos_venta[4] = Menu_principal.nombre_usuario;
 						datos_venta[5] = txt_numero_venta.getText();
 						
 				

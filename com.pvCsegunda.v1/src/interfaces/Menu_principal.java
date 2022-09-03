@@ -21,6 +21,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
 import java.awt.Cursor;
 import javax.swing.JTextField;
 
@@ -535,6 +536,12 @@ public class Menu_principal extends JFrame {
 		lbl_usuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_usuario.setBounds(42, 11, 185, 20);
 		lbl_usuario.setColumns(10);
+		lbl_usuario.setText(Login.usuario_menu);
 		panel.add(lbl_usuario);
+		nombre_usuario = Login.usuario_menu;
+		
 	}
+
+	
+	public static String nombre_usuario;
 }

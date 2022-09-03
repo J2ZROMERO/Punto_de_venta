@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.itextpdf.text.log.SysoCounter;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -14,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Caja_Inicial extends JFrame {
 
@@ -65,25 +72,62 @@ public class Caja_Inicial extends JFrame {
 		txt_monto.setBounds(48, 73, 232, 24);
 		panel.add(txt_monto);
 		txt_monto.setColumns(10);
-		
+		txt_monto.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+						
+							if(!txt_monto.getText().equals("")) {
+								
+							Menu_principal mp = new Menu_principal();
+							mp.setVisible(true);
+							mp.setFocusable(true);
+							mp.setLocationRelativeTo(null);
+							
+							monto = txt_monto.getText();	
+							
+					dispose();
+							}else {
+								JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+								frame.requestFocus();
+							}
+						}
+					
+				
+			}
+		});
 		JButton btn_añadir = new JButton("AÑADIR");
+		
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_añadir.setBounds(320, 73, 89, 24);
+		
+		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				
 				if(!txt_monto.getText().equals("")) {
+					
 				Menu_principal mp = new Menu_principal();
 				mp.setVisible(true);
 				mp.setFocusable(true);
 				mp.setLocationRelativeTo(null);
-				dispose();
+				
+				monto = txt_monto.getText();	
+				
+		dispose();
 				}else {
 					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 					frame.requestFocus();
 				}
 			}
 		});
+		
+		
 		panel.add(btn_añadir);
 		
 		txt_usuario = new JTextField();
@@ -99,5 +143,15 @@ public class Caja_Inicial extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBounds(10, 76, 28, 20);
 		panel.add(lblNewLabel);
+		
+		
+
+			
+
 	}
+
+
+	
+public  static  String monto;
+
 }

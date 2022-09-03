@@ -150,23 +150,26 @@ public class Login extends JFrame {
 			
 			
 		public void keyReleased(KeyEvent e) {
+			
+			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				
+			
+			
 		String nombre = cbx_nickname.getName();
 		String pass = txt_password.getText();
 	
-		if(cbx_nickname.getName().equals("")) {
-				if (pass.equalsIgnoreCase("12345") && nombre.equalsIgnoreCase(cbx_nickname.getName())) {
-					Caja_Inicial ci = new Caja_Inicial();
-					ci.setVisible(true);
-					ci.setFocusable(true);
-					ci.setLocationRelativeTo(null);
-					ci.txt_usuario.setText(cbx_nickname.getSelectedItem().toString());
-					dispose();
-				}
+		if(acceso_usuario(cbx_nickname, txt_password) == true) {
+			Caja_Inicial establece_monto = new Caja_Inicial();
+		   usuario_menu =  cbx_nickname.getSelectedItem().toString();
+			
+			establece_monto.setVisible(true);
+		dispose();
 		}else {
-			JOptionPane.showMessageDialog(null, "CAMPOS VACIOS...");
+			JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
+			txt_password.setText("");
 		}
 			}
-			
+		}
 		    });
 		
 		/*CERRAR CON LA TECLA SCAPE*/
@@ -199,9 +202,11 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			if(acceso_usuario(cbx_nickname, txt_password) == true) {                        
-				Menu_principal acceso_menu = new Menu_principal();
-				acceso_menu.setVisible(true);
+			if(acceso_usuario(cbx_nickname, txt_password) == true) {
+				Caja_Inicial establece_monto = new Caja_Inicial();
+			   usuario_menu =  cbx_nickname.getSelectedItem().toString();
+				
+				establece_monto.setVisible(true);
 			dispose();
 			}else {
 				JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
@@ -262,7 +267,8 @@ public boolean acceso_usuario(JComboBox cbx, JTextField pass) {
 	
 }
 		
-		
+
+		public static String usuario_menu;
 		
 }
 
@@ -307,19 +313,19 @@ class eventoTeclado_enter implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		
+	/*	
 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	
 	Login acceso = new Login();
 	
 	
 	if(acceso.acceso_usuario(usuarios,pass) == true) {                        
-		Menu_principal acceso_menu = new Menu_principal();
-		acceso_menu.lbl_usuario.setText(usuarios.getSelectedItem().toString());
 		
-		
-		acceso_menu.setVisible(true);
+		Caja_Inicial establece_monto = new Caja_Inicial();
+		establece_monto.setVisible(true);
+		 
+		//acceso_menu.setVisible(true);
+
 		frame.dispose();
 	
 	}else {
@@ -327,7 +333,7 @@ if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 		
 	}
 
-}
+}*/
 	}		
 			
 

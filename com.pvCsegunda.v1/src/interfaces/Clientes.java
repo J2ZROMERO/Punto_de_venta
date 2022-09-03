@@ -174,6 +174,10 @@ public class Clientes extends JFrame {
 		panel.add(btn_limpiar_campos);
 		
 		JButton btn_ver_clientes = new JButton("");
+		btn_ver_clientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_ver_clientes.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/tabla.png")));
 		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ver_clientes.setBounds(122, 281, 163, 41);

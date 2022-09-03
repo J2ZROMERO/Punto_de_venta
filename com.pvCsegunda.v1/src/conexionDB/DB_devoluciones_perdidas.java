@@ -47,7 +47,7 @@ if(datos_campos[4].equals("")) {
 if(datos_campos[5].equals("")) {
 	cstm.setNull(6, java.sql.Types.NULL);
 }else {
-	cstm.setDouble(6,Integer.parseInt(datos_campos[5].toString() ));                //double	
+	cstm.setString(6,datos_campos[5].toString() );                //double	
 }
 
 cstm.executeUpdate();

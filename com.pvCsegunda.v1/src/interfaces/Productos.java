@@ -211,7 +211,7 @@ private JSpinner spinner_tiempo_limite;
 							datosDB[13] = txt_marca.getText();
 							datosDB[14] = txt_linea.getText();
 							datosDB[15] = txt_categoria.getText();
-							datosDB[16] =  txt_usuario.getText();
+							datosDB[16] =  Menu_principal.nombre_usuario;
 							datosDB[17] =  txt_notas_de_venta.getText();
 							
 							try 

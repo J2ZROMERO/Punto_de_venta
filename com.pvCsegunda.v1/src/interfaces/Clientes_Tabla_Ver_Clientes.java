@@ -84,6 +84,61 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 		});
 		panel.add(btn_ok);
 	}
+
+	
+	public  void ver_clientes_ventas(JTextField id) {
+
+		try {
+			
+			tbl_ver_clientes.setModel(DB_clientes.model_view_clientes());
+			
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+	tbl_ver_clientes.addMouseListener( new MouseAdapter() {
+			
+			public void mousePressed(MouseEvent e) {
+				
+				String selectedCellValue = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 0).toString();
+		        
+				id.setText(selectedCellValue);
+		     
+			     if(e.getClickCount()==2) {
+			    	 
+			    	 
+			    	 	
+						try {
+						Object	datos[] = DB_clientes.buscar(Integer.parseInt(id.getText()));
+							
+						for(Object t: DB_clientes.buscar(Integer.parseInt(id.getText()))) {
+							System.out.println(t);
+						}
+							//nombre.setText( datos[1].toString());
+							
+							
+							dispose();
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				
+			    	 
+			     }	
+				
+			       
+		           
+		            			
+		
+		}                              });
+		
+		
+			
+	}
+	
 	
 	public  void ver_clientes(JTextField id,JTextField nombre,JTextField apellido,JTextField nickname,JTextField telefono) {
 
