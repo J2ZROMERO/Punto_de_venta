@@ -55,7 +55,7 @@ public class Productos_Tabla_Ver_Movimientos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(198, 144, 125));
+		panel.setBackground(new Color(82, 190, 128));
 		panel.setBounds(0, 0, 875, 377);
 		contentPane.add(panel);
 		panel.setLayout(null);

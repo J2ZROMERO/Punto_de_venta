@@ -71,7 +71,7 @@ public class Categorias extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(46, 134, 193));
+		panel.setBackground(new Color(93, 173, 226));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);

@@ -67,7 +67,7 @@ public class Menu_principal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(87, 181, 132));
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 597, 711);
 		contentPane.add(panel);
 		panel.setLayout(null);
