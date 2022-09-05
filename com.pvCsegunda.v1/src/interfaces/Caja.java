@@ -64,7 +64,7 @@ public class Caja extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(235, 152, 78));
+		panel.setBackground(new Color(139, 195, 74));
 		panel.setBounds(0, 0, 518, 607);
 		contentPane.add(panel);
 		panel.setLayout(null);

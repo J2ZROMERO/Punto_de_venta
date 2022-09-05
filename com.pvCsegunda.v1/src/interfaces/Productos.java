@@ -63,7 +63,7 @@ private JSpinner spinner_tiempo_limite;
 	private JTextField txt_kilos;
 	private JTextField txt_usuario;
 	private JTextField txt_notas_de_venta;
-	private static Productos frame;
+	public static Productos frame;
 	/**
 	 * Launch the application.
 	 */
@@ -500,7 +500,7 @@ private JSpinner spinner_tiempo_limite;
 					txt_mililitros.setEnabled(false);
 					txt_color.setEnabled(false);
 					txt_tamano.setEnabled(false);
-			 
+					txt_kilos.requestFocus();
 			
 		}
 				if(cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("medida")){
@@ -509,6 +509,7 @@ private JSpinner spinner_tiempo_limite;
 					txt_mililitros.setEnabled(false);
 					txt_color.setEnabled(false);
 					txt_tamano.setEnabled(false);
+					txt_cm.requestFocus();
 			  
 					
 				}	else	if(cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("mililitros")){
@@ -517,6 +518,7 @@ private JSpinner spinner_tiempo_limite;
 					txt_mililitros.setEnabled(true);
 					txt_color.setEnabled(false);
 					txt_tamano.setEnabled(false);
+					txt_mililitros.requestFocus();
 					
 				}		else if(cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("color")){
 					txt_kilos.setEnabled(false);
@@ -524,6 +526,7 @@ private JSpinner spinner_tiempo_limite;
 					txt_mililitros.setEnabled(false);
 					txt_color.setEnabled(true);
 					txt_tamano.setEnabled(false);
+					txt_color.requestFocus();
 					
 				}		else if(cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("tamaño")){
 					txt_kilos.setEnabled(false);
@@ -531,6 +534,7 @@ private JSpinner spinner_tiempo_limite;
 					txt_mililitros.setEnabled(false);
 					txt_color.setEnabled(false);
 					txt_tamano.setEnabled(true);
+					txt_tamano.requestFocus();
 					
 				}else if (cbx_atributos_produccion.getSelectedItem().toString().equalsIgnoreCase("SELECCIONAR")){
 					txt_kilos.setEnabled(false);
