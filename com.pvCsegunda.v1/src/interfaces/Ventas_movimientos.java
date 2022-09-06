@@ -53,7 +53,7 @@ public class Ventas_movimientos extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 928, 466);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(152, 179, 255));
+		contentPane.setBackground(new Color(248, 196, 113));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

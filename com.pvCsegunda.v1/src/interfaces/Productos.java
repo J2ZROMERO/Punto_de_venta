@@ -206,12 +206,6 @@ private JSpinner spinner_tiempo_limite;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-			if(!"".equals(txt_id.getText()) && !"".equals(txt_producto.getText()) && !"".equals(txt_distintivo_1.getText())
-			 && !"".equals(txt_notas_a_cerca_del_producto.getText()) && !"".equals(txt_stock.getText()) && !"".equals(txt_kilos.getText())
-			 && !"".equals(txt_cm.getText()) && !"".equals(txt_mililitros.getText()) && !"".equals(txt_color.getText()) && !"".equals(txt_tamano.getText())
-			 && !"".equals(txt_precio_de_compra.getText()) && !"".equals(txt_precio_de_venta.getText()) && !"".equals(txt_provedores.getText()) && !"".equals(txt_notas_de_venta.getText())
-			 && !"".equals(txt_marca.getText()) && !"".equals(txt_linea.getText()) && !"".equals(txt_categoria.getText()) && !"".equals(txt_usuario.getText())) {
-			
 				Object datosDB[] = new Object[18];
 				datosDB[0] = txt_id.getText();
 				datosDB[1] = txt_producto.getText();
@@ -242,10 +236,6 @@ private JSpinner spinner_tiempo_limite;
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}else {
-				JOptionPane.showMessageDialog(null,"FAVOR DE LLENAR LOS CAMPOS VACIOS...");
-				frame.requestFocus();
-			}
 							
 			}	
 		});
