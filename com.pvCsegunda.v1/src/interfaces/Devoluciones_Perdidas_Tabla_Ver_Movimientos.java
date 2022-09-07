@@ -47,7 +47,7 @@ public class Devoluciones_Perdidas_Tabla_Ver_Movimientos extends JFrame {
 	 * Create the frame.
 	 */
 	public Devoluciones_Perdidas_Tabla_Ver_Movimientos() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 1144, 416);
 		contentPane = new JPanel();

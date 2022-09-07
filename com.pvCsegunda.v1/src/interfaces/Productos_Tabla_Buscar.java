@@ -57,7 +57,8 @@ public class Productos_Tabla_Buscar extends JFrame {
 	 * Create the frame.
 	 */
 	public Productos_Tabla_Buscar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 658, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
