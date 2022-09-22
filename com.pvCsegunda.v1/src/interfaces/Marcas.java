@@ -206,6 +206,14 @@ public class Marcas extends JFrame {
 		});
 		panel.add(btn_regresar);
 		
+		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(245, 176, 65));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(487, 30, 44, 24);
+		panel.add(lbl_alerta_1);
+		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
 	}
 	public void ver_datos_tabla(JTable tabla) {

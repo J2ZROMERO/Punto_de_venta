@@ -203,6 +203,15 @@ public class Categorias extends JFrame {
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
+		
+		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setBackground(new Color(93, 173, 226));
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(488, 30, 51, 24);
+		panel.add(lbl_alerta_1);
 	}
 	public void ver_datos_tabla(JTable tabla) {
 
