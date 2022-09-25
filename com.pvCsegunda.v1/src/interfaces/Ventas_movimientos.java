@@ -58,7 +58,7 @@ public class Ventas_movimientos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btn_ver = new JButton("VER");
+		JButton btn_ver = new JButton("OK");
 		btn_ver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();

@@ -167,7 +167,7 @@ public class Login extends JFrame {
 		txt_password.addKeyListener(new KeyAdapter() {
 			
 			
-		public void keyReleased(KeyEvent e) {
+		public void keyPressed(KeyEvent e) {
 			
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 				
@@ -184,9 +184,11 @@ public class Login extends JFrame {
 			establece_monto.setFocusable(true);
 			
 			establece_monto.setLocationRelativeTo(null);	
+			establece_monto.txt_monto.requestFocus();
 		dispose();
 		}else {
 			JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
+			
 			txt_password.setText("");
 		}
 			}
@@ -230,7 +232,8 @@ public class Login extends JFrame {
 				establece_monto.setVisible(true);
 				establece_monto.setFocusable(true);
 				
-				establece_monto.setLocationRelativeTo(null);				
+				establece_monto.setLocationRelativeTo(null);
+				establece_monto.txt_monto.requestFocus();
 			dispose();
 			}else {
 				JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");

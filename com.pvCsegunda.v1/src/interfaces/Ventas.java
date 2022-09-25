@@ -30,6 +30,8 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionListener;
@@ -50,7 +52,7 @@ import javax.swing.event.CaretEvent;
 import java.awt.SystemColor;
 
 public class Ventas extends JFrame {
-	
+	public static String id_productos;
 	private JTextPane txt_numero_venta;
 	private DefaultTableModel def_tabla  = new DefaultTableModel();  
 	private enventoTeclado evento_teclado_campo_id;
@@ -94,6 +96,9 @@ public class Ventas extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventas() {
+		
+		System.out.println(Math.abs(-15));
+		System.out.println(-15);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 949, 716);
@@ -175,9 +180,19 @@ public class Ventas extends JFrame {
 						 DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
 					 }else {
 						 
-						 Productos busca_productos = new Productos();
+						 busqueda_productos busca_productos = new busqueda_productos();
 						 busca_productos.setVisible(true);
 						 busca_productos.setLocationRelativeTo(null);
+						 
+						busca_productos.addWindowFocusListener(new WindowFocusListener() {
+								public void windowGainedFocus(WindowEvent e) {
+								}
+								public void windowLostFocus(WindowEvent e) {
+								txt_id.setText(id_productos);
+								System.out.println("cerradnao");
+								
+								}
+							});	 
 					 }
 					
 				} catch (NumberFormatException e1) {
@@ -448,7 +463,7 @@ total_txt(txt_total, def_tabla);
 				}else {
 					double total_pagar = Double.parseDouble( txt_total.getText());
 					double efectivo = Double.parseDouble(txt_paga_con.getText());
-					double total =   total_pagar-efectivo  ; 
+					double total = Math.abs(  total_pagar-efectivo  ); 
 					
 				String h =	String.valueOf(efectivo);
 					System.out.println( h.length());
@@ -520,6 +535,7 @@ total_txt(txt_total, def_tabla);
 						try {
 							DB_ventas.anadir(datos_venta);
 							JOptionPane.showMessageDialog(null,"Venta generada");	
+							limpia_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -617,7 +633,7 @@ total_txt(txt_total, def_tabla);
 		double total_val= Double.parseDouble( txt_total.getText());
 		double total = 0;
 	
-		total = total_val - desc;
+		total = Math.abs(  total_val - desc);
 		
 		String cast = String.valueOf(total);
 		
@@ -662,7 +678,7 @@ txt_cambio.setText(cambio);
 			double total_val= Double.parseDouble( txt_total.getText());
 			double total = 0;
 		
-			total = (total_val+extra);
+			total = Math.abs(  (total_val+extra));
 			
 			String cast = String.valueOf(total);
 			
@@ -893,7 +909,7 @@ txt_cambio.setText(cambio);
 	txt_total.setText("");	
 	txt_notas_extra.setText("");
 	def_tabla.setRowCount(0);
-	frame.requestFocus();
+	//frame.requestFocus();
 	}
 }
 

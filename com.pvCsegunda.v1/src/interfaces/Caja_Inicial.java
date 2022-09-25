@@ -25,7 +25,7 @@ import java.awt.event.KeyEvent;
 public class Caja_Inicial extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt_monto;
+	public JTextField txt_monto;
 	public static Caja_Inicial frame;
 	public JTextField txt_usuario;
 
@@ -39,6 +39,7 @@ public class Caja_Inicial extends JFrame {
 					frame = new Caja_Inicial();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

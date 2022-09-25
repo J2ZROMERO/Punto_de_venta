@@ -460,7 +460,7 @@ public class Menu_principal extends JFrame {
 		});
 		panel.add(lbl_caja_titulo);
 		
-		JButton btn_cambiar_usuario = new JButton("CAMBIAR USUARIO");
+		JButton btn_cambiar_usuario = new JButton("Usuario");
 	
 	
 		btn_cambiar_usuario.addActionListener((ActionListener) new ActionListener() {
@@ -468,7 +468,7 @@ public class Menu_principal extends JFrame {
 			}
 		});
 		btn_cambiar_usuario.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_cambiar_usuario.setBounds(237, 10, 184, 23);
+		btn_cambiar_usuario.setBounds(10, 10, 102, 23);
 		
 		btn_cambiar_usuario.addMouseListener(new MouseAdapter() {
 			@Override
@@ -540,14 +540,18 @@ public class Menu_principal extends JFrame {
 		panel.add(lbl_proveedores);
 		
 		lbl_usuario = new JTextField();
-		lbl_usuario.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_usuario.setFont(new Font("Dialog", Font.BOLD, 25));
 		lbl_usuario.setEditable(false);
 		lbl_usuario.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_usuario.setBounds(42, 11, 185, 20);
+		lbl_usuario.setBounds(206, 10, 185, 31);
 		lbl_usuario.setColumns(10);
-		lbl_usuario.setText(Login.usuario_menu);
-		panel.add(lbl_usuario);
+		lbl_usuario.setOpaque(false);
+		lbl_usuario.setBorder(null);
 		nombre_usuario = Login.usuario_menu;
+		lbl_usuario.setText(nombre_usuario);
+		panel.add(lbl_usuario);
+		
+		
 		
 	}
 
