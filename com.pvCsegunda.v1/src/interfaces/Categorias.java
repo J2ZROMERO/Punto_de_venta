@@ -62,7 +62,7 @@ public class Categorias extends JFrame {
 	 */
 	public Categorias() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,7 +71,7 @@ public class Categorias extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBackground(new Color(46, 134, 193));
+		panel.setBackground(new Color(93, 173, 226));
 		panel.setBounds(0, 0, 603, 511);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -203,6 +203,15 @@ public class Categorias extends JFrame {
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
+		
+		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setBackground(new Color(93, 173, 226));
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(488, 30, 51, 24);
+		panel.add(lbl_alerta_1);
 	}
 	public void ver_datos_tabla(JTable tabla) {
 

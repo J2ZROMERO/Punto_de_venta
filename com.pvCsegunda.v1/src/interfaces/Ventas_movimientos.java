@@ -50,10 +50,11 @@ public class Ventas_movimientos extends JFrame {
 	 * Create the frame.
 	 */
 	public Ventas_movimientos() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 928, 466);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(152, 179, 255));
+		contentPane.setBackground(new Color(248, 196, 113));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

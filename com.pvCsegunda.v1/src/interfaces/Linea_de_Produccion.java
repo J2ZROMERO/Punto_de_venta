@@ -190,6 +190,14 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		lbl_imagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
+		
+		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(253, 223, 127));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(532, 30, 61, 24);
+		panel.add(lbl_alerta_1);
 	}
 	public void ver_datos_tabla(JTable tabla) {
 

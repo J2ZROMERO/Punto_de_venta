@@ -68,11 +68,13 @@ public class Ventas extends JFrame {
 	private JTextField txt_paga_con;
 	private JTextField txt_cambio;
 	private long numero_venta = 0;
-	private 	String spinnerTimeInicial ;
+	private String spinnerTimeInicial ;
 	private String spinnerTimefinal;
 	private JSpinner spinner_tiempo_inicial;
 	private JSpinner spinner_tiempo_limite;
 	private static Ventas frame;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
 	
 	/**
 	 * Launch the application.
@@ -101,15 +103,18 @@ public class Ventas extends JFrame {
 		System.out.println(-15);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 949, 716);
+
+		setBounds(100, 100, 1026, 746);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(152, 179, 255));
-		panel.setBounds(0, 0, 933, 666);
+		panel.setBackground(new Color(248, 196, 113));
+		panel.setBounds(0, 0, 1010, 707);
+
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -134,12 +139,16 @@ public class Ventas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				Clientes_Tabla_Ver_Clientes b = new Clientes_Tabla_Ver_Clientes();
-				b.ver_clientes_ventas(txt_id_cliente);
-				b.setVisible(true);
-				b.setFocusable(true);
-				b.setLocationRelativeTo(null);
+				if(!"".equals(txt_id_cliente.getText())) {
+					Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
+					b.setVisible(true);
+					b.setFocusable(true);
+					b.setLocationRelativeTo(null);
+				}else {
+					JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID CLIENTE");
+				}
 
+				
 			}
 		});
 		btn_buscar_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -163,22 +172,19 @@ public class Ventas extends JFrame {
 		panel.add(txt_id);
 		
 		JButton btn_buscar_productos = new JButton("BUSCAR PRODUCTOS");
-		btn_buscar_productos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		
-	
-			}
-		});
 		btn_buscar_productos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 	
 		//	ver_datos_ventas( Long.parseLong( txt_id.getText()));
-				   
+				 
 				 try {
 					 if(!"".equals(txt_id.getText())) {
 						 DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
+						 lbl_alerta_1.setForeground(new Color(248, 196, 113));
+						 txt_id.setText("");
 					 }else {
+
 						 
 						 busqueda_productos busca_productos = new busqueda_productos();
 						 busca_productos.setVisible(true);
@@ -193,6 +199,10 @@ public class Ventas extends JFrame {
 								
 								}
 							});	 
+
+						 //ALERTA
+						 lbl_alerta_1.setForeground(new Color(0,0,0));
+
 					 }
 					
 				} catch (NumberFormatException e1) {
@@ -742,25 +752,29 @@ txt_cambio.setText(cambio);
 	JButton btn_ver_movimientos = new JButton("VER MOVIMIENTOS");
 	btn_ver_movimientos.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			 spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+			spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			 spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+			spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
 			
 			Ventas_movimientos movimientos_generados = new Ventas_movimientos();
 			
 			System.out.println(spinnerTimeInicial + spinnerTimefinal);
 			
 			
-		movimientos_generados.ver_datos(spinnerTimeInicial, spinnerTimefinal);
+			movimientos_generados.ver_datos(spinnerTimeInicial, spinnerTimefinal);
 			movimientos_generados.setVisible(true);
 			movimientos_generados.setLocationRelativeTo(null);
+			lbl_alerta_2.setForeground(new Color(0,0,0));
 		
 		}
 	});
 	btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
-	btn_ver_movimientos.setBounds(520, 624, 161, 23);
+
+	btn_ver_movimientos.setBounds(441, 673, 161, 23);
+
 	panel.add(btn_ver_movimientos);
 	
 	JLabel lbl_calendario_1 = new JLabel("");
@@ -807,11 +821,29 @@ txt_cambio.setText(cambio);
 	lbl_numero_ventas.setBounds(590, 91, 169, 39);
 	panel.add(lbl_numero_ventas);
 	
+
 	JLabel lblNewLabel = new JLabel("$");
 	lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 	lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 18));
 	lblNewLabel.setBounds(560, 481, 53, 26);
 	panel.add(lblNewLabel);
+
+	lbl_alerta_1 = new JLabel("*");
+	lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+	lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+	lbl_alerta_1.setForeground(new Color(248, 196, 113));
+	lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+	lbl_alerta_1.setBounds(138, 136, 157, 24);
+	panel.add(lbl_alerta_1);
+	
+	lbl_alerta_2 = new JLabel("*");
+	lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+	lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+	lbl_alerta_2.setForeground(new Color(248, 196, 113));
+	lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+	lbl_alerta_2.setBounds(201, 624, 519, 24);
+	panel.add(lbl_alerta_2);
+
 
 	txt_total.addCaretListener(new CaretListener() {
 		public void caretUpdate(CaretEvent e) {
@@ -935,9 +967,6 @@ class enventoTeclado implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
-		
-		
-		
 		int key = e.getKeyChar();
 		boolean numeros = key >= 48 && key <=57;
 		if(!numeros) {
@@ -959,7 +988,7 @@ class enventoTeclado implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		
 		
-if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+    if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	
 	
 	if(campo.getText().equalsIgnoreCase("")) {
@@ -980,7 +1009,7 @@ if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					 for(int i = 0;i < modelo.getRowCount();i++) {
 						 
 						 double costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
-						double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
+						 double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
 						
 						
 						

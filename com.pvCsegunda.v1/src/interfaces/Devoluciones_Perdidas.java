@@ -36,8 +36,11 @@ import javax.swing.SpinnerNumberModel;
 
 
 public class Devoluciones_Perdidas extends JFrame {
+
+
 	private JScrollPane scrollPane;
 	private 	String spinnerTimeInicial ;
+
 	private String spinnerTimefinal;
 	private JSpinner spinner_tiempo_inicial;
 	private JSpinner spinner_tiempo_limite;
@@ -71,6 +74,15 @@ public class Devoluciones_Perdidas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Limpiar_Campos() {
+		txt_id.setText("");
+		sp_cantidad.setValue(0);
+		txt_cantidad_devolver.setText("");
+		cbx_motivo.setSelectedIndex(0);
+		txt_id_cliente.setText("");
+		table.getRowCount();
+	}
 	
 	public void Desactivar_Boton() {
 		int numero = Integer.parseInt(sp_cantidad.getValue().toString());
@@ -211,7 +223,7 @@ public class Devoluciones_Perdidas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(txt_id.getText().equalsIgnoreCase("")) {
-					System.out.println("rellena campos");
+					JOptionPane.showMessageDialog(null,"FAVOR DE LLENAR LOS CAMPOS");
 				}else {
 
 					Object datos[] = new Object [6];
@@ -239,6 +251,8 @@ public class Devoluciones_Perdidas extends JFrame {
 							));
 					try {
 						DB_devoluciones_perdidas.anadir(datos);
+						Limpiar_Campos();
+						txt_id.requestFocus();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

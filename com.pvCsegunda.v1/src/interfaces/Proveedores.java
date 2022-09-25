@@ -47,6 +47,8 @@ public class Proveedores extends JFrame {
 	private JTable tbl_proveedores;
 	private JButton btn_regresar;
 	private static Proveedores frame;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
 
 	/**
 	 * Launch the application.
@@ -383,6 +385,22 @@ public class Proveedores extends JFrame {
 			}
 		});
 		panel.add(btn_regresar);
+		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(186, 104, 200));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(140, 82, 198, 24);
+		panel.add(lbl_alerta_1);
+		
+		lbl_alerta_2 = new JLabel("*");
+		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_2.setForeground(new Color(186, 104, 200));
+		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_2.setBounds(140, 127, 198, 24);
+		panel.add(lbl_alerta_2);
 	}
 	
 	public void ver_datos_tabla(JTable tabla) {

@@ -33,6 +33,8 @@ import javax.swing.JPasswordField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Color;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Usuarios extends JFrame {
 
@@ -44,7 +46,13 @@ public class Usuarios extends JFrame {
 	private JTextField txt_nick_name;
 	private JTable tbl_usuarios;
 	private JComboBox cbx_tipo_de_rol;
-	private static Usuarios frame;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
+	private JLabel lbl_alerta_3;
+	private JLabel lbl_alerta_4;
+	private JLabel lbl_alerta_5;
+	private JLabel lbl_alerta_6;
+	public static Usuarios frame;
 	
 	/**
 	 * Launch the application.
@@ -57,11 +65,38 @@ public class Usuarios extends JFrame {
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
+					frame.Validar_Campos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public void Validar_Campos() {
+		if(cbx_tipo_de_rol.getSelectedIndex() >= 1) {
+			lbl_alerta_1.setForeground(new Color(144, 238, 144));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_nombre.getText())) {
+			lbl_alerta_3.setForeground(new Color(144, 238, 144));
+		}else {
+			lbl_alerta_3.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_nick_name.getText())) {
+			lbl_alerta_4.setForeground(new Color(144, 238, 144));
+		}else {
+			lbl_alerta_4.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_pass.getText())) {
+			lbl_alerta_5.setForeground(new Color(144, 238, 144));
+		}else {
+			lbl_alerta_5.setForeground(new Color(0,0,0));
+		}
 	}
 	
 	public void Limpiar_Campos() {
@@ -76,7 +111,8 @@ public class Usuarios extends JFrame {
 	}
 	
 	public Usuarios() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 808, 514);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -97,6 +133,11 @@ public class Usuarios extends JFrame {
 		
 		cbx_tipo_de_rol = new JComboBox();
 		cbx_tipo_de_rol.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONA UN ROL", "ADMINISTRADOR", "EMPLEADO"}));
+		cbx_tipo_de_rol.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				Validar_Campos();
+			}
+		});
 		
 		cbx_tipo_de_rol.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_tipo_de_rol.setBounds(149, 56, 230, 22);
@@ -142,6 +183,13 @@ public class Usuarios extends JFrame {
 		txt_nombre.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_nombre.setColumns(10);
 		txt_nombre.setBounds(149, 146, 230, 22);
+		
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nombre);
 		
 		JLabel lbl_apellido = new JLabel("APELLIDO");
@@ -178,6 +226,13 @@ public class Usuarios extends JFrame {
 		txt_nick_name.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_nick_name.setColumns(10);
 		txt_nick_name.setBounds(149, 291, 230, 22);
+		
+		txt_nick_name.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nick_name);
 		
 		JLabel lbl_password = new JLabel("PASSWORD");
@@ -213,18 +268,16 @@ public class Usuarios extends JFrame {
 	
 		JButton btn_añadir = new JButton("");
 		btn_añadir.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/anadir.png")));
-		btn_añadir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setBounds(511, 52, 164, 41);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				Object datos[] = new Object[7];
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0  && !txt_id.equals("") && !txt_nombre.equals("") && !txt_apellido.equals("") && !txt_nick_name.equals("") && !txt_pass.equals("")) {
+				
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0 && !"".equals(txt_nombre.getText()) && !"".equals(txt_nick_name.getText()) && !"".equals(txt_pass.getText()) ) {
 				datos[0] = txt_id.getText();
 				datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
 				datos[2] = txt_nombre.getText();
@@ -233,9 +286,7 @@ public class Usuarios extends JFrame {
 				datos[5] = txt_nick_name.getText();
 				datos[6] = txt_pass.getText();
 						
-					
-					
-					try {
+				try {
 						DB_usuarios.anadir(datos);
 						JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
@@ -247,7 +298,7 @@ public class Usuarios extends JFrame {
 					}
 				
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+					//System.out.println("*");
 				}
 				
 			}
@@ -488,6 +539,10 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 			        e.consume();
 			    }*/
 			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
 		});
 		panel.add(txt_pass);
 		
@@ -497,6 +552,54 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		txt_fecha.setColumns(10);
 		txt_fecha.setBounds(149, 376, 230, 22);
 		panel.add(txt_fecha);
+		
+		lbl_alerta_2 = new JLabel("*");
+		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_2.setForeground(new Color(144, 238, 144));
+		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_2.setBounds(149, 121, 230, 24);
+		panel.add(lbl_alerta_2);
+		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(144, 238, 144));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(149, 77, 230, 24);
+		panel.add(lbl_alerta_1);
+		
+		lbl_alerta_3 = new JLabel("*");
+		lbl_alerta_3.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_3.setForeground(new Color(144, 238, 144));
+		lbl_alerta_3.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_3.setBounds(149, 167, 230, 24);
+		panel.add(lbl_alerta_3);
+		
+		lbl_alerta_4 = new JLabel("*");
+		lbl_alerta_4.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_4.setForeground(new Color(144, 238, 144));
+		lbl_alerta_4.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_4.setBounds(149, 312, 230, 24);
+		panel.add(lbl_alerta_4);
+		
+		lbl_alerta_5 = new JLabel("*");
+		lbl_alerta_5.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_5.setForeground(new Color(144, 238, 144));
+		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_5.setBounds(149, 354, 230, 24);
+		panel.add(lbl_alerta_5);
+		
+		lbl_alerta_6 = new JLabel("*");
+		lbl_alerta_6.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_6.setForeground(new Color(144, 238, 144));
+		lbl_alerta_6.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_6.setBounds(149, 398, 230, 24);
+		panel.add(lbl_alerta_6);
 		
 	}
 	

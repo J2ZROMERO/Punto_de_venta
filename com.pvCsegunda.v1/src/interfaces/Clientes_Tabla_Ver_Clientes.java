@@ -48,7 +48,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 	 */
 	public Clientes_Tabla_Ver_Clientes() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 870, 416);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

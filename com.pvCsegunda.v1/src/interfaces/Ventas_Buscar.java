@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollBar;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.Color;
 
 public class Ventas_Buscar extends JFrame {
 private static Ventas_Buscar frame;
@@ -59,19 +60,21 @@ private boolean estaActivo = false;
 	 */
 	public Ventas_Buscar() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 902, 553);
+		setBounds(100, 100, 1133, 493);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 886, 514);
+		panel.setBackground(new Color(82, 190, 128));
+		panel.setBounds(0, 0, 1117, 454);
 		contentPane.add(panel);
 		
-		JButton btn_regresar = new JButton("");
-		btn_regresar.setBounds(0, 0, 44, 35);
-		btn_regresar.setIcon(new ImageIcon(Ventas_Buscar.class.getResource("/imagenes/flecha.png")));
+		JButton btn_regresar = new JButton("OK");
+		btn_regresar.setFont(new Font("Dialog", Font.BOLD, 12));
+		btn_regresar.setBounds(529, 404, 59, 35);
+		btn_regresar.setIcon(null);
 		
 		btn_regresar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -84,7 +87,7 @@ private boolean estaActivo = false;
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(83, 42, 747, 442);
+		scrollPane.setBounds(10, 11, 1097, 382);
 		panel.add(scrollPane);
 		
 		table = new JTable();

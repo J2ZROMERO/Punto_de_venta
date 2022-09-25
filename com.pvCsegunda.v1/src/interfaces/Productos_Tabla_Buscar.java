@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Productos_Tabla_Buscar extends JFrame {
 
@@ -56,7 +57,8 @@ public class Productos_Tabla_Buscar extends JFrame {
 	 * Create the frame.
 	 */
 	public Productos_Tabla_Buscar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 658, 511);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +66,7 @@ public class Productos_Tabla_Buscar extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(198, 144, 125));
+		panel.setBackground(new Color(82, 190, 128));
 		panel.setBounds(0, 0, 642, 476);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -74,6 +76,7 @@ public class Productos_Tabla_Buscar extends JFrame {
 		panel.add(marcas);
 		
 		tbl_mrs = new JTable();
+		tbl_mrs.setFont(new Font("Dialog", Font.BOLD, 12));
 		marcas.setViewportView(tbl_mrs);
 
 
@@ -107,12 +110,14 @@ public class Productos_Tabla_Buscar extends JFrame {
 		lineas.setBounds(176, 11, 139, 344);
 		panel.add(lineas);
 		tbl_linea = new JTable();
+		tbl_linea.setFont(new Font("Dialog", Font.BOLD, 12));
 		lineas.setViewportView(tbl_linea);
 	
 		JScrollPane categoria = new JScrollPane();
 		categoria.setBounds(340, 11, 139, 344);
 		panel.add(categoria);
 		tbl_categoria = new JTable();
+		tbl_categoria.setFont(new Font("Dialog", Font.BOLD, 12));
 		categoria.setViewportView(tbl_categoria);
 	
 		
@@ -123,25 +128,34 @@ public class Productos_Tabla_Buscar extends JFrame {
 		panel.add(provedor);
 		
 		tbl_provedores = new JTable();
+		tbl_provedores.setFont(new Font("Dialog", Font.BOLD, 12));
 		provedor.setViewportView(tbl_provedores);
 	
 		
 		ver_datos_tablas(tbl_mrs, tbl_linea, tbl_categoria, tbl_provedores);
 		
 		 jtf_marca = new JTextField();
-		jtf_marca.setBounds(10, 366, 102, 14);
+		 jtf_marca.setHorizontalAlignment(SwingConstants.CENTER);
+		 jtf_marca.setFont(new Font("Dialog", Font.BOLD, 12));
+		jtf_marca.setBounds(10, 366, 139, 23);
 		panel.add(jtf_marca);
 		
 		jtf_linea = new JTextField();
-		jtf_linea.setBounds(176, 366, 139, 14);
+		jtf_linea.setHorizontalAlignment(SwingConstants.CENTER);
+		jtf_linea.setFont(new Font("Dialog", Font.BOLD, 12));
+		jtf_linea.setBounds(176, 366, 139, 23);
 		panel.add(jtf_linea);
 		
 		 jtf_categoria = new JTextField();
-		jtf_categoria.setBounds(340, 366, 139, 14);
+		 jtf_categoria.setHorizontalAlignment(SwingConstants.CENTER);
+		 jtf_categoria.setFont(new Font("Dialog", Font.BOLD, 12));
+		jtf_categoria.setBounds(340, 366, 139, 23);
 		panel.add(jtf_categoria);
 		
 		 jtf_provedores = new JTextField();
-		jtf_provedores.setBounds(490, 366, 139, 14);
+		 jtf_provedores.setHorizontalAlignment(SwingConstants.CENTER);
+		 jtf_provedores.setFont(new Font("Dialog", Font.BOLD, 12));
+		jtf_provedores.setBounds(490, 366, 139, 23);
 		panel.add(jtf_provedores);
 		
 		evento(tbl_mrs,jtf_marca);
