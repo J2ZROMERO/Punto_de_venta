@@ -38,6 +38,7 @@ public class Categorias extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_categoria;
 	private JTable tbl_categoria;
+	private JLabel lbl_alerta_1;
 	private static Categorias frame;
 
 	/**
@@ -129,6 +130,18 @@ public class Categorias extends JFrame {
 		txt_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_categoria.setColumns(10);
 		txt_categoria.setBounds(264, 31, 214, 23);
+		
+		txt_categoria.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(!"".equals(txt_categoria.getText())) {
+					lbl_alerta_1.setForeground(new Color(93, 173, 226));
+				}else {
+					lbl_alerta_1.setForeground(new Color(0,0,0));
+				}
+			}
+		});
+		
 		panel.add(txt_categoria);
 		
 		JButton btn_añadir = new JButton("");
@@ -204,13 +217,13 @@ public class Categorias extends JFrame {
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
 		
-		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setBackground(new Color(93, 173, 226));
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(488, 30, 51, 24);
+		lbl_alerta_1.setBounds(488, 30, 64, 24);
 		panel.add(lbl_alerta_1);
 	}
 	public void ver_datos_tabla(JTable tabla) {

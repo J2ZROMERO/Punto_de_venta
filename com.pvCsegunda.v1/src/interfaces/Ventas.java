@@ -294,11 +294,8 @@ if(e.getButton() == 2) {
 			
 				
 			
-					if(def_tabla.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
-										
-				
-					
-			
+				if(def_tabla.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
+
 				int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
 				suma-=1;
 				def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);

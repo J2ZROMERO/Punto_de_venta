@@ -59,12 +59,13 @@ import java.awt.event.ActionEvent;
 public class Bar_Code extends JFrame {
 	private List<String> letras = new ArrayList<>();
 	private JPanel contentPane;
-	public JTextField txt_id;
+	private JTextField txt_id;
 	private JTable tbl_bar_code;
 	public JTextField txt_cantidad;
 	public JLabel lbl_bar_code;
 	public JLabel lbl_cantidad;
 	public JLabel lbl_precio;
+	public JLabel lbl_alerta_1;
 	public static Bar_Code frame;
 
 	/**
@@ -88,6 +89,14 @@ public class Bar_Code extends JFrame {
 	 * Create the frame.
 	 * @throws DocumentException 
 	 */
+	
+	public void Validar() {
+		if(!"".equals(txt_id.getText())) {
+			lbl_alerta_1.setForeground(new Color(253, 223, 127));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
 	
 	//barcode bean
 	JBarcodeBean barcode = new JBarcodeBean();
@@ -160,7 +169,7 @@ public class Bar_Code extends JFrame {
 	public Bar_Code() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 990, 725);
+		setBounds(100, 100, 990, 763);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -168,7 +177,7 @@ public class Bar_Code extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(253, 223, 127));
-		panel.setBounds(0, 0, 974, 686);
+		panel.setBounds(0, 0, 974, 724);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -238,7 +247,7 @@ public class Bar_Code extends JFrame {
 		JLabel lbl_id_1 = new JLabel("<html><center>CANTIDAD DE ETIQUETAS</center></html>");
 		lbl_id_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id_1.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_id_1.setBounds(10, 115, 147, 35);
+		lbl_id_1.setBounds(10, 145, 147, 35);
 		panel.add(lbl_id_1);
 		
 		txt_cantidad = new JTextField();
@@ -247,7 +256,7 @@ public class Bar_Code extends JFrame {
 		txt_cantidad.setHorizontalAlignment(SwingConstants.RIGHT);
 		txt_cantidad.setFont(new Font("Dialog", Font.BOLD, 14));
 		txt_cantidad.setColumns(10);
-		txt_cantidad.setBounds(162, 115, 72, 35);
+		txt_cantidad.setBounds(162, 145, 72, 35);
 		
 		txt_cantidad.addKeyListener(new KeyAdapter() {
 			@Override
@@ -271,7 +280,7 @@ public class Bar_Code extends JFrame {
 			}
 		});
 		btn_mas.setFont(new Font("Dialog", Font.BOLD, 15));
-		btn_mas.setBounds(244, 115, 44, 35);
+		btn_mas.setBounds(244, 145, 44, 35);
 		
 		btn_mas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -304,14 +313,14 @@ public class Bar_Code extends JFrame {
 			}
 		});
 		btn_menos.setFont(new Font("Dialog", Font.BOLD, 22));
-		btn_menos.setBounds(298, 115, 44, 35);
+		btn_menos.setBounds(298, 145, 44, 35);
 		
 		panel.add(btn_menos);
 		
 		JButton btn_ejecutar = new JButton("EJECUTAR");
 		
 		btn_ejecutar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ejecutar.setBounds(162, 161, 180, 35);
+		btn_ejecutar.setBounds(162, 191, 180, 35);
 //		
 //		btn_ejecutar.addMouseListener(new MouseAdapter() {
 //			public void mouseClicked(MouseEvent e) {
@@ -351,7 +360,7 @@ public class Bar_Code extends JFrame {
 			}
 		});
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(162, 73, 180, 31);
+		btn_buscar.setBounds(162, 100, 180, 31);
 		
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -424,7 +433,7 @@ public class Bar_Code extends JFrame {
 		panel.add(btn_imprimir);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 222, 954, 451);
+		scrollPane_1.setBounds(10, 237, 954, 476);
 		panel.add(scrollPane_1);
 		
 		btn_ejecutar.addActionListener(new ActionListener() {
@@ -558,6 +567,14 @@ public class Bar_Code extends JFrame {
 		pnl_vista.add(lbl_precio);*/
 		envento_barcode eventos = new envento_barcode();
 		eventos.evento_barcodes(tbl_bar_code, txt_id);
+		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(0, 0, 0));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(162, 68, 180, 24);
+		panel.add(lbl_alerta_1);
 		txt_id.addKeyListener(eventos);
 		
 	}
@@ -650,6 +667,8 @@ class envento_barcode implements KeyListener{
 
 	private JTable tabla;
 	private JTextField campo;
+	private JTextField txt_id;
+	private JLabel lbl_alerta_1;
 	
 	public envento_barcode() {
 		
@@ -658,43 +677,38 @@ class envento_barcode implements KeyListener{
 
 	 void evento_barcodes(JTable tabla, JTextField campo) {
 		// TODO Auto-generated method stub
-this.tabla = tabla;
+        this.tabla = tabla;
 		this.campo = campo;
 	}
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-		
-		
-		
 		int key = e.getKeyChar();
 		boolean numeros = key >= 48 && key <=57;
 		if(!numeros) {
 			
 		e.consume();	
 		}
-			}
+		}
 	
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	
+	public void keyReleased(KeyEvent e) { 
+	if(!"".equals(txt_id.getText())) {
+	lbl_alerta_1.setForeground(new Color(253, 223, 127)); }else {
+	lbl_alerta_1.setForeground(new Color(0,0,0))
+	;}}
 
 
-						
-				}
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
 		
-if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	
 	
 	if(campo.getText().equalsIgnoreCase("")) {
-		System.out.println("vaacio");
+		System.out.println("vacio");
 	}else {
 		
 		

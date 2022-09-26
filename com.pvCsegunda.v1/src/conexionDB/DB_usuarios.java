@@ -34,9 +34,6 @@ public class DB_usuarios {
 	      
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.insertar_usuarios(?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
-	        
-
-	       
 	       {	       
 
 cstm.setInt( 1,Integer.parseInt(datos_campos[0].toString()));

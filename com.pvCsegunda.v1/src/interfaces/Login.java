@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 
@@ -31,6 +33,8 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField txt_password;
 	public JComboBox cbx_nickname;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
 
 	/**
 	 * Launch the application.
@@ -44,10 +48,6 @@ public class Login extends JFrame {
 					frame.setFocusable(true);
 					frame.esc();
 					frame.setLocationRelativeTo(null);
-					
-					Shape forma = new RoundRectangle2D.Double(0, 0, frame.getBounds().width, frame.getBounds().height, 30, 30);
-					
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,6 +74,21 @@ public class Login extends JFrame {
 				}
 			}
 		});
+	}
+	
+	
+	public void Validar_Campos() {
+		if(cbx_nickname.getSelectedIndex()>0) {
+			lbl_alerta_1.setForeground(new Color(186, 85, 211));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_password.getText())) {
+			lbl_alerta_2.setForeground(new Color(186, 85, 211));
+		}else {
+			lbl_alerta_2.setForeground(new Color(0,0,0));
+		}
 	}
 		
 		public Login() {
@@ -126,6 +141,13 @@ public class Login extends JFrame {
 		cbx_nickname.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_nickname.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cbx_nickname.setBounds(124, 89, 231, 22);
+		
+		cbx_nickname.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				Validar_Campos();
+			}
+		});
+		
 		cbx_nickname.addKeyListener(new KeyAdapter() {
 			
 			public void keyPressed(KeyEvent e) {
@@ -135,6 +157,7 @@ public class Login extends JFrame {
 					System.exit(0);
 				}
 			}
+			
 		});
 		panel.add(cbx_nickname);
 		
@@ -147,6 +170,8 @@ public class Login extends JFrame {
 		String nombre = cbx_nickname.getName();
 		String pass = txt_password.getText();
 	
+		Validar_Campos();
+		
 		if(cbx_nickname.getName().equals("")) {
 				if (pass.equalsIgnoreCase("12345") && nombre.equalsIgnoreCase(cbx_nickname.getName())) {
 					Caja_Inicial ci = new Caja_Inicial();
@@ -213,6 +238,22 @@ public class Login extends JFrame {
 		btn_ingresar.setFont(new Font("Roboto Slab", Font.BOLD, 13));
 		btn_ingresar.setBounds(135, 275, 111, 23);
 		panel.add(btn_ingresar);
+		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(Color.BLACK);
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(124, 122, 231, 24);
+		panel.add(lbl_alerta_1);
+		
+		lbl_alerta_2= new JLabel("*");
+		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_2.setForeground(Color.BLACK);
+		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_2.setBounds(124, 233, 231, 24);
+		panel.add(lbl_alerta_2);
 		btn_ingresar.addKeyListener(new KeyAdapter() {
 		
 		public void keyPressed(KeyEvent e) {

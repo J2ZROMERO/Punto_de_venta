@@ -60,12 +60,12 @@ public class Usuarios extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
 					frame = new Usuarios();
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
-					frame.Validar_Campos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -78,6 +78,12 @@ public class Usuarios extends JFrame {
 			lbl_alerta_1.setForeground(new Color(144, 238, 144));
 		}else {
 			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_id.getText())) {
+			lbl_alerta_2.setForeground(new Color(144, 238, 144));
+		}else {
+			lbl_alerta_2.setForeground(new Color(0,0,0));
 		}
 		
 		if(!"".equals(txt_nombre.getText())) {
@@ -150,7 +156,6 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
-		txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(149, 100, 230, 22);
 		panel.add(txt_id);
@@ -169,6 +174,10 @@ public class Usuarios extends JFrame {
 			    /*if (txt_id.getText().trim().length() == 10) {
 			        e.consume();
 			    }*/
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
 			}
 		});
 		txt_id.setColumns(10);
@@ -291,6 +300,7 @@ public class Usuarios extends JFrame {
 						JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_id.requestFocus();
+						Validar_Campos();
 						ver_datos_tabla(tbl_usuarios);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -298,7 +308,7 @@ public class Usuarios extends JFrame {
 					}
 				
 				}else {
-					//System.out.println("*");
+					Validar_Campos();
 				}
 				
 			}
@@ -307,10 +317,6 @@ public class Usuarios extends JFrame {
 		
 		JButton btn_actualizar = new JButton("");
 		btn_actualizar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/actualizar.png")));
-		btn_actualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_actualizar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_actualizar.setBounds(511, 104, 164, 41);
 		
@@ -463,21 +469,9 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 											//cbx_tipo_de_rol.setEnabled(false);
 											//
 										}
-										
-						
-						
-						
-						
+
 						}
 
-											
-							
-								
-							
-							
-						
-							
-							
 						 catch (NumberFormatException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -485,15 +479,8 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-				
-			    	 
-			     
-				
-			       
-		           
-		            			
-		
-		}                              });
+
+		}});
 		
 
 		
@@ -556,7 +543,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		lbl_alerta_2 = new JLabel("*");
 		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_2.setForeground(new Color(144, 238, 144));
+		lbl_alerta_2.setForeground(new Color(0,0,0));
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_2.setBounds(149, 121, 230, 24);
 		panel.add(lbl_alerta_2);
@@ -564,7 +551,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_1.setForeground(new Color(144, 238, 144));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_1.setBounds(149, 77, 230, 24);
 		panel.add(lbl_alerta_1);
@@ -572,7 +559,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		lbl_alerta_3 = new JLabel("*");
 		lbl_alerta_3.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_3.setForeground(new Color(144, 238, 144));
+		lbl_alerta_3.setForeground(new Color(0,0,0));
 		lbl_alerta_3.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_3.setBounds(149, 167, 230, 24);
 		panel.add(lbl_alerta_3);
@@ -580,7 +567,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		lbl_alerta_4 = new JLabel("*");
 		lbl_alerta_4.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_4.setForeground(new Color(144, 238, 144));
+		lbl_alerta_4.setForeground(new Color(0,0,0));
 		lbl_alerta_4.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_4.setBounds(149, 312, 230, 24);
 		panel.add(lbl_alerta_4);
@@ -588,7 +575,7 @@ tbl_usuarios.addMouseListener( new MouseAdapter() {
 		lbl_alerta_5 = new JLabel("*");
 		lbl_alerta_5.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_5.setForeground(new Color(144, 238, 144));
+		lbl_alerta_5.setForeground(new Color(0,0,0));
 		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_5.setBounds(149, 354, 230, 24);
 		panel.add(lbl_alerta_5);

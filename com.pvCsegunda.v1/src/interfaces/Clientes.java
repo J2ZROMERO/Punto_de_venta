@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Clientes extends JFrame {
 
@@ -36,6 +38,8 @@ public class Clientes extends JFrame {
 	private JTextField txt_apellido;
 	private JTextField txt_nick_name;
 	private JTextField txt_telefono;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
 	public static Clientes frame;
 
 	/**
@@ -60,8 +64,21 @@ public class Clientes extends JFrame {
 		txt_apellido.setText("");
 		txt_nick_name.setText("");
 		txt_telefono.setText("");
+	}
 	
-
+	
+	public void Validar_Campos() {
+		if(!"".equals(txt_nombre.getText())) {
+			lbl_alerta_1.setForeground(new Color(135, 206, 250));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_nick_name.getText())) {
+			lbl_alerta_2.setForeground(new Color(135, 206, 250));
+		}else {
+			lbl_alerta_2.setForeground(new Color(0,0,0));
+		}
 	}
 	/**
 	 * Create the frame.
@@ -121,6 +138,13 @@ public class Clientes extends JFrame {
 		txt_nombre.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_nombre.setColumns(10);
 		txt_nombre.setBounds(122, 103, 163, 20);
+		
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nombre);
 		
 		JLabel lbl_apellido = new JLabel("APELLIDO");
@@ -145,6 +169,13 @@ public class Clientes extends JFrame {
 		txt_nick_name.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_nick_name.setColumns(10);
 		txt_nick_name.setBounds(122, 195, 163, 20);
+		
+		txt_nick_name.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nick_name);
 		
 		JLabel lbl_telefono = new JLabel("TELEFONO");
@@ -323,6 +354,21 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_eliminar);
 		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(Color.BLACK);
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(122, 124, 163, 20);
+		panel.add(lbl_alerta_1);
+		
+		lbl_alerta_2 = new JLabel("*");
+		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_2.setForeground(Color.BLACK);
+		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_2.setBounds(122, 219, 163, 20);
+		panel.add(lbl_alerta_2);
+		
 }
-
 }

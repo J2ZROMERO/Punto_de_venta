@@ -40,6 +40,7 @@ public class Marcas extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_marca;
 	private JTable tbl_marcas;
+	private JLabel lbl_alerta_1;
 	DefaultTableModel modelo = new DefaultTableModel();
 	
 	public static void main(String[] args) {
@@ -88,6 +89,17 @@ public class Marcas extends JFrame {
 		txt_marca.setBounds(263, 30, 214, 23);
 		txt_marca.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		panel.add(txt_marca);
+		
+		txt_marca.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if(!"".equals(txt_marca.getText())) {
+					lbl_alerta_1.setForeground(new Color(245, 176, 65));
+				}else {
+					lbl_alerta_1.setForeground(new Color(0,0,0));
+				}
+			}
+		});
 		txt_marca.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -206,12 +218,12 @@ public class Marcas extends JFrame {
 		});
 		panel.add(btn_regresar);
 		
-		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_1.setForeground(new Color(245, 176, 65));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(487, 30, 44, 24);
+		lbl_alerta_1.setBounds(487, 30, 73, 24);
 		panel.add(lbl_alerta_1);
 		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
