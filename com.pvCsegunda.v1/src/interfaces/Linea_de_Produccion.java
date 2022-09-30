@@ -57,6 +57,15 @@ public class Linea_de_Produccion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Validar_Campos() {
+		if(!"".equals(txt_linea_de_produccion.getText())) {
+			lbl_alerta_1.setForeground(new Color(253, 223, 127));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
+	
 	public Linea_de_Produccion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
@@ -102,11 +111,7 @@ public class Linea_de_Produccion extends JFrame {
 		txt_linea_de_produccion.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(!"".equals(txt_linea_de_produccion.getText())) {
-					lbl_alerta_1.setForeground(new Color(253, 223, 127));
-				}else {
-					lbl_alerta_1.setForeground(new Color(0,0,0));
-				}
+				Validar_Campos();
 			}
 		});
 		
@@ -150,6 +155,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 				try {
 					DB_linea.anadir_marca(txt_linea_de_produccion.getText());
 					ver_datos_tabla(tbl_linea_de_produccion);
+					Validar_Campos();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -157,9 +163,9 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION AGREGADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
-					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 				}
 				
 			}
@@ -182,6 +188,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					try {
 						DB_linea.eliminar_lineas (  Integer.parseInt( txt_linea_de_produccion.getText()));
 						ver_datos_tabla(tbl_linea_de_produccion);
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -190,9 +197,10 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION ELIMINADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+					Validar_Campos();
 					txt_linea_de_produccion.requestFocus();
 				}
 				

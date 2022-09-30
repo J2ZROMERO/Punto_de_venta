@@ -61,6 +61,14 @@ public class Marcas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	public void Validar_Campos() {
+		if(!"".equals(txt_marca.getText())) {
+			lbl_alerta_1.setForeground(new Color(245, 176, 65));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
+	
 	public Marcas() {
 		setResizable(false);
 		
@@ -93,11 +101,7 @@ public class Marcas extends JFrame {
 		txt_marca.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(!"".equals(txt_marca.getText())) {
-					lbl_alerta_1.setForeground(new Color(245, 176, 65));
-				}else {
-					lbl_alerta_1.setForeground(new Color(0,0,0));
-				}
+				Validar_Campos();
 			}
 		});
 		txt_marca.setColumns(10);
@@ -140,6 +144,7 @@ public class Marcas extends JFrame {
 					try {
 						DB_marcas.anadir_marca(txt_marca.getText());
 						ver_datos_tabla(tbl_marcas);
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -148,9 +153,10 @@ public class Marcas extends JFrame {
 					JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.requestFocus();
+					Validar_Campos();
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					Validar_Campos();
 					txt_marca.requestFocus();
 				}
 			}
@@ -180,6 +186,7 @@ public class Marcas extends JFrame {
 					try {
 						DB_marcas.eliminar_marcas(Integer.parseInt(txt_marca.getText()));
 						ver_datos_tabla(tbl_marcas);
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -187,10 +194,11 @@ public class Marcas extends JFrame {
 					JOptionPane.showMessageDialog(null, "MARCA ELIMINADA CORRECTAMENTE");
 					txt_marca.setText("");
 					txt_marca.requestFocus();
+					Validar_Campos();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
 					txt_marca.requestFocus();
+					Validar_Campos();
 				}
 			}
 		});

@@ -252,10 +252,6 @@ public class Usuarios extends JFrame {
 		
 		JButton btn_limpiar_campos = new JButton("");
 		btn_limpiar_campos.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/escoba.png")));
-		btn_limpiar_campos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_limpiar_campos.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_limpiar_campos.setBounds(117, 423, 164, 41);
 		
@@ -270,7 +266,7 @@ public class Usuarios extends JFrame {
 				txt_id.setEnabled(true);
 			//	cbx_tipo_de_rol.setEnabled(true);
 				//
-
+				Validar_Campos();
 			}		
 		});
 		panel.add(btn_limpiar_campos);
@@ -286,7 +282,7 @@ public class Usuarios extends JFrame {
 				
 				Object datos[] = new Object[7];
 				
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0 && !"".equals(txt_nombre.getText()) && !"".equals(txt_nick_name.getText()) && !"".equals(txt_pass.getText()) ) {
+				if(cbx_tipo_de_rol.getSelectedIndex() > 0 && !"".equals(txt_id.getText()) && !"".equals(txt_nombre.getText()) && !"".equals(txt_nick_name.getText()) && !"".equals(txt_pass.getText()) ) {
 				datos[0] = txt_id.getText();
 				datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
 				datos[2] = txt_nombre.getText();
@@ -342,13 +338,14 @@ public class Usuarios extends JFrame {
 					Limpiar_Campos();
 					txt_id.requestFocus();
 					ver_datos_tabla(tbl_usuarios);
+					Validar_Campos();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+					Validar_Campos();
 				}
 			}
 		});
@@ -356,10 +353,6 @@ public class Usuarios extends JFrame {
 		
 		JButton btn_eliminar = new JButton("");
 		btn_eliminar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/basura.png")));
-		btn_eliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(511, 156, 164, 41);
 		
@@ -378,6 +371,7 @@ public class Usuarios extends JFrame {
 						JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_id.requestFocus();
+						Validar_Campos();
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -387,7 +381,7 @@ public class Usuarios extends JFrame {
 					}
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+					Validar_Campos();
 				}
 			}
 		});
@@ -401,11 +395,11 @@ public class Usuarios extends JFrame {
 		tbl_usuarios = new JTable();
 		tbl_usuarios.setSelectionBackground(new Color(144, 238, 144));
 		tbl_usuarios.setBackground(new Color(173, 216, 230));
-tbl_usuarios.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+        tbl_usuarios.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		scroll.setViewportView(tbl_usuarios);
 		ver_datos_tabla(tbl_usuarios);
 	
-tbl_usuarios.addMouseListener( new MouseAdapter() {
+        tbl_usuarios.addMouseListener( new MouseAdapter() {
 
 	
 			public void mousePressed(MouseEvent e) {

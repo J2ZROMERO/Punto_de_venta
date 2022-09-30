@@ -293,13 +293,14 @@ private JSpinner spinner_tiempo_limite;
 					datosDB[15] = txt_categoria.getText();
 					datosDB[16] =  txt_usuario.getText();
 					datosDB[17] =  txt_notas_de_venta.getText();
-					
+					Validar_Campos();
 					try 
 					{
 						
 						DB_productos.anadir(datosDB);
 						System.out.println("datos enviados");
 						frame.requestFocus();
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -350,7 +351,7 @@ private JSpinner spinner_tiempo_limite;
 				txt_categoria.setText(datos[15].toString());
 				txt_usuario.setText(datos[16].toString());
 				txt_notas_de_venta.setText(datos[17].toString());
-						  
+				Validar_Campos();	  
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -380,6 +381,7 @@ private JSpinner spinner_tiempo_limite;
 					datos[14] = txt_categoria.getText().toString();
 					datos[15] = txt_usuario.getText().toString();
 					datos[16] = txt_notas_de_venta.getText().toString();
+					Validar_Campos();
 					
 					Ventas_Buscar b= new Ventas_Buscar();
 					b.setVisible(true);
@@ -405,23 +407,23 @@ private JSpinner spinner_tiempo_limite;
 						txt_id.setText(datos[0].toString());
 						txt_producto.setText(datos[1].toString());
 						txt_distintivo_1.setText(datos[2].toString());
-										txt_notas_a_cerca_del_producto.setText(datos[3].toString());
-								txt_stock.setText(datos[4].toString());
-								txt_kilos.setText(datos[5].toString());
-								txt_cm.setText(datos[6].toString());
-								txt_mililitros.setText(datos[7].toString());
-								txt_color.setText(datos[8].toString());
-								txt_tamano.setText(datos[9].toString());
-								  txt_precio_de_compra.setText(datos[10].toString());
-								 txt_precio_de_venta.setText(datos[11].toString());
-						
-								 txt_provedores.setText(datos[12].toString());
-								 txt_marca.setText(datos[13].toString());
-								 txt_linea.setText(datos[14].toString());
-							 txt_categoria.setText(datos[15].toString());
-								  txt_usuario.setText(datos[16].toString());
-								  txt_notas_de_venta.setText(datos[17].toString());
-								  }
+						txt_notas_a_cerca_del_producto.setText(datos[3].toString());
+						txt_stock.setText(datos[4].toString());
+						txt_kilos.setText(datos[5].toString());
+						txt_cm.setText(datos[6].toString());
+						txt_mililitros.setText(datos[7].toString());
+						txt_color.setText(datos[8].toString());
+						txt_tamano.setText(datos[9].toString());
+						txt_precio_de_compra.setText(datos[10].toString());
+						txt_precio_de_venta.setText(datos[11].toString());
+						txt_provedores.setText(datos[12].toString());
+						txt_marca.setText(datos[13].toString());
+						txt_linea.setText(datos[14].toString());
+						txt_categoria.setText(datos[15].toString());
+						txt_usuario.setText(datos[16].toString());
+						txt_notas_de_venta.setText(datos[17].toString());
+						Validar_Campos();
+						}
 						
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
@@ -430,17 +432,10 @@ private JSpinner spinner_tiempo_limite;
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}			
-					
-					
-					
 				}
-
 		      });
 				}
-			
-				
-			
-				
+
 			}
 		});
 		
@@ -451,9 +446,6 @@ private JSpinner spinner_tiempo_limite;
 		btn_actualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!txt_id.getText().equals("") ) {
-	
-				
-					
 					try {
 						Object datosDB[] = new Object[18];
 						datosDB[0] = txt_id.getText();
@@ -475,12 +467,15 @@ private JSpinner spinner_tiempo_limite;
 						datosDB[16] =  txt_usuario.getText();
 						datosDB[17] =  txt_notas_de_venta.getText();
 						DB_productos.actualizar(datosDB);
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					System.out.println("datos enviados");
 					
+				}else {
+					Validar_Campos();
 				}
 			}	
 		});
@@ -494,12 +489,15 @@ private JSpinner spinner_tiempo_limite;
 				
 				try {
 					DB_productos.eliminar(txt_usuario.getText(), Long.parseLong(txt_id.getText()));
+					Validar_Campos();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					Validar_Campos();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					Validar_Campos();
 				}
 			}
 		});
@@ -515,6 +513,7 @@ private JSpinner spinner_tiempo_limite;
 			public void mouseClicked(MouseEvent e) {
 			Limpiar_Campos();
 			cbx_atributos_produccion.setSelectedIndex(0);
+			Validar_Campos();
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -910,7 +909,7 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(txt_notas_de_venta);
 		
 		lbl_alerta_1 = new JLabel("*");
-		lbl_alerta_1.setForeground(new Color(82, 190, 128));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setBounds(34, 86, 151, 24);
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
@@ -918,35 +917,35 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(lbl_alerta_1);
 		
 		lbl_alerta_2 = new JLabel("*");
-		lbl_alerta_2.setForeground(new Color(82, 190, 128));
+		lbl_alerta_2.setForeground(new Color(0,0,0));
 		lbl_alerta_2.setBounds(245, 87, 167, 24);
 		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_2);
 		
 		lbl_alerta_3 = new JLabel("*");
-		lbl_alerta_3.setForeground(new Color(82, 190, 128));
+		lbl_alerta_3.setForeground(new Color(0,0,0));
 		lbl_alerta_3.setBounds(490, 86, 227, 24);
 		lbl_alerta_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_3.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_3);
 		
 		lbl_alerta_4 = new JLabel("*");
-		lbl_alerta_4.setForeground(new Color(82, 190, 128));
+		lbl_alerta_4.setForeground(new Color(0,0,0));
 		lbl_alerta_4.setBounds(245, 169, 167, 24);
 		lbl_alerta_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_4.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_4);
 		
 		lbl_alerta_5 = new JLabel("*");
-		lbl_alerta_5.setForeground(new Color(82, 190, 128));
+		lbl_alerta_5.setForeground(new Color(0,0,0));
 		lbl_alerta_5.setBounds(490, 168, 227, 24);
 		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_5);
 		
 		lbl_alerta_6 = new JLabel("*");
-		lbl_alerta_6.setForeground(new Color(82, 190, 128));
+		lbl_alerta_6.setForeground(new Color(0,0,0));
 		lbl_alerta_6.setBounds(777, 169, 217, 23);
 		lbl_alerta_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_6.setFont(new Font("Dialog", Font.BOLD, 23));
@@ -954,14 +953,14 @@ private JSpinner spinner_tiempo_limite;
 		
 		lbl_alerta_7 = new JLabel("*");
 		lbl_alerta_7.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_alerta_7.setForeground(new Color(82, 190, 128));
+		lbl_alerta_7.setForeground(new Color(0,0,0));
 		lbl_alerta_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_7.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_7.setBounds(281, 572, 151, 24);
 		panel.add(lbl_alerta_7);
 		
 		lbl_alerta_8 = new JLabel("*");
-		lbl_alerta_8.setForeground(new Color(82, 190, 128));
+		lbl_alerta_8.setForeground(new Color(0,0,0));
 		lbl_alerta_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_8.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_8.setBounds(563, 572, 151, 24);

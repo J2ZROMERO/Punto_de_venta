@@ -61,6 +61,15 @@ public class Categorias extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Validar_campos() {
+		if(!"".equals(txt_categoria.getText())) {
+			lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
+	
 	public Categorias() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -111,11 +120,7 @@ public class Categorias extends JFrame {
 				   txt_categoria.setText(selectedCellValue);
 		            
 			};
-			
-			
-			
-			
-			
+
 			});
 			
 		scrollPane.setViewportView(tbl_categoria);
@@ -134,11 +139,7 @@ public class Categorias extends JFrame {
 		txt_categoria.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(!"".equals(txt_categoria.getText())) {
-					lbl_alerta_1.setForeground(new Color(93, 173, 226));
-				}else {
-					lbl_alerta_1.setForeground(new Color(0,0,0));
-				}
+			Validar_campos();
 			}
 		});
 		
@@ -157,6 +158,7 @@ public class Categorias extends JFrame {
 					try {
 						DB_categoria.anadir_categoria(txt_categoria.getText());
 						ver_datos_tabla(tbl_categoria);
+						Validar_campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -165,8 +167,9 @@ public class Categorias extends JFrame {
 					txt_categoria.setText("");
 					txt_categoria.setFocusable(true);
 					txt_categoria.requestFocus();
+					Validar_campos();
 				}else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					Validar_campos();
 					txt_categoria.requestFocus();
 				}
 			}
@@ -175,10 +178,6 @@ public class Categorias extends JFrame {
 		
 		JButton btn_eliminar = new JButton("");
 		btn_eliminar.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/basura.png")));
-		btn_eliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(407, 225, 117, 41);
@@ -193,7 +192,8 @@ public class Categorias extends JFrame {
 
 						try {
 							DB_categoria.eliminar_categoria( Integer.parseInt(txt_categoria.getText()));
-						ver_datos_tabla(tbl_categoria);
+						    ver_datos_tabla(tbl_categoria);
+						    Validar_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -202,9 +202,10 @@ public class Categorias extends JFrame {
 						txt_categoria.setText("");
 						txt_categoria.setFocusable(true);
 						txt_categoria.requestFocus();
+						Validar_campos();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					Validar_campos();
 					txt_categoria.requestFocus();
 				}
 			}

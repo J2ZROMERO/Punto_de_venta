@@ -200,6 +200,7 @@ public class Clientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
 				txt_nombre.requestFocus();
+				Validar_Campos();
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -232,8 +233,7 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals("") && txt_apellido.getText().equals("")
-						&& txt_telefono.getText().equals(""))) {
+				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals(""))) {
 					Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					try {
 						DB_clientes.anadir(datos);
@@ -245,9 +245,11 @@ public class Clientes extends JFrame {
 					JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
 							txt_nombre.requestFocus();
 							Limpiar_Campos();
+							Validar_Campos();
 						}else {
 							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
 							frame.requestFocus();
+							Validar_Campos();
 						}
 			}
 		});
@@ -278,10 +280,11 @@ public class Clientes extends JFrame {
 			e1.printStackTrace();
 		}
 					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
-					frame.requestFocus();
+					Validar_Campos();
 				} else {
 					JOptionPane.showMessageDialog(null, "DA CLICK EN VER TABLA DE CLIENTES");
 					txt_nombre.requestFocus();
+					Validar_Campos();
 				}
 			}
 		});
@@ -301,6 +304,7 @@ public class Clientes extends JFrame {
 					
 					try {
 						DB_clientes.actualizar(datos);
+						Validar_Campos();
 					//	ver_datos_tabla(tbl_clientes);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -309,8 +313,9 @@ public class Clientes extends JFrame {
 					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
 					Limpiar_Campos();
 					txt_nombre.requestFocus();
+					Validar_Campos();
 				}else {
-					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+					Validar_Campos();
 					frame.requestFocus();
 				}
 			}
@@ -332,6 +337,7 @@ public class Clientes extends JFrame {
 						try {
 						
 						DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
+						Validar_Campos();
 						//	ver_datos_tabla(tbl_clientes);
 							
 						} catch (NumberFormatException e1) {
@@ -344,11 +350,13 @@ public class Clientes extends JFrame {
 						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
+						Validar_Campos();
 					}
 					
 				}else {
 				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 				   frame.requestFocus();
+				   Validar_Campos();
 				}
 		 	}
 		});
