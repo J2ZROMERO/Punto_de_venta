@@ -698,6 +698,16 @@ total_txt(txt_total, def_tabla);
 	lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 	lbl_alerta_2.setBounds(201, 624, 519, 24);
 	panel.add(lbl_alerta_2);
+	
+	JSpinner spinner_tiempo_inicial_1 = new JSpinner((SpinnerModel) null);
+	spinner_tiempo_inicial_1.setFont(new Font("Dialog", Font.BOLD, 12));
+	spinner_tiempo_inicial_1.setBounds(201, 581, 139, 20);
+	panel.add(spinner_tiempo_inicial_1);
+	
+	JSpinner spinner_tiempo_limite_1 = new JSpinner((SpinnerModel) null);
+	spinner_tiempo_limite_1.setFont(new Font("Dialog", Font.BOLD, 12));
+	spinner_tiempo_limite_1.setBounds(499, 580, 123, 20);
+	panel.add(spinner_tiempo_limite_1);
 
 
 	}	
