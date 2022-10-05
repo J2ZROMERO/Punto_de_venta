@@ -390,7 +390,7 @@ private JSpinner spinner_tiempo_limite;
 					
 				b.ver_datos_productos_like(datos);
 				b.ver_datos_evento(txt_id);
-		b.addFocusListener((FocusListener) new FocusListener() {
+				b.addFocusListener((FocusListener) new FocusListener() {
 
 				@Override
 				public void focusGained(FocusEvent e) {
@@ -856,14 +856,6 @@ private JSpinner spinner_tiempo_limite;
 		txt_usuario.setColumns(10);
 		panel.add(txt_usuario);
 		
-
-
-
-
-
-
-
-
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
 		spinner_tiempo_inicial.setBounds(281, 542, 151, 20);
 		spinner_tiempo_inicial.setFont(new Font("Dialog", Font.BOLD, 12));
