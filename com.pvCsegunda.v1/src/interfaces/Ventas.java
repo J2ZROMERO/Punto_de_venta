@@ -100,14 +100,6 @@ public class Ventas extends JFrame implements Printable {
 	 * Create the frame.
 	 */
 	
-	/*public int print1(Graphics graficos,PageFormat formato_hoja,int indice) throws PrinterException {
-		if(indice == 0) {
-			return PAGE_EXISTS;
-		}
-		else {
-			return NO_SUCH_PAGE;
-		}
-	}*/
 	
 	public Ventas() {
 		setResizable(false);
@@ -232,7 +224,7 @@ public class Ventas extends JFrame implements Printable {
 		public void mouseEntered(MouseEvent e) {
 	
 			  int row = tbl_ventas.rowAtPoint( e.getPoint() );
-	            int column = tbl_ventas.columnAtPoint( e.getPoint() );
+	          int column = tbl_ventas.columnAtPoint( e.getPoint() );
 
 		};		
 	public void mousePressed(MouseEvent e) {
@@ -243,13 +235,7 @@ public class Ventas extends JFrame implements Printable {
             txt_id.setText(selectedCellValue);
             
 		}
-		
-			
-	
-	
-		   
-            
-            
+		       
 if(e.getButton() == 3 ) {
   
 	
@@ -282,10 +268,6 @@ if(e.getButton() == 2) {
 		total_txt(txt_total, def_tabla);
 	}else {
 		
-
-
-		 
-	
 	}
 	 }
 
@@ -533,9 +515,6 @@ if(e.getButton() == 2) {
 				def_tabla.removeRow( tbl_ventas.getSelectedRow());
 				total_txt(txt_total, def_tabla);
 			}
-			
-			
-			
 		}
 	});
 	btn_borrar.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -689,7 +668,7 @@ if(e.getButton() == 2) {
 	lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_alerta_2.setForeground(new Color(248, 196, 113));
 	lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
-	lbl_alerta_2.setBounds(375, 624, 519, 24);
+	lbl_alerta_2.setBounds(189, 625, 531, 24);
 	panel.add(lbl_alerta_2);
 	
 	
@@ -699,6 +678,14 @@ if(e.getButton() == 2) {
 	
 	btn_ver_ticket.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			
+			if(def_tabla.getRowCount() != 0) {
+				Vista_Impresora t = new Vista_Impresora();
+				t.setVisible(true);
+				t.setLocationRelativeTo(null);
+			}else {
+				JOptionPane.showMessageDialog(null,"TABLA VACIA");
+			}
 		}
 	});
 	panel.add(btn_ver_ticket);
@@ -714,8 +701,6 @@ if(e.getButton() == 2) {
 	spinner_tiempo_limite.setFont(new Font("Dialog", Font.BOLD, 12));
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	panel.add(spinner_tiempo_limite);
-	
-	
 	}	
 				
 				
@@ -836,13 +821,7 @@ class enventoTeclado implements KeyListener{
 						 
 						 double costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
 						 double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-						
-						
-						
-						total += (costo_sum * cantidad_sum) ;
-						 
-						 
-						 
+						total += (costo_sum * cantidad_sum) ; 
 					 }
 					 
 					 String total_cadena =    String.valueOf(  total);
