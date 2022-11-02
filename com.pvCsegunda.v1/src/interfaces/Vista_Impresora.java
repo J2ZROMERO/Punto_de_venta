@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -66,6 +67,7 @@ public class Vista_Impresora extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(240, 230, 140));
 		panel.setBounds(0, 0, 626, 520);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -90,10 +92,17 @@ public class Vista_Impresora extends JFrame {
 		JButton btn_confirmar = new JButton("CONFIRMAR");
 		btn_confirmar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btn_confirmar.setBounds(270, 486, 109, 23);
+		
+		btn_confirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null,"REALIZANDO IMPRESION");
+			}
+		});
 		panel.add(btn_confirmar);
 		
 		lbl_img = new JLabel("");
-		lbl_img.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lbl_img.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_img.setBounds(48, 141, 130, 97);
 		panel.add(lbl_img);
@@ -122,21 +131,25 @@ public class Vista_Impresora extends JFrame {
 		panel.add(btn_seleccionar_img);
 		
 		JLabel lbl_nombre = new JLabel("NOMBRE EMPRESA");
+		lbl_nombre.setFont(new Font("Dialog", Font.BOLD, 12));
 		lbl_nombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_nombre.setBounds(10, 279, 130, 23);
 		panel.add(lbl_nombre);
 		
 		JLabel lbl_direccion = new JLabel("DIRECCION");
+		lbl_direccion.setFont(new Font("Dialog", Font.BOLD, 12));
 		lbl_direccion.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_direccion.setBounds(10, 327, 130, 23);
 		panel.add(lbl_direccion);
 		
 		JLabel lbl_despedida = new JLabel("DESPEDIDA");
+		lbl_despedida.setFont(new Font("Dialog", Font.BOLD, 12));
 		lbl_despedida.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_despedida.setBounds(10, 375, 130, 23);
 		panel.add(lbl_despedida);
 		
 		JLabel lbl_impresora = new JLabel("IMPRESORA");
+		lbl_impresora.setFont(new Font("Dialog", Font.BOLD, 12));
 		lbl_impresora.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_impresora.setBounds(10, 420, 130, 23);
 		panel.add(lbl_impresora);
