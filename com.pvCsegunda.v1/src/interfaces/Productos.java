@@ -274,6 +274,10 @@ private JSpinner spinner_tiempo_limite;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				if(!"".equals(txt_id.getText()) && !"".equals(txt_producto.getText()) && !"".equals(txt_distintivo_1.getText())
+				  && !"".equals(txt_stock.getText()) && !"".equals(txt_precio_de_venta.getText()) && !"".equals(txt_precio_de_compra.getText()) 
+				  && !"".equals(spinner_tiempo_inicial.getValue()) && !"".equals(spinner_tiempo_limite.getValue()) ) {
+					
 					Object datosDB[] = new Object[18];
 					datosDB[0] = txt_id.getText();
 					datosDB[1] = txt_producto.getText();
@@ -305,6 +309,12 @@ private JSpinner spinner_tiempo_limite;
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					
+				}else {
+					Validar_Campos();
+				}
+				
+					
 					
 					/*
 					lbl_alerta_3.setForeground(new Color(0,0,0));
@@ -390,7 +400,7 @@ private JSpinner spinner_tiempo_limite;
 					
 				b.ver_datos_productos_like(datos);
 				b.ver_datos_evento(txt_id);
-		b.addFocusListener((FocusListener) new FocusListener() {
+				b.addFocusListener((FocusListener) new FocusListener() {
 
 				@Override
 				public void focusGained(FocusEvent e) {
@@ -856,14 +866,6 @@ private JSpinner spinner_tiempo_limite;
 		txt_usuario.setColumns(10);
 		panel.add(txt_usuario);
 		
-
-
-
-
-
-
-
-
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
 		spinner_tiempo_inicial.setBounds(281, 542, 151, 20);
 		spinner_tiempo_inicial.setFont(new Font("Dialog", Font.BOLD, 12));

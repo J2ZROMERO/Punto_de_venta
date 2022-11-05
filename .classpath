@@ -15,5 +15,7 @@
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/jasper/itext-2.1.7.js10.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/pdfbox-3.0.0-alpha3.jar"/>
 	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
 </classpath>
