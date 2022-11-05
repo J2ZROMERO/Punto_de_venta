@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Proveedores extends JFrame {
 
@@ -59,11 +61,20 @@ public class Proveedores extends JFrame {
 				try {
 					frame = new Proveedores();
 					frame.setVisible(true);
+					frame.Validar_Campos();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+	
+	public void Validar_Campos() {
+		if(!"".equals(txt_nombre.getText())) {
+			lbl_alerta_2.setForeground(new Color(186, 104, 200));
+		}else {
+			lbl_alerta_2.setForeground(new Color(0,0,0));
+		}
 	}
 	
 	public void Limpiar_Campos() {
@@ -119,6 +130,13 @@ public class Proveedores extends JFrame {
 		txt_nombre.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_nombre.setColumns(10);
 		txt_nombre.setBounds(140, 107, 198, 20);
+		
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nombre);
 		
 		lbl_apellido = new JLabel("APELLIDO");
@@ -212,9 +230,7 @@ public class Proveedores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
-				   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
-				   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
+				if(!txt_nombre.getText().equals("")) {	
 					
 					Object datos[] = new Object[6];
 					datos[0] = txt_nombre.getText().toString();
@@ -229,6 +245,7 @@ public class Proveedores extends JFrame {
 						JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
+						Validar_Campos();
 						ver_datos_tabla(tbl_proveedores);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -237,8 +254,7 @@ public class Proveedores extends JFrame {
 					
 					
 				}else {
-					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-					frame.requestFocus();
+						Validar_Campos();
 				}
 			}
 		});
@@ -397,7 +413,7 @@ public class Proveedores extends JFrame {
 		lbl_alerta_2 = new JLabel("*");
 		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_2.setForeground(new Color(186, 104, 200));
+		lbl_alerta_2.setForeground(new Color(0,0,0));
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_2.setBounds(140, 127, 198, 24);
 		panel.add(lbl_alerta_2);

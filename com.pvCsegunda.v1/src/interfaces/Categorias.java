@@ -38,6 +38,7 @@ public class Categorias extends JFrame {
 	private JPanel contentPane;
 	private JTextField txt_categoria;
 	private JTable tbl_categoria;
+	private JLabel lbl_alerta_1;
 	private static Categorias frame;
 
 	/**
@@ -60,6 +61,15 @@ public class Categorias extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Validar_campos() {
+		if(!"".equals(txt_categoria.getText())) {
+			lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
+	
 	public Categorias() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -110,11 +120,7 @@ public class Categorias extends JFrame {
 				   txt_categoria.setText(selectedCellValue);
 		            
 			};
-			
-			
-			
-			
-			
+
 			});
 			
 		scrollPane.setViewportView(tbl_categoria);
@@ -129,6 +135,14 @@ public class Categorias extends JFrame {
 		txt_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_categoria.setColumns(10);
 		txt_categoria.setBounds(264, 31, 214, 23);
+		
+		txt_categoria.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+			Validar_campos();
+			}
+		});
+		
 		panel.add(txt_categoria);
 		
 		JButton btn_añadir = new JButton("");
@@ -144,6 +158,7 @@ public class Categorias extends JFrame {
 					try {
 						DB_categoria.anadir_categoria(txt_categoria.getText());
 						ver_datos_tabla(tbl_categoria);
+						Validar_campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -152,8 +167,9 @@ public class Categorias extends JFrame {
 					txt_categoria.setText("");
 					txt_categoria.setFocusable(true);
 					txt_categoria.requestFocus();
+					Validar_campos();
 				}else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					Validar_campos();
 					txt_categoria.requestFocus();
 				}
 			}
@@ -162,10 +178,6 @@ public class Categorias extends JFrame {
 		
 		JButton btn_eliminar = new JButton("");
 		btn_eliminar.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/basura.png")));
-		btn_eliminar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_eliminar.setBounds(407, 225, 117, 41);
@@ -180,7 +192,8 @@ public class Categorias extends JFrame {
 
 						try {
 							DB_categoria.eliminar_categoria( Integer.parseInt(txt_categoria.getText()));
-						ver_datos_tabla(tbl_categoria);
+						    ver_datos_tabla(tbl_categoria);
+						    Validar_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -189,9 +202,10 @@ public class Categorias extends JFrame {
 						txt_categoria.setText("");
 						txt_categoria.setFocusable(true);
 						txt_categoria.requestFocus();
+						Validar_campos();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "CAMPOS VACIOS..." );
+					Validar_campos();
 					txt_categoria.requestFocus();
 				}
 			}
@@ -204,13 +218,13 @@ public class Categorias extends JFrame {
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
 		
-		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setBackground(new Color(93, 173, 226));
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_1.setForeground(new Color(93, 173, 226));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(488, 30, 51, 24);
+		lbl_alerta_1.setBounds(488, 30, 64, 24);
 		panel.add(lbl_alerta_1);
 	}
 	public void ver_datos_tabla(JTable tabla) {

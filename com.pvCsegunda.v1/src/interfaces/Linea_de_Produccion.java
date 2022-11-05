@@ -26,12 +26,15 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Linea_de_Produccion extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txt_linea_de_produccion;
 	private JTable tbl_linea_de_produccion;
+	private JLabel lbl_alerta_1;
 
 	/**
 	 * Launch the application.
@@ -54,6 +57,15 @@ public class Linea_de_Produccion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public void Validar_Campos() {
+		if(!"".equals(txt_linea_de_produccion.getText())) {
+			lbl_alerta_1.setForeground(new Color(253, 223, 127));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+	}
+	
 	public Linea_de_Produccion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
@@ -95,6 +107,14 @@ public class Linea_de_Produccion extends JFrame {
 		txt_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_linea_de_produccion.setColumns(10);
 		txt_linea_de_produccion.setBounds(310, 31, 214, 23);
+		
+		txt_linea_de_produccion.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
+		
 		panel.add(txt_linea_de_produccion);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -135,6 +155,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 				try {
 					DB_linea.anadir_marca(txt_linea_de_produccion.getText());
 					ver_datos_tabla(tbl_linea_de_produccion);
+					Validar_Campos();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -142,9 +163,9 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION AGREGADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
-					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 				}
 				
 			}
@@ -167,6 +188,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					try {
 						DB_linea.eliminar_lineas (  Integer.parseInt( txt_linea_de_produccion.getText()));
 						ver_datos_tabla(tbl_linea_de_produccion);
+						Validar_Campos();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -175,9 +197,10 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION ELIMINADA CORRECTAMENTE");
 					txt_linea_de_produccion.setText("");
 					txt_linea_de_produccion.requestFocus();
+					Validar_Campos();
 					}
 				}else {
-					JOptionPane.showMessageDialog(null, "FAVOR DE LLENAR CAMPOS...");
+					Validar_Campos();
 					txt_linea_de_produccion.requestFocus();
 				}
 				
@@ -191,10 +214,10 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		lbl_imagen.setBounds(344, 288, 249, 212);
 		panel.add(lbl_imagen);
 		
-		JLabel lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_alerta_1.setForeground(new Color(253, 223, 127));
+		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_1.setBounds(532, 30, 61, 24);
 		panel.add(lbl_alerta_1);

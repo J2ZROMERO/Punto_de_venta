@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Graphics;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -30,10 +31,17 @@ import javax.swing.JCheckBox;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -47,12 +55,20 @@ import javax.swing.JTextPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
+
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 import java.awt.SystemColor;
 
-public class Ventas extends JFrame {
-	public static String id_productos;
+
+
+
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+
+public class Ventas extends JFrame implements Printable {
+	public static String id_productos;	
+
 	private JTextPane txt_numero_venta;
 	private DefaultTableModel def_tabla  = new DefaultTableModel();  
 	private enventoTeclado evento_teclado_campo_id;
@@ -97,6 +113,8 @@ public class Ventas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	public Ventas() {
 		
 		System.out.println(Math.abs(-15));
@@ -245,12 +263,12 @@ public class Ventas extends JFrame {
 		
 		def_tabla.setColumnIdentifiers(columnNames);
 		
-	tbl_ventas.setModel(def_tabla);
-	tbl_ventas.addMouseListener( new MouseAdapter() {
+		tbl_ventas.setModel(def_tabla);
+		tbl_ventas.addMouseListener( new MouseAdapter() {
 		public void mouseEntered(MouseEvent e) {
 	
 			  int row = tbl_ventas.rowAtPoint( e.getPoint() );
-	            int column = tbl_ventas.columnAtPoint( e.getPoint() );
+	          int column = tbl_ventas.columnAtPoint( e.getPoint() );
 
 		};		
 	public void mousePressed(MouseEvent e) {
@@ -261,13 +279,7 @@ public class Ventas extends JFrame {
             txt_id.setText(selectedCellValue);
             
 		}
-		
-			
-	
-	
-		   
-            
-            
+		       
 if(e.getButton() == 3 ) {
   
 	
@@ -290,16 +302,7 @@ if(e.getButton() == 3 ) {
 			total_txt(txt_total, def_tabla);
 			}
 	}
-		
-	
-
-	
-	
-	
-		
-		
-
-		
+			
 }
 
 if(e.getButton() == 2) {
@@ -309,10 +312,6 @@ if(e.getButton() == 2) {
 		total_txt(txt_total, def_tabla);
 	}else {
 		
-
-
-		 
-	
 	}
 	 }
 
@@ -329,11 +328,8 @@ if(e.getButton() == 2) {
 			
 				
 			
-					if(def_tabla.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
-										
-				
-					
-			
+				if(def_tabla.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
+
 				int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
 				suma-=1;
 				def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
@@ -359,7 +355,7 @@ if(e.getButton() == 2) {
 						Object notas[] = DB_ventas.add_row(Long.parseLong(txt_id.getText()),def_tabla);
 						txt_notas_extra.setText(notas[0].toString());
 						
-total_txt(txt_total, def_tabla);
+					total_txt(txt_total, def_tabla);
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -516,19 +512,13 @@ total_txt(txt_total, def_tabla);
 				
 				if(txt_extra.getText().equalsIgnoreCase("")  && txt_descuento.getText().equalsIgnoreCase("")) {
 					for(int i = 0; i <  def_tabla.getRowCount();i++) {
-					
-
-						
 						datos_venta[0] = def_tabla.getValueAt(i, 0);
 						datos_venta[1] = def_tabla.getValueAt(i, 5);
 						datos_venta[2] = txt_total.getText();
 						datos_venta[3] =  txt_id_cliente.getText();
 						datos_venta[4] = Menu_principal.nombre_usuario;
 						datos_venta[5] = txt_numero_venta.getText();
-						
-				
-						
-						
+		
 					}
 					
 					int conteo_elementos_sin_stock = 0;
@@ -554,13 +544,7 @@ total_txt(txt_total, def_tabla);
 					}else {
 						JOptionPane.showMessageDialog(null,"Elimina productos sin stock");
 					}
-					
-					
-					
-								
-										
-					
-				
+
 				}else {
 				
 					JOptionPane.showMessageDialog(null,"Confirma tu descuento o extra");
@@ -574,7 +558,9 @@ total_txt(txt_total, def_tabla);
 		
 		JButton btn_ver_ventas = new JButton("VER VENTAS");
 		btn_ver_ventas.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_ventas.setBounds(766, 624, 157, 22);
+
+		btn_ver_ventas.setBounds(766, 534, 157, 22);
+
 		panel.add(btn_ver_ventas);
 		
 		JCheckBox chk_imprimir_recibo = new JCheckBox("IMPRIMIR RECIBO");
@@ -585,15 +571,15 @@ total_txt(txt_total, def_tabla);
 		});
 		chk_imprimir_recibo.setFont(new Font("Dialog", Font.BOLD, 13));
 		chk_imprimir_recibo.setHorizontalAlignment(SwingConstants.CENTER);
-		chk_imprimir_recibo.setBounds(762, 450, 161, 23);
+
+		chk_imprimir_recibo.setBounds(408, 486, 157, 23);
+
 		panel.add(chk_imprimir_recibo);
 		
 		JButton btn_cancelar_pedido = new JButton("CANCELAR PEDIDO");
 		btn_cancelar_pedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			limpia_campos();	
-				
-				
 			}
 		});
 		btn_cancelar_pedido.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -625,9 +611,6 @@ total_txt(txt_total, def_tabla);
 				def_tabla.removeRow( tbl_ventas.getSelectedRow());
 				total_txt(txt_total, def_tabla);
 			}
-			
-			
-			
 		}
 	});
 	btn_borrar.setFont(new Font("Dialog", Font.BOLD, 18));
@@ -754,10 +737,10 @@ txt_cambio.setText(cambio);
 		public void actionPerformed(ActionEvent e) {
 			
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+			//spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+			//spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
 			
 			Ventas_movimientos movimientos_generados = new Ventas_movimientos();
 			
@@ -772,8 +755,7 @@ txt_cambio.setText(cambio);
 		}
 	});
 	btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
-
-	btn_ver_movimientos.setBounds(441, 673, 161, 23);
+	btn_ver_movimientos.setBounds(432, 659, 161, 23);
 
 	panel.add(btn_ver_movimientos);
 	
@@ -783,17 +765,21 @@ txt_cambio.setText(cambio);
 	lbl_calendario_1.setBounds(413, 595, 76, 60);
 	panel.add(lbl_calendario_1);
 	
+
 	spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
 	spinner_tiempo_limite.setSize(135, 26);
 	spinner_tiempo_limite.setLocation(254, 623);
+
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	
-	panel.add(spinner_tiempo_limite);
+
 	
 	JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 	lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_fecha_final.setFont(new Font("Dialog", Font.BOLD, 13));
-	lbl_fecha_final.setBounds(268, 595, 135, 32);
+
+	lbl_fecha_final.setBounds(488, 541, 146, 32);
+
 	panel.add(lbl_fecha_final);
 	
 	JLabel lbl_calendario = new JLabel("");
@@ -802,17 +788,19 @@ txt_cambio.setText(cambio);
 	lbl_calendario.setBounds(167, 595, 76, 60);
 	panel.add(lbl_calendario);
 	
+
 	 spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
 	 spinner_tiempo_inicial.setSize(135, 27);
 	 spinner_tiempo_inicial.setLocation(10, 623);
 	 spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 	
-	panel.add(spinner_tiempo_inicial);
+
 	
 	JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
 	lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_fecha_inicial.setFont(new Font("Dialog", Font.BOLD, 13));
-	lbl_fecha_inicial.setBounds(22, 595, 135, 32);
+	lbl_fecha_inicial.setBounds(189, 541, 147, 32);
+
 	panel.add(lbl_fecha_inicial);
 	
 	JLabel lbl_numero_ventas = new JLabel("Venta #:");
@@ -841,34 +829,11 @@ txt_cambio.setText(cambio);
 	lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
 	lbl_alerta_2.setForeground(new Color(248, 196, 113));
 	lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
-	lbl_alerta_2.setBounds(201, 624, 519, 24);
+	lbl_alerta_2.setBounds(189, 625, 531, 24);
 	panel.add(lbl_alerta_2);
-
 
 	txt_total.addCaretListener(new CaretListener() {
 		public void caretUpdate(CaretEvent e) {
-			
-
-			
-//			double billete = 0;
-//			if(txt_paga_con.getText().equalsIgnoreCase("")) {
-//				
-//				 billete = Double.parseDouble(txt_paga_con.getText());	
-//					System.out.println("billete" +  billete);
-//				 if(billete >= 0) {
-//
-//					 
-//						double total_pagar = Double.parseDouble( txt_total.getText());
-//						double efectivo = Double.parseDouble(txt_paga_con.getText());
-//						double total = Math.abs(  total_pagar-efectivo  ); 
-//						
-//						String cambio = String.valueOf(total);
-//						txt_cambio.setText(cambio);
-//						
-//						
-//				}
-//			}
-//			
 
 			
 			if(!txt_paga_con.getText().equalsIgnoreCase("")) {
@@ -892,6 +857,39 @@ txt_cambio.setText(cambio);
 			
 		}
 	});
+
+
+	
+	
+	JButton btn_ver_ticket = new JButton("VER TICKET");
+	btn_ver_ticket.setFont(new Font("Dialog", Font.BOLD, 13));
+	btn_ver_ticket.setBounds(766, 579, 157, 22);
+	
+	btn_ver_ticket.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+			if(def_tabla.getRowCount() != 0) {
+				Vista_Impresora t = new Vista_Impresora();
+				t.setVisible(true);
+				t.setLocationRelativeTo(null);
+			}else {
+				JOptionPane.showMessageDialog(null,"TABLA VACIA");
+			}
+		}
+	});
+	panel.add(btn_ver_ticket);
+	
+	spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
+	spinner_tiempo_inicial.setBounds(189, 581, 147, 20);
+	spinner_tiempo_inicial.setFont(new Font("Dialog", Font.BOLD, 12));
+	spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
+	panel.add(spinner_tiempo_inicial);
+	
+	spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
+	spinner_tiempo_limite.setBounds(487, 580, 147, 20);
+	spinner_tiempo_limite.setFont(new Font("Dialog", Font.BOLD, 12));
+	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
+	panel.add(spinner_tiempo_limite);
 
 	}	
 				
@@ -942,6 +940,12 @@ txt_cambio.setText(cambio);
 	txt_notas_extra.setText("");
 	def_tabla.setRowCount(0);
 	//frame.requestFocus();
+	}
+
+	@Override
+	public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
 
@@ -1010,13 +1014,7 @@ class enventoTeclado implements KeyListener{
 						 
 						 double costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
 						 double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-						
-						
-						
-						total += (costo_sum * cantidad_sum) ;
-						 
-						 
-						 
+						total += (costo_sum * cantidad_sum) ; 
 					 }
 					 
 					 String total_cadena =    String.valueOf(  total);

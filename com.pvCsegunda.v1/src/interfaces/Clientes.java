@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Clientes extends JFrame {
 
@@ -36,6 +38,8 @@ public class Clientes extends JFrame {
 	private JTextField txt_apellido;
 	private JTextField txt_nick_name;
 	private JTextField txt_telefono;
+	private JLabel lbl_alerta_1;
+	private JLabel lbl_alerta_2;
 	public static Clientes frame;
 
 	/**
@@ -60,8 +64,21 @@ public class Clientes extends JFrame {
 		txt_apellido.setText("");
 		txt_nick_name.setText("");
 		txt_telefono.setText("");
+	}
 	
-
+	
+	public void Validar_Campos() {
+		if(!"".equals(txt_nombre.getText())) {
+			lbl_alerta_1.setForeground(new Color(135, 206, 250));
+		}else {
+			lbl_alerta_1.setForeground(new Color(0,0,0));
+		}
+		
+		if(!"".equals(txt_nick_name.getText())) {
+			lbl_alerta_2.setForeground(new Color(135, 206, 250));
+		}else {
+			lbl_alerta_2.setForeground(new Color(0,0,0));
+		}
 	}
 	/**
 	 * Create the frame.
@@ -121,6 +138,13 @@ public class Clientes extends JFrame {
 		txt_nombre.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_nombre.setColumns(10);
 		txt_nombre.setBounds(122, 103, 163, 20);
+		
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nombre);
 		
 		JLabel lbl_apellido = new JLabel("APELLIDO");
@@ -145,6 +169,13 @@ public class Clientes extends JFrame {
 		txt_nick_name.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_nick_name.setColumns(10);
 		txt_nick_name.setBounds(122, 195, 163, 20);
+		
+		txt_nick_name.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
 		panel.add(txt_nick_name);
 		
 		JLabel lbl_telefono = new JLabel("TELEFONO");
@@ -169,6 +200,7 @@ public class Clientes extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
 				txt_nombre.requestFocus();
+				Validar_Campos();
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -205,8 +237,7 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals("") && txt_apellido.getText().equals("")
-						&& txt_telefono.getText().equals(""))) {
+				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals(""))) {
 					Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					try {
 						DB_clientes.anadir(datos);
@@ -218,9 +249,11 @@ public class Clientes extends JFrame {
 					JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
 							txt_nombre.requestFocus();
 							Limpiar_Campos();
+							Validar_Campos();
 						}else {
 							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
 							frame.requestFocus();
+							Validar_Campos();
 						}
 			}
 		});
@@ -251,10 +284,11 @@ public class Clientes extends JFrame {
 			e1.printStackTrace();
 		}
 					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
-					frame.requestFocus();
+					Validar_Campos();
 				} else {
 					JOptionPane.showMessageDialog(null, "DA CLICK EN VER TABLA DE CLIENTES");
 					txt_nombre.requestFocus();
+					Validar_Campos();
 				}
 			}
 		});
@@ -274,6 +308,7 @@ public class Clientes extends JFrame {
 					
 					try {
 						DB_clientes.actualizar(datos);
+						Validar_Campos();
 					//	ver_datos_tabla(tbl_clientes);
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
@@ -282,8 +317,9 @@ public class Clientes extends JFrame {
 					JOptionPane.showMessageDialog(null,"CLIENTE ACTUALIZADO");
 					Limpiar_Campos();
 					txt_nombre.requestFocus();
+					Validar_Campos();
 				}else {
-					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+					Validar_Campos();
 					frame.requestFocus();
 				}
 			}
@@ -305,6 +341,7 @@ public class Clientes extends JFrame {
 						try {
 						
 						DB_clientes.eliminar(Integer.parseInt(txt_id.getText()));
+						Validar_Campos();
 						//	ver_datos_tabla(tbl_clientes);
 							
 						} catch (NumberFormatException e1) {
@@ -317,16 +354,33 @@ public class Clientes extends JFrame {
 						JOptionPane.showMessageDialog(null,"CLIENTE ELIMINADO");
 						Limpiar_Campos();
 						txt_nombre.requestFocus();
+						Validar_Campos();
 					}
 					
 				}else {
 				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
 				   frame.requestFocus();
+				   Validar_Campos();
 				}
 		 	}
 		});
 		panel.add(btn_eliminar);
 		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(Color.BLACK);
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(122, 124, 163, 20);
+		panel.add(lbl_alerta_1);
+		
+		lbl_alerta_2 = new JLabel("*");
+		lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_2.setForeground(Color.BLACK);
+		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_2.setBounds(122, 219, 163, 20);
+		panel.add(lbl_alerta_2);
+		
 }
-
 }
