@@ -1,7 +1,7 @@
 /imagenes/
-<<<<<<< HEAD
-=======
-/interfaces/
->>>>>>> 048781614532a5e18063b509b2e25349da5311f4
+/.gitignore
 /Codigo_De_Barras/
 /conexionDB/
+/events/
+/interfaces/
+/interfaces_no_graficas/
