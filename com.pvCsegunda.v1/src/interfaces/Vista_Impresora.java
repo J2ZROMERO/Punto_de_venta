@@ -175,7 +175,7 @@ public class Vista_Impresora extends JFrame {
 		panel.add(txt_impresora);
 		
 		JLabel lbl_img_1 = new JLabel("");
-		lbl_img_1.setIcon(new ImageIcon(Vista_Impresora.class.getResource("/imagenes/impresora.png")));
+		lbl_img_1.setIcon(new ImageIcon(Vista_Impresora.class.getResource("/imagenes/cliente.png")));
 		lbl_img_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_img_1.setBounds(384, 12, 97, 97);
 		panel.add(lbl_img_1);

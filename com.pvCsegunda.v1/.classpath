@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/libreria tickets/escpos-coffee-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
