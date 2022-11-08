@@ -62,23 +62,16 @@ public class Ticket{
 
     public void print(String printerName){
 
-        // get the printer service by name passed on command line...
-        //this call is slow, try to use it only once and reuse the PrintService variable.
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
         try {
-        	  // creating the EscPosImage, need buffered image and algorithm.
-         //  BufferedImage  imageBufferedImage = SamplesCommon.getImage(SamplesCommon.sampleImages.dog);
-
-            
-            // this wrapper uses esc/pos sequence: "GS 'v' '0'"
             RasterBitImageWrapper imageWrapper = new RasterBitImageWrapper();
 
             escpos = new EscPos(new PrinterOutputStream(printService));
             
-            //escpos.writeLF("print on Center");
+
             imageWrapper.setJustification(EscPosConst.Justification.Center);
-           // escpos.write(imageWrapper, escposImage);
+
             
             Style title = new Style()
                     .setFontSize(Style.FontSize._3, Style.FontSize._3)
@@ -89,11 +82,11 @@ public class Ticket{
                     .setUnderline(Style.Underline.OneDotThick);
             Style bold = new Style(escpos.getStyle())
                     .setBold(true);
-            // creating the EscPosImage, need buffered image and algorithm.
+
            BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("c:/arrow.png"));
 
             
-            // this wrapper uses esc/pos sequence: "GS 'v' '0'"
+
  
             
            escpos = new EscPos(new PrinterOutputStream(printService));
@@ -105,22 +98,20 @@ public class Ticket{
         
             // using ordered dither for dithering algorithm with (clearing) values
             algorithm = new BitonalOrderedDither(2,2,120,170);
-            escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
-            escpos.write(imageWrapper, escposImage);
+       //     escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+          //  escpos.write(imageWrapper, escposImage);
        
             escpos.writeLF(title,"My Market")
                     .feed(1)
-                    .write("Client: ")
-                    .writeLF(subtitle, "John Doe")
-                    .writeLF(subtitle, "1234567891011121314151617181920212223")
+                    .write						("Client: ")
+                    .writeLF					(subtitle, "John Doe")
                     .feed(1)
-                    .writeLF("Cup of coffee              $1.00")
-                    .writeLF("Botle of water             $0.50")
-                    .writeLF(bold,"--------------------------------")
+                    .writeLF						 ("Cup of coffee              $1.00")
+                    .writeLF						 ("Botle of water             $0.50")
+                    .writeLF					(bold,"--------------------------------")
                     .feed(1)
-                    .writeLF(bold, 
-                             "TOTAL                      $1.50")
-                    .writeLF(bold,"--------------------------------")
+                    .writeLF					(bold,"TOTAL                      $1.50")
+                    .writeLF					(bold,"--------------------------------")
                     .feed(2)
                     .cut(EscPos.CutMode.FULL);
             
