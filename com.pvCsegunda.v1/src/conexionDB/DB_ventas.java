@@ -329,9 +329,31 @@ while(rs_movimientos.next()) {
 	return modelo_ver_movimientos;
 	
 }
+
+
+
 private static Object[][] data_ver_movimientos;	
 private static Object datos_movimientos[];
 private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel();
 
+
+public static String countcells() throws SQLException {
+	String ConteoVenta;
+    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.countVentas() }"); ResultSet rs = cstm.executeQuery()  )   // dentro statement connection and resulset
+   
+    {	
+    	
+    	rs.next();
+     ConteoVenta =  rs.getString(1); 
+  
+
+    	
+    	
+    	
+    	
+    }
+	return ConteoVenta;
+}
 }
 

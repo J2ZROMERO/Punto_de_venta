@@ -120,9 +120,9 @@ public class Vista_Impresora extends JFrame {
 				fc.setDialogTitle("EXPLORADOR DE ARCHIVOS");
 				
 				if(fc.showOpenDialog(contentPane) == JFileChooser.APPROVE_OPTION){
-					File archivo = new File(fc.getSelectedFile().toString());
+					//File archivo = new File(fc.getSelectedFile().toString());
 					
-					lbl_img.setIcon(new ImageIcon(archivo.toString()));
+					lbl_img.setIcon(new ImageIcon("c:/arrow.png"));
 				}
 				
 			}

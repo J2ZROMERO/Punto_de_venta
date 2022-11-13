@@ -97,9 +97,9 @@ public class Ticket{
          
         
             // using ordered dither for dithering algorithm with (clearing) values
-            algorithm = new BitonalOrderedDither(2,2,120,170);
+           // algorithm = new BitonalOrderedDither(2,2,120,170);
        //     escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
-          //  escpos.write(imageWrapper, escposImage);
+          escpos.write(imageWrapper, escposImage);
        
             escpos.writeLF(title,"My Market")
                     .feed(1)

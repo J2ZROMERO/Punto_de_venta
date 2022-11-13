@@ -116,6 +116,8 @@ public class Ventas extends JFrame implements Printable {
 	
 	
 	public Ventas() {
+
+
 		
 		System.out.println(Math.abs(-15));
 		System.out.println(-15);
@@ -550,6 +552,14 @@ if(e.getButton() == 2) {
 					JOptionPane.showMessageDialog(null,"Confirma tu descuento o extra");
 	
 				}
+				try {
+					long  venta_numero =  DB_ventas.numero_venta() +1 ;
+					txt_numero_venta.setText(String.valueOf(venta_numero ));
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 		});
 		btn_generar_venta.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -720,8 +730,8 @@ txt_cambio.setText(cambio);
 	txt_numero_venta.repaint();
 	long venta_numero;
 	try {
-		venta_numero = DB_ventas.numero_venta() +1 ;
-		txt_numero_venta.setText("38" );
+		venta_numero =  DB_ventas.numero_venta() +1 ;
+		txt_numero_venta.setText(String.valueOf(venta_numero ));
 	} catch (SQLException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
