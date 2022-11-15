@@ -4,12 +4,12 @@ package interfaces;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -22,7 +22,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Vista_Impresora extends JFrame {
 
@@ -37,6 +42,7 @@ public class Vista_Impresora extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
@@ -56,6 +62,8 @@ public class Vista_Impresora extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	
 	
 	public Vista_Impresora() {
 		setResizable(false);
@@ -86,7 +94,7 @@ public class Vista_Impresora extends JFrame {
 		JLabel lbl_titulo = new JLabel("IMPRESORA");
 		lbl_titulo.setFont(new Font("Dialog", Font.BOLD, 18));
 		lbl_titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titulo.setBounds(34, 45, 340, 31);
+		lbl_titulo.setBounds(55, 34, 340, 31);
 		panel.add(lbl_titulo);
 		
 		JButton btn_confirmar = new JButton("CONFIRMAR");
@@ -104,12 +112,12 @@ public class Vista_Impresora extends JFrame {
 		lbl_img = new JLabel("");
 		lbl_img.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_img.setBounds(48, 141, 130, 97);
+		lbl_img.setBounds(110, 104, 230, 150);
 		panel.add(lbl_img);
 		
 		JButton btn_seleccionar_img = new JButton("SELECCIONAR IMAGEN");
 		btn_seleccionar_img.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_seleccionar_img.setBounds(188, 178, 193, 23);
+		btn_seleccionar_img.setBounds(380, 165, 204, 23);
 		
 		btn_seleccionar_img.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,10 +128,17 @@ public class Vista_Impresora extends JFrame {
 				fc.setDialogTitle("EXPLORADOR DE ARCHIVOS");
 				
 				if(fc.showOpenDialog(contentPane) == JFileChooser.APPROVE_OPTION){
+					
 					File archivo = new File(fc.getSelectedFile().toString());
 					
-					lbl_img.setIcon(new ImageIcon(archivo.toString()));
+					ImageIcon imagen = new ImageIcon(archivo.toString());
+					
+					Icon img = new ImageIcon(imagen.getImage().getScaledInstance(lbl_img.getWidth(),lbl_img.getHeight(),Image.SCALE_DEFAULT));
+					
+					lbl_img.setIcon(img);
+					
 				}
+				
 				
 			}
 		});
@@ -177,7 +192,7 @@ public class Vista_Impresora extends JFrame {
 		JLabel lbl_img_1 = new JLabel("");
 		lbl_img_1.setIcon(new ImageIcon(Vista_Impresora.class.getResource("/imagenes/impresora.png")));
 		lbl_img_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_img_1.setBounds(384, 12, 97, 97);
+		lbl_img_1.setBounds(384, 12, 196, 97);
 		panel.add(lbl_img_1);
 	}
 }
