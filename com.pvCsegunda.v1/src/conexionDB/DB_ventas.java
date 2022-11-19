@@ -17,6 +17,12 @@ public class DB_ventas {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		try {
+			System.out.println(DB_ventas.countcells());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
 
 	}
 
@@ -55,7 +61,7 @@ long id_venta_generada = 0;
 
 
 cstm.setLong( 1,Long.parseLong(datos_campos[0].toString()));  
-cstm.setInt(2,  Integer.parseInt(  datos_campos[1].toString()) );	  				//varchar
+cstm.setLong(2,  Long.parseLong(  datos_campos[1].toString()) );	  				//varchar
 cstm.setDouble(3, Double.parseDouble(  datos_campos[2].toString()) );	 				//varchar  				
 if(datos_campos[3].equals("")) {
 	cstm.setNull(4, java.sql.Types.NULL);
@@ -337,15 +343,18 @@ private static Object datos_movimientos[];
 private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel();
 
 
-public static String countcells() throws SQLException {
-	String ConteoVenta;
+public static int countcells() throws SQLException {
+	
+	int conteoVentas = 1;
     try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
- 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.countVentas() }"); ResultSet rs = cstm.executeQuery()  )   // dentro statement connection and resulset
+ 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.conteo_filas_venta_generadas() }"); ResultSet rs = cstm.executeQuery()  )   // dentro statement connection and resulset
    
     {	
+    	while(rs.next()) {
+    		conteoVentas++;
     	
-    	rs.next();
-     ConteoVenta =  rs.getString(1); 
+    	}
+     
   
 
     	
@@ -353,7 +362,7 @@ public static String countcells() throws SQLException {
     	
     	
     }
-	return ConteoVenta;
+	return  conteoVentas;
 }
 }
 

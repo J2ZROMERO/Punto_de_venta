@@ -41,7 +41,10 @@ import java.awt.print.PrinterException;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -192,6 +195,10 @@ public class Ventas extends JFrame implements Printable {
 		panel.add(txt_id);
 		
 		JButton btn_buscar_productos = new JButton("BUSCAR PRODUCTOS");
+		btn_buscar_productos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_buscar_productos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -200,9 +207,14 @@ public class Ventas extends JFrame implements Printable {
 				 
 				 try {
 					 if(!"".equals(txt_id.getText())) {
-						 DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
+						 Object notas[] = DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
 						 lbl_alerta_1.setForeground(new Color(248, 196, 113));
 						 txt_id.setText("");
+					
+						
+						txt_notas_extra.setText(notas[6].toString());
+							
+					total_txt(txt_total, def_tabla);
 					 }else {
 
 						 
@@ -510,8 +522,9 @@ if(e.getButton() == 2) {
 				
 				boolean confirma = false;
 				
-				Object datos_venta[] = new Object[6];		
+				ArrayList<Object> datos_venta_list = new ArrayList<Object>();
 				
+				Object datos_venta[] = new Object[6];
 				if(txt_extra.getText().equalsIgnoreCase("")  && txt_descuento.getText().equalsIgnoreCase("")) {
 					for(int i = 0; i <  def_tabla.getRowCount();i++) {
 						datos_venta[0] = def_tabla.getValueAt(i, 0);
@@ -520,7 +533,7 @@ if(e.getButton() == 2) {
 						datos_venta[3] =  txt_id_cliente.getText();
 						datos_venta[4] = Menu_principal.nombre_usuario;
 						datos_venta[5] = txt_numero_venta.getText();
-		
+		datos_venta_list.add(datos_venta);
 					}
 					
 					int conteo_elementos_sin_stock = 0;
@@ -535,7 +548,13 @@ if(e.getButton() == 2) {
 					if(conteo_elementos_sin_stock==0) {
 
 						try {
-							DB_ventas.anadir(datos_venta);
+							for (int i=0;i<datos_venta_list.size();i++) {
+							
+								Object venta[] =  (Object[])datos_venta_list.get(i);
+								
+								DB_ventas.anadir(venta);
+							    }
+							
 							JOptionPane.showMessageDialog(null,"Venta generada");	
 							limpia_campos();
 						} catch (SQLException e1) {
@@ -553,7 +572,7 @@ if(e.getButton() == 2) {
 	
 				}
 				try {
-					long  venta_numero =  DB_ventas.numero_venta() +1 ;
+					long  venta_numero =  DB_ventas.countcells() +1 ;
 					txt_numero_venta.setText(String.valueOf(venta_numero ));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -582,7 +601,7 @@ if(e.getButton() == 2) {
 		chk_imprimir_recibo.setFont(new Font("Dialog", Font.BOLD, 13));
 		chk_imprimir_recibo.setHorizontalAlignment(SwingConstants.CENTER);
 
-		chk_imprimir_recibo.setBounds(408, 486, 157, 23);
+		chk_imprimir_recibo.setBounds(766, 466, 157, 23);
 
 		panel.add(chk_imprimir_recibo);
 		
@@ -730,7 +749,7 @@ txt_cambio.setText(cambio);
 	txt_numero_venta.repaint();
 	long venta_numero;
 	try {
-		venta_numero =  DB_ventas.numero_venta() +1 ;
+		venta_numero =  DB_ventas.countcells() +1 ;
 		txt_numero_venta.setText(String.valueOf(venta_numero ));
 	} catch (SQLException e1) {
 		// TODO Auto-generated catch block
@@ -747,14 +766,14 @@ txt_cambio.setText(cambio);
 		public void actionPerformed(ActionEvent e) {
 			
 			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			//spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+			spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			//spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+			spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
 			
 			Ventas_movimientos movimientos_generados = new Ventas_movimientos();
 			
-			System.out.println(spinnerTimeInicial + spinnerTimefinal);
+			System.out.println(spinnerTimeInicial + spinnerTimefinal + "no da valores");
 			
 			
 			movimientos_generados.ver_datos(spinnerTimeInicial, spinnerTimefinal);
@@ -795,7 +814,7 @@ txt_cambio.setText(cambio);
 	JLabel lbl_calendario = new JLabel("");
 	lbl_calendario.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/calendario.png")));
 	lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
-	lbl_calendario.setBounds(167, 595, 76, 60);
+	lbl_calendario.setBounds(110, 595, 76, 60);
 	panel.add(lbl_calendario);
 	
 
