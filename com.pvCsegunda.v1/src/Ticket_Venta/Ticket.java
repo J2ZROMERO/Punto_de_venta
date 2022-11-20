@@ -55,7 +55,6 @@ import javax.print.PrintService;
 
 //libreias itext
 
-
 public class Ticket{
 
 
@@ -81,8 +80,8 @@ public class Ticket{
                     .setFontSize(Style.FontSize._1, Style.FontSize._1)
                     .setJustification(EscPosConst.Justification.Center);
 
-Style right = new Style().setJustification(EscPosConst.Justification.Right);
-Style left = new Style().setJustification(EscPosConst.Justification.Left_Default);
+            Style right = new Style().setJustification(EscPosConst.Justification.Right);
+	Style left = new Style().setJustification(EscPosConst.Justification.Left_Default);
             
             Style subtitle = new Style(escpos.getStyle())
                     .setBold(true)
@@ -92,7 +91,7 @@ Style left = new Style().setJustification(EscPosConst.Justification.Left_Default
             
             
 
-           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("c:/arrow.png"));
+           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("E:/Users/windows/Pictures/impresora/impresora.png"));
 
             
 
@@ -106,10 +105,10 @@ Style left = new Style().setJustification(EscPosConst.Justification.Left_Default
          
         
             // using ordered dither for dithering algorithm with (clearing) values
-           // algorithm = new BitonalOrderedDither(2,2,120,170);
-       //     escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+           algorithm = new BitonalOrderedDither(2,2,120,170);
+       escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
           escpos.write(imageWrapper, escposImage);
-       
+          escpos.writeLF						("").feed(1);
             escpos.writeLF						(title,"My Market")
                     .feed(1)
                     .writeLF					(center,"Calle de las flores #12 seccion primera")
@@ -120,7 +119,7 @@ Style left = new Style().setJustification(EscPosConst.Justification.Left_Default
                     .writeLF						 ("id             U    P      total")
                     .writeLF						 (Ticket.printline(1234,123,123,2225))
                     .writeLF						 ("Botle of water                  ")
-                 .writeLF						 (Ticket.printline(1234567891021L,12312,123,2225))
+                    .writeLF						 (Ticket.printline(1234567891021L,12312,123,2225))
                 //    .writeLF						 ("Botle of water                  ")
                   //  .feed(1)
                  //   .writeLF					(right,"SubTotal   $2000.50")

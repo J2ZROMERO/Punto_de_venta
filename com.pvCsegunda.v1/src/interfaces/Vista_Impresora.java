@@ -8,6 +8,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -23,11 +25,16 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import com.github.anastaciocintra.output.PrinterOutputStream;
+
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JScrollBar;
+import javax.swing.JList;
+import java.awt.Choice;
 
 public class Vista_Impresora extends JFrame {
 
@@ -35,8 +42,9 @@ public class Vista_Impresora extends JFrame {
 	private JTextField txt_nombre_empresa;
 	private JTextField txt_direccion;
 	private JTextField txt_despedida;
-	private JTextField txt_impresora;
 	private JLabel lbl_img;
+	private String urlImagen = "";
+	private String carpetaDestinoImagen = "E:/Users/windows/Pictures/impresora/impresora.png"; 
 
 	/**
 	 * Launch the application.
@@ -66,7 +74,6 @@ public class Vista_Impresora extends JFrame {
 	 */
 	
 	
-	private String urlImagen = "";
 	
 	public void setUrl(String url) {
 		urlImagen = url;
@@ -83,9 +90,9 @@ public class Vista_Impresora extends JFrame {
 	        BufferedImage originalImage = ImageIO.read(new File(path));//change path to where file is located
 	        int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 
-	        BufferedImage resizeImageJpg = resizeImage(originalImage, type, 120, 120);
+	        BufferedImage resizeImageJpg = resizeImage(originalImage, type, 160, 160);
 	        
-	        ImageIO.write(resizeImageJpg, "png", new File("E:/Users/windows/Pictures/impresora/impresora.png")); //change path where you want it saved
+	        ImageIO.write(resizeImageJpg, "png", new File(carpetaDestinoImagen)); //change path where you want it saved
 	        System.out.println("imagen renderizada");
 	    } catch (IOException e) {
 	        System.out.println(e.getMessage());
@@ -107,7 +114,7 @@ public class Vista_Impresora extends JFrame {
 	public Vista_Impresora() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 642, 559);
+		setBounds(100, 100, 465, 559);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -119,33 +126,31 @@ public class Vista_Impresora extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JButton btn_seleccionar = new JButton("SELECCIONAR IMPRESORA");
-		btn_seleccionar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_seleccionar.setBounds(412, 419, 204, 23);
-		
-		btn_seleccionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		panel.add(btn_seleccionar);
-		
 		JLabel lbl_titulo = new JLabel("IMPRESORA");
-		lbl_titulo.setFont(new Font("Dialog", Font.BOLD, 18));
+		lbl_titulo.setFont(new Font("Dialog", Font.BOLD, 25));
 		lbl_titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titulo.setBounds(55, 34, 340, 31);
+		lbl_titulo.setBounds(63, 11, 300, 56);
 		panel.add(lbl_titulo);
 		
 		JButton btn_confirmar = new JButton("CONFIRMAR");
 		btn_confirmar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_confirmar.setBounds(270, 486, 109, 23);
+		btn_confirmar.setBounds(215, 466, 109, 23);
 		
 		btn_confirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
 				
-				File archivo = new File("E://Users/windows/Pictures/impresora/impresora.png");
+				File archivo = new File(carpetaDestinoImagen);
+				try {
+					FileInputStream readImage = new FileInputStream(archivo);
+					readImage.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
 				if (archivo.delete())			   System.out.println("El fichero ha sido borrado satisfactoriamente");
 					else  System.out.println("El fichero no puede ser borrado");
 				
@@ -156,19 +161,19 @@ public class Vista_Impresora extends JFrame {
 		panel.add(btn_confirmar);
 		
 		
-		ImageIcon imagenMuestra = new ImageIcon(Vista_Impresora.class.getResource("/imagenes/impresora.png"));
+		ImageIcon imagenMuestra = new ImageIcon(Vista_Impresora.class.getResource("/imagenes/impresora.png")); //imagen muestra desde el proyecto
 		Icon imgMuestra = new ImageIcon(imagenMuestra.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
 		
 		lbl_img = new JLabel("");
 		lbl_img.setIcon(imgMuestra);
 		lbl_img.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		lbl_img.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_img.setBounds(110, 104, 230, 150);
+		lbl_img.setBounds(150, 70, 245, 150);
 		panel.add(lbl_img);
 		
 		JButton btn_seleccionar_img = new JButton("SELECCIONAR IMAGEN");
 		btn_seleccionar_img.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_seleccionar_img.setBounds(380, 165, 204, 23);
+		btn_seleccionar_img.setBounds(150, 231, 245, 23);
 		
 		btn_seleccionar_img.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,15 +241,26 @@ public class Vista_Impresora extends JFrame {
 		txt_despedida.setBounds(150, 374, 245, 25);
 		panel.add(txt_despedida);
 		
-		txt_impresora = new JTextField();
-		txt_impresora.setColumns(10);
-		txt_impresora.setBounds(150, 419, 245, 25);
-		panel.add(txt_impresora);
+		Choice choice = new Choice();
+		choice.setBounds(150, 419, 245, 20);
 		
-		JLabel lbl_img_1 = new JLabel("");
-		lbl_img_1.setIcon(new ImageIcon(Vista_Impresora.class.getResource("/imagenes/cliente.png")));
-		lbl_img_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_img_1.setBounds(384, 12, 196, 97);
-		panel.add(lbl_img_1);
+            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
+                System.out.println("Printer list to use:");
+                String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
+                for(String printServiceName: printServicesNames){
+                	choice.add(printServiceName);
+                	System.out.println(printServiceName);
+                }
+		
+		panel.add(choice);
+		
+		JLabel lbl_logo = new JLabel("LOGO");
+		lbl_logo.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_logo.setFont(new Font("Dialog", Font.BOLD, 12));
+		lbl_logo.setBounds(9, 138, 130, 23);
+		panel.add(lbl_logo);
+		
+		 
+		
 	}
 }
