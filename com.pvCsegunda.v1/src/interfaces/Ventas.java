@@ -62,7 +62,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 import java.awt.SystemColor;
-
+import Ticket_Venta.Ticket;
 
 
 
@@ -208,11 +208,12 @@ public class Ventas extends JFrame implements Printable {
 				 try {
 					 if(!"".equals(txt_id.getText())) {
 						 Object notas[] = DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
+						 System.out.println(notas.length+"asdada");
 						 lbl_alerta_1.setForeground(new Color(248, 196, 113));
 						 txt_id.setText("");
 					
 						
-						txt_notas_extra.setText(notas[6].toString());
+						txt_notas_extra.setText(notas[7].toString());
 							
 					total_txt(txt_total, def_tabla);
 					 }else {
@@ -273,7 +274,7 @@ public class Ventas extends JFrame implements Printable {
 		panel.add(scrollPane);
  	   
 		tbl_ventas = new  JTable();
-		String[] columnNames = {"ID","Producto","Distintivo1","Stock", "Precio", "Cantidad"};  
+		String[] columnNames = {"ID","Producto","Distintivo1","Stock", "Precio", "Cantidad", "$"};  
 		
 		def_tabla.setColumnIdentifiers(columnNames);
 		
@@ -485,9 +486,7 @@ if(e.getButton() == 2) {
 					double efectivo = Double.parseDouble(txt_paga_con.getText());
 					double total = Math.abs(  total_pagar-efectivo  ); 
 					
-				String h =	String.valueOf(efectivo);
-					System.out.println( h.length());
-					
+				String h =	String.valueOf(efectivo);					
 					String cambio = String.valueOf(total);
 					txt_cambio.setText(cambio);
 					
@@ -556,6 +555,8 @@ if(e.getButton() == 2) {
 							    }
 							
 							JOptionPane.showMessageDialog(null,"Venta generada");	
+							Ticket enviarDatosTicket = new Ticket();
+							enviarDatosTicket.datosImpresora(def_tabla);
 							limpia_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -1035,7 +1036,7 @@ class enventoTeclado implements KeyListener{
 					
 					 
 					Object  datos_notas[] = DB_ventas.add_row(Long.parseLong(campo.getText()), modelo);
-					 campo_notas.setText(datos_notas[6].toString());
+					 campo_notas.setText(datos_notas[7].toString());
 					 
 					 double total=0;
 					

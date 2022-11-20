@@ -92,6 +92,9 @@ System.out.println("datos insertados");
 	
 public static Object[] add_row(long id,DefaultTableModel modelo) throws SQLException {
 	
+	System.out.println(modelo.getColumnCount());
+	double precio = 0.0;
+	  	int cantidad = 0;
 	List<Object> n_ver_ventas = new ArrayList<Object>();
 	Object[] dat ;
 	   int conteo = 0;
@@ -103,7 +106,7 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
     	   
     	   ResultSet rs= cstm.executeQuery();
      int contador = 0;
-			dat = new Object[7];
+			dat = new Object[8];
 			
   	  		 while(rs.next()) {
   	    		for(int i =0 ; i <= modelo.getRowCount()-1;i++) {
@@ -117,11 +120,14 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
   	    		dat[0]=(rs.getString(1));
   	  			dat[1]=(rs.getString(2));	
   	  			dat[2]=(rs.getString(3));	
-  	  			dat[3]=(rs.getString(4));
-  	  			dat[4]=(rs.getString(5));
+  	  			dat[3]=(rs.getInt(4));
+  	  			dat[4]=(rs.getDouble(5));
   	  			dat[5]=(1);
-  	  			dat[6]=(rs.getString(6));
-  	  			
+  	  			precio =(double) dat[4];
+  	  	        cantidad= (int)dat[5];
+  	  			dat[6]= (cantidad*precio);
+  	  			dat[7]= (rs.getString(6));
+  	  
   	  	
   	  		 }//while
 
@@ -161,42 +167,20 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  				
 	  			}else {
 
-	  				
-	  				
-	  				
 	  					int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
 							
 		  				suma+=1;
 		  				modelo.setValueAt (suma,contador , 5);
-		  					
-	  				
-		  			
+		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);		  			
 	  			}
 	  			
 	  	  	  }else {
-		  	  		
-	  	  		  
-	  	  		  
+
 	  	  		  if(Integer.parseInt( dat[3].toString()) == 0) {
 	  	  			dat[5] = 0;  
 	  	  		  }
-	  	  	
 	  	  		  modelo.addRow(dat);
-	  	  			
-
-
-	  	  	
-				
-				
-			
-	  	  	  }
-  	  			}
-  	  			
-  	  			}  	  		
-
-  	  	
-  	  		 
-  	  			}//clstam
+	  	  	  }}}}
   	 if(dat[6] == null) {
 			 dat[6] = "";
 		 }

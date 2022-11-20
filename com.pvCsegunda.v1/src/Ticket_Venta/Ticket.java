@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.print.PrintService;
+import javax.swing.table.DefaultTableModel;
 
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.escpos.EscPosConst;
@@ -56,7 +57,16 @@ import javax.print.PrintService;
 //libreias itext
 
 public class Ticket{
-
+	public Object []datosImpresora (DefaultTableModel datos) {
+		
+		
+		for(int i= 0;i < datos.getRowCount();i++) {
+		System.out.println(datos.getValueAt(i, 0)); 	
+		}
+		
+		return null;
+		
+	}
 
 
     public void print(String printerName){
