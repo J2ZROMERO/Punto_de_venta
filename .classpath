@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="com.pvCsegunda.v1/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/barcode4j.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/icepdf-core.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/icepdf-viewer.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
-	<classpathentry kind="lib" path="E:/Users/windows/Desktop/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
-
-=======
-	<classpathentry kind="lib" path="C:/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/barcode4j.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/icepdf-core.jar"/>
@@ -28,8 +14,7 @@
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/jasper/itext-2.1.7.js10.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/pdfbox-3.0.0-alpha3.jar"/>
->>>>>>> ece1b2949af1dc75fb4250b0ded91e91aa2e51c9
-	<classpathentry kind="output" path="com.pvCsegunda.v1/bin"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/libreria tickets/escpos-coffee-4.1.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
