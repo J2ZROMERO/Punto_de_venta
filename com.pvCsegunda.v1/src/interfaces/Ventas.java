@@ -530,7 +530,7 @@ if(e.getButton() == 2) {
 						datos_venta[1] = def_tabla.getValueAt(i, 5);
 						datos_venta[2] = txt_total.getText();
 						datos_venta[3] =  txt_id_cliente.getText();
-						datos_venta[4] = Menu_principal.nombre_usuario;
+						datos_venta[4] = "javier";
 						datos_venta[5] = txt_numero_venta.getText();
 		datos_venta_list.add(datos_venta);
 					}
@@ -556,7 +556,7 @@ if(e.getButton() == 2) {
 							
 							JOptionPane.showMessageDialog(null,"Venta generada");	
 							Ticket enviarDatosTicket = new Ticket();
-							enviarDatosTicket.datosImpresora(def_tabla);
+							enviarDatosTicket.print("POS-58-Series", def_tabla, "jose juan ", "1521");
 							limpia_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block

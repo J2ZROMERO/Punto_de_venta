@@ -5,6 +5,7 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +29,16 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.List;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import interfaces.Usuarios;
+
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.escpos.EscPosConst;
 import com.github.anastaciocintra.escpos.Style;
@@ -57,19 +62,30 @@ import javax.print.PrintService;
 //libreias itext
 
 public class Ticket{
-	public Object []datosImpresora (DefaultTableModel datos) {
+	
+	public void datosImpresora (DefaultTableModel datos,String user,String total) {
 		
+
+		Object datos_venta[] = new Object[5];
 		
 		for(int i= 0;i < datos.getRowCount();i++) {
-		System.out.println(datos.getValueAt(i, 0)); 	
+		
+			datos_venta[0] = datos.getValueAt(i,0);
+			datos_venta[1] = datos.getValueAt(i,5);
+			datos_venta[2] =datos.getValueAt(i,4);
+			datos_venta[3] =datos.getValueAt(i,6);
+			datos_venta[4] =datos.getValueAt(i,1);
+			
+ 	
 		}
 		
-		return null;
+	
+		
 		
 	}
 
 
-    public void print(String printerName){
+    public void print(String printerName,DefaultTableModel datos,String user,String total){
 
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
@@ -126,10 +142,33 @@ public class Ticket{
                     .write						("Te atendio:")  .writeLF(" jose zepeda")
                     .write						("Client: ")     .writeLF(" John Doe")
                     .feed(1)
-                    .writeLF						 ("id             U    P      total")
-                    .writeLF						 (Ticket.printline(1234,123,123,2225))
-                    .writeLF						 ("Botle of water                  ")
-                    .writeLF						 (Ticket.printline(1234567891021L,12312,123,2225))
+                    .writeLF						 ("id             U    P      total");
+                    
+    		/*
+            
+            Long.parseLong((String)datos.getValueAt(i,0)),
+ 		   Long.parseLong(datos.getValueAt(i,5).toString()),
+ 		   Double.parseDouble(datos.getValueAt(i,4).toString()),
+ 		   Double.parseDouble(datos.getValueAt(i,6).toString())
+            
+            */
+            System.out.println("empezando impresion");
+            
+    		for(int i= 0;i < datos.getRowCount();i++) {
+    		System.out.println(i);
+    		
+    	       escpos.writeLF(Ticket.printline(Long.parseLong((String)datos.getValueAt(i,0)),
+    	    		   Long.parseLong(datos.getValueAt(i,5).toString()),
+    	    		   Double.parseDouble(datos.getValueAt(i,4).toString()),
+    	    		   Double.parseDouble(datos.getValueAt(i,6).toString())    	    		   )
+    	    		   )
+              .writeLF(String.valueOf(datos.getValueAt(i,1)));  			
+    }
+ 	System.out.println("terminado impresion");
+    		
+                    //escpos.writeLF						 (Ticket.printline(1234,123,123,2225))
+                    //.writeLF						 ("Botle of water                  ")
+                    //.writeLF						 (Ticket.printline(1234567891021L,12312,123,2225))
                 //    .writeLF						 ("Botle of water                  ")
                   //  .feed(1)
                  //   .writeLF					(right,"SubTotal   $2000.50")
@@ -137,7 +176,7 @@ public class Ticket{
                   //  .writeLF					(right,"   Total   $   0.00")
                    // .feed(1)
                   //  .writeLF					(center,"Gracias por tu compra!")
-                    .feed(2)
+                    escpos.feed(2)
                     .cut(EscPos.CutMode.FULL);
             
             
@@ -148,7 +187,7 @@ public class Ticket{
         }
         
     }
-
+/*
     public static void main(String[] args) {
          	
     	
@@ -166,8 +205,8 @@ public class Ticket{
             obj.print("POS-58-Series");
 
     }
-    
-    public static String printline(long id, long unidades, long precio, long total) {
+    */
+    public static String printline(long id, long unidades, double precio, double total) {
 
         String ids = String.valueOf(id);
         String unidadesvar = String.valueOf(unidades);
