@@ -117,7 +117,7 @@ public class Ticket{
             
             
 
-           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("E:/Users/windows/Pictures/impresora/impresora.png"));
+           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("/com.pvCsegunda.v1/src/imagenes/impresora.png"));
 
             
 

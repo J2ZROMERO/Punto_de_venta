@@ -57,7 +57,20 @@ public class Vista_Impresora extends JFrame {
 				try {
 					Vista_Impresora frame = new Vista_Impresora();
 					frame.setVisible(true);
+
 					
+					File archivo = new File("E:/Users/windows/Pictures/impresora/impresora.png");
+					try {
+						FileInputStream readImage = new FileInputStream(archivo);
+						readImage.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					if (archivo.delete())			   System.out.println("El fichero ha sido borrado satisfactoriamente");
+						else  System.out.println("El fichero no puede ser borrado");
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					
 					
