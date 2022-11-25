@@ -18,7 +18,7 @@ public class DB_ventas {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			System.out.println(DB_ventas.countcells());
+			System.out.println(DB_ventas.conteoVentasgeneradas());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -327,7 +327,7 @@ private static Object datos_movimientos[];
 private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel();
 
 
-public static int countcells() throws SQLException {
+public static int conteoVentasgeneradas() throws SQLException {
 	
 	int conteoVentas = 1;
     try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 

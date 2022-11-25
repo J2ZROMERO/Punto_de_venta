@@ -987,7 +987,7 @@ private JSpinner spinner_tiempo_limite;
 		do {
 			
 			
-			for(int i =0 ; i < 13 ; i++) {
+			for(int i =0 ; i < 6 ; i++) {
 				int numero =  (int) Math.abs(Math.random()*10);
 
 

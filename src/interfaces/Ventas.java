@@ -71,7 +71,7 @@ import javax.swing.event.ChangeEvent;
 
 public class Ventas extends JFrame implements Printable {
 	public static String id_productos;	
-
+    private boolean confirmarRecibo = false;
 	private JTextPane txt_numero_venta;
 	private DefaultTableModel def_tabla  = new DefaultTableModel();  
 	private enventoTeclado evento_teclado_campo_id;
@@ -121,10 +121,6 @@ public class Ventas extends JFrame implements Printable {
 	
 	public Ventas() {
 
-
-		
-		System.out.println(Math.abs(-15));
-		System.out.println(-15);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -515,13 +511,32 @@ if(e.getButton() == 2) {
 		
 		 
 		panel.add(txt_cambio);
+		JCheckBox chk_imprimir_recibo = new JCheckBox("IMPRIMIR RECIBO");
+		chk_imprimir_recibo.setSelected(confirmarRecibo);
+		chk_imprimir_recibo.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				confirmarRecibo = chk_imprimir_recibo.isSelected();
+				
+			}
+		});
+		chk_imprimir_recibo.setFont(new Font("Dialog", Font.BOLD, 13));
+		chk_imprimir_recibo.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		chk_imprimir_recibo.setBounds(766, 466, 157, 23);
+		
+		panel.add(chk_imprimir_recibo);
 		
 		JButton btn_generar_venta = new JButton("GENERAR VENTA");
 		btn_generar_venta.addActionListener(new ActionListener() {
+			
+			
+			
+			
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				boolean confirma = false;
-				
 				ArrayList<Object> datos_venta_list = new ArrayList<Object>();
 				
 				Object datos_venta[] = new Object[6];
@@ -531,7 +546,7 @@ if(e.getButton() == 2) {
 						datos_venta[1] = def_tabla.getValueAt(i, 5);
 						datos_venta[2] = txt_total.getText();
 						datos_venta[3] =  txt_id_cliente.getText();
-						datos_venta[4] = "javier";
+						datos_venta[4] = Login.usuario_menu;
 						datos_venta[5] = txt_numero_venta.getText();
 		datos_venta_list.add(datos_venta);
 					}
@@ -555,9 +570,16 @@ if(e.getButton() == 2) {
 								DB_ventas.anadir(venta);
 							    }
 							
-							JOptionPane.showMessageDialog(null,"Venta generada");	
 							Ticket enviarDatosTicket = new Ticket();
-							enviarDatosTicket.print("POS-58-Series", def_tabla, "jose juan ", "1521");
+if(confirmarRecibo) {
+	enviarDatosTicket.print("POS-58-Series", def_tabla, Login.usuario_menu, txt_total.getText(),txt_id_cliente.getText());
+	chk_imprimir_recibo.setSelected(false);
+	JOptionPane.showMessageDialog(null,"Venta generada");
+	
+}else {
+	confirmarRecibo = false;
+	JOptionPane.showMessageDialog(null,"Venta generada");
+}
 							limpia_campos();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -574,8 +596,8 @@ if(e.getButton() == 2) {
 	
 				}
 				try {
-					long  venta_numero =  DB_ventas.countcells() +1 ;
-					txt_numero_venta.setText(String.valueOf(venta_numero ));
+					long  venta_numero =  DB_ventas.conteoVentasgeneradas() +1 ;
+					txt_numero_venta.setText(String.valueOf(venta_numero));
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -594,23 +616,12 @@ if(e.getButton() == 2) {
 
 		panel.add(btn_ver_ventas);
 		
-		JCheckBox chk_imprimir_recibo = new JCheckBox("IMPRIMIR RECIBO");
-		chk_imprimir_recibo.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				
-			}
-		});
-		chk_imprimir_recibo.setFont(new Font("Dialog", Font.BOLD, 13));
-		chk_imprimir_recibo.setHorizontalAlignment(SwingConstants.CENTER);
-
-		chk_imprimir_recibo.setBounds(766, 466, 157, 23);
-
-		panel.add(chk_imprimir_recibo);
 		
 		JButton btn_cancelar_pedido = new JButton("CANCELAR PEDIDO");
 		btn_cancelar_pedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			limpia_campos();	
+			
 			}
 		});
 		btn_cancelar_pedido.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -670,7 +681,7 @@ if(e.getButton() == 2) {
 			
 			
 	
-	    
+		
 	    double paga_con =  Double.parseDouble( txt_paga_con.getText() );
 
 	    if(!txt_paga_con.getText().equalsIgnoreCase("") && paga_con <=0) {
@@ -696,7 +707,7 @@ txt_cambio.setText(cambio);
 	JButton btn_confirma_extra = new JButton("confirmar ");
 	btn_confirma_extra.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
+				
 			
 			double extra = Double.parseDouble( txt_extra.getText());
 			double total_val= Double.parseDouble( txt_total.getText());
@@ -751,7 +762,7 @@ txt_cambio.setText(cambio);
 	txt_numero_venta.repaint();
 	long venta_numero;
 	try {
-		venta_numero =  DB_ventas.countcells() +1 ;
+		venta_numero =  DB_ventas.conteoVentasgeneradas()+1 ;
 		txt_numero_venta.setText(String.valueOf(venta_numero ));
 	} catch (SQLException e1) {
 		// TODO Auto-generated catch block
@@ -803,7 +814,7 @@ txt_cambio.setText(cambio);
 
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	
-
+	
 	
 	JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 	lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
@@ -865,7 +876,8 @@ txt_cambio.setText(cambio);
 
 	txt_total.addCaretListener(new CaretListener() {
 		public void caretUpdate(CaretEvent e) {
-
+			
+			
 			
 			if(!txt_paga_con.getText().equalsIgnoreCase("")) {
 				double comparador = Double.parseDouble(txt_paga_con.getText());
@@ -926,7 +938,7 @@ txt_cambio.setText(cambio);
 				
 				
 				
-		
+
 	public void total_txt(JTextField total_suma,DefaultTableModel modelo) {
 		
 		 double total_sum=0;
@@ -1037,7 +1049,10 @@ class enventoTeclado implements KeyListener{
 					
 					 
 					Object  datos_notas[] = DB_ventas.add_row(Long.parseLong(campo.getText()), modelo);
-					 campo_notas.setText(datos_notas[7].toString());
+					 
+					
+					
+					campo_notas.setText(datos_notas[7] != null ? datos_notas[7].toString():"" );
 					 
 					 double total=0;
 					

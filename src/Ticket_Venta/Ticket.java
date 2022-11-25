@@ -5,7 +5,9 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -85,7 +87,7 @@ public class Ticket{
 	}
 
 
-    public void print(String printerName,DefaultTableModel datos,String user,String total){
+    public void print(String printerName,DefaultTableModel datos,String user,String total,String cliente){
 
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
@@ -117,65 +119,77 @@ public class Ticket{
             
             
 
-          // BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("/com.pvCsegunda.v1/src/imagenes/impresora.png"));
+//           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("C:/Punto_de_venta/src/imagenes/impresora.png"));
 
             
-
+           SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+           Date date = new Date();  
+             
  
             
            escpos = new EscPos(new PrinterOutputStream(printService));
             
    
-          //  Bitonal algorithm = new BitonalThreshold(); 
-       //    EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+        Bitonal algorithm = new BitonalThreshold(); 
+  //         EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
          
         
-            // using ordered dither for dithering algorithm with (clearing) values
-          // algorithm = new BitonalOrderedDither(2,2,120,170);
-      // escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
-       //   escpos.write(imageWrapper, escposImage);
+          // using ordered dither for dithering algorithm with (clearing) values
+           algorithm = new BitonalOrderedDither(2,2,120,170);
+    //   escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+      //    escpos.write(imageWrapper, escposImage);
           escpos.writeLF						("").feed(1);
             escpos.writeLF						(title,"My Market")
                     .feed(1)
                     .writeLF					(center,"Calle de las flores #12 seccion primera")
-                    .write					("Ticket #1325156")  .writeLF("    fecha")
-                    .write						("Te atendio:")  .writeLF(" jose zepeda")
-                    .write						("Client: ")     .writeLF(" John Doe")
-                    .feed(1)
-                    .writeLF						 ("id             U    P      total");
+                    .writeLF					(center,"Ticket #1325156") 
+                    .writeLF(center,formatter.format(date))
+                    .write						("Te atendio:")  .writeLF(user == null ? "":user)
+                    .write						("Cliente: ")     .writeLF(cliente)
+                    .feed(1);
                     
-    		/*
-            
-            Long.parseLong((String)datos.getValueAt(i,0)),
- 		   Long.parseLong(datos.getValueAt(i,5).toString()),
- 		   Double.parseDouble(datos.getValueAt(i,4).toString()),
- 		   Double.parseDouble(datos.getValueAt(i,6).toString())
-            
-            */
-            System.out.println("empezando impresion");
+         
             
     		for(int i= 0;i < datos.getRowCount();i++) {
-    		System.out.println(i);
-    		
-    	       escpos.writeLF(Ticket.printline(Long.parseLong((String)datos.getValueAt(i,0)),
-    	    		   Long.parseLong(datos.getValueAt(i,5).toString()),
-    	    		   Double.parseDouble(datos.getValueAt(i,4).toString()),
-    	    		   Double.parseDouble(datos.getValueAt(i,6).toString())    	    		   )
-    	    		   )
-              .writeLF(String.valueOf(datos.getValueAt(i,1)));  			
+
+    			if(String.valueOf(datos.getValueAt(i,0)).length() > 10) {
+    				escpos.writeLF		("Id      Pzas    Precio     Total");
+      				escpos.writeLF(right,
+      				Ticket.printline(Long.parseLong((String)datos.getValueAt(i,0)),
+     	    		   Long.parseLong(datos.getValueAt(i,5).toString()),
+     	    		   Double.parseDouble(datos.getValueAt(i,4).toString()),
+     	    		   Double.parseDouble(datos.getValueAt(i,6).toString())    	    		   )
+     	    		   )
+               .write(String.valueOf(datos.getValueAt(i,0))+ "   ")
+               .writeLF(String.valueOf(datos.getValueAt(i,1)));
+      		}else {
+      			escpos.writeLF		("Id      Pzas    Precio     Total");		
+      			escpos.writeLF(right,
+      					Ticket.printline(Long.parseLong((String)datos.getValueAt(i,0)),
+      					Long.parseLong(datos.getValueAt(i,5).toString()),
+      					Double.parseDouble(datos.getValueAt(i,4).toString()),
+      					Double.parseDouble(datos.getValueAt(i,6).toString())    	    		   )
+      					)
+      			.writeLF(String.valueOf(datos.getValueAt(i,1)));  			
+      		}
     }
- 	System.out.println("terminado impresion");
+ 	
+    		int conteoSubYtotal = ("SubTotal   $   ").length() + total.length();
+    		int conteoIva =("      Iva   $   ").length();
+    		String espacioIva = "";
+    		String iva = "      Iva   $";
+    		while(conteoIva != conteoSubYtotal) {
+    			espacioIva+=" ";
+    			conteoSubYtotal--;
+    		}
+    		iva+=espacioIva+"0.00";
     		
-                    //escpos.writeLF						 (Ticket.printline(1234,123,123,2225))
-                    //.writeLF						 ("Botle of water                  ")
-                    //.writeLF						 (Ticket.printline(1234567891021L,12312,123,2225))
-                //    .writeLF						 ("Botle of water                  ")
-                  //  .feed(1)
-                 //   .writeLF					(right,"SubTotal   $2000.50")
-                   // .writeLF					(right,"     Iva   $   0.00")
-                  //  .writeLF					(right,"   Total   $   0.00")
-                   // .feed(1)
-                  //  .writeLF					(center,"Gracias por tu compra!")
+                escpos.feed(1);
+                 escpos.writeLF					(right,"SubTotal   $   " + total )
+                   .writeLF					(right,iva)
+                    .writeLF					(right,"    Total   $   "+ total)
+                    .feed(1)
+                   .writeLF					(center,"Gracias por tu compra!");
                     escpos.feed(2)
                     .cut(EscPos.CutMode.FULL);
             
@@ -192,52 +206,95 @@ public class Ticket{
          	
     	
     	if(args.length!=1){
-            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
-                System.out.println("Printer list to use:");
+//            System.out.println("Usage: java -jar xyz.jar (\"printer name\")");
+              //  System.out.println("Printer list to use:");
                 String[] printServicesNames = PrinterOutputStream.getListPrintServicesNames();
                 for(String printServiceName: printServicesNames){
-                    System.out.println(printServiceName);
+                  //  System.out.println(printServiceName);
                 }
                 
                // System.exit(0);
             }
             Ticket obj = new Ticket();
-            obj.print("POS-58-Series");
+//            obj.print("POS-58-Series");
+            System.out.println(obj.printline(12349123123L, 545, 54521.00, 12333.32));
 
-    }
-    */
-    public static String printline(long id, long unidades, double precio, double total) {
-
-        String ids = String.valueOf(id);
+    }*/
+    
+    private static String printline(long id, long unidades, double precio, double total) {
+    	
+    	String ids = String.valueOf(id);
         String unidadesvar = String.valueOf(unidades);
         String preciovar = String.valueOf(precio);
         String totalvar = String.valueOf(total);
-        String va = "";
+        String totalDePago = "";
+        String totalPrecio = "";
         String space = " ";
-        while (ids.length() != 14){
-        	
-          ids += space;
-        } ;
-
-        while (unidadesvar.length() != 5) {
-          unidadesvar += space;
-        } ;
-
-        while (preciovar.length() != 6) {
-          preciovar += space;
-        } ;
-
-        int count = totalvar.length();
-        while (count != 6) {
-           va +=space;
-           count++;
-        };
-va += totalvar;
-        String productoDetalles = ids+"" + unidadesvar + " "+ preciovar + ""+ va;
+      
+        
+    	if(ids.length() > 10 || preciovar.length() > 8 ||totalvar.length() > 8 ) {
+    		
+    		System.out.println("in range out ");
+    		while (unidadesvar.length() != 3) {
+    			unidadesvar += space;
+    		} ;
+ 
+    		int countSpacesInprecio = preciovar.length();
+    		while (countSpacesInprecio != 8) {
+    			
+    			totalPrecio += space;
+    			countSpacesInprecio++;
+    		} ;
+    		totalPrecio+=preciovar;
+    		int countSpacesIntotal = totalvar.length();
+ 
+    		while (countSpacesIntotal != 8) {
+    			totalDePago +=space;
+    			countSpacesIntotal++;
+    		};
+    		totalDePago += totalvar;
+    		String productoDetalles = unidadesvar + " "+ totalPrecio + " "+ totalDePago;
+    		System.out.println("below");
+    		return productoDetalles;
+    		
+    	}else {
+    		System.out.println("in range in ");
+    		while (ids.length() != 10){
+    			
+    			ids += space;
+    			System.out.println("1 while ");
+    		} ;
+    		
+    		while (unidadesvar.length() != 3) {
+    			System.out.println("2 while ");
+    			unidadesvar += space;
+    		} ;
+ 
+    		int countSpacesInprecio = preciovar.length();
+    		while (countSpacesInprecio != 8) {
+    			System.out.println("3 while ");
+    			totalPrecio += space;
+    			countSpacesInprecio++;
+    		} ;
+    		totalPrecio+=preciovar;
+    		int countSpacesIntotal = totalvar.length();
+ 
+    		while (countSpacesIntotal != 8) {
+    			System.out.println("4 while ");
+    			totalDePago +=space;
+    			countSpacesIntotal++;
+    		};
+    		totalDePago += totalvar;
+    		String productoDetalles = ids+" " + unidadesvar + " "+ totalPrecio + " "+ totalDePago;
+    		System.out.println("below");
+    		return productoDetalles;
+    	}
+    	
         // System.out.println("Los caracteres estan sobrepasado los limites de la
         // impresion maixmo largo de 32");
-
-        return productoDetalles;
+        // para subtotal el maximo es de 7 cifras inclutyendo el punto}
+        // para ñas piezas maximo una cantidadn de 3000
+        // 
       };
 
 

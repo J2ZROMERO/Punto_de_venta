@@ -585,7 +585,7 @@ public class Bar_Code extends JFrame {
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
 
 		Document document = new Document();
-		String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+		String url = "C:\\Punto_de_venta\\src\\Codigo_De_Barras\\codigo.pdf";
 		
 
 	PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(url));
@@ -651,7 +651,7 @@ public class Bar_Code extends JFrame {
 		
 public	  void openpdf(JScrollPane panel){
 	  
-	String url = "C:/Punto_de_venta/com.pvCsegunda.v1/src/Codigo_De_Barras/codigo.pdf";
+	String url = "C:\\Punto_de_venta\\src\\Codigo_De_Barras\\codigo.pdf";
 
     try {
            SwingController control=new SwingController();
