@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,6 +26,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.log.SysoCounter;
 import com.itextpdf.text.pdf.Barcode;
 import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -55,6 +57,8 @@ import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Bar_Code extends JFrame {
 	private List<String> letras = new ArrayList<>();
@@ -167,6 +171,12 @@ public class Bar_Code extends JFrame {
 	}
 	
 	public Bar_Code() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_id.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 990, 763);
@@ -251,7 +261,6 @@ public class Bar_Code extends JFrame {
 		panel.add(lbl_id_1);
 		
 		txt_cantidad = new JTextField();
-		txt_cantidad.setEditable(false);
 		txt_cantidad.setText("0");
 		txt_cantidad.setHorizontalAlignment(SwingConstants.RIGHT);
 		txt_cantidad.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -321,7 +330,7 @@ public class Bar_Code extends JFrame {
 		
 		panel.add(btn_menos);
 		
-		JButton btn_ejecutar = new JButton("EJECUTAR");
+		JButton btn_ejecutar = new JButton("GENERAR");
 		
 		btn_ejecutar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ejecutar.setBounds(162, 191, 180, 35);
@@ -441,41 +450,45 @@ public class Bar_Code extends JFrame {
 		scrollPane_1.setBounds(10, 237, 954, 476);
 		panel.add(scrollPane_1);
 		
+	
 		btn_ejecutar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-		
-				try {
-		
-
-					if(txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("") || !txt_id.getText().equalsIgnoreCase("") && txt_cantidad.getText().equalsIgnoreCase("0")) {
-						JOptionPane.showMessageDialog(null,"SELECCIONA UNA CANTIDAD DE ETIQUETAS MAYOR A 0");
-		frame.requestFocus();
-
-					}else {
-
-						createPdf(txt_id.getText(), Integer.parseInt(txt_cantidad.getText()));
-						openpdf(scrollPane_1 );	
-
-					//	frame.requestFocus();
-
-
-					}
+				//
+//				System.out.println(Integer.parseInt(txt_cantidad.getText()) > 0);
+				
+				if(txt_id.getText().equalsIgnoreCase("") || Integer.parseInt(txt_cantidad.getText()) > 0 == false ) {
+					JOptionPane.showMessageDialog(null,"ID DEBE SER SELECCIONADO y CANTIDAD DE ETIQUETAS MAYOR A 0");
+					frame.requestFocus();
 					
-					}	
-			
-		 catch (NumberFormatException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+				}else {
+					
+					try {
+						createPdf(txt_id.getText(), Integer.parseInt(txt_cantidad.getText()));
+						txt_cantidad.setText("0");
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (DocumentException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					openpdf(scrollPane_1 );	
+					
+					frame.requestFocus();
+					
+					
+				}
 			}
-			
 		});
+		
+
+					
+		
+
+	
 		
 		btn_limpiar_hoja.addMouseListener(new MouseAdapter() {
 			@Override
@@ -531,45 +544,7 @@ public class Bar_Code extends JFrame {
 		
 			}
 		});
-		/*
-		 
-		 panel con recuadro centrico resaltando precio titulo
-		JPanel pnl_vista = new JPanel();
-		scrollPane_1.setViewportView(pnl_vista);
-		pnl_vista.setBorder(new LineBorder(new Color(0, 0, 0)));
-		pnl_vista.setLayout(null);
 		
-		JLabel lbl_titulo_etiqueta = new JLabel("<html><center>ETIQUETAS</center></html>");
-		lbl_titulo_etiqueta.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_titulo_etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_titulo_etiqueta.setBounds(7, 11, 583, 22);
-		pnl_vista.add(lbl_titulo_etiqueta);
-		
-		lbl_bar_code = new JLabel("");
-		lbl_bar_code.setIcon(null);
-		lbl_bar_code.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbl_bar_code.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_bar_code.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_bar_code.setBounds(180, 44, 234, 121);
-		pnl_vista.add(lbl_bar_code);
-		
-		lbl_cantidad = new JLabel("");
-		lbl_cantidad.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_cantidad.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbl_cantidad.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_cantidad.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cantidad.setBounds(180, 176, 111, 28);
-		pnl_vista.add(lbl_cantidad);
-		
-		lbl_precio = new JLabel("$ 352");
-		lbl_precio.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_precio.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbl_precio.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_precio.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lbl_precio.setBounds(301, 176, 113, 28);
-		pnl_vista.add(lbl_precio);*/
-		envento_barcode eventos = new envento_barcode();
-		eventos.evento_barcodes(tbl_bar_code, txt_id);
 		
 		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -578,8 +553,10 @@ public class Bar_Code extends JFrame {
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_1.setBounds(162, 68, 180, 24);
 		panel.add(lbl_alerta_1);
-		txt_id.addKeyListener(eventos);
 		
+		envento_barcode eventos = new envento_barcode();
+		txt_id.addKeyListener(eventos);
+		eventos.evento_barcodes(tbl_bar_code, txt_id,lbl_alerta_1);
 	}
 	
 	public void createPdf(String id,int cantidad) throws IOException, DocumentException {
@@ -682,60 +659,69 @@ class envento_barcode implements KeyListener{
 	}
 	
 
-	 void evento_barcodes(JTable tabla, JTextField campo) {
+	 void evento_barcodes(JTable tabla, JTextField txt_id, JLabel lbl_alerta_1) {
 		// TODO Auto-generated method stub
         this.tabla = tabla;
-		this.campo = campo;
+		this.txt_id = txt_id;
+		this.lbl_alerta_1 = lbl_alerta_1; 
 	}
 	
 	@Override
+	public void keyPressed(KeyEvent e) { //minetras tenemos el dedo sobre la tecla presionandolo
+		
+		
+		if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			
+			
+			if(this.txt_id.getText().equalsIgnoreCase("")) {
+				System.out.println("vacio");
+			}else {
+				
+				
+				try {
+					
+					tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(this.txt_id.getText() )));
+					txt_id.setText("");
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+				
+				
+			}
+			
+		}}
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		int key = e.getKeyChar();
 		boolean numeros = key >= 48 && key <=57;
 		if(!numeros) {
 			
 		e.consume();	
 		}
+			
+			
+		
 		}
 	
 	@Override
-	public void keyReleased(KeyEvent e) { 
-	if(!"".equals(txt_id.getText())) {
-	lbl_alerta_1.setForeground(new Color(253, 223, 127)); }else {
-	lbl_alerta_1.setForeground(new Color(0,0,0))
-	;}}
+	public void keyReleased(KeyEvent e) {
+
+		if(!txt_id.getText().equalsIgnoreCase("")) {
+this.lbl_alerta_1.setForeground(new Color(253, 223, 127)); }else {
+	this.lbl_alerta_1.setForeground(new Color(0,0,0))
+	;}
+	
+	}
 
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		
-		
-	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	
-	
-	if(campo.getText().equalsIgnoreCase("")) {
-		System.out.println("vacio");
-	}else {
-		
-		
-try {
-tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(campo.getText() )));
-
-} catch (NumberFormatException e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-} catch (SQLException e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-}
-		
-					
-					 
-	
-}
-		
-}}
 	
 }
 

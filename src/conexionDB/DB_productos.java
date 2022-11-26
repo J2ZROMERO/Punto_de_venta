@@ -21,6 +21,7 @@ public class DB_productos {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		
 
 //		try {
 //			Object datosDB[] = new Object[17];
@@ -918,6 +919,29 @@ public static boolean acceso (String nickname, String contrasena_usuario) throws
  	   
     }
 	return acceso_usuario;
+	
+}
+public static boolean compararStock (long id) throws SQLException {
+	boolean confirmaCliente = false;
+	
+    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.productosEnStock(?,?) }"))	       
+    {	       
+ 	 
+ 	   cstm.setLong(1, id);
+ 	    cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+ 	   
+ 	   cstm.execute();
+ 	   
+ 	   
+ 	   confirmaCliente = cstm.getBoolean(2);
+ 	   
+ 	   
+
+ 	   
+ 	   
+    }
+	return confirmaCliente;
 	
 }
 
