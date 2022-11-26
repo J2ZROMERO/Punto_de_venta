@@ -33,6 +33,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class Marcas extends JFrame {
@@ -57,7 +59,9 @@ public class Marcas extends JFrame {
 			}
 		});
 	}
-
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -70,6 +74,12 @@ public class Marcas extends JFrame {
 	}
 	
 	public Marcas() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_marca.requestFocus();
+			}
+		});
 		setResizable(false);
 		
 		
@@ -103,6 +113,33 @@ public class Marcas extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				Validar_Campos();
 			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(!txt_marca.getText().equals("")) {
+						try {
+							DB_marcas.anadir_marca(txt_marca.getText());
+							ver_datos_tabla(tbl_marcas);
+							Validar_Campos();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						JOptionPane.showMessageDialog(null, "MARCA AGREGADA CORRECTAMENTE");
+						txt_marca.setText("");
+						txt_marca.requestFocus();
+						Validar_Campos();
+					}
+					else {
+						Validar_Campos();
+						txt_marca.requestFocus();
+					}
+					
+				}
+				
+			}
 		});
 		txt_marca.setColumns(10);
 		
@@ -131,6 +168,10 @@ public class Marcas extends JFrame {
 		
 		ver_datos_tabla(tbl_marcas);
 		JButton btn_añadir = new JButton("");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setIcon(new ImageIcon(Marcas.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
