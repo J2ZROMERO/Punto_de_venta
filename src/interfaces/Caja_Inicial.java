@@ -63,14 +63,10 @@ public class Caja_Inicial extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lbl_caja_inicial = new JLabel("CAJA INICIAL");
-		lbl_caja_inicial.setFont(new Font("Dialog", Font.BOLD, 16));
-		lbl_caja_inicial.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_caja_inicial.setBounds(48, 11, 361, 32);
-		panel.add(lbl_caja_inicial);
-		
 		txt_monto = new JTextField();
-		txt_monto.setFont(new Font("Dialog", Font.BOLD, 13));
+		txt_monto.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_monto.setText("0.0");
+		txt_monto.setFont(new Font("Dialog", Font.BOLD, 17));
 		txt_monto.setBounds(48, 73, 232, 24);
 		panel.add(txt_monto);
 		txt_monto.setColumns(10);
@@ -99,6 +95,12 @@ public class Caja_Inicial extends JFrame {
 				
 			}
 		});
+		
+		JLabel lbl_caja_inicial = new JLabel("CAJA INICIAL");
+		lbl_caja_inicial.setFont(new Font("Dialog", Font.BOLD, 35));
+		lbl_caja_inicial.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_caja_inicial.setBounds(48, 11, 361, 32);
+		panel.add(lbl_caja_inicial);
 		JButton btn_añadir = new JButton("AÑADIR");
 		
 		btn_añadir.addActionListener(new ActionListener() {

@@ -13,10 +13,32 @@ import javax.swing.table.DefaultTableModel;
 public class DB_provedores {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 
+	public static boolean compararprovedores (int id) throws SQLException {
+boolean existeProvedor = false;		
+		
+		  try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.compararProvedores(?,?) }"))   // dentro statement connection and resulset
+	       {	       
+
+	    	   
+cstm.setInt(1,id );
+
+cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+cstm.execute();
+existeProvedor = cstm.getBoolean(2);
+
+
+
+return existeProvedor;
+		       	
+
+
+	       }
+	}
+	
 	
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 	      

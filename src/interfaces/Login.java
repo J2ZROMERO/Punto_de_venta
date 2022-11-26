@@ -352,9 +352,6 @@ public boolean acceso_usuario(JComboBox cbx, JTextField pass) {
 	return confirma_acceso;
 	
 }
-		
-
-		
 }
 
 

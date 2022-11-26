@@ -159,13 +159,12 @@ public class Ventas extends JFrame implements Printable {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if(!"".equals(txt_id_cliente.getText())) {
-					Ventas_Tabla_Buscar_Clientes b = new Ventas_Tabla_Buscar_Clientes();
-					b.setVisible(true);
-					b.setFocusable(true);
-					b.setLocationRelativeTo(null);
+				if("".equals(txt_id_cliente.getText())) {
+					Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
+					c.setVisible(true);
+					c.ver_clientes(txt_id_cliente);
 				}else {
-					JOptionPane.showMessageDialog(null,"LLENAR CAMPO ID CLIENTE");
+					JOptionPane.showMessageDialog(null,"Campo lleno");
 				}
 
 				

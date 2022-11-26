@@ -29,6 +29,10 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Proveedores extends JFrame {
 
@@ -52,6 +56,9 @@ public class Proveedores extends JFrame {
 	private JLabel lbl_alerta_1;
 	private JLabel lbl_alerta_2;
 
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -92,6 +99,13 @@ public class Proveedores extends JFrame {
 	 * Create the frame.
 	 */
 	public Proveedores() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+			
+			txt_nombre.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 780, 571);
@@ -101,11 +115,26 @@ public class Proveedores extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
+		
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setBackground(new Color(186, 104, 200));
 		panel.setBounds(0, 0, 764, 532);
 		contentPane.add(panel);
 		panel.setLayout(null);
+		
+		txt_nombre = new JTextField();
+		txt_nombre.setFont(new Font("Roboto Light", Font.BOLD, 13));
+		txt_nombre.setColumns(10);
+		txt_nombre.setBounds(140, 107, 198, 20);
+		txt_nombre.requestFocus();
+		txt_nombre.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validar_Campos();
+			}
+		});
+		panel.add(txt_nombre);
+		
 		
 		JLabel lbl_id = new JLabel("ID");
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,19 +154,6 @@ public class Proveedores extends JFrame {
 		lbl_nombre.setFont(new Font("Dialog", Font.BOLD, 13));
 		lbl_nombre.setBounds(10, 107, 120, 20);
 		panel.add(lbl_nombre);
-		
-		txt_nombre = new JTextField();
-		txt_nombre.setFont(new Font("Roboto Light", Font.BOLD, 13));
-		txt_nombre.setColumns(10);
-		txt_nombre.setBounds(140, 107, 198, 20);
-		
-		txt_nombre.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				Validar_Campos();
-			}
-		});
-		panel.add(txt_nombre);
 		
 		lbl_apellido = new JLabel("APELLIDO");
 		lbl_apellido.setHorizontalAlignment(SwingConstants.CENTER);
@@ -212,7 +228,7 @@ public class Proveedores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Limpiar_Campos();
-				txt_id.requestFocus();				
+				txt_nombre.requestFocus();				
 			}
 		});
 		panel.add(btn_limpiar_campos);
@@ -226,36 +242,87 @@ public class Proveedores extends JFrame {
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 12));
 		btn_añadir.setBounds(474, 50, 159, 46);
 		
+		
+		
+		
+		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_nombre.getText().equals("")) {	
+				try {
 					
-					Object datos[] = new Object[6];
-					datos[0] = txt_nombre.getText().toString();
-					datos[1] = txt_apellido.getText().toString();
-					datos[2] = txt_contacto.getText().toString();
-					datos[3] = txt_empresa_para_la_que_trabaja.getText().toString();
-					datos[4] = txt_nombre_supervisor.getText().toString();
-					datos[5] = txt_contacto_del_supervisor.getText().toString();
-					
-					try {
-						DB_provedores.anadir(datos);
-						JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
-						Limpiar_Campos();
-						txt_nombre.requestFocus();
-						Validar_Campos();
-						ver_datos_tabla(tbl_proveedores);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					if(!txt_nombre.getText().equalsIgnoreCase("")) {
+						
+						
+						if(!txt_id.getText().equalsIgnoreCase("")) {
+							
+							if(DB_provedores.compararprovedores(Integer.parseInt(txt_id.getText())) == false) {
+								
+								Object datos[] = new Object[6];
+								datos[0] = txt_nombre.getText().toString();
+								datos[1] = txt_apellido.getText().toString();
+								datos[2] = txt_contacto.getText().toString();
+								datos[3] = txt_empresa_para_la_que_trabaja.getText().toString();
+								datos[4] = txt_nombre_supervisor.getText().toString();
+								datos[5] = txt_contacto_del_supervisor.getText().toString();
+								
+								try {
+									DB_provedores.anadir(datos);
+									JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
+									Limpiar_Campos();
+									txt_nombre.requestFocus();
+									Validar_Campos();
+									ver_datos_tabla(tbl_proveedores);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								
+								
+							}else {
+								JOptionPane.showMessageDialog(null,"ESTE ID YA EXISTE");
+								Limpiar_Campos();
+								txt_nombre.requestFocus();
+								
+							}
+							
+						}else {
+
+							Object datos[] = new Object[6];
+							datos[0] = txt_nombre.getText().toString();
+							datos[1] = txt_apellido.getText().toString();
+							datos[2] = txt_contacto.getText().toString();
+							datos[3] = txt_empresa_para_la_que_trabaja.getText().toString();
+							datos[4] = txt_nombre_supervisor.getText().toString();
+							datos[5] = txt_contacto_del_supervisor.getText().toString();
+							
+							try {
+								DB_provedores.anadir(datos);
+								JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
+								Limpiar_Campos();
+								txt_nombre.requestFocus();
+								Validar_Campos();
+								ver_datos_tabla(tbl_proveedores);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							
+						}
 					}
 					
-					
-				}else {
-						Validar_Campos();
+				} catch (NumberFormatException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
+				
+				
 			}
 		});
 		panel.add(btn_añadir);
@@ -273,9 +340,7 @@ public class Proveedores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
-						   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
-						   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
+				if(!txt_id.getText().equals("")) {	
 							
 				Object datos [] =  new Object[7];
 				datos[0] =txt_id.getText().toString();
@@ -306,6 +371,10 @@ public class Proveedores extends JFrame {
 		panel.add(btn_actualizar);
 		
 		JButton btn_eliminar = new JButton("");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_eliminar.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btn_eliminar.setBounds(371, 127, 159, 46);
@@ -314,9 +383,7 @@ public class Proveedores extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_id.getText().equals("") && !txt_nombre.getText().equals("") && !txt_apellido.getText().equals("")
-						   && !txt_contacto.getText().equals("") && !txt_empresa_para_la_que_trabaja.getText().equals("")
-						   && !txt_nombre_supervisor.getText().equals("") && !txt_contacto_del_supervisor.getText().equals("")) {	
+				if(!txt_id.getText().equals("")) {	
                 int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR EL PROVEEDOR?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					
 					if (opcion == 0) {
@@ -371,7 +438,7 @@ public class Proveedores extends JFrame {
 								txt_empresa_para_la_que_trabaja.setText(datos[4].toString());
 								txt_nombre_supervisor.setText((String)datos[5]);
 								txt_contacto_del_supervisor.setText((String)datos[6]);
-								
+								txt_nombre.requestFocus();
 							} catch (NumberFormatException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
@@ -417,7 +484,115 @@ public class Proveedores extends JFrame {
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_2.setBounds(140, 127, 198, 24);
 		panel.add(lbl_alerta_2);
+		
+		JTextField inputs[] =  new JTextField[7];
+		inputs[0] = txt_apellido;
+		inputs[1] = txt_contacto;
+		inputs[2] = txt_contacto_del_supervisor;
+		inputs[3] = txt_empresa_para_la_que_trabaja;
+		inputs[4] = txt_nombre;
+		inputs[5] = txt_nombre_supervisor;
+		inputs[6] = txt_id;
+		
+		
+		listenElementosToEnter(inputs);
 	}
+	private void listenElementosToEnter(JTextField txt_id[]) {
+		
+		
+		for(int i = 0; i < txt_id.length;i++) {
+			
+		txt_id[i].addKeyListener(new KeyAdapter() {
+				
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+									
+					
+
+							try {
+								
+								if(!txt_id[4].getText().equalsIgnoreCase("")) {
+									
+									
+									if(!txt_id[6].getText().equalsIgnoreCase("")) {
+										
+										if(DB_provedores.compararprovedores(Integer.parseInt(txt_id[6].getText())) == false) {
+											
+											Object datos[] = new Object[6];
+											datos[0] = txt_nombre.getText().toString();
+											datos[1] = txt_apellido.getText().toString();
+											datos[2] = txt_contacto.getText().toString();
+											datos[3] = txt_empresa_para_la_que_trabaja.getText().toString();
+											datos[4] = txt_nombre_supervisor.getText().toString();
+											datos[5] = txt_contacto_del_supervisor.getText().toString();
+											
+											try {
+												DB_provedores.anadir(datos);
+												JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
+												Limpiar_Campos();
+												txt_nombre.requestFocus();
+												Validar_Campos();
+												ver_datos_tabla(tbl_proveedores);
+											} catch (SQLException e1) {
+												// TODO Auto-generated catch block
+												e1.printStackTrace();
+											}
+											
+											
+											
+										}else {
+											JOptionPane.showMessageDialog(null,"ESTE ID YA EXISTE");
+											Limpiar_Campos();
+											txt_nombre.requestFocus();
+											
+										}
+										
+									}else {
+
+										Object datos[] = new Object[6];
+										datos[0] = txt_nombre.getText().toString();
+										datos[1] = txt_apellido.getText().toString();
+										datos[2] = txt_contacto.getText().toString();
+										datos[3] = txt_empresa_para_la_que_trabaja.getText().toString();
+										datos[4] = txt_nombre_supervisor.getText().toString();
+										datos[5] = txt_contacto_del_supervisor.getText().toString();
+										
+										try {
+											DB_provedores.anadir(datos);
+											JOptionPane.showMessageDialog(null,"PROVEEDOR AGREGADO CORRECTAMENTE");
+											Limpiar_Campos();
+											txt_nombre.requestFocus();
+											Validar_Campos();
+											ver_datos_tabla(tbl_proveedores);
+										} catch (SQLException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
+										
+										
+									}
+								}
+								
+							} catch (NumberFormatException e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							} catch (SQLException e2) {
+								// TODO Auto-generated catch block
+								e2.printStackTrace();
+							}
+							
+						
+								
+						
+					
+					}
+				
+		
+		}
+				});
+		}
+	}
+	
 	
 	public void ver_datos_tabla(JTable tabla) {
 		

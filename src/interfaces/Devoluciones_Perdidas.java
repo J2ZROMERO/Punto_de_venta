@@ -104,7 +104,7 @@ public class Devoluciones_Perdidas extends JFrame {
 	public Devoluciones_Perdidas() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 538, 604);
+		setBounds(100, 100, 538, 630);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -113,7 +113,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(84, 153, 199));
 		panel.setForeground(new Color(0, 0, 0));
-		panel.setBounds(0, 0, 522, 565);
+		panel.setBounds(0, 0, 522, 593);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -264,31 +264,31 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		btn_devolver.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_devolver.setBounds(371, 238, 141, 23);
+		btn_devolver.setBounds(206, 357, 141, 23);
 		panel.add(btn_devolver);
 		
 		JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
 		lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_inicial.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_inicial.setBounds(63, 437, 122, 18);
+		lbl_fecha_inicial.setBounds(63, 460, 122, 18);
 		panel.add(lbl_fecha_inicial);
 		
 		JLabel lbl_fecha_final = new JLabel("FECHA FINAL");
 		lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_final.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		lbl_fecha_final.setBounds(321, 440, 122, 18);
+		lbl_fecha_final.setBounds(351, 463, 122, 18);
 		panel.add(lbl_fecha_final);
 		
 		JLabel lbl_calendario = new JLabel("");
 		lbl_calendario.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_calendario.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
-		lbl_calendario.setBounds(89, 368, 70, 58);
+		lbl_calendario.setBounds(89, 391, 70, 58);
 		panel.add(lbl_calendario);
 		
 		JLabel lbl_calendario_1 = new JLabel("");
 		lbl_calendario_1.setIcon(new ImageIcon(Devoluciones_Perdidas.class.getResource("/imagenes/calendario.png")));
 		lbl_calendario_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_calendario_1.setBounds(347, 371, 70, 58);
+		lbl_calendario_1.setBounds(377, 394, 70, 58);
 		panel.add(lbl_calendario_1);
 		
 		JButton btn_ver_movimiento = new JButton("VER MOVIMIENTOS");
@@ -297,7 +297,7 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		btn_ver_movimiento.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_ver_movimiento.setBounds(163, 526, 176, 23);
+		btn_ver_movimiento.setBounds(175, 548, 176, 23);
 		
 		btn_ver_movimiento.addMouseListener(new MouseAdapter() {
 			@Override
@@ -371,11 +371,11 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 		btn_clientes.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		btn_clientes.setBounds(371, 293, 141, 23);
+		btn_clientes.setBounds(361, 312, 141, 23);
 		panel.add(btn_clientes);
 		
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
-		spinner_tiempo_inicial.setBounds(49, 477, 151, 20);
+		spinner_tiempo_inicial.setBounds(49, 500, 151, 20);
 		panel.add(spinner_tiempo_inicial);
 		spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
 		
@@ -383,7 +383,7 @@ public class Devoluciones_Perdidas extends JFrame {
 		
 		
 		 spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
-		 spinner_tiempo_limite.setBounds(307, 477, 151, 20);
+		 spinner_tiempo_limite.setBounds(337, 500, 151, 20);
 		 panel.add(spinner_tiempo_limite);
 		 
 		 spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
