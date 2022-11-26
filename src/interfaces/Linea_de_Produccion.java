@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import conexionDB.DB_categoria;
 import conexionDB.DB_linea;
 import conexionDB.DB_marcas;
 
@@ -28,6 +29,10 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Linea_de_Produccion extends JFrame {
 
@@ -67,6 +72,12 @@ public class Linea_de_Produccion extends JFrame {
 	}
 	
 	public Linea_de_Produccion() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_linea_de_produccion.requestFocus();
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
 		contentPane = new JPanel();
@@ -113,6 +124,27 @@ public class Linea_de_Produccion extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				Validar_Campos();
 			}
+public void keyPressed(KeyEvent e) {
+				
+	if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+	if(!txt_linea_de_produccion.getText().equals("")) {
+		try {
+			DB_linea.anadir_marca(txt_linea_de_produccion.getText());
+			ver_datos_tabla(tbl_linea_de_produccion);
+			Validar_Campos();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			JOptionPane.showMessageDialog(null, "LINEA DE PRODUCCION AGREGADA CORRECTAMENTE");
+			txt_linea_de_produccion.setText("");
+			txt_linea_de_produccion.requestFocus();
+			Validar_Campos();
+		}else {
+			Validar_Campos();
+		}
+	}
+			}
 		});
 		
 		panel.add(txt_linea_de_produccion);
@@ -140,6 +172,10 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		scrollPane.setViewportView(tbl_linea_de_produccion);
 		
 		JButton btn_añadir = new JButton("");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setIcon(new ImageIcon(Linea_de_Produccion.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));

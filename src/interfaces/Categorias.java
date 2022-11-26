@@ -32,6 +32,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Categorias extends JFrame {
 
@@ -71,6 +73,12 @@ public class Categorias extends JFrame {
 	}
 	
 	public Categorias() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_categoria.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 619, 550);
@@ -141,11 +149,41 @@ public class Categorias extends JFrame {
 			public void keyReleased(KeyEvent e) {
 			Validar_campos();
 			}
+	public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(!txt_categoria.getText().equals("")) {
+						
+						try {
+							DB_categoria.anadir_categoria(txt_categoria.getText());
+							ver_datos_tabla(tbl_categoria);
+							Validar_campos();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						JOptionPane.showMessageDialog(null, "CATEGORIA AGREGADA CORRECTAMENTE");
+						txt_categoria.setText("");
+						txt_categoria.setFocusable(true);
+						txt_categoria.requestFocus();
+						Validar_campos();
+					}else {
+						Validar_campos();
+						txt_categoria.requestFocus();
+					}
+					
+				}
+				
+			}
 		});
 		
 		panel.add(txt_categoria);
 		
 		JButton btn_añadir = new JButton("");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
