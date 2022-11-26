@@ -21,7 +21,14 @@ public class DB_devoluciones_perdidas {
 
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 
-
+		
+for(Object s: datos_campos) {
+	
+	if(s == null) {
+		System.out.println("asdasdasadasdaasd");
+	}
+	
+}
 //		}
 //		
 //	
@@ -44,7 +51,7 @@ if(datos_campos[4].equals("")) {
 	cstm.setDouble(5, Integer.parseInt(datos_campos[4].toString() ));                //double	
 }
 
-if(datos_campos[5].equals("")) {
+if(datos_campos[5].equals(null)) {
 	cstm.setNull(6, java.sql.Types.NULL);
 }else {
 	cstm.setString(6,datos_campos[5].toString() );                //double	

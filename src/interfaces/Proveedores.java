@@ -240,7 +240,7 @@ public class Proveedores extends JFrame {
 			}
 		});
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_añadir.setBounds(474, 50, 159, 46);
+		btn_añadir.setBounds(468, 60, 159, 46);
 		
 		
 		

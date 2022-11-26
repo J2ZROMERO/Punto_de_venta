@@ -31,8 +31,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_devoluciones_perdidas;
+import conexionDB.DB_marcas;
+
 import java.awt.Color;
 import javax.swing.SpinnerNumberModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class Devoluciones_Perdidas extends JFrame {
@@ -102,6 +106,12 @@ public class Devoluciones_Perdidas extends JFrame {
 	}
 	
 	public Devoluciones_Perdidas() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_id.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 538, 630);
@@ -132,6 +142,24 @@ public class Devoluciones_Perdidas extends JFrame {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				//Activar_Boton();
+			}
+			@Override
+public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					if(txt_id.getText().equals("")) {
+						JOptionPane.showMessageDialog(null,"Ingresa ID");
+						txt_id.requestFocus();
+					}else {
+//						Devoluciones_Perdidas_Buscar b = new Devoluciones_Perdidas_Buscar();
+//						b.setVisible(true);
+//						b.setLocationRelativeTo(null);
+//						b.setFocusable(true);
+						ver_datos_tabla(table, Integer.parseInt(txt_id.getText()));	
+					}
+					
+				}
+				
 			}
 		});
 		

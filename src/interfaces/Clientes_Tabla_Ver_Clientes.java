@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
@@ -19,6 +20,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Clientes_Tabla_Ver_Clientes extends JFrame {
 
@@ -72,6 +75,19 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 		scrollPane.setViewportView(tbl_ver_clientes);
 	
 		JButton btn_ok = new JButton("OK");
+		btn_ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		btn_ok.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		
+			}
+		});
+		
+		
 		btn_ok.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_ok.setBounds(375, 339, 102, 27);
 		
@@ -154,10 +170,19 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 			
 			public void mousePressed(MouseEvent e) {
 				
-				String selectedCellValue = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 0).toString();
+				String selectedCellValueId = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 0).toString();
+				String selectedCellValueNombre = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 1).toString();
+				String selectedCellValueApellido = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 2).toString();
+				String selectedCellValueNickname = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 3).toString();
+				String selectedCellValueTelefono = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 4).toString();
 		        
-				id.setText(selectedCellValue);
-		     
+				id.setText(selectedCellValueId);
+				nombre.setText(selectedCellValueNombre);
+				apellido.setText(selectedCellValueApellido);
+				nickname.setText(selectedCellValueNickname);
+				telefono.setText(selectedCellValueTelefono);
+		     nombre.requestFocus();
+				
 			     if(e.getClickCount()==2) {
 			    	 
 			    	 

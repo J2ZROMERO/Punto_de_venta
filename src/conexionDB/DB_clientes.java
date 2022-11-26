@@ -28,7 +28,30 @@ public class DB_clientes {
 	}
 
 	
+
+public static boolean compararcliente (int id) throws SQLException {
+	boolean confirmaCliente = false;
 	
+    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.compararCliente(?,?) }"))	       
+    {	       
+ 	 
+ 	   cstm.setInt(1, id);
+ 	    cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+ 	   
+ 	   cstm.execute();
+ 	   
+ 	   
+ 	   confirmaCliente = cstm.getBoolean(2);
+ 	   
+ 	   
+
+ 	   
+ 	   
+    }
+	return confirmaCliente;
+	
+}
 	
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 	      

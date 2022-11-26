@@ -17,18 +17,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_clientes;
 import conexionDB.DB_marcas;
+import conexionDB.DB_provedores;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Clientes extends JFrame {
 
@@ -84,9 +90,15 @@ public class Clientes extends JFrame {
 	 * Create the frame.
 	 */
 	public Clientes() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_nombre.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 612, 396);
+		setBounds(100, 100, 612, 413);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -95,7 +107,7 @@ public class Clientes extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(135, 206, 250));
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panel.setBounds(0, 0, 596, 357);
+		panel.setBounds(0, 0, 596, 374);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -193,7 +205,7 @@ public class Clientes extends JFrame {
 		JButton btn_limpiar_campos = new JButton("");
 		btn_limpiar_campos.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/escoba.png")));
 		btn_limpiar_campos.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_limpiar_campos.setBounds(399, 281, 154, 41);
+		btn_limpiar_campos.setBounds(399, 228, 154, 41);
 		
 		btn_limpiar_campos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -205,16 +217,74 @@ public class Clientes extends JFrame {
 		});
 		panel.add(btn_limpiar_campos);
 		
-		JButton btn_ver_clientes = new JButton("");
-		btn_ver_clientes.addActionListener(new ActionListener() {
+		
+		
+		JButton btn_añadir = new JButton("");
+		btn_añadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_ver_clientes.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/tabla.png")));
-		btn_ver_clientes.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_ver_clientes.setBounds(122, 281, 163, 41);
+		btn_añadir.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/anadir.png")));
+		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
+		btn_añadir.setBounds(399, 41, 154, 41);
 		
-		btn_ver_clientes.addMouseListener(new MouseAdapter() {
+		btn_añadir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(!txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")) {
+					
+					if(!txt_id.getText().equalsIgnoreCase("")) {
+			
+						
+							try {
+								if (DB_clientes.compararcliente(Integer.parseInt(txt_id.getText())) == true) {
+							
+								JOptionPane.showMessageDialog(null,"ESTE CLIENTE YA EXISTE");
+									txt_nombre.requestFocus();
+									Limpiar_Campos();
+									Validar_Campos();
+								}
+							} catch (NumberFormatException | HeadlessException | SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						
+					}else {
+						Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
+
+						try {
+							DB_clientes.anadir(datos);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						//ver_datos_tabla(tbl_clientes);
+
+						JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
+							txt_nombre.requestFocus();
+							Limpiar_Campos();
+							Validar_Campos();
+					}
+				}else {
+					JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
+					frame.requestFocus();
+					Validar_Campos();
+				}
+			}
+		});
+		panel.add(btn_añadir);
+		
+		JButton btn_buscar = new JButton("");
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_buscar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/buscar_tabla.png")));
+		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
+		btn_buscar.setBounds(399, 166, 154, 41);
+		
+		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
@@ -224,72 +294,6 @@ public class Clientes extends JFrame {
 				c.setLocationRelativeTo(null);
 				frame.requestFocus();
 				
-			}
-		});
-		panel.add(btn_ver_clientes);
-		
-		JButton btn_añadir = new JButton("");
-		btn_añadir.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/anadir.png")));
-		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_añadir.setBounds(399, 41, 154, 41);
-		
-		btn_añadir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				if(!(txt_nombre.getText().equals("") && txt_nick_name.getText().equals(""))) {
-					Object datos[] = { txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
-					try {
-						DB_clientes.anadir(datos);
-						//ver_datos_tabla(tbl_clientes);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
-							txt_nombre.requestFocus();
-							Limpiar_Campos();
-							Validar_Campos();
-						}else {
-							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
-							frame.requestFocus();
-							Validar_Campos();
-						}
-			}
-		});
-		panel.add(btn_añadir);
-		
-		JButton btn_buscar = new JButton("");
-		btn_buscar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/buscar_tabla.png")));
-		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_buscar.setBounds(399, 224, 154, 41);
-		
-		btn_buscar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (!txt_id.getText().equals("")){
-		try {
-			Object datos[]=    DB_clientes.buscar(Integer.parseInt(txt_id.getText()));
-			
-			txt_id.setText(datos[0].toString());
-			txt_nombre.setText((String) datos[1]);
-			txt_apellido.setText((String) datos[2]);
-			txt_nick_name.setText((String) datos[3]);
-			txt_telefono.setText((String) datos[4]);
-			
-			
-			
-		} catch (NumberFormatException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-					JOptionPane.showMessageDialog(null, "DEVOLVIENDO DATOS");
-					Validar_Campos();
-				} else {
-					JOptionPane.showMessageDialog(null, "DA CLICK EN VER TABLA DE CLIENTES");
-					txt_nombre.requestFocus();
-					Validar_Campos();
-				}
 			}
 		});
 		panel.add(btn_buscar);
@@ -329,7 +333,7 @@ public class Clientes extends JFrame {
 		JButton btn_eliminar = new JButton("");
 		btn_eliminar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setFont(new Font("Dialog", Font.BOLD, 13));
-		btn_eliminar.setBounds(399, 163, 154, 41);
+		btn_eliminar.setBounds(399, 293, 154, 41);
 		
 		btn_eliminar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -381,6 +385,83 @@ public class Clientes extends JFrame {
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_2.setBounds(122, 219, 163, 20);
 		panel.add(lbl_alerta_2);
+	
 		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/cliente.png")));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(108, 270, 163, 64);
+		panel.add(lblNewLabel);
+		
+		
+		
+		JTextField inputs[] =  new JTextField[5];
+		inputs[0] = txt_id;
+		inputs[1] = txt_nombre;
+		inputs[2] = txt_apellido;
+		inputs[3] = txt_nick_name;
+		inputs[4] = txt_telefono;
+		listenElementosToEnter(inputs);
 }
+	
+private void listenElementosToEnter(JTextField txt[]) {
+		
+		
+		for(int i = 0; i < txt.length;i++) {
+			
+		txt[i].addKeyListener(new KeyAdapter() {
+				
+				public void keyPressed(KeyEvent e) {
+					if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+
+						if(!txt[1].getText().equals("") && !txt[3].getText().equals("")) {
+							
+							if(!txt[0].getText().equalsIgnoreCase("")) {
+					
+								
+									try {
+										if (DB_clientes.compararcliente(Integer.parseInt(txt[0].getText())) == true) {
+									
+										JOptionPane.showMessageDialog(null,"ESTE CLIENTE YA EXISTE");
+											txt_nombre.requestFocus();
+											Limpiar_Campos();
+											Validar_Campos();
+										}
+									} catch (NumberFormatException | HeadlessException | SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								
+							}else {
+								Object datos[] = { txt[1].getText(),txt[2].getText(),txt[3].getText(),txt[4].getText()};
+
+								try {
+									DB_clientes.anadir(datos);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								//ver_datos_tabla(tbl_clientes);
+
+								JOptionPane.showMessageDialog(null,"CLIENTE AÑADIDO");
+									txt_nombre.requestFocus();
+									Limpiar_Campos();
+									Validar_Campos();
+							}
+						}else {
+							JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
+							frame.requestFocus();
+							Validar_Campos();
+						}
+						
+					
+					}
+				
+		
+		}
+				});
+		}
+	}
 }
+
