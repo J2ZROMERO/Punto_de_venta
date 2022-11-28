@@ -28,6 +28,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
+import java.awt.event.MouseMotionAdapter;
 
 public class Menu_principal extends JFrame {
 
@@ -65,6 +66,7 @@ public class Menu_principal extends JFrame {
 		lbl_usuario.setText(nombre);
 	}
 	
+	int xx,xy;
 	public Menu_principal() {
 		setUndecorated(true);
 		setResizable(false);
@@ -588,7 +590,36 @@ public class Menu_principal extends JFrame {
 		lbl_impresion_titulo.setBounds(356, 636, 109, 20);
 		panel.add(lbl_impresion_titulo);
 		
+		JPanel panel_mov = new JPanel();
+		panel_mov.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				
+				 int x = e.getXOnScreen();
+			        int y = e.getYOnScreen();
+			        
+			      setLocation(x-xx, y-xy);
+			}
+		});
+		panel_mov.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				xx = e.getX();
+		        xy =e.getY();
+			}
+		});
+		panel_mov.setBackground(SystemColor.activeCaption);
+		panel_mov.setBounds(0, 0, 784, 41);
+		contentPane.add(panel_mov);
+		panel_mov.setLayout(null);
+		
+		JButton btn_minimizar = new JButton("-");
+		btn_minimizar.setBounds(676, 11, 50, 23);
+		panel_mov.add(btn_minimizar);
+		
 		JButton btn_cerrar = new JButton("X");
+		btn_cerrar.setBounds(724, 11, 50, 23);
+		panel_mov.add(btn_cerrar);
 		btn_cerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -603,18 +634,12 @@ public class Menu_principal extends JFrame {
 				
 			}
 		});
-		btn_cerrar.setBounds(724, 11, 50, 23);
-		contentPane.add(btn_cerrar);
-		
-		JButton btn_minimizar = new JButton("-");
 		btn_minimizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setExtendedState(ICONIFIED);
 				requestFocus();
 			}
 		});
-		btn_minimizar.setBounds(676, 11, 50, 23);
-		contentPane.add(btn_minimizar);
 		
 		
 		
