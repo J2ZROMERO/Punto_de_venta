@@ -31,6 +31,7 @@ public class Ventas_movimientos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,7 +43,7 @@ public class Ventas_movimientos extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -60,7 +61,7 @@ public class Ventas_movimientos extends JFrame {
 		JButton btn_ver = new JButton("OK");
 		btn_ver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				dispose();
 			}
 		});
 		btn_ver.setBounds(401, 393, 111, 23);

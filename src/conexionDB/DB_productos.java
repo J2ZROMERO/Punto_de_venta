@@ -20,8 +20,13 @@ public class DB_productos {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		
+/*
+try {
+	System.out.println( DB_productos.compararproductos(786269));
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}		*/
 
 //		try {
 //			Object datosDB[] = new Object[17];
@@ -899,7 +904,28 @@ public static boolean compararStock (long id) throws SQLException {
 	return confirmaCliente;
 	
 }
+public static boolean compararproductos (long id) throws SQLException {
+boolean existeProducto = false;		
+	
+	  try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.verificarExistenciaProducto(?,?) }"))   // dentro statement connection and resulset
+       {	       
 
+    	   
+cstm.setLong(1,id );
+
+cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+cstm.execute();
+existeProducto = cstm.getBoolean(2);
+
+
+
+return existeProducto;
+	       	
+
+
+       }
+}
 }
 
 

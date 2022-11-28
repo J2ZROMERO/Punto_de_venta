@@ -46,6 +46,7 @@ public class Categorias extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -59,7 +60,7 @@ public class Categorias extends JFrame {
 		});
 	
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -142,7 +143,7 @@ public class Categorias extends JFrame {
 		txt_categoria = new JTextField();
 		txt_categoria.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_categoria.setColumns(10);
-		txt_categoria.setBounds(264, 31, 214, 23);
+		txt_categoria.setBounds(353, 67, 214, 23);
 		
 		txt_categoria.addKeyListener(new KeyAdapter() {
 			@Override
@@ -209,12 +210,17 @@ public class Categorias extends JFrame {
 				}else {
 					Validar_campos();
 					txt_categoria.requestFocus();
+					JOptionPane.showMessageDialog(null, "AÑADE TEXTO PARA AGREGAR");
 				}
 			}
 		});
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_eliminar.setIcon(new ImageIcon(Categorias.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
@@ -245,6 +251,7 @@ public class Categorias extends JFrame {
 				}else {
 					Validar_campos();
 					txt_categoria.requestFocus();
+					JOptionPane.showMessageDialog(null, "AÑADE ID PARA BORRAR");
 				}
 			}
 		});
@@ -262,8 +269,13 @@ public class Categorias extends JFrame {
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(488, 30, 64, 24);
+		lbl_alerta_1.setBounds(428, 98, 64, 24);
 		panel.add(lbl_alerta_1);
+		
+		JLabel lblNewLabel = new JLabel("Texto para añadir - Id para borrar");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(333, 11, 260, 50);
+		panel.add(lblNewLabel);
 	}
 	public void ver_datos_tabla(JTable tabla) {
 

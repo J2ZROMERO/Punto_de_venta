@@ -37,9 +37,11 @@ public class Productos_Tabla_Buscar extends JFrame {
 	private JTextField jtf_categoria;
 	private JTextField jtf_linea;
 	private JTextField jtf_marca;
+	public String datosMarcas[] = new  String[4];
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,7 +53,7 @@ public class Productos_Tabla_Buscar extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -95,12 +97,19 @@ public class Productos_Tabla_Buscar extends JFrame {
 			
 			public void mouseClicked(MouseEvent e) {
 
-				Productos.impresion_atributos(jtf_marca.getText(),jtf_linea.getText(),jtf_categoria.getText(),jtf_provedores.getText());
-	
+				
+				datosMarcas[0] =  	jtf_marca.getText().equalsIgnoreCase(null)? "":jtf_marca.getText();
+				datosMarcas[1] =  jtf_linea.getText().equalsIgnoreCase(null)? "":jtf_linea.getText();
+				datosMarcas[2] =  jtf_categoria.getText().equalsIgnoreCase(null)? "":jtf_categoria.getText();
+				datosMarcas[3] =  jtf_provedores.getText().equalsIgnoreCase(null)? "":jtf_provedores.getText();
+				
+				
+				
+	/*
 				for(JTextField jtext: Productos.bloquear_campos()) {
 		jtext.setEnabled(false);
 	}
-				
+				*/
 				dispose();
 			}
 		});

@@ -25,6 +25,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -65,8 +66,8 @@ private JSpinner spinner_tiempo_limite;
 	private JTextField txt_mililitros;
 	private JTextField txt_cm;
 	private JTextField txt_kilos;
-	private JTextField txt_usuario;
 	private JTextField txt_notas_de_venta;
+	public static String id_productos;	
 	public static Productos frame;
 	
 	//variables de alertas
@@ -88,6 +89,7 @@ private JSpinner spinner_tiempo_limite;
 				try {
 					frame = new Productos();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -169,12 +171,25 @@ private JSpinner spinner_tiempo_limite;
 		txt_marca.setText("");
 		txt_linea.setText("");
 		txt_categoria.setText("");
-		txt_usuario.setText("");
+		
 		txt_notas_de_venta.setText("");
-		frame.requestFocus();
+		txt_id.requestFocus();
 	}
 	
 	public Productos() {
+		setLocationRelativeTo(null);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_id.requestFocus();
+				txt_kilos.setEnabled(true); 
+				txt_cm.setEnabled(false);
+				txt_mililitros.setEnabled(false);
+				txt_color.setEnabled(false);
+				txt_tamano.setEnabled(false);
+				txt_kilos.setEnabled(false);
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1089, 681);
@@ -245,7 +260,7 @@ private JSpinner spinner_tiempo_limite;
 			    movimientos.ver_datos(spinnerTimeInicial, spinnerTimefinal);
 				movimientos.setVisible(true);
 			    movimientos.setLocationRelativeTo(null);
-			    frame.requestFocus();
+			    //frame.requestFocus();
 			}
 		});
 		btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
@@ -267,43 +282,62 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_ver_movimientos);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setBounds(34, 121, 156, 23);
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-
-			Object datosDB[] = new Object[18];
-							datosDB[0] = txt_id.getText();
-							datosDB[1] = txt_producto.getText();
-							datosDB[2] = txt_distintivo_1.getText();
-							datosDB[3] = txt_notas_a_cerca_del_producto.getText();
-							datosDB[4] = txt_stock.getText();
-							datosDB[5] = txt_kilos.getText();
-							datosDB[6] = txt_cm.getText();
-							datosDB[7] = txt_mililitros.getText();
-							datosDB[8] = txt_color.getText();
-							datosDB[9] = txt_tamano.getText();
-							datosDB[10] =  txt_precio_de_compra.getText();
-							datosDB[11] = txt_precio_de_venta.getText();
-							datosDB[12] = txt_provedores.getText();
-							datosDB[13] = txt_marca.getText();
-							datosDB[14] = txt_linea.getText();
-							datosDB[15] = txt_categoria.getText();
-							datosDB[16] =  Menu_principal.nombre_usuario;
-							datosDB[17] =  txt_notas_de_venta.getText();
-							
-							try 
-							{
-								
-								DB_productos.anadir(datosDB);
-								System.out.println("datos enviados");
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+if(txt_id.getText().equals("") || txt_producto.getText().equals("") || txt_distintivo_1.getText().equals("") || txt_stock.getText().equals("") | txt_precio_de_venta.getText().equals("") || txt_precio_de_compra.getText().equals("")) {
+JOptionPane.showMessageDialog(null,"POR FAVOR LOS CAMPOS CON ' ASTERISCO ' SON OBLIGATORIOS");	
+}else {
+	
+try {
+	if(DB_productos.compararproductos(Long.parseLong(txt_id.getText()))) {
+	JOptionPane.showMessageDialog(null,"ESTE PRODUCTO YA EXISTE");
+	}
+	else {
+		Object datosDB[] = new Object[18];
+		datosDB[0] = txt_id.getText();
+		datosDB[1] = txt_producto.getText();
+		datosDB[2] = txt_distintivo_1.getText();
+		datosDB[3] = txt_notas_a_cerca_del_producto.getText();
+		datosDB[4] = txt_stock.getText();
+		datosDB[5] = txt_kilos.getText();
+		datosDB[6] = txt_cm.getText();
+		datosDB[7] = txt_mililitros.getText();
+		datosDB[8] = txt_color.getText();
+		datosDB[9] = txt_tamano.getText();
+		datosDB[10] =  txt_precio_de_compra.getText();
+		datosDB[11] = txt_precio_de_venta.getText();
+		datosDB[12] = txt_provedores.getText();
+		datosDB[13] = txt_marca.getText();
+		datosDB[14] = txt_linea.getText();
+		datosDB[15] = txt_categoria.getText();
+		datosDB[16] =  Menu_principal.nombre_usuario;
+		datosDB[17] =  txt_notas_de_venta.getText();
+		
+		try 
+		{
+			
+			DB_productos.anadir(datosDB);
+			System.out.println("datos enviados");
+			Limpiar_Campos();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+} catch (NumberFormatException | SQLException e2) {
+	// TODO Auto-generated catch block
+	e2.printStackTrace();
+}
+		
+}
 			
 
 			}	
@@ -313,6 +347,10 @@ private JSpinner spinner_tiempo_limite;
 		
 		
 		JButton btn_buscar = new JButton("BUSCAR");
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_buscar.setBounds(34, 169, 156, 23);
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
 		
@@ -342,7 +380,6 @@ private JSpinner spinner_tiempo_limite;
 				txt_marca.setText(datos[13].toString());
 				txt_linea.setText(datos[14].toString());
 				txt_categoria.setText(datos[15].toString());
-				txt_usuario.setText(datos[16].toString());
 				txt_notas_de_venta.setText(datos[17].toString());
 				Validar_Campos();	  
 				} catch (NumberFormatException e1) {
@@ -354,83 +391,43 @@ private JSpinner spinner_tiempo_limite;
 				}
 					
 				}else {   
-				 
-					Object datos [] = new Object [17];
+					 busqueda_productos busca_productos = new busqueda_productos();
+					 busca_productos.setVisible(true);
+					 busca_productos.setLocationRelativeTo(null);
+					 
+					busca_productos.addWindowFocusListener(new WindowFocusListener() {
+							public void windowGainedFocus(WindowEvent e) {
+							}
+							public void windowLostFocus(WindowEvent e) {
+							txt_id.setText(id_productos);
+							System.out.println("cerradnao");
+							System.out.println("perdido");
+							txt_id.setText(busca_productos.txt_id.getText());
+							
+							}
+						});
 					
-					datos[0] = txt_producto.getText().toString();
-					datos[1] = txt_distintivo_1.getText().toString();
-					datos[2] = txt_notas_a_cerca_del_producto.getText().toString();
-					datos[3] = txt_stock.getText().toString();
-					datos[4] = txt_kilos.getText().toString();
-					datos[5] = txt_cm.getText().toString();
-					datos[6] = txt_mililitros.getText().toString();
-					datos[7] = txt_color.getText().toString();
-					datos[8] = txt_tamano.getText().toString();
-					datos[9] = txt_precio_de_compra.getText().toString();
-					datos[10] = txt_precio_de_venta.getText().toString();
-					datos[11] = txt_provedores.getText().toString();
-					datos[12] = txt_marca.getText().toString();
-					datos[13] = txt_linea.getText().toString();
-					datos[14] = txt_categoria.getText().toString();
-					datos[15] = txt_usuario.getText().toString();
-					datos[16] = txt_notas_de_venta.getText().toString();
-					Validar_Campos();
-					
-					Ventas_Buscar b= new Ventas_Buscar();
-					b.setVisible(true);
-					b.setFocusable(true);
-					b.setLocationRelativeTo(null);
-					
-				b.ver_datos_productos_like(datos);
-				b.ver_datos_evento(txt_id);
-				b.addFocusListener((FocusListener) new FocusListener() {
-
-				@Override
-				public void focusGained(FocusEvent e) {
-					// TODO Auto-generated method stub
-					System.out.println("i have the focus");
-				}
-
-				@Override
-				public void focusLost(FocusEvent e) {
-					 Object datos[];
-					try {
-						if(!txt_id.getText().equals("") ) {
-						datos = DB_productos.buscar(Long.parseLong(txt_id.getText()));
-						txt_id.setText(datos[0].toString());
-						txt_producto.setText(datos[1].toString());
-						txt_distintivo_1.setText(datos[2].toString());
-						txt_notas_a_cerca_del_producto.setText(datos[3].toString());
-						txt_stock.setText(datos[4].toString());
-						txt_kilos.setText(datos[5].toString());
-						txt_cm.setText(datos[6].toString());
-						txt_mililitros.setText(datos[7].toString());
-						txt_color.setText(datos[8].toString());
-						txt_tamano.setText(datos[9].toString());
-						txt_precio_de_compra.setText(datos[10].toString());
-						txt_precio_de_venta.setText(datos[11].toString());
-						txt_provedores.setText(datos[12].toString());
-						txt_marca.setText(datos[13].toString());
-						txt_linea.setText(datos[14].toString());
-						txt_categoria.setText(datos[15].toString());
-						txt_usuario.setText(datos[16].toString());
-						txt_notas_de_venta.setText(datos[17].toString());
-						Validar_Campos();
-						}
-						
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}			
-				}
-		      });
 				}
 
 			}
 		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		panel.add(btn_buscar);
 		
@@ -461,11 +458,13 @@ private JSpinner spinner_tiempo_limite;
 						datosDB[17] =  txt_notas_de_venta.getText();
 						DB_productos.actualizar(datosDB);
 						Validar_Campos();
+						Limpiar_Campos();
+						JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS");
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					System.out.println("datos enviados");
+					
 					
 				}else {
 					Validar_Campos();
@@ -481,12 +480,16 @@ private JSpinner spinner_tiempo_limite;
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-
-					DB_productos.eliminar(Menu_principal.nombre_usuario, Long.parseLong(txt_id.getText()));
-					
-					Limpiar_Campos();
-					cbx_atributos_produccion.setSelectedIndex(0);
-					JOptionPane.showMessageDialog(null,"Producto eliminado");
+if(!txt_id.getText().equalsIgnoreCase("")) {
+	
+	DB_productos.eliminar(Menu_principal.nombre_usuario, Long.parseLong(txt_id.getText()));
+	
+	Limpiar_Campos();
+	cbx_atributos_produccion.setSelectedIndex(0);
+	JOptionPane.showMessageDialog(null,"PRODUCTO ELIMINADO");
+}else {
+	JOptionPane.showMessageDialog(null,"BUSCA EL PRODUCTO A ELIMINAR");
+}
 
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -659,13 +662,13 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(lbl_stock);
 		
 		JLabel lbl_precio_de_venta = new JLabel("PRECIO DE VENTA");
-		lbl_precio_de_venta.setBounds(490, 121, 224, 20);
+		lbl_precio_de_venta.setBounds(777, 121, 224, 20);
 		lbl_precio_de_venta.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_precio_de_venta);
 		
 		txt_precio_de_venta = new JTextField();
-		txt_precio_de_venta.setBounds(490, 146, 227, 23);
+		txt_precio_de_venta.setBounds(777, 146, 227, 23);
 		txt_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_venta.setColumns(10);
 		
@@ -678,13 +681,13 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(txt_precio_de_venta);
 		
 		JLabel lbl_precio_de_compra = new JLabel("PRECIO DE COMPRA");
-		lbl_precio_de_compra.setBounds(777, 115, 217, 32);
+		lbl_precio_de_compra.setBounds(497, 115, 217, 32);
 		lbl_precio_de_compra.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_precio_de_compra);
 		
 		txt_precio_de_compra = new JTextField();
-		txt_precio_de_compra.setBounds(777, 146, 217, 23);
+		txt_precio_de_compra.setBounds(497, 146, 217, 23);
 		txt_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_compra.setColumns(10);
 		
@@ -772,53 +775,62 @@ private JSpinner spinner_tiempo_limite;
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
 				interfaz_busqueda.setVisible(true);
 				interfaz_busqueda.setLocationRelativeTo(null);
-				frame.requestFocus();
+			//	frame.requestFocus();
 			}
 		});
 		btn_ver_atributos.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(btn_ver_atributos);
 		
 		txt_marca = new JTextField();
+		txt_marca.setEditable(false);
 		txt_marca.setBounds(490, 255, 189, 20);
 		panel.add(txt_marca);
 		txt_marca.setColumns(10);
 		
 		txt_linea = new JTextField();
+		txt_linea.setEditable(false);
 		txt_linea.setBounds(490, 286, 189, 20);
 		txt_linea.setColumns(10);
 		panel.add(txt_linea);
 		
 		txt_categoria = new JTextField();
+		txt_categoria.setEditable(false);
 		txt_categoria.setBounds(490, 313, 189, 20);
 		txt_categoria.setColumns(10);
 		panel.add(txt_categoria);
 		
 		txt_provedores = new JTextField();
+		txt_provedores.setEditable(false);
 		txt_provedores.setBounds(490, 344, 189, 20);
 		txt_provedores.setColumns(10);
 		panel.add(txt_provedores);
 		
 		txt_color = new JTextField();
+		txt_color.setEditable(false);
 		txt_color.setBounds(295, 344, 117, 20);
 		txt_color.setColumns(10);
 		panel.add(txt_color);
 		
 		txt_mililitros = new JTextField();
+		txt_mililitros.setEditable(false);
 		txt_mililitros.setBounds(295, 313, 117, 20);
 		txt_mililitros.setColumns(10);
 		panel.add(txt_mililitros);
 		
 		txt_cm = new JTextField();
+		txt_cm.setEditable(false);
 		txt_cm.setBounds(295, 286, 117, 20);
 		txt_cm.setColumns(10);
 		panel.add(txt_cm);
 		
 		txt_kilos = new JTextField();
+		txt_kilos.setEditable(false);
 		txt_kilos.setBounds(295, 255, 117, 20);
 		txt_kilos.setColumns(10);
 		panel.add(txt_kilos);
 		
 		txt_tamano = new JTextField();
+		txt_tamano.setEditable(false);
 		txt_tamano.setBounds(295, 375, 117, 20);
 				txt_tamano.setColumns(10);
 		panel.add(txt_tamano);
@@ -852,11 +864,6 @@ private JSpinner spinner_tiempo_limite;
 		lblTamao.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblTamao.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblTamao);
-		
-		txt_usuario = new JTextField();
-		txt_usuario.setBounds(490, 375, 189, 20);
-		txt_usuario.setColumns(10);
-		panel.add(txt_usuario);
 		
 		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
 		spinner_tiempo_inicial.setBounds(281, 542, 151, 20);
@@ -933,14 +940,14 @@ private JSpinner spinner_tiempo_limite;
 		
 		lbl_alerta_5 = new JLabel("*");
 		lbl_alerta_5.setForeground(new Color(0,0,0));
-		lbl_alerta_5.setBounds(490, 168, 227, 24);
+		lbl_alerta_5.setBounds(777, 168, 227, 24);
 		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_5);
 		
 		lbl_alerta_6 = new JLabel("*");
 		lbl_alerta_6.setForeground(new Color(0,0,0));
-		lbl_alerta_6.setBounds(777, 169, 217, 23);
+		lbl_alerta_6.setBounds(497, 169, 217, 23);
 		lbl_alerta_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_6.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_6);
@@ -959,18 +966,32 @@ private JSpinner spinner_tiempo_limite;
 		lbl_alerta_8.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_8.setBounds(563, 572, 151, 24);
 		panel.add(lbl_alerta_8);
+		
+		JButton btnNewButton = new JButton("CALCULAR PRECIO");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CalculaPrecio calcula = new CalculaPrecio();
+				calcula.setVisible(true);
+				calcula.setLocationRelativeTo(null);
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton.setBounds(777, 289, 227, 47);
+		panel.add(btnNewButton);
 	
 	}
 	
-	
+	/*
 	public static void impresion_atributos(String marca,String linea,String categoria,String provedores) {
 		
 		txt_marca.setText(marca);
 		txt_linea.setText(linea);
 		txt_categoria.setText(categoria);
 		txt_provedores.setText(provedores);
+		
 	}
-	
+	*/
 	public static JTextField[] bloquear_campos() {
 		JTextField campos[] =new JTextField[4];
 		campos[0] = txt_marca;
@@ -1035,6 +1056,6 @@ private void limpia_campos_atributos_produccion() {
 	txt_linea.setText("");
 	txt_categoria.setText("");
 	txt_provedores.setText("");
-	txt_usuario.setText("");
+	
 	}
 }

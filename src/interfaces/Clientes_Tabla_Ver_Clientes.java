@@ -27,7 +27,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 
 	private JPanel contentPane;
 	private  JTable tbl_ver_clientes;
-
+ public String arrayDato[] = new String[5];
 	/**
 	 * Launch the application.
 	 */
@@ -94,7 +94,28 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 		btn_ok.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				dispose();
+				
+				
+				
+				if(tbl_ver_clientes.getSelectedRow() > -1) {
+					
+					String selectedCellValueId = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 0).toString();
+					String selectedCellValueNombre = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 1).toString();
+					String selectedCellValueApellido = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 2).toString();
+					String selectedCellValueNickname = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 3).toString();
+					String selectedCellValueTelefono = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 4).toString();
+					
+					
+					arrayDato[0] = selectedCellValueId;
+					arrayDato[1] = selectedCellValueNombre ;
+					arrayDato[2] = selectedCellValueApellido;
+					arrayDato[3] = selectedCellValueNickname;
+					arrayDato[4] = selectedCellValueTelefono;
+					dispose();
+				}else {
+					dispose();
+				}
+				
 
 			}
 		});
@@ -175,14 +196,14 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 				String selectedCellValueApellido = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 2).toString();
 				String selectedCellValueNickname = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 3).toString();
 				String selectedCellValueTelefono = tbl_ver_clientes.getValueAt(tbl_ver_clientes.getSelectedRow() , 4).toString();
-		        
+		        /*
 				id.setText(selectedCellValueId);
 				nombre.setText(selectedCellValueNombre);
 				apellido.setText(selectedCellValueApellido);
 				nickname.setText(selectedCellValueNickname);
 				telefono.setText(selectedCellValueTelefono);
 		     nombre.requestFocus();
-				
+				*/
 			     if(e.getClickCount()==2) {
 			    	 
 			    	 

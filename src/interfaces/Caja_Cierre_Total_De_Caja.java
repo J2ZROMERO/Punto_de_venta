@@ -12,12 +12,15 @@ import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import conexionDB.DB_caja;
 import conexionDB.DB_devoluciones_perdidas;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -25,15 +28,15 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tbl_cierre_total_de_caja;
-
+	private DecimalFormat df = new DecimalFormat("#.##");
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Caja_Cierre_Total_De_Caja frame = new Caja_Cierre_Total_De_Caja(3213,3213,321,80,80);
+					Caja_Cierre_Total_De_Caja frame = new Caja_Cierre_Total_De_Caja(32.222213,32.0000013,32.000001,80,80);
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
@@ -43,7 +46,7 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -68,7 +71,7 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 		tbl_cierre_total_de_caja = new JTable();
 		tbl_cierre_total_de_caja.setModel(new DefaultTableModel(
 			new Object[][] {
-				{saldoInicial,entradas,salidas,saldoTotal},
+				{df.format(saldoInicial),df.format(entradas),df.format(salidas),df.format(saldoTotal)},
 			},
 			new String[] {
 				"<html><center>SALDO INICIAL</center></html>", "<html><center>SALIDAS</center></html>", "<html><center>ENTRADAS</center></html>", "<html><center>TOTAL EN CAJA</center></html>"
@@ -100,9 +103,12 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 		
 		JButton btn_cerrar_caja = new JButton("CERRAR CAJA");
 		btn_cerrar_caja.addActionListener(new ActionListener() {
+			DecimalFormat df = new DecimalFormat("#.##");
+		
+			
 			public void actionPerformed(ActionEvent e) {
-				Object datosCierre[] = {tbl_cierre_total_de_caja.getValueAt(0,0 ),tbl_cierre_total_de_caja.getValueAt(0,1 ),tbl_cierre_total_de_caja.getValueAt(0,2 ),tbl_cierre_total_de_caja.getValueAt(0,3),id};
-				
+				Object datosCierre[] = {String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,0 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,1 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,2 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,3)),id};
+
 				try {
 					DB_caja.cerrarCaja(datosCierre);
 dispose();

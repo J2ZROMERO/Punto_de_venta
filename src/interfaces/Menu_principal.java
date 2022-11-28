@@ -35,6 +35,7 @@ public class Menu_principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,7 +52,7 @@ public class Menu_principal extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -64,6 +65,7 @@ public class Menu_principal extends JFrame {
 	}
 	
 	public Menu_principal() {
+		setDefaultCloseOperation( EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 613, 750);
 		contentPane = new JPanel();
@@ -91,6 +93,7 @@ public class Menu_principal extends JFrame {
 				v.setVisible(true);
 				v.setFocusable(true);
 				v.setLocationRelativeTo(null);
+				v.txt_id.requestFocus();
 				dispose();
 			}
 		});
@@ -170,6 +173,7 @@ public class Menu_principal extends JFrame {
 		panel.add(lbl_proveedores_titulo);
 		
 		JLabel lbl_estadisticas = new JLabel("");
+		lbl_estadisticas.setEnabled(false);
 		lbl_estadisticas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lbl_estadisticas.setIcon(new ImageIcon(Menu_principal.class.getResource("/imagenes/estadisticas.png")));
 		lbl_estadisticas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -178,11 +182,11 @@ public class Menu_principal extends JFrame {
 		lbl_estadisticas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Estadisticas frame = new Estadisticas();
+				/*Estadisticas frame = new Estadisticas();
 				frame.setVisible(true);
 				frame.setFocusable(true);
 				frame.setLocationRelativeTo(null);
-				dispose();
+				dispose();*/
 			}
 		});
 		panel.add(lbl_estadisticas);
@@ -232,11 +236,11 @@ public class Menu_principal extends JFrame {
 		lbl_estadisticas_titulo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Estadisticas frame = new Estadisticas();
+			/*	Estadisticas frame = new Estadisticas();
 				frame.setVisible(true);
 				frame.setFocusable(true);
 				frame.setLocationRelativeTo(null);
-				dispose();
+				dispose(); */
 			}
 		});
 		panel.add(lbl_estadisticas_titulo);

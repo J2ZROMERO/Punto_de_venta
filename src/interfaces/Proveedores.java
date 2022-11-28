@@ -62,6 +62,7 @@ public class Proveedores extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -75,7 +76,7 @@ public class Proveedores extends JFrame {
 			}
 		});
 	}
-	
+	*/
 	public void Validar_Campos() {
 		if(!"".equals(txt_nombre.getText())) {
 			lbl_alerta_2.setForeground(new Color(186, 104, 200));
@@ -312,6 +313,8 @@ public class Proveedores extends JFrame {
 							
 							
 						}
+					}else{
+						JOptionPane.showMessageDialog(null, "AGREGA CAMPOS NECESARIOS '*' SON LOS MAS IMPORTANTES");
 					}
 					
 				} catch (NumberFormatException e2) {
@@ -364,7 +367,7 @@ public class Proveedores extends JFrame {
 		
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-							frame.requestFocus();
+							txt_nombre.requestFocus();
 						}
 			}
 		});
@@ -404,7 +407,7 @@ public class Proveedores extends JFrame {
 					}
 						}else {
 							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-							frame.requestFocus();
+							txt_nombre.requestFocus();	
 						}
 			}
 		});

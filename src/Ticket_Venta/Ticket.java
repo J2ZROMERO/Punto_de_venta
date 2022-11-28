@@ -119,8 +119,7 @@ public class Ticket{
             
             
 
-//           BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("C:/Punto_de_venta/src/imagenes/impresora.png"));
-
+//BufferedImage  imageBufferedImage = (BufferedImage)ImageIO.read(new File("C:/Punto_de_venta/src/imagenes/impresora.png"));
             
            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
            Date date = new Date();  
@@ -131,14 +130,15 @@ public class Ticket{
             
    
         Bitonal algorithm = new BitonalThreshold(); 
-  //         EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+//EscPosImage escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
          
         
-          // using ordered dither for dithering algorithm with (clearing) values
-           algorithm = new BitonalOrderedDither(2,2,120,170);
-    //   escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
-      //    escpos.write(imageWrapper, escposImage);
-          escpos.writeLF						("").feed(1);
+//         using ordered dither for dithering algorithm with (clearing) values
+  //         algorithm = new BitonalOrderedDither(2,2,120,170);
+   //escposImage = new EscPosImage(new CoffeeImageImpl(imageBufferedImage), algorithm);
+    //escpos.write(imageWrapper, escposImage);
+         escpos.writeLF						("").feed(1);
+         escpos.write(27).write(112).write(0).write(55).write(121);   
             escpos.writeLF						(title,"My Market")
                     .feed(1)
                     .writeLF					(center,"Calle de las flores #12 seccion primera")
@@ -190,7 +190,9 @@ public class Ticket{
                     .writeLF					(right,"    Total   $   "+ total)
                     .feed(1)
                    .writeLF					(center,"Gracias por tu compra!");
-                    escpos.feed(2)
+                 escpos.feed(3)
+                    //.pulsePin(null, conteoSubYtotal, conteoIva)
+                    
                     .cut(EscPos.CutMode.FULL);
             
             

@@ -221,6 +221,29 @@ n_nickname.add(usuario);
 }
 private static Object  usuario[];
 
+public static boolean compararUsuarios (long id) throws SQLException {
+boolean existeUsuario = false;		
+	
+	  try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.verificarExistenciaUsuario(?,?) }"))   // dentro statement connection and resulset
+       {	       
+
+    	   
+cstm.setLong(1,id );
+
+cstm.registerOutParameter(2, java.sql.Types.BOOLEAN);
+cstm.execute();
+existeUsuario = cstm.getBoolean(2);
+
+
+
+return existeUsuario;
+	       	
+
+
+       }
+}
+
 
 
 }

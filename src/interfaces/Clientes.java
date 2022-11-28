@@ -35,6 +35,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 
 public class Clientes extends JFrame {
 
@@ -51,6 +52,7 @@ public class Clientes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -63,7 +65,7 @@ public class Clientes extends JFrame {
 			}
 		});
 	}
-
+*/
 	public void Limpiar_Campos() {
 		txt_id.setText("");
 		txt_nombre.setText("");
@@ -268,7 +270,7 @@ public class Clientes extends JFrame {
 					}
 				}else {
 					JOptionPane.showMessageDialog(null,"FAVOR DE RELLENAR CAMPOS");
-					frame.requestFocus();
+          txt_nombre.requestFocus();
 					Validar_Campos();
 				}
 			}
@@ -288,17 +290,36 @@ public class Clientes extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
-				c.ver_clientes(txt_id, txt_nombre, txt_apellido, txt_nick_name, txt_telefono);
+				c.ver_clientes(txt_id);
 				c.setVisible(true);
 				c.setFocusable(true);
 				c.setLocationRelativeTo(null);
-				frame.requestFocus();
+				c.addWindowFocusListener(new WindowFocusListener() {
+					public void windowGainedFocus(WindowEvent e) {
+					}
+					public void windowLostFocus(WindowEvent e) {
+					
+					txt_id.setText(c.arrayDato[0]);
+					txt_nombre.setText(c.arrayDato[1]);
+					txt_apellido.setText(c.arrayDato[2]);
+					txt_nick_name.setText(c.arrayDato[3]);
+					txt_telefono.setText(c.arrayDato[4]);
+					
+					
+					}
+				});
+				System.out.println(c.arrayDato[1]);
+				//frame.requestFocus();
 				
 			}
 		});
 		panel.add(btn_buscar);
 		
 		JButton btn_actualizar = new JButton("");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_actualizar.setIcon(new ImageIcon(Clientes.class.getResource("/imagenes/actualizar.png")));
 		btn_actualizar.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_actualizar.setBounds(399, 103, 154, 41);
@@ -306,8 +327,7 @@ public class Clientes extends JFrame {
 		btn_actualizar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if( !txt_nombre.getText().equals("") && !txt_nick_name.getText().equals("")
-				   || txt_apellido.getText().equals("") ||  txt_telefono.getText().equals("")) {
+				if( !txt_id.getText().equalsIgnoreCase("") || !txt_nombre.getText().equalsIgnoreCase("") || !txt_nick_name.getText().equalsIgnoreCase("")) {
 					Object datos[] = {Integer.parseInt(  txt_id.getText()), txt_nombre.getText(),txt_apellido.getText(),txt_nick_name.getText(),txt_telefono.getText()};
 					
 					try {
@@ -323,8 +343,9 @@ public class Clientes extends JFrame {
 					txt_nombre.requestFocus();
 					Validar_Campos();
 				}else {
+					JOptionPane.showMessageDialog(null,"SELECCIONA CLIENTE PARA ACTUALIZAR");
 					Validar_Campos();
-					frame.requestFocus();
+txt_nombre.requestFocus();
 				}
 			}
 		});
@@ -363,7 +384,7 @@ public class Clientes extends JFrame {
 					
 				}else {
 				   JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-				   frame.requestFocus();
+txt_nombre.requestFocus();
 				   Validar_Campos();
 				}
 		 	}

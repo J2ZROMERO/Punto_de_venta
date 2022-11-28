@@ -60,6 +60,7 @@ public class Devoluciones_Perdidas extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -74,7 +75,7 @@ public class Devoluciones_Perdidas extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -268,10 +269,12 @@ public void keyPressed(KeyEvent e) {
 					txt_id_cliente.setText("");
 					cbx_motivo.setSelectedIndex(0);
 				
-					System.out.println("exitrosa");
+					
 					try {
 						DB_devoluciones_perdidas.anadir(datos);
 						JOptionPane.showMessageDialog(null,"Transaccion exitosa");
+
+
 						Limpiar_Campos();
 						txt_id.requestFocus();
 					} catch (SQLException e1) {

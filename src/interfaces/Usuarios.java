@@ -158,15 +158,15 @@ public class Usuarios extends JFrame {
 		panel.add(cbx_tipo_de_rol);
 		
 		JLabel lbl_id = new JLabel("ID");
+		lbl_id.setBackground(Color.ORANGE);
 		lbl_id.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_id.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_id.setBounds(10, 100, 121, 22);
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
-		txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		txt_id.setBounds(149, 100, 230, 22);
+		txt_id.setBounds(149, 100, 170, 22);
 		panel.add(txt_id);
 		
 		txt_id.addKeyListener(new KeyAdapter() {
@@ -281,6 +281,10 @@ public class Usuarios extends JFrame {
 		panel.add(btn_limpiar_campos);
 	
 		JButton btn_añadir = new JButton("");
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_añadir.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/anadir.png")));
 		btn_añadir.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_añadir.setBounds(511, 52, 164, 41);
@@ -289,38 +293,62 @@ public class Usuarios extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				Object datos[] = new Object[7];
 				
-				if(cbx_tipo_de_rol.getSelectedIndex() > 0 && !"".equals(txt_id.getText()) && !"".equals(txt_nombre.getText()) && !"".equals(txt_nick_name.getText()) && !"".equals(txt_pass.getText()) ) {
-				datos[0] = txt_id.getText();
-				datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
-				datos[2] = txt_nombre.getText();
-				datos[3] = txt_apellido.getText();
-				datos[4] = txt_segundo_apellido.getText();
-				datos[5] = txt_nick_name.getText();
-				datos[6] = txt_pass.getText();
-						
 				try {
-						DB_usuarios.anadir(datos);
-						JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
-						Limpiar_Campos();
-						txt_id.requestFocus();
-						Validar_Campos();
-						ver_datos_tabla(tbl_usuarios);
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+					
+						Object datos[] = new Object[7];
+						
+						if(cbx_tipo_de_rol.getSelectedIndex() > 0 && !"".equals(txt_id.getText()) && !"".equals(txt_nombre.getText()) && !"".equals(txt_nick_name.getText()) && !"".equals(txt_pass.getText()) ) {
+						datos[0] = txt_id.getText();
+						datos[1] = cbx_tipo_de_rol.getSelectedItem().toString();
+						datos[2] = txt_nombre.getText();
+						datos[3] = txt_apellido.getText();
+						datos[4] = txt_segundo_apellido.getText();
+						datos[5] = txt_nick_name.getText();
+						datos[6] = txt_pass.getText();
+						if( !DB_usuarios.compararUsuarios(Long.parseLong(txt_id.getText()))) {
+						try {
+								DB_usuarios.anadir(datos);
+								JOptionPane.showMessageDialog(null, "USUARIO AGREGADO CORRECTAMENTE");
+								Limpiar_Campos();
+								txt_id.requestFocus();
+								txt_id.setEditable(true);
+								txt_id.setEnabled(true);
+								Validar_Campos();
+								ver_datos_tabla(tbl_usuarios);
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}else {
+						JOptionPane.showMessageDialog(null, "ESTE USUARIO YA EXISTENTE");
 					}
+						
+						
+						}else {
+							JOptionPane.showMessageDialog(null, "COMPLETA LOS CAMPOS REQUERIDOS");
+							Validar_Campos();
+						}
+						
 				
-				}else {
-					Validar_Campos();
+					
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
 				}
+				
+				
+				
 				
 			}
 		});
 		panel.add(btn_añadir);
 		
 		JButton btn_actualizar = new JButton("");
+		btn_actualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_actualizar.setIcon(new ImageIcon(Usuarios.class.getResource("/imagenes/actualizar.png")));
 		btn_actualizar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		btn_actualizar.setBounds(511, 104, 164, 41);
@@ -346,6 +374,8 @@ public class Usuarios extends JFrame {
 					JOptionPane.showMessageDialog(null, "USUARIO ACTUALIZADO CORRECTAMENTE");
 					Limpiar_Campos();
 					txt_id.requestFocus();
+					txt_id.setEditable(true);
+					txt_id.setEnabled(true);
 					ver_datos_tabla(tbl_usuarios);
 					Validar_Campos();
 				} catch (SQLException e1) {
@@ -354,6 +384,7 @@ public class Usuarios extends JFrame {
 				}
 			
 				}else {
+					JOptionPane.showMessageDialog(null, "RELLENA LOS CAMPOS REQUERIDOS");
 					Validar_Campos();
 				}
 			}
@@ -369,7 +400,7 @@ public class Usuarios extends JFrame {
 			@Override
 			
 			public void mouseClicked(MouseEvent e) {
-				if(!txt_id.equals("")) {
+				if(!txt_id.getText().equals("")) {
 					
                 int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR AL USUARIO?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					
@@ -380,6 +411,9 @@ public class Usuarios extends JFrame {
 						JOptionPane.showMessageDialog(null, "USUARIO ELIMINADO CORRECTAMENTE");
 						Limpiar_Campos();
 						txt_id.requestFocus();
+						txt_id.setEditable(true);
+						txt_id.setEnabled(true);
+						
 						Validar_Campos();
 					} catch (NumberFormatException e1) {
 						// TODO Auto-generated catch block
@@ -390,6 +424,7 @@ public class Usuarios extends JFrame {
 					}
 					}
 				}else {
+					JOptionPane.showMessageDialog(null, "SELEECIONA USUARIO A ELIMINAR");
 					Validar_Campos();
 				}
 			}
@@ -512,7 +547,7 @@ public class Usuarios extends JFrame {
 		txt_pass = new JTextField();
 		txt_pass.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_pass.setColumns(10);
-		txt_pass.setBounds(149, 334, 230, 22);
+		txt_pass.setBounds(149, 334, 170, 22);
 		
 		txt_pass.addKeyListener(new KeyAdapter() {
 			@Override
@@ -548,7 +583,7 @@ public class Usuarios extends JFrame {
 		lbl_alerta_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_2.setForeground(new Color(0,0,0));
 		lbl_alerta_2.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_2.setBounds(149, 121, 230, 24);
+		lbl_alerta_2.setBounds(122, 102, 27, 24);
 		panel.add(lbl_alerta_2);
 		
 		lbl_alerta_1 = new JLabel("*");
@@ -556,7 +591,7 @@ public class Usuarios extends JFrame {
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(149, 77, 230, 24);
+		lbl_alerta_1.setBounds(122, 58, 27, 24);
 		panel.add(lbl_alerta_1);
 		
 		lbl_alerta_3 = new JLabel("*");
@@ -564,7 +599,7 @@ public class Usuarios extends JFrame {
 		lbl_alerta_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_3.setForeground(new Color(0,0,0));
 		lbl_alerta_3.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_3.setBounds(149, 167, 230, 24);
+		lbl_alerta_3.setBounds(122, 148, 27, 24);
 		panel.add(lbl_alerta_3);
 		
 		lbl_alerta_4 = new JLabel("*");
@@ -572,7 +607,7 @@ public class Usuarios extends JFrame {
 		lbl_alerta_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_4.setForeground(new Color(0,0,0));
 		lbl_alerta_4.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_4.setBounds(149, 312, 230, 24);
+		lbl_alerta_4.setBounds(122, 293, 27, 24);
 		panel.add(lbl_alerta_4);
 		
 		lbl_alerta_5 = new JLabel("*");
@@ -580,7 +615,7 @@ public class Usuarios extends JFrame {
 		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_5.setForeground(new Color(0,0,0));
 		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_5.setBounds(149, 354, 230, 24);
+		lbl_alerta_5.setBounds(122, 332, 27, 24);
 		panel.add(lbl_alerta_5);
 		
 		lbl_alerta_6 = new JLabel("*");
@@ -590,6 +625,16 @@ public class Usuarios extends JFrame {
 		lbl_alerta_6.setFont(new Font("Dialog", Font.BOLD, 23));
 		lbl_alerta_6.setBounds(149, 398, 230, 24);
 		panel.add(lbl_alerta_6);
+		
+		lblNewLabel = new JLabel("Numero");
+		lblNewLabel.setBackground(Color.ORANGE);
+		lblNewLabel.setBounds(329, 105, 46, 14);
+		panel.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("Numero");
+		lblNewLabel_1.setBackground(Color.ORANGE);
+		lblNewLabel_1.setBounds(333, 339, 46, 14);
+		panel.add(lblNewLabel_1);
 		
 	}
 	
@@ -606,6 +651,8 @@ try {
 	
 	private JTextField txt_pass;
 	private JTextField txt_fecha;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
 }
 
 

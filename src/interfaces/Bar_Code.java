@@ -75,6 +75,7 @@ public class Bar_Code extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -87,7 +88,7 @@ public class Bar_Code extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
@@ -458,7 +459,7 @@ public class Bar_Code extends JFrame {
 				
 				if(txt_id.getText().equalsIgnoreCase("") || Integer.parseInt(txt_cantidad.getText()) > 0 == false ) {
 					JOptionPane.showMessageDialog(null,"ID DEBE SER SELECCIONADO y CANTIDAD DE ETIQUETAS MAYOR A 0");
-					frame.requestFocus();
+					txt_id.requestFocus();
 					
 				}else {
 					
@@ -477,7 +478,7 @@ public class Bar_Code extends JFrame {
 					}
 					openpdf(scrollPane_1 );	
 					
-					frame.requestFocus();
+txt_id.requestFocus();
 					
 					
 				}
@@ -681,7 +682,7 @@ class envento_barcode implements KeyListener{
 				try {
 					
 					tabla.setModel(	DB_productos.model_view_prod_barcode(Long.parseLong(this.txt_id.getText() )));
-					txt_id.setText("");
+					
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

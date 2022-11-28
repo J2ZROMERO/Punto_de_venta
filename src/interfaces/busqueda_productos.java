@@ -52,7 +52,7 @@ private JSpinner spinner_tiempo_limite;
 	private JTextField txt_stock;
 	private JTextField txt_precio_de_venta;
 	private JTextField txt_precio_de_compra;
-	private JTextField txt_id;
+	public JTextField txt_id;
 	private JTextField txt_producto;
 	private JTextField txt_tamano;
 	private JComboBox cbx_atributos_produccion;
@@ -112,8 +112,10 @@ private JSpinner spinner_tiempo_limite;
 	
 	public busqueda_productos() {
 	
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 1032, 494);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -497,8 +499,24 @@ private JSpinner spinner_tiempo_limite;
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
 				interfaz_busqueda.setVisible(true);
 				interfaz_busqueda.setLocationRelativeTo(null);
+				interfaz_busqueda.addWindowFocusListener(new WindowFocusListener() {
+					public void windowGainedFocus(WindowEvent e) {
+						System.out.println("in the focus the focuss");
+					}
+					public void windowLostFocus(WindowEvent e) {
+					System.out.println("loosing the focuss");
+					 txt_marca.setText(interfaz_busqueda.datosMarcas[0]);
+					  txt_linea.setText( interfaz_busqueda.datosMarcas[1]);
+					 txt_categoria.setText(( interfaz_busqueda.datosMarcas[2])); ;
+					 txt_provedores.setText(interfaz_busqueda.datosMarcas[3]);
+					
+					}
+				});
 			}
+			
 		});
+		
+	
 		btn_ver_atributos.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(btn_ver_atributos);
 		
@@ -726,4 +744,6 @@ private void limpia_campos_atributos_produccion() {
 	txt_provedores.setText("");
 	txt_usuario.setText("");
 	}
+
+
 }

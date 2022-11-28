@@ -44,6 +44,7 @@ public class Linea_de_Produccion extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,7 +58,7 @@ public class Linea_de_Produccion extends JFrame {
 		});
 		
 	}
-
+*/
 	
 	/**
 	 * Create the frame.
@@ -72,13 +73,14 @@ public class Linea_de_Produccion extends JFrame {
 	}
 	
 	public Linea_de_Produccion() {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				txt_linea_de_produccion.requestFocus();
 			}
 		});
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 619, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -117,7 +119,7 @@ public class Linea_de_Produccion extends JFrame {
 		txt_linea_de_produccion = new JTextField();
 		txt_linea_de_produccion.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_linea_de_produccion.setColumns(10);
-		txt_linea_de_produccion.setBounds(310, 31, 214, 23);
+		txt_linea_de_produccion.setBounds(359, 67, 214, 23);
 		
 		txt_linea_de_produccion.addKeyListener(new KeyAdapter() {
 			@Override
@@ -202,6 +204,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 					Validar_Campos();
 				}else {
 					Validar_Campos();
+					JOptionPane.showMessageDialog(null, "TEXTO PARA AÑADIR");
 				}
 				
 			}
@@ -209,6 +212,10 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		panel.add(btn_añadir);
 		
 		JButton btn_eliminar = new JButton("");
+		btn_eliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_eliminar.setIcon(new ImageIcon(Linea_de_Produccion.class.getResource("/imagenes/basura.png")));
 		btn_eliminar.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn_eliminar.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
@@ -238,6 +245,7 @@ ver_datos_tabla(tbl_linea_de_produccion);
 				}else {
 					Validar_Campos();
 					txt_linea_de_produccion.requestFocus();
+					JOptionPane.showMessageDialog(null, "ID PARA BORRAR");
 				}
 				
 			}
@@ -255,8 +263,13 @@ ver_datos_tabla(tbl_linea_de_produccion);
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(532, 30, 61, 24);
+		lbl_alerta_1.setBounds(433, 92, 61, 24);
 		panel.add(lbl_alerta_1);
+		
+		JLabel lblNewLabel = new JLabel("Texto para añadir - Id para borrar");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(333, 11, 260, 50);
+		panel.add(lblNewLabel);
 	}
 	public void ver_datos_tabla(JTable tabla) {
 

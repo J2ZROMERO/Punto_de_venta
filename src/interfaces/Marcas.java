@@ -44,7 +44,7 @@ public class Marcas extends JFrame {
 	private JTable tbl_marcas;
 	private JLabel lbl_alerta_1;
 	DefaultTableModel modelo = new DefaultTableModel();
-	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,13 +53,14 @@ public class Marcas extends JFrame {
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
-	
+	*/
 	
 	
 	/**
@@ -74,6 +75,8 @@ public class Marcas extends JFrame {
 	}
 	
 	public Marcas() {
+		
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
@@ -98,13 +101,13 @@ public class Marcas extends JFrame {
 		panel.setLayout(null);
 		
 		JLabel lbl_marca = new JLabel("MARCA");
-		lbl_marca.setBounds(180, 30, 73, 23);
-		lbl_marca.setFont(new Font("Roboto Slab Black", Font.BOLD, 14));
+		lbl_marca.setBounds(54, 18, 199, 35);
+		lbl_marca.setFont(new Font("Dialog", Font.BOLD, 30));
 		lbl_marca.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lbl_marca);
 		
 		txt_marca = new JTextField();
-		txt_marca.setBounds(263, 30, 214, 23);
+		txt_marca.setBounds(365, 66, 214, 23);
 		txt_marca.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		panel.add(txt_marca);
 		
@@ -199,6 +202,7 @@ public class Marcas extends JFrame {
 				else {
 					Validar_Campos();
 					txt_marca.requestFocus();
+					JOptionPane.showMessageDialog(null, "AÑADE TEXTO AL CAMPO");
 				}
 			}
 		});
@@ -219,7 +223,7 @@ public class Marcas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				if(!txt_marca.getText().equals("")) {
+				if(!txt_marca.getText().equals("")  ) {
 					
 					int opcion = JOptionPane.showConfirmDialog(null,"¿ESTAS SEGURO DE ELIMINAR LA MARCA?","¡ALERTA!",JOptionPane.YES_NO_OPTION);
 					
@@ -238,6 +242,7 @@ public class Marcas extends JFrame {
 					Validar_Campos();
 					}
 				}else {
+					JOptionPane.showMessageDialog(null, "AÑADE ID PARA BORRAR");
 					txt_marca.requestFocus();
 					Validar_Campos();
 				}
@@ -272,8 +277,13 @@ public class Marcas extends JFrame {
 		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_1.setForeground(new Color(0,0,0));
 		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_1.setBounds(487, 30, 73, 24);
+		lbl_alerta_1.setBounds(426, 91, 73, 24);
 		panel.add(lbl_alerta_1);
+		
+		JLabel lblNewLabel = new JLabel("Texto para añadir - Id para borrar");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(332, 3, 260, 50);
+		panel.add(lblNewLabel);
 		
 		tbl_marcas.getColumnModel().getColumn(0).setResizable(false);
 	}
