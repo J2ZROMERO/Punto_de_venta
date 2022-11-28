@@ -35,7 +35,7 @@ public class Productos_Generador extends JFrame {
 	 * Create the frame.
 	 */
 	public Productos_Generador() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 666, 457);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

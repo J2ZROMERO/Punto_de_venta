@@ -42,7 +42,7 @@ public class Caja_Tabla_Ver_Movimientos extends JFrame {
 	 * Create the frame.
 	 */
 	public Caja_Tabla_Ver_Movimientos() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 870, 416);
 		contentPane = new JPanel();

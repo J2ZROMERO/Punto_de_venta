@@ -51,7 +51,7 @@ public class Caja_Inicial extends JFrame {
 	 * Create the frame.
 	 */
 	public Caja_Inicial() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 466, 211);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

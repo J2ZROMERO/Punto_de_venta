@@ -6,15 +6,18 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/barcode4j.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/icepdf-core.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/icepdf-viewer.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/conector_db/mariadb-java-client-3.0.6.jar"/>
-	<classpathentry kind="lib" path="C:/Punto_de_venta/libreria tickets/escpos-coffee-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/conector_db/mariadb-java-client-3.0.6.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/libreria tickets/escpos-coffee-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/barbecue-1.5-beta1.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/barcode4j.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/fontbox-0.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/icepdf-core.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/icepdf-viewer.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/itext5-itextpdf-5.5.11.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/itext5-itext-pdfa-5.5.11.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/itextpdf-5.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/jbarcodebean-1.2.0 .jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/org-apache-commons-logging.jar"/>
+	<classpathentry kind="lib" path="C:/Punto_de_venta/src/librerias para uso de pdf/pdfbox-3.0.0-alpha3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

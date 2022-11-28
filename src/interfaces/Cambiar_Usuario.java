@@ -44,7 +44,7 @@ public class Cambiar_Usuario extends JFrame {
 	 * Create the frame.
 	 */
 	public Cambiar_Usuario() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 699, 176);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

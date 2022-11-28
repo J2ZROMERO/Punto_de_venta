@@ -39,7 +39,7 @@ public class Devoluciones_Perdidas_Tabla_Buscar extends JFrame {
 	 * Create the frame.
 	 */
 	public Devoluciones_Perdidas_Tabla_Buscar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 843, 467);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -44,7 +44,7 @@ public class Productos_Tabla_Buscar_Marca extends JFrame {
 	 * Create the frame.
 	 */
 	public Productos_Tabla_Buscar_Marca() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 801, 515);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

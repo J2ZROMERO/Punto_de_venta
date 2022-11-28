@@ -115,8 +115,7 @@ public class Login extends JFrame {
 	}
 		
 		public Login() {
-		
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 443, 234);
 		
 		contentPane = new JPanel();
@@ -166,7 +165,7 @@ public class Login extends JFrame {
 		cbx_nickname.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		cbx_nickname.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		cbx_nickname.setBounds(124, 89, 231, 22);
+		cbx_nickname.setBounds(120, 75, 231, 22);
 		
 		cbx_nickname.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -190,7 +189,7 @@ public class Login extends JFrame {
 		
 		txt_password = new JPasswordField();
 		txt_password.setFont(new Font("Roboto Slab", Font.BOLD, 20));
-		txt_password.setBounds(124, 113, 231, 22);
+		txt_password.setBounds(120, 113, 231, 22);
 		txt_password.addKeyListener(new KeyAdapter() {
 			
 			
@@ -283,7 +282,7 @@ public class Login extends JFrame {
 		});
 		
 		btn_ingresar.setFont(new Font("Roboto Slab", Font.BOLD, 13));
-		btn_ingresar.setBounds(186, 146, 111, 23);
+		btn_ingresar.setBounds(180, 146, 111, 23);
 		panel.add(btn_ingresar);
 		
 		lbl_alerta_1 = new JLabel("*");

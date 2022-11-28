@@ -135,7 +135,7 @@ public class Vista_Impresora extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(240, 230, 140));
-		panel.setBounds(0, 0, 626, 520);
+		panel.setBounds(0, 0, 449, 520);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -272,6 +272,20 @@ public class Vista_Impresora extends JFrame {
 		lbl_logo.setFont(new Font("Dialog", Font.BOLD, 12));
 		lbl_logo.setBounds(9, 138, 130, 23);
 		panel.add(lbl_logo);
+		
+		JButton btn_regresar = new JButton("");
+		btn_regresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Menu_principal mp = new Menu_principal();
+				mp.setVisible(true);
+				mp.setFocusable(true);
+				mp.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
+		btn_regresar.setIcon(new ImageIcon(Vista_Impresora.class.getResource("/imagenes/flecha.png")));
+		btn_regresar.setBounds(0, 0, 44, 35);
+		panel.add(btn_regresar);
 		
 		 
 		
