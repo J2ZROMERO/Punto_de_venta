@@ -60,7 +60,7 @@ public class Ventas_movimientos extends JFrame {
 		JButton btn_ver = new JButton("OK");
 		btn_ver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				System.exit(0);
 			}
 		});
 		btn_ver.setBounds(401, 393, 111, 23);

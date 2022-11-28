@@ -4,12 +4,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.border.EmptyBorder;
+
+import conexionDB.DB_caja;
+import conexionDB.DB_devoluciones_perdidas;
+import conexionDB.DB_ventas;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -21,19 +28,34 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.nio.file.spi.FileSystemProvider;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 
 public class Caja extends JFrame {
 
 	private JPanel contentPane;
 	public static  JTextField txt_saldo_inicial;
+	private 	String spinnerTimeInicial ;
+
+	private String spinnerTimefinal;
 	private JTextField txt_motivo;
 	private JTextField txt_monto;
 	private JTextField txt_saldo_total_del_dia;
-	private JTextField txt_fecha_inicial;
-	private JTextField txt_fecha_final;
 	private static Caja frame;
-
+	private JSpinner spinner_tiempo_inicial;
+	private JSpinner spinner_tiempo_limite;
+	private double valorInicial;
+	private	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+    private Date now = new Date();
+   private String fechaActual = sdfDate.format(now);
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +82,9 @@ public class Caja extends JFrame {
 	 * Create the frame.
 	 */
 	public Caja() {
+		
+		
+		this.valorInicial = 12121.0;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 534, 646);
@@ -75,6 +100,10 @@ public class Caja extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btn_regresar = new JButton("");
+		btn_regresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_regresar.setBounds(0, 0, 44, 35);
 		panel.add(btn_regresar);
 		btn_regresar.setIcon(new ImageIcon(Caja.class.getResource("/imagenes/flecha.png")));
@@ -86,7 +115,8 @@ public class Caja extends JFrame {
 		lbl_saldo_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		txt_saldo_inicial = new JTextField();
-		txt_saldo_inicial.setEnabled(false);
+		txt_saldo_inicial.setText("0.0");
+		txt_saldo_inicial.setEditable(false);
 		txt_saldo_inicial.setBounds(196, 55, 192, 22);
 		panel.add(txt_saldo_inicial);
 		txt_saldo_inicial.setFont(new Font("Roboto Slab", Font.BOLD, 12));
@@ -95,7 +125,8 @@ public class Caja extends JFrame {
 		
 		
 		
-		txt_saldo_inicial.setText(Caja_Inicial.monto);
+
+		
 		
 		
 		//txt_fecha_inicial.setText(  Menu_principal.saldoInicial);
@@ -147,15 +178,44 @@ public class Caja extends JFrame {
 		btn_cargar_movimiento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(cbx_movimiento.getSelectedIndex() > 0 && !txt_motivo.getText().equals("") && !txt_monto.getText().equals("")) {
-					JOptionPane.showMessageDialog(null,"MOVIMIENTO CARGADO CORRECTAMENTE");
-					cbx_movimiento.setSelectedIndex(0);
-					txt_motivo.setText("");
-					txt_monto.setText("");
-					frame.requestFocus();
+				if(cbx_movimiento.getSelectedIndex() > 0 && !txt_motivo.getText().equals("") && !txt_monto.getText().equals("") && !txt_saldo_inicial.getText().equals("")) {
+					Object datosCaja[] = {
+							Double.parseDouble( txt_saldo_inicial.getText()),
+							cbx_movimiento.getSelectedItem().toString(),
+							txt_motivo.getText(),
+							Double.parseDouble( txt_monto.getText()),
+							Login.idUsers[Login.indiceSeleccionado]};
+
+try {
+	DB_caja.insertarMovimientosCaja(datosCaja);
+	JOptionPane.showMessageDialog(null,"MOVIMIENTO CARGADO CORRECTAMENTE");
+	cbx_movimiento.setSelectedIndex(0);
+	txt_motivo.setText("");
+	txt_monto.setText("");
+	//frame.requestFocus();
+
+	try {
+		
+txt_saldo_inicial.setText(Caja_Inicial.monto);
+		double calculoDia = (
+				Double.parseDouble(txt_saldo_inicial.getText()) +DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado])) 
+				-  
+				(DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado])) ;
+		DecimalFormat df = new DecimalFormat("#.##");
+		txt_saldo_total_del_dia.setText(df.format(calculoDia));
+		System.out.println("abajo copnsulta");
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+} catch (SQLException e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}
 				}else{
 					JOptionPane.showMessageDialog(null,"MOVIMIENTO, MOTIVO Y MONTON DEBEN SER LLENADOS");
-					frame.requestFocus();
+					// frame.requestFocus();
 				}
 			}
 		});
@@ -168,9 +228,12 @@ public class Caja extends JFrame {
 		lbl_saldo_total_del_dia.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		
 		txt_saldo_total_del_dia = new JTextField();
-		txt_saldo_total_del_dia.setBounds(196, 297, 192, 22);
+		txt_saldo_total_del_dia.setEditable(false);
+		txt_saldo_total_del_dia.setHorizontalAlignment(SwingConstants.CENTER);
+		txt_saldo_total_del_dia.setText("0");
+		txt_saldo_total_del_dia.setBounds(196, 286, 192, 53);
 		panel.add(txt_saldo_total_del_dia);
-		txt_saldo_total_del_dia.setFont(new Font("Roboto Slab", Font.BOLD, 12));
+		txt_saldo_total_del_dia.setFont(new Font("Dialog", Font.BOLD, 25));
 		txt_saldo_total_del_dia.setColumns(10);
 		
 		JLabel lbl_fecha_inicial = new JLabel("FECHA INICIAL");
@@ -178,12 +241,6 @@ public class Caja extends JFrame {
 		panel.add(lbl_fecha_inicial);
 		lbl_fecha_inicial.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_inicial.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
-		
-		txt_fecha_inicial = new JTextField();
-		txt_fecha_inicial.setBounds(196, 350, 192, 22);
-		panel.add(txt_fecha_inicial);
-		txt_fecha_inicial.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		txt_fecha_inicial.setColumns(10);
 		
 		JLabel img_fecha_inicial = new JLabel("");
 		img_fecha_inicial.setBounds(418, 331, 76, 59);
@@ -197,12 +254,6 @@ public class Caja extends JFrame {
 		lbl_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_fecha_final.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		
-		txt_fecha_final = new JTextField();
-		txt_fecha_final.setBounds(196, 420, 192, 22);
-		panel.add(txt_fecha_final);
-		txt_fecha_final.setFont(new Font("Roboto Slab", Font.BOLD, 12));
-		txt_fecha_final.setColumns(10);
-		
 		JLabel img_fecha_final = new JLabel("");
 		img_fecha_final.setBounds(418, 401, 76, 59);
 		panel.add(img_fecha_final);
@@ -210,26 +261,37 @@ public class Caja extends JFrame {
 		img_fecha_final.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btn_ver_movimientos = new JButton("VER MOVIMIENTOS");
-		btn_ver_movimientos.setBounds(196, 498, 192, 23);
+		btn_ver_movimientos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_ver_movimientos.setBounds(196, 467, 192, 23);
 		panel.add(btn_ver_movimientos);
 		
 		btn_ver_movimientos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(!txt_fecha_inicial.getText().equals("") && !txt_fecha_final.getText().equals("")) {
-					Caja_Tabla_Ver_Movimientos ver= new Caja_Tabla_Ver_Movimientos();
-					ver.setLocationRelativeTo(null);
-					ver.setVisible(true);
-					ver.setFocusable(true);
-				}else {
-					JOptionPane.showMessageDialog(null,"ES NECESARIO SELECCIONAR UN RANGO DE FECHAS...");
-				}
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				 spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+				
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				 spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+				Caja_Tabla_Ver_Movimientos tvm = new Caja_Tabla_Ver_Movimientos();
+		tvm.ver_datos(spinnerTimeInicial, spinnerTimefinal);
+				tvm.setVisible(true);
+				tvm.setLocationRelativeTo(null);
+				tvm.setFocusable(true);
+			
 				
 			}
 		});
 		btn_ver_movimientos.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		
 		JButton btn_cierre_total_de_caja = new JButton("CIERRE TOTAL DE CAJA");
+		btn_cierre_total_de_caja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_cierre_total_de_caja.setBounds(196, 546, 192, 23);
 		panel.add(btn_cierre_total_de_caja);
 		
@@ -237,10 +299,26 @@ public class Caja extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				Caja_Cierre_Total_De_Caja cierre = new Caja_Cierre_Total_De_Caja();
-				cierre.setFocusable(true);
-				cierre.setLocationRelativeTo(null);
-				cierre.setVisible(true);
+				try {
+				Caja_Cierre_Total_De_Caja cierre = new Caja_Cierre_Total_De_Caja(  
+						Double.parseDouble(txt_saldo_inicial.getText()),
+						Double.parseDouble(txt_saldo_inicial.getText()) +DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]),						 
+						DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado])+ DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]),
+						
+						Double.parseDouble(txt_saldo_total_del_dia.getText()),
+						Login.idUsers[Login.indiceSeleccionado]);
+					
+					
+					cierre.setFocusable(true);
+					cierre.setLocationRelativeTo(null);
+					cierre.setVisible(true);
+					dispose();
+					
+				} catch (Exception e2) {
+					
+					// TODO: handle exception
+				}
+				
 			}
 		});
 		btn_cierre_total_de_caja.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
@@ -256,8 +334,64 @@ public class Caja extends JFrame {
 			}
 		});
 	
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+			
+				
 
+					try {
+						
+txt_saldo_inicial.setText(Caja_Inicial.monto);
+						double calculoDia = (
+								Double.parseDouble(txt_saldo_inicial.getText()) +DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado])) 
+								-  
+								(DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado])) ;
+						DecimalFormat df = new DecimalFormat("#.##");
+						txt_saldo_total_del_dia.setText(df.format(calculoDia));
+						System.out.println("abajo copnsulta");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+			}
+
+		});
+		spinner_tiempo_inicial = new JSpinner(new SpinnerDateModel());
+		spinner_tiempo_inicial.setBounds(196, 350, 192, 20);
+		panel.add(spinner_tiempo_inicial);
+		spinner_tiempo_inicial.setEditor(new JSpinner.DateEditor(spinner_tiempo_inicial, "yyyy-MM-dd HH:mm:ss"));
+		
+		
+		
+		
+		 spinner_tiempo_limite = new JSpinner(new SpinnerDateModel());
+		 spinner_tiempo_limite.setBounds(196, 422, 192, 20);
+		 panel.add(spinner_tiempo_limite);
+		 
+		 spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
+		 
+		 JButton btn_ver_cierres = new JButton("VER CIERRES");
+		 btn_ver_cierres.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				 spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+				
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				 spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+				Caja_Tabla_Ver_Cierres_Caja tvm = new Caja_Tabla_Ver_Cierres_Caja();
+		tvm.ver_datos(spinnerTimeInicial, spinnerTimefinal);
+				tvm.setVisible(true);
+				tvm.setLocationRelativeTo(null);
+				tvm.setFocusable(true);
+			
+		 	}
+		 });
+		 btn_ver_cierres.setFont(new Font("Dialog", Font.BOLD, 13));
+		 btn_ver_cierres.setBounds(196, 501, 192, 23);
+		 panel.add(btn_ver_cierres);
 	}
-
-
 }
+
+

@@ -20,7 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import conexionDB.DB_caja;
 import conexionDB.DB_productos;
+import conexionDB.DB_usuarios;
 import conexionDB.DB_ventas;
 
 import javax.swing.JLabel;
@@ -28,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.HeadlessException;
 
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ItemListener;
@@ -44,6 +47,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -59,7 +63,9 @@ public class Login extends JFrame {
 	public JComboBox cbx_nickname;
 	private JLabel lbl_alerta_1;
 	private JLabel lbl_alerta_2;
-
+	public static int idUsers[];
+	public static int indiceSeleccionado;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -200,34 +206,29 @@ public class Login extends JFrame {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 	
 				
-					if (acceso_usuario(cbx_nickname, txt_password)) {
-						Caja_Inicial ci = new Caja_Inicial();
-						ci.setVisible(true);
-						ci.setFocusable(true);
-						ci.setLocationRelativeTo(null);
-						ci.txt_usuario.setText(cbx_nickname.getSelectedItem().toString());
-						dispose();
+					try {
+						if (acceso_usuario(cbx_nickname, txt_password)) {
+							Caja_Inicial cliente = new Caja_Inicial();
+							cliente.setVisible(true);
+							cliente.setFocusable(true);
+							cliente.setLocationRelativeTo(null);
+							usuario_menu =  cbx_nickname.getSelectedItem().toString();
+							cliente.txt_monto.requestFocus();
+							cliente.txt_usuario.setText(cbx_nickname.getSelectedItem().toString());
+							dispose();
+							Validar_Campos();
+							
+							
+						}
 
-					
-						Caja_Inicial establece_monto = new Caja_Inicial();
-						usuario_menu =  cbx_nickname.getSelectedItem().toString();
-						
-						establece_monto.setVisible(true);
-						establece_monto.setFocusable(true);
-						
-						establece_monto.setLocationRelativeTo(null);	
-						establece_monto.txt_monto.requestFocus();
-						dispose();
-						
-						Validar_Campos();
-						
-						
-					}
-	
-					else {
-						JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
-						
-						txt_password.setText("");
+						else {
+							JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
+							
+							txt_password.setText("");
+						}
+					} catch (HeadlessException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 	
 		}
@@ -265,19 +266,25 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			
-			if(acceso_usuario(cbx_nickname, txt_password) == true) {
-				Caja_Inicial establece_monto = new Caja_Inicial();
-				
-				usuario_menu =  cbx_nickname.getSelectedItem().toString();
-				establece_monto.setVisible(true);
-				establece_monto.setFocusable(true);
-				
-				establece_monto.setLocationRelativeTo(null);
-				establece_monto.txt_monto.requestFocus();
-			dispose();
-			}else {
-				JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
-				txt_password.setText("");
+			try {
+				if(acceso_usuario(cbx_nickname, txt_password) == true) {
+					Caja_Inicial establece_monto = new Caja_Inicial();
+					
+					usuario_menu =  cbx_nickname.getSelectedItem().toString();
+					establece_monto.setVisible(true);
+					establece_monto.setFocusable(true);
+					
+					establece_monto.setLocationRelativeTo(null);
+					establece_monto.txt_monto.requestFocus();
+					
+				dispose();
+				}else {
+					JOptionPane.showMessageDialog(null, "DATOS INCORRECTOS...");
+					txt_password.setText("");
+				}
+			} catch (HeadlessException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		
 		}
@@ -286,6 +293,7 @@ public class Login extends JFrame {
 		btn_ingresar.setFont(new Font("Roboto Slab", Font.BOLD, 13));
 		btn_ingresar.setBounds(186, 146, 111, 23);
 		panel.add(btn_ingresar);
+		
 		
 		lbl_alerta_1 = new JLabel("*");
 		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -321,34 +329,36 @@ public class Login extends JFrame {
 	}
 		public void lista_usuarios(JComboBox users) {
 			
+			
 		try {
 			users.addItem("");
-			for(int i = 1;  i < DB_productos.nicknames().size(); i++) {
+			this.idUsers = new int[DB_usuarios.nicknames().size()];
+			for(int i = 1;  i < DB_usuarios.nicknames().size(); i++) {
 				
-				Object indice_lista[]  =(Object[]) DB_productos.nicknames().get(i);
-				
-			users.addItem(indice_lista[2]);	
+				Object indice_lista[]  =(Object[]) DB_usuarios.nicknames().get(i);
+    
+		this.idUsers[i]	= Integer.parseInt(indice_lista[0].toString());
+    			users.addItem(indice_lista[2]);	
 			}
-			
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	
 		}
 		
-public boolean acceso_usuario(JComboBox cbx, JTextField pass) {
+public boolean acceso_usuario(JComboBox cbx, JTextField pass) throws SQLException {
 	
 	System.out.println(cbx.getSelectedItem().toString()+" "+ pass.getText());
 	boolean confirma_acceso = false;
-	try {
-		confirma_acceso =  DB_productos.acceso(cbx.getSelectedItem().toString(), pass.getText());
-		System.out.println(confirma_acceso +" " + "confirmando aceso" );
 		
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		confirma_acceso =  DB_productos.acceso(this.idUsers[cbx.getSelectedIndex()], pass.getText());
+		
+		this.indiceSeleccionado= cbx.getSelectedIndex();
+		
+
 	return confirma_acceso;
 	
 }

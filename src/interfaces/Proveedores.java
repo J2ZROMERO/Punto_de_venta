@@ -143,9 +143,9 @@ public class Proveedores extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Light", Font.BOLD, 13));
 		txt_id.setBounds(140, 60, 198, 20);
-		txt_id.setEnabled(false);
 		panel.add(txt_id);
 		txt_id.setColumns(10);
 		

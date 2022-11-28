@@ -250,41 +250,38 @@ public void keyPressed(KeyEvent e) {
 		btn_devolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(txt_id.getText().equalsIgnoreCase("")) {
-					JOptionPane.showMessageDialog(null,"FAVOR DE LLENAR LOS CAMPOS");
-				}else {
-
+				
+				if(!txt_id.getText().equalsIgnoreCase("") && cbx_motivo.getSelectedIndex() > 0 && !txt_cantidad_devolver.getText().equalsIgnoreCase("") && Integer.parseInt(sp_cantidad.getValue().toString()) > 0 ) {
 					Object datos[] = new Object [6];
 					datos[0] = txt_id.getText();
 					datos[1] = sp_cantidad.getValue().toString();
 					datos[2] = txt_cantidad_devolver.getText();
 					datos[3] =  cbx_motivo.getSelectedItem().toString();
 					datos[4] =  txt_id_cliente.getText();
-					datos[5] = Menu_principal.nombre_usuario;
+					datos[5] =  Login.idUsers[Login.indiceSeleccionado];
 					
 					
-					JOptionPane.showMessageDialog(null,"Transaccion exitosa");
 					
 					txt_cantidad_devolver.setText("");
 					sp_cantidad.setValue(0);
 					txt_id.setText("");
 					txt_id_cliente.setText("");
 					cbx_motivo.setSelectedIndex(0);
-					 table.setModel(new DefaultTableModel(
-								new Object[][] {
-								},
-								new String[] {
-									
-								}
-							));
+				
+					System.out.println("exitrosa");
 					try {
 						DB_devoluciones_perdidas.anadir(datos);
+						JOptionPane.showMessageDialog(null,"Transaccion exitosa");
 						Limpiar_Campos();
 						txt_id.requestFocus();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+				}else {
+
+					JOptionPane.showMessageDialog(null,"FAVOR DE LLENAR LOS CAMPOS, CLIENTE PUEDE ESTAR VACIO");
+				
 				}
 				
 				 

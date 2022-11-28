@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.itextpdf.text.log.SysoCounter;
 
+import conexionDB.DB_caja;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -17,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -76,20 +79,27 @@ public class Caja_Inicial extends JFrame {
 				
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 						
-							if(!txt_monto.getText().equals("")) {
-								
-							Menu_principal mp = new Menu_principal();
-							mp.setVisible(true);
-							mp.setFocusable(true);
-							mp.setLocationRelativeTo(null);
-							
-							monto = txt_monto.getText();	
-							
-					dispose();
-							}else {
-								JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
-								frame.requestFocus();
-							}
+					if(!txt_monto.getText().equals("")) {
+						
+						Menu_principal mp = new Menu_principal();
+						mp.setVisible(true);
+						mp.setFocusable(true);
+						mp.setLocationRelativeTo(null);
+						
+						monto = txt_monto.getText();	
+						
+						Object datosCajaInicial[] = {Double.parseDouble(txt_monto.getText()),"ENTRADA DE EFECTIVO","SALDO INICIAL",Double.parseDouble(txt_monto.getText()),Login.idUsers[Login.indiceSeleccionado]};
+						try {
+							DB_caja.insertarCajaInicial(datosCajaInicial);
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}		
+				dispose();
+						}else {
+							JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");
+							frame.requestFocus();
+						}
 						}
 					
 				
@@ -123,6 +133,13 @@ public class Caja_Inicial extends JFrame {
 				
 				monto = txt_monto.getText();	
 				
+				Object datosCajaInicial[] = {Double.parseDouble(txt_monto.getText()),"ENTRADA","SALDO INICIAL",0,"",Login.idUsers[Login.indiceSeleccionado]};
+				try {
+					DB_caja.insertarCajaInicial(datosCajaInicial);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}		
 		dispose();
 				}else {
 					JOptionPane.showMessageDialog(null,"CAMPOS VACIOS...");

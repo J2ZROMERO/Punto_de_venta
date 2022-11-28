@@ -20,7 +20,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.Color;
 
-public class Caja_Tabla_Ver_Movimientos extends JFrame {
+public class Caja_Tabla_Ver_Cierres_Caja extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tbl_ver_movimiento;
@@ -32,10 +32,11 @@ public class Caja_Tabla_Ver_Movimientos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Caja_Tabla_Ver_Movimientos frame = new Caja_Tabla_Ver_Movimientos();
+					Caja_Tabla_Ver_Cierres_Caja frame = new Caja_Tabla_Ver_Cierres_Caja();
 					frame.setVisible(true);
 					frame.setFocusable(true);
 					frame.setLocationRelativeTo(null);
+					//frame.ver_datos("2022-11-28 02:23:36","2022-11-28 02:23:36");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,7 +47,7 @@ public class Caja_Tabla_Ver_Movimientos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Caja_Tabla_Ver_Movimientos() {
+	public Caja_Tabla_Ver_Cierres_Caja() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 870, 416);
@@ -89,7 +90,7 @@ public class Caja_Tabla_Ver_Movimientos extends JFrame {
 	}
 	public void ver_datos(String fechaInicial,String fechaFinal) {
 		try {
-			tbl_ver_movimiento.setModel(DB_caja.model_view_dev_caja_movimientos(fechaInicial, fechaFinal));
+			tbl_ver_movimiento.setModel(DB_caja.model_view_dev_caja_Cierre(fechaInicial, fechaFinal));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

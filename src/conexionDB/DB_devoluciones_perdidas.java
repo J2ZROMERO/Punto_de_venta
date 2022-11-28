@@ -22,16 +22,7 @@ public class DB_devoluciones_perdidas {
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 
 		
-for(Object s: datos_campos) {
-	
-	if(s == null) {
-		System.out.println("asdasdasadasdaasd");
-	}
-	
-}
-//		}
-//		
-//	
+
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.anadir_devoluciones_perdidas(?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
@@ -199,5 +190,30 @@ private static Object datos_movimientos[];
 private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel();
 
 
-	
+public static double calcularTotalPerdidasDevolucionesDia(String fecha,int id) throws SQLException {
+	double sumaTotalVentas = 0;
+	 try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+			 CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.calcularPerdidasDevoluciones(?,?) }")  )   // dentro statement connection and resulset
+	 
+	   
+	    {
+		 
+		 cstm.setString(1, fecha);
+		 cstm.setInt(2, id);
+		 ResultSet rs = cstm.executeQuery();
+		 while(rs.next()) {
+		  sumaTotalVentas += rs.getDouble(1);
+	  }
+	     
+	  
+
+	    	
+	    	
+	    	
+	    	
+	    }
+
+
+return sumaTotalVentas;
+}	
 }

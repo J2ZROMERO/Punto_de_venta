@@ -35,6 +35,8 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Usuarios extends JFrame {
 
@@ -117,6 +119,12 @@ public class Usuarios extends JFrame {
 	}
 	
 	public Usuarios() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_id.requestFocus();
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 808, 514);
@@ -156,6 +164,7 @@ public class Usuarios extends JFrame {
 		panel.add(lbl_id);
 		
 		txt_id = new JTextField();
+		txt_id.setEditable(false);
 		txt_id.setFont(new Font("Roboto Slab", Font.BOLD, 12));
 		txt_id.setBounds(149, 100, 230, 22);
 		panel.add(txt_id);
@@ -528,7 +537,7 @@ public class Usuarios extends JFrame {
 		panel.add(txt_pass);
 		
 		txt_fecha = new JTextField();
-		txt_fecha.setEnabled(false);
+		txt_fecha.setEditable(false);
 		txt_fecha.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_fecha.setColumns(10);
 		txt_fecha.setBounds(149, 376, 230, 22);

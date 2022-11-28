@@ -178,7 +178,48 @@ private static Object[][] data_row;
 private static Object[] datos;
 private	static DefaultTableModel modelo = new DefaultTableModel();
 
+public static  List<Object> nicknames () throws SQLException {
+	
+	
+	List<Object> n_nickname = new ArrayList<Object>();
+	
+       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.ver_usuarios() }"); ResultSet rs= cstm.executeQuery()
+    		   )// dentro statement connection and resulset
+       
+    		   {	       
+	n_nickname.add("");
+	//id_nickname.add(0L);
 
+	while(rs.next()) {
+		
+		
+		usuario = new Object[3];
+
+usuario[0] =( rs.getString(1));
+usuario[1] = (rs.getString(2));
+usuario[2] = (rs.getString(3));
+
+
+n_nickname.add(usuario);
+	
+	//id_nickname.add(rs.getLong(1));
+
+
+
+}
+
+	
+	
+	
+}
+	
+	
+
+	return n_nickname;
+	
+}
+private static Object  usuario[];
 
 
 

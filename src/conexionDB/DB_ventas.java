@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JTextField;
@@ -17,12 +19,19 @@ public class DB_ventas {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		try {
-			System.out.println(DB_ventas.conteoVentasgeneradas());
+	/*	try {
+		
+			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+		    Date now = new Date();
+		    String fechaActual = sdfDate.format(now);
+
+
+			System.out.println(DB_ventas.calcularTotalVentasDia(fechaActual,1));
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}   
+		} */
 
 	}
 
@@ -73,7 +82,7 @@ if(datos_campos[3].equals("")) {
 if(datos_campos[4].equals("")) {
 	cstm.setNull(5, java.sql.Types.NULL);
 }else {
-	cstm.setString(5, datos_campos[4].toString() );                //double	
+	cstm.setInt(5,Integer.parseInt(datos_campos[4].toString() ));                //double	
 }
 cstm.setLong( 6,Long.parseLong(datos_campos[5].toString()));
 	
@@ -347,6 +356,32 @@ public static int conteoVentasgeneradas() throws SQLException {
     	
     }
 	return  conteoVentas;
+}
+public static double calcularTotalVentasDia(String fecha, int id) throws SQLException {
+	double sumaTotalVentas = 0;
+	 try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+			 CallableStatement cstm = con.prepareCall("	{ CALL pv_canoa_segunda.calcularTotalVentas(?,?) }")  )   // dentro statement connection and resulset
+	 
+	   
+	    {
+		 
+		 cstm.setString(1, fecha);
+		 cstm.setInt(2, id);
+		 ResultSet rs = cstm.executeQuery();
+		 while(rs.next()) {
+		  sumaTotalVentas += rs.getDouble(1);
+	  }
+	     
+	  
+
+	    	
+	    	
+	    	
+	    	
+	    }
+
+
+return sumaTotalVentas;
 }
 }
 
