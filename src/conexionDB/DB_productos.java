@@ -18,15 +18,15 @@ import com.itextpdf.text.log.SysoCounter;
 
 public class DB_productos {
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-/*
+
 try {
 	System.out.println( DB_productos.compararproductos(786269));
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
-}		*/
+}		
 
 //		try {
 //			Object datosDB[] = new Object[17];
@@ -94,7 +94,7 @@ try {
 //}
 //	
 	}
-
+*/
 
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 
@@ -103,7 +103,7 @@ try {
 //		
 //	
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
 
 	       
@@ -175,7 +175,8 @@ if(datos_campos[16].toString().equals("")) {
 }else {
 	cstm.setString(17, datos_campos[16].toString());	                 //int
 }
-cstm.setString(18, datos_campos[17].toString() );    
+cstm.setString(18, datos_campos[17].toString() );
+cstm.setString(19, datos_campos[18].toString() );   
 
 	
 

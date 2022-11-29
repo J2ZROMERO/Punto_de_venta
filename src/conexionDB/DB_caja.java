@@ -11,14 +11,14 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class DB_caja {
-
+/*
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
-	/*	Object dat[] = {500,"ENTRADA","DEPOSITO",500.0,400,1};
-		DB_caja.insertarMovimientosCaja(dat);*/
+		Object dat[] = {500,"ENTRADA","DEPOSITO",500.0,400,1};
+		DB_caja.insertarMovimientosCaja(dat);
 	
 	}
-
+*/
 	public  static void insertarCajaInicial(Object datos_campos[]) throws SQLException{
 
 		

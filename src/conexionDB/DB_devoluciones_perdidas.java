@@ -14,11 +14,11 @@ import interfaces.Clientes_Tabla_Ver_Clientes;
 
 public class DB_devoluciones_perdidas {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
-
+*/
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 
 		

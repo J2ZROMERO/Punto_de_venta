@@ -62,6 +62,7 @@ public class Caja extends JFrame {
 	public void Activar_Botones() {
 		
 	}
+	/*
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -76,7 +77,7 @@ public class Caja extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.

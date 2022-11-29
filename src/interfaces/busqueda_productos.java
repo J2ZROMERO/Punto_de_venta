@@ -70,6 +70,7 @@ private JSpinner spinner_tiempo_limite;
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -83,7 +84,7 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */

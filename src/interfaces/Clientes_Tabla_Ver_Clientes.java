@@ -31,6 +31,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+ /*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,7 +46,7 @@ public class Clientes_Tabla_Ver_Clientes extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */

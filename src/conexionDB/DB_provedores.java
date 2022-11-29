@@ -12,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class DB_provedores {
 
-	public static void main(String[] args) {
-
-	}
 
 	public static boolean compararprovedores (int id) throws SQLException {
 boolean existeProvedor = false;		

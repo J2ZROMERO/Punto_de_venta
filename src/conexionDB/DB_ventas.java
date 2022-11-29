@@ -17,9 +17,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class DB_ventas {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	/*	try {
+		try {
 		
 			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
 		    Date now = new Date();
@@ -31,9 +31,9 @@ public class DB_ventas {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} */
+		} 
 
-	}
+	}*/
 
 public static Long numero_venta() throws SQLException {
 long id_venta_generada = 0;

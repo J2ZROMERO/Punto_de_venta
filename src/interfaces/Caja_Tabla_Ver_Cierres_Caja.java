@@ -28,6 +28,7 @@ public class Caja_Tabla_Ver_Cierres_Caja extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,7 +44,7 @@ public class Caja_Tabla_Ver_Cierres_Caja extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */

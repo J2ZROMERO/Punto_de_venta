@@ -42,10 +42,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.SpinnerModel;
+import javax.swing.JCheckBox;
 
 public class Productos extends JFrame {
 private 	String spinnerTimeInicial ;
 private String spinnerTimefinal;
+private String spinnerCaducidad;
 private JSpinner spinner_tiempo_inicial;
 private JSpinner spinner_tiempo_limite;
 	private JPanel contentPane;
@@ -83,6 +86,7 @@ private JSpinner spinner_tiempo_limite;
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -96,7 +100,7 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -282,66 +286,7 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(btn_ver_movimientos);
 		
 		JButton btn_añadir = new JButton("AÑADIR");
-		btn_añadir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btn_añadir.setBounds(34, 121, 156, 23);
-		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
 		
-		btn_añadir.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-if(txt_id.getText().equals("") || txt_producto.getText().equals("") || txt_distintivo_1.getText().equals("") || txt_stock.getText().equals("") | txt_precio_de_venta.getText().equals("") || txt_precio_de_compra.getText().equals("")) {
-JOptionPane.showMessageDialog(null,"POR FAVOR LOS CAMPOS CON ' ASTERISCO ' SON OBLIGATORIOS");	
-}else {
-	
-try {
-	if(DB_productos.compararproductos(Long.parseLong(txt_id.getText()))) {
-	JOptionPane.showMessageDialog(null,"ESTE PRODUCTO YA EXISTE");
-	}
-	else {
-		Object datosDB[] = new Object[18];
-		datosDB[0] = txt_id.getText();
-		datosDB[1] = txt_producto.getText();
-		datosDB[2] = txt_distintivo_1.getText();
-		datosDB[3] = txt_notas_a_cerca_del_producto.getText();
-		datosDB[4] = txt_stock.getText();
-		datosDB[5] = txt_kilos.getText();
-		datosDB[6] = txt_cm.getText();
-		datosDB[7] = txt_mililitros.getText();
-		datosDB[8] = txt_color.getText();
-		datosDB[9] = txt_tamano.getText();
-		datosDB[10] =  txt_precio_de_compra.getText();
-		datosDB[11] = txt_precio_de_venta.getText();
-		datosDB[12] = txt_provedores.getText();
-		datosDB[13] = txt_marca.getText();
-		datosDB[14] = txt_linea.getText();
-		datosDB[15] = txt_categoria.getText();
-		datosDB[16] =  Menu_principal.nombre_usuario;
-		datosDB[17] =  txt_notas_de_venta.getText();
-		
-		try 
-		{
-			
-			DB_productos.anadir(datosDB);
-			System.out.println("datos enviados");
-			Limpiar_Campos();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
-} catch (NumberFormatException | SQLException e2) {
-	// TODO Auto-generated catch block
-	e2.printStackTrace();
-}
-		
-}
-			
-
-			}	
-		});
 		panel.add(btn_añadir);
 		
 		
@@ -724,7 +669,7 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 		btn_generar_qr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				txt_id.setText(generar_contraseña());
-				frame.requestFocus();
+			
 			}
 		});
 		btn_generar_qr.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/actualizar.png")));
@@ -887,6 +832,8 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 		
 		spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 		
+		
+		
 		 spinner_tiempo_limite.addChangeListener(new ChangeListener() {
 			 	public void stateChanged(ChangeEvent e) {
 			 		Validar_Campos();
@@ -977,8 +924,106 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton.setBounds(777, 289, 227, 47);
+		btnNewButton.setBounds(777, 358, 227, 47);
 		panel.add(btnNewButton);
+		
+		JLabel lbl_caducidad = new JLabel("CADUCIDAD");
+		lbl_caducidad.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_caducidad.setFont(new Font("Dialog", Font.BOLD, 13));
+		lbl_caducidad.setBounds(777, 271, 217, 23);
+		panel.add(lbl_caducidad);
+		
+		JSpinner spinner_caducidad = new JSpinner(new SpinnerDateModel());
+		spinner_caducidad.setFont(new Font("Dialog", Font.BOLD, 12));
+		spinner_caducidad.setBounds(839, 298, 94, 20);
+		
+		
+	spinner_caducidad.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd"));
+		
+		
+		
+		 spinner_caducidad.addChangeListener(new ChangeListener() {
+			 	public void stateChanged(ChangeEvent e) {
+			 		Validar_Campos();
+			 	}
+			 });
+	
+		panel.add(spinner_caducidad);
+		
+		JCheckBox ckb_confirmaCaducidad = new JCheckBox("");
+		ckb_confirmaCaducidad.setBounds(939, 294, 21, 23);
+		panel.add(ckb_confirmaCaducidad);
+		
+		
+		
+		btn_añadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_añadir.setBounds(34, 121, 156, 23);
+		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
+		
+		btn_añadir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+spinnerCaducidad = format.format(spinner_caducidad .getValue());
+				 
+if(txt_id.getText().equals("") || txt_producto.getText().equals("") || txt_distintivo_1.getText().equals("") || txt_stock.getText().equals("") | txt_precio_de_venta.getText().equals("") || txt_precio_de_compra.getText().equals("")) {
+JOptionPane.showMessageDialog(null,"POR FAVOR LOS CAMPOS CON ' ASTERISCO ' SON OBLIGATORIOS");	
+}else {
+	
+try {
+	if(DB_productos.compararproductos(Long.parseLong(txt_id.getText()))) {
+	JOptionPane.showMessageDialog(null,"ESTE PRODUCTO YA EXISTE");
+	}
+	else {
+		Object datosDB[] = new Object[19];
+		datosDB[0] = txt_id.getText();
+		datosDB[1] = txt_producto.getText();
+		datosDB[2] = txt_distintivo_1.getText();
+		datosDB[3] = txt_notas_a_cerca_del_producto.getText();
+		datosDB[4] = txt_stock.getText();
+		datosDB[5] = txt_kilos.getText();
+		datosDB[6] = txt_cm.getText();
+		datosDB[7] = txt_mililitros.getText();
+		datosDB[8] = txt_color.getText();
+		datosDB[9] = txt_tamano.getText();
+		datosDB[10] =  txt_precio_de_compra.getText();
+		datosDB[11] = txt_precio_de_venta.getText();
+		datosDB[12] = txt_provedores.getText();
+		datosDB[13] = txt_marca.getText();
+		datosDB[14] = txt_linea.getText();
+		datosDB[15] = txt_categoria.getText();
+		datosDB[16] =  Menu_principal.nombre_usuario;
+		datosDB[17] =  txt_notas_de_venta.getText();
+		datosDB[18] =  ckb_confirmaCaducidad.isSelected()? spinnerCaducidad : "";
+		
+		
+		try 
+		{
+			
+			DB_productos.anadir(datosDB);
+			System.out.println("datos enviados");
+			ckb_confirmaCaducidad.setSelected(false);
+			Limpiar_Campos();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+} catch (NumberFormatException | SQLException e2) {
+	// TODO Auto-generated catch block
+	e2.printStackTrace();
+}
+		
+}
+			
+
+			}	
+		});
+	
 	
 	}
 	

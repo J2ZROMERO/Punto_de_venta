@@ -27,6 +27,7 @@ public class Productos_Tabla_Ver_Movimientos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,7 +42,7 @@ public class Productos_Tabla_Ver_Movimientos extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
