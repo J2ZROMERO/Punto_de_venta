@@ -89,7 +89,7 @@ public class Caja_Inicial extends JFrame {
 						
 						monto = txt_monto.getText();	
 						
-						Object datosCajaInicial[] = {Double.parseDouble(txt_monto.getText()),"ENTRADA DE EFECTIVO","SALDO INICIAL",Double.parseDouble(txt_monto.getText()),Login.idUsers[Login.indiceSeleccionado]};
+						Object datosCajaInicial[] = {Double.parseDouble(txt_monto.getText()),"ENTRADA DE EFECTIVO INICIAL","SALDO INICIAL",Double.parseDouble(txt_monto.getText()),Login.idUsers[Login.indiceSeleccionado]};
 						try {
 							DB_caja.insertarCajaInicial(datosCajaInicial);
 						} catch (SQLException e1) {

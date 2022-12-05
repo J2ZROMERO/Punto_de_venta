@@ -25,6 +25,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Productos_Tabla_Buscar extends JFrame {
 
@@ -59,6 +61,7 @@ public class Productos_Tabla_Buscar extends JFrame {
 	 * Create the frame.
 	 */
 	public Productos_Tabla_Buscar() {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 658, 511);

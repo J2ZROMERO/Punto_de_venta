@@ -303,7 +303,7 @@ txt_saldo_inicial.setText(Caja_Inicial.monto);
 				try {
 				Caja_Cierre_Total_De_Caja cierre = new Caja_Cierre_Total_De_Caja(  
 						Double.parseDouble(txt_saldo_inicial.getText()),
-						Double.parseDouble(txt_saldo_inicial.getText()) +DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]),						 
+						DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]),						 
 						DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado])+ DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]),
 						
 						Double.parseDouble(txt_saldo_total_del_dia.getText()),

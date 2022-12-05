@@ -33,6 +33,7 @@ import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.ActionEvent;
@@ -86,7 +87,7 @@ private JSpinner spinner_tiempo_limite;
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -100,7 +101,7 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 	}
-*/
+
 	/**
 	 * Create the frame.
 	 */
@@ -720,6 +721,18 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
 				interfaz_busqueda.setVisible(true);
 				interfaz_busqueda.setLocationRelativeTo(null);
+				interfaz_busqueda.addWindowFocusListener(new WindowFocusListener() {
+					public void windowGainedFocus(WindowEvent e) {
+			
+					}
+					public void windowLostFocus(WindowEvent e) {
+					
+			txt_marca.setText(interfaz_busqueda.datosMarcas[0]);
+			txt_linea.setText(interfaz_busqueda.datosMarcas[1]);
+			txt_categoria.setText(interfaz_busqueda.datosMarcas[2]);
+			txt_provedores.setText(interfaz_busqueda.datosMarcas[3]);
+					}
+				});
 			//	frame.requestFocus();
 			}
 		});
@@ -751,31 +764,26 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 		panel.add(txt_provedores);
 		
 		txt_color = new JTextField();
-		txt_color.setEditable(false);
 		txt_color.setBounds(295, 344, 117, 20);
 		txt_color.setColumns(10);
 		panel.add(txt_color);
 		
 		txt_mililitros = new JTextField();
-		txt_mililitros.setEditable(false);
 		txt_mililitros.setBounds(295, 313, 117, 20);
 		txt_mililitros.setColumns(10);
 		panel.add(txt_mililitros);
 		
 		txt_cm = new JTextField();
-		txt_cm.setEditable(false);
 		txt_cm.setBounds(295, 286, 117, 20);
 		txt_cm.setColumns(10);
 		panel.add(txt_cm);
 		
 		txt_kilos = new JTextField();
-		txt_kilos.setEditable(false);
 		txt_kilos.setBounds(295, 255, 117, 20);
 		txt_kilos.setColumns(10);
 		panel.add(txt_kilos);
 		
 		txt_tamano = new JTextField();
-		txt_tamano.setEditable(false);
 		txt_tamano.setBounds(295, 375, 117, 20);
 				txt_tamano.setColumns(10);
 		panel.add(txt_tamano);

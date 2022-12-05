@@ -51,6 +51,7 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 	 * Create the frame.
 	 */
 	public Caja_Cierre_Total_De_Caja(double saldoInicial , double entradas, double salidas, double saldoTotal,int id) {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 815, 200);
@@ -72,9 +73,10 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 		tbl_cierre_total_de_caja.setModel(new DefaultTableModel(
 			new Object[][] {
 				{df.format(saldoInicial),df.format(entradas),df.format(salidas),df.format(saldoTotal)},
+				
 			},
 			new String[] {
-				"<html><center>SALDO INICIAL</center></html>", "<html><center>SALIDAS</center></html>", "<html><center>ENTRADAS</center></html>", "<html><center>TOTAL EN CAJA</center></html>"
+				"<html><center>SALDO INICIAL</center></html>", "<html><center>ENTRADAS</center></html>", "<html><center>SALIDAS</center></html>", "<html><center>TOTAL EN CAJA</center></html>"
 			}
 		));
 		tbl_cierre_total_de_caja.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -107,7 +109,22 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 		
 			
 			public void actionPerformed(ActionEvent e) {
-				Object datosCierre[] = {String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,0 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,1 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,2 )),String.format("%.2f", tbl_cierre_total_de_caja.getValueAt(0,3)),id};
+				
+				double inicialDouble = Double.parseDouble( (String) tbl_cierre_total_de_caja.getValueAt(0,0));
+				double ingresolDouble = Double.parseDouble( (String) tbl_cierre_total_de_caja.getValueAt(0,1));
+				double salidaDouble = Double.parseDouble( (String)  tbl_cierre_total_de_caja.getValueAt(0,2));
+				double totalDouble = Double.parseDouble( (String) tbl_cierre_total_de_caja.getValueAt(0,3));
+				
+				String inicialFinal = df.format( inicialDouble);
+						String ingresoFinal =  df.format(ingresolDouble);
+								String salidaFinal =  df.format( salidaDouble); 
+										String totallFinal =  df.format( totalDouble);
+				
+				
+				Object datosCierre[] = {inicialFinal
+						,ingresoFinal,salidaFinal
+						
+						,totallFinal,id};
 
 				try {
 					DB_caja.cerrarCaja(datosCierre);
@@ -130,3 +147,4 @@ inicio.setLocationRelativeTo(null);
 
 
 }
+
