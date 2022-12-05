@@ -13,6 +13,8 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Cierre_Total_De_Caja extends JFrame {
 
@@ -83,6 +85,10 @@ public class Cierre_Total_De_Caja extends JFrame {
 		panel.add(btn_regresar);
 		
 		JButton btn_cerrar_caja = new JButton("CERRAR CAJA");
+		btn_cerrar_caja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btn_cerrar_caja.setFont(new Font("Dialog", Font.BOLD, 13));
 		btn_cerrar_caja.setBounds(455, 269, 142, 23);
 		panel.add(btn_cerrar_caja);

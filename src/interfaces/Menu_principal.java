@@ -12,6 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.Cursor;
 
 import java.awt.geom.RoundRectangle2D;
@@ -27,8 +30,17 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class Menu_principal extends JFrame {
+import conexionDB.DB_caja;
+import conexionDB.DB_devoluciones_perdidas;
+import conexionDB.DB_ventas;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Menu_principal extends JFrame {
+	private	SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+    private Date now = new Date();
+   private String fechaActual = sdfDate.format(now);
 	private JPanel contentPane;
 	public JTextField lbl_usuario;
 	
@@ -65,6 +77,40 @@ public class Menu_principal extends JFrame {
 	}
 	
 	public Menu_principal() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				
+			}
+			@Override
+			public void windowClosing(WindowEvent e) {
+				DecimalFormat df = new DecimalFormat("#.##");
+				try {
+					System.out.println("ventana cerrada");
+					double inicialDouble = Double.parseDouble( Caja_Inicial.monto);
+					double ingresolDouble = DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]);
+					double salidaDouble = DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado])+ DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]);
+					double totalDouble =  
+						
+							(	Double.parseDouble(Caja_Inicial.monto)
+									+ DB_ventas.calcularTotalVentasDia(fechaActual,Login.idUsers[Login.indiceSeleccionado]) + DB_caja.calcularEntradasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]) ) -
+							DB_devoluciones_perdidas.calcularTotalPerdidasDevolucionesDia(fechaActual,Login.idUsers[Login.indiceSeleccionado])+ DB_caja.calcularSalidasCaja(fechaActual,Login.idUsers[Login.indiceSeleccionado]
+							
+							);
+					
+					String inicialFinal = df.format( inicialDouble);
+					String ingresoFinal =  df.format(ingresolDouble);
+					String salidaFinal =  df.format( salidaDouble); 
+					String totallFinal =  df.format( totalDouble);
+					
+					
+					Object datosCierre[] = {inicialFinal,ingresoFinal,salidaFinal,totallFinal,Login.idUsers[Login.indiceSeleccionado]};
+					DB_caja.cerrarCaja(datosCierre);
+				}catch (Exception u) {
+					System.out.println(u);
+				}
+			}
+		});
 		setDefaultCloseOperation( EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 613, 750);

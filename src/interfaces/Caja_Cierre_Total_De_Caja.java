@@ -121,10 +121,7 @@ public class Caja_Cierre_Total_De_Caja extends JFrame {
 										String totallFinal =  df.format( totalDouble);
 				
 				
-				Object datosCierre[] = {inicialFinal
-						,ingresoFinal,salidaFinal
-						
-						,totallFinal,id};
+				Object datosCierre[] = {inicialFinal,ingresoFinal,salidaFinal,totallFinal,id};
 
 				try {
 					DB_caja.cerrarCaja(datosCierre);

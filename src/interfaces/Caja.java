@@ -309,7 +309,9 @@ txt_saldo_inicial.setText(Caja_Inicial.monto);
 						Double.parseDouble(txt_saldo_total_del_dia.getText()),
 						Login.idUsers[Login.indiceSeleccionado]);
 					
-					
+			
+				
+				
 					cierre.setFocusable(true);
 					cierre.setLocationRelativeTo(null);
 					cierre.setVisible(true);

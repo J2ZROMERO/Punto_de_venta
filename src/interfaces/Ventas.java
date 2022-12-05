@@ -69,6 +69,7 @@ import Ticket_Venta.Ticket;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.WindowAdapter;
 
 public class Ventas extends JFrame implements Printable {
 	public static String id_productos;	
@@ -121,6 +122,12 @@ public class Ventas extends JFrame implements Printable {
 	
 	
 	public Ventas() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txt_id.requestFocus();
+			}
+		});
 
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -163,9 +170,21 @@ public class Ventas extends JFrame implements Printable {
 				if("".equals(txt_id_cliente.getText())) {
 					Clientes_Tabla_Ver_Clientes c = new Clientes_Tabla_Ver_Clientes();
 					c.setVisible(true);
+					c.setLocationRelativeTo(null);
 					c.ver_clientes(txt_id_cliente);
+					c.addWindowFocusListener(new WindowFocusListener() {
+						public void windowGainedFocus(WindowEvent e) {
+						}
+						public void windowLostFocus(WindowEvent e) {
+						txt_id.setText(id_productos);
+						txt_id.requestFocus();
+						
+						}
+					});	 
+
 				}else {
 					JOptionPane.showMessageDialog(null,"Campo lleno");
+					txt_id.requestFocus();
 				}
 
 				
@@ -257,6 +276,7 @@ public class Ventas extends JFrame implements Printable {
 		panel.add(lbl_notas_extra);
 		
 		txt_notas_extra = new JTextField();
+		txt_notas_extra.setEditable(false);
 		txt_notas_extra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_notas_extra.setColumns(10);
 		txt_notas_extra.setBounds(10, 208, 622, 22);
@@ -823,12 +843,24 @@ txt_cambio.setText(cambio);
 			movimientos_generados.setVisible(true);
 			movimientos_generados.setLocationRelativeTo(null);
 			lbl_alerta_2.setForeground(new Color(0,0,0));
+			movimientos_generados.addWindowFocusListener(new WindowFocusListener() {
+				public void windowGainedFocus(WindowEvent e) {
+				}
+				public void windowLostFocus(WindowEvent e) {
+				
+				txt_id.requestFocus();
+				
+				
+				}
+			});
 		
 		}
 	});
 	btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
 	btn_ver_movimientos.setBounds(762, 619, 161, 23);
 
+	
+	
 	panel.add(btn_ver_movimientos);
 	
 	JLabel lbl_calendario_1 = new JLabel("");
@@ -994,6 +1026,7 @@ DecimalFormat df = new DecimalFormat("#.##");
 	txt_total.setText("");	
 	txt_notas_extra.setText("");
 	def_tabla.setRowCount(0);
+	txt_id.requestFocus();
 	//frame.requestFocus();
 	}
 

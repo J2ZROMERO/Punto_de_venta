@@ -153,13 +153,13 @@ public class Login extends JFrame {
 		lbl_titulo.setBounds(113, 11, 259, 47);
 		panel.add(lbl_titulo);
 		
-		JLabel lbl_nickname = new JLabel("NICKNAME");
+		JLabel lbl_nickname = new JLabel("NOMBRE");
 		lbl_nickname.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_nickname.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_nickname.setBounds(10, 75, 100, 22);
 		panel.add(lbl_nickname);
 		
-		JLabel lbl_password = new JLabel("PASSWORD");
+		JLabel lbl_password = new JLabel("CONTRASEÑA");
 		lbl_password.setFont(new Font("Roboto Slab Black", Font.BOLD, 13));
 		lbl_password.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_password.setBounds(10, 116, 100, 22);
