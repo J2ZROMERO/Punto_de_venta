@@ -89,6 +89,8 @@ public class Ticket{
 
     public void print(String printerName,DefaultTableModel datos,String user,String total,String cliente){
 
+    	
+
         PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
         EscPos escpos;
         try {
@@ -223,6 +225,24 @@ public class Ticket{
 
     }*/
     
+    
+    public void print(String printerName){
+
+        PrintService printService = PrinterOutputStream.getPrintServiceByName(printerName);
+        EscPos escpos;
+        try {
+            
+
+         escpos = new EscPos(new PrinterOutputStream(printService));       
+         escpos.write(27).write(112).write(0).write(55).write(121);                         
+         escpos.cut(EscPos.CutMode.FULL);       
+         escpos.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Ticket.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     private static String printline(long id, long unidades, double precio, double total) {
     	
     	String ids = String.valueOf(id);

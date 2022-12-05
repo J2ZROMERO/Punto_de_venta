@@ -589,6 +589,7 @@ if(e.getButton() == 2) {
 		
 	}else {
 		confirmarRecibo = false;
+		enviarDatosTicket.print("POS-58-Series");
 		JOptionPane.showMessageDialog(null,"Venta generada");
 		txt_id.requestFocus();
 	}
