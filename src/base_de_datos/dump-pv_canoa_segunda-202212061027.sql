@@ -33,7 +33,7 @@ CREATE TABLE `caja` (
   PRIMARY KEY (`id`),
   KEY `caja_FK_3` (`fk_usuarios`),
   CONSTRAINT `caja_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `caja` (
 
 LOCK TABLES `caja` WRITE;
 /*!40000 ALTER TABLE `caja` DISABLE KEYS */;
-INSERT INTO `caja` VALUES (144,0,'ENTRADA','SALDO INICIAL',0,'2022-11-28 19:45:29',NULL);
+INSERT INTO `caja` VALUES (159,10,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',10,'2022-12-04 18:42:13',1),(160,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:44:24',1),(161,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:45:02',1),(162,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:46:30',1),(163,0,'ENTRADA DE EFECTIVO','ingreso extra',20,'2022-12-04 18:47:14',1),(164,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:58:21',1),(165,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:02:48',1),(166,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:07:05',1),(167,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:08:30',1),(168,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:09:24',1),(169,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:10:16',1),(170,0,'ENTRADA','SALDO INICIAL',0,'2022-12-04 19:11:43',NULL),(171,100,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',100,'2022-12-04 19:13:26',1),(172,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:13:40',1),(173,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:41:49',1),(174,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:42:33',1),(175,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:47:31',1),(176,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:52:51',1),(177,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:53:38',1),(178,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:54:23',1),(179,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:15:49',1),(180,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:07',1),(181,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:31',1),(182,45,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',45,'2022-12-04 20:22:11',1),(183,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:22:28',1),(184,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:25:43',1),(185,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-06 10:20:34',1);
 /*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (27,'bebidas');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +88,7 @@ CREATE TABLE `cierre_caja` (
   PRIMARY KEY (`id`),
   KEY `cierre_caja_FK` (`fk_idusuario`),
   CONSTRAINT `cierre_caja_FK` FOREIGN KEY (`fk_idusuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,35 +97,8 @@ CREATE TABLE `cierre_caja` (
 
 LOCK TABLES `cierre_caja` WRITE;
 /*!40000 ALTER TABLE `cierre_caja` DISABLE KEYS */;
+INSERT INTO `cierre_caja` VALUES (27,0,114,20,94,'2022-12-04 19:10:59',1),(28,100,114,20,194,'2022-12-04 19:13:35',1),(29,0,166,20,146,'2022-12-04 20:15:52',1),(30,0,166,20,146,'2022-12-04 20:21:14',1),(31,0,166,20,146,'2022-12-04 20:21:49',1),(32,45,166,20,191,'2022-12-04 20:22:19',1),(33,0,166,20,146,'2022-12-04 20:26:26',1),(34,0,0,0,0,'2022-12-06 10:22:04',1);
 /*!40000 ALTER TABLE `cierre_caja` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `cierrecaja`
---
-
-DROP TABLE IF EXISTS `cierrecaja`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cierrecaja` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `saldoInicial` double NOT NULL,
-  `saldoTotalDia` double NOT NULL,
-  `fecha` datetime NOT NULL,
-  `fkUser` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cierrecaja_FK` (`fkUser`),
-  CONSTRAINT `cierrecaja_FK` FOREIGN KEY (`fkUser`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cierrecaja`
---
-
-LOCK TABLES `cierrecaja` WRITE;
-/*!40000 ALTER TABLE `cierrecaja` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cierrecaja` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,7 +116,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +125,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (67,'rosa ','sanchez','primera','22265124','2022-12-04 18:03:47');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +239,7 @@ CREATE TABLE `linea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linea` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,6 +248,7 @@ CREATE TABLE `linea` (
 
 LOCK TABLES `linea` WRITE;
 /*!40000 ALTER TABLE `linea` DISABLE KEYS */;
+INSERT INTO `linea` VALUES (27,'refrescos');
 /*!40000 ALTER TABLE `linea` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +263,7 @@ CREATE TABLE `marcas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,6 +272,7 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
+INSERT INTO `marcas` VALUES (19,'Coca cola');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +301,7 @@ CREATE TABLE `movimientos_productos` (
 
 LOCK TABLES `movimientos_productos` WRITE;
 /*!40000 ALTER TABLE `movimientos_productos` DISABLE KEYS */;
-INSERT INTO `movimientos_productos` VALUES (1,'gggggggss','ddddddd',0,0,'eliminado',1,'2022-11-28 19:28:49'),(2,'asdas','asdas',0,0,'eliminado',1,'2022-11-28 19:28:49'),(7,'asdas','asdas',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(60,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(80,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(90,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(1231,'aaaaaaa','ddddddd',365,0,'eliminado',NULL,'2022-11-28 19:28:49'),(2131,'3213','21312',32,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3145,'panes de dulce','de colores',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6565,'46546','45645645',6546,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12312,'231','321',2312314,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12313,'sda','ffsad',1,0,'eliminado',NULL,'2022-11-28 19:28:49'),(25518,'hgfhf','hgfhg',1,0,'eliminado',1,'2022-11-28 19:28:49'),(31456,'nuevos panes e duces','chocolate',66,0,'eliminado',NULL,'2022-11-28 19:28:49'),(31475,'fdsfsdfs','de colores',-2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(54654,'6546','546546',454,0,'eliminado',NULL,'2022-11-28 19:28:49'),(66152,'vcvxcv','vxcvxv',210,0,'eliminado',1,'2022-11-28 19:28:49'),(235599,'fsdfsdfs','fsdfdsf',20,0,'eliminado',1,'2022-11-28 19:28:49'),(322792,'hgf','hgfhgfh',212,0,'eliminado',1,'2022-11-28 19:28:49'),(398636,'hgfhfh','ghfhgf',10,0,'eliminado',1,'2022-11-28 19:28:49'),(456546,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(765055,'bvnbv','nbvnbv',12,0,'eliminado',1,'2022-11-28 19:28:49'),(786269,'hgfhgf','hgfhgf',2,0,'eliminado',1,'2022-11-28 19:28:49'),(999558,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3527525,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4646513,'sad','sad',10,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9995586,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(75925168,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(780083146221,'brosoflux','medicina',5,0,'eliminado',1,'2022-11-28 19:28:49'),(2190839452139,'adada','dsafasdfa',1312,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3576953937339,'<','asdsdasd',2123,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4420061396957,'gfdg','dfgdfgdf',343,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6243340423249,'ayyyyy','yyy',232323,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6679656518349,'ggg','gghhh',2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6825166629653,'jhgjf','j',30,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9578302976396,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49');
+INSERT INTO `movimientos_productos` VALUES (1,'gggggggss','ddddddd',0,0,'eliminado',1,'2022-11-28 19:28:49'),(2,'asdas','asdas',0,0,'eliminado',1,'2022-11-28 19:28:49'),(7,'asdas','asdas',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(60,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(80,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(90,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(1231,'aaaaaaa','ddddddd',365,0,'eliminado',NULL,'2022-11-28 19:28:49'),(2131,'3213','21312',32,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3145,'panes de dulce','de colores',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6565,'46546','45645645',6546,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12312,'231','321',2312314,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12313,'sda','ffsad',1,0,'eliminado',NULL,'2022-11-28 19:28:49'),(25518,'hgfhf','hgfhg',1,0,'eliminado',1,'2022-11-28 19:28:49'),(31456,'nuevos panes e duces','chocolate',66,0,'eliminado',NULL,'2022-11-28 19:28:49'),(31475,'fdsfsdfs','de colores',-2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(54654,'6546','546546',454,0,'eliminado',NULL,'2022-11-28 19:28:49'),(66152,'vcvxcv','vxcvxv',210,0,'eliminado',1,'2022-11-28 19:28:49'),(235599,'fsdfsdfs','fsdfdsf',20,0,'eliminado',1,'2022-11-28 19:28:49'),(322792,'hgf','hgfhgfh',212,0,'eliminado',1,'2022-11-28 19:28:49'),(398636,'hgfhfh','ghfhgf',10,0,'eliminado',1,'2022-11-28 19:28:49'),(456546,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(765055,'bvnbv','nbvnbv',12,0,'eliminado',1,'2022-11-28 19:28:49'),(786269,'hgfhgf','hgfhgf',2,0,'eliminado',1,'2022-11-28 19:28:49'),(999558,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3527525,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4646513,'sad','sad',10,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9995586,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(75925168,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(780083146221,'brosoflux','medicina',5,0,'eliminado',1,'2022-11-28 19:28:49'),(2190839452139,'adada','dsafasdfa',1312,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3576953937339,'<','asdsdasd',2123,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4420061396957,'gfdg','dfgdfgdf',343,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6243340423249,'ayyyyy','yyy',232323,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6679656518349,'ggg','gghhh',2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6825166629653,'jhgjf','j',30,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9578302976396,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(515606,'pepsi','ertiquetra',0,20,'agregado',1,'2022-12-04 18:50:15'),(515606,'pepsi','ertiquetra',20,18,'actualizado',1,'2022-12-04 18:53:52'),(515606,'pepsi','ertiquetra',18,17,'actualizado',1,'2022-12-04 19:29:14'),(1,'s2222','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:10'),(123,'pasado','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:51'),(124,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:08'),(66,'15 dias','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:25'),(689,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:15:38'),(66,'15 dias','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(123,'pasado','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(604488,'sssssssssssss','sssssssssssss',0,434,'agregado',1,'2022-12-06 10:20:51'),(589741,'kkk','kkk',0,54,'agregado',1,'2022-12-06 10:21:08'),(892278,'dddd','dddddddddddd',0,43,'agregado',1,'2022-12-06 10:21:32');
 /*!40000 ALTER TABLE `movimientos_productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +329,7 @@ CREATE TABLE `perdidas_devoluciones` (
   KEY `perdidas_devoluciones_FK_1` (`fk_usuario`),
   CONSTRAINT `perdidas_devoluciones_FK` FOREIGN KEY (`fk_cliente`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `perdidas_devoluciones_FK_1` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -361,6 +338,7 @@ CREATE TABLE `perdidas_devoluciones` (
 
 LOCK TABLES `perdidas_devoluciones` WRITE;
 /*!40000 ALTER TABLE `perdidas_devoluciones` DISABLE KEYS */;
+INSERT INTO `perdidas_devoluciones` VALUES (43,1,NULL,NULL,NULL,2,20,'CADUCADO','2022-12-04 18:22:48',67,1);
 /*!40000 ALTER TABLE `perdidas_devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,6 +390,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (1,'s2222','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:09:10',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-30 00:00:00'),(66,'15 dias','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:10:25',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-20 00:00:00'),(123,'pasado','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:09:51',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-21 00:00:00'),(124,'hoy','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:10:08',NULL,NULL,NULL,NULL,NULL,'fasda','2022-11-25 00:00:00'),(689,'hoy','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:15:38',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-05 00:00:00'),(515606,'pepsi','ertiquetra','',17,20,5,40,'rojo','grande',1000,52,'2022-12-04 18:50:15',53,19,27,27,1,'se vende sueltos','0000-00-00 00:00:00'),(589741,'kkk','kkk','',54,NULL,NULL,NULL,'',NULL,545,65,'2022-12-06 10:21:08',NULL,NULL,NULL,NULL,1,'','2022-12-06 00:00:00'),(604488,'sssssssssssss','sssssssssssss','',434,NULL,NULL,NULL,'',NULL,324,33,'2022-12-06 10:20:51',NULL,NULL,NULL,NULL,1,'','0000-00-00 00:00:00'),(892278,'dddd','dddddddddddd','',43,NULL,NULL,NULL,'',NULL,43,43,'2022-12-06 10:21:32',NULL,NULL,NULL,NULL,1,'','2023-10-06 00:00:00');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -526,7 +505,7 @@ CREATE TABLE `provedores` (
   `nombreSupervisor` varchar(50) DEFAULT NULL,
   `contactoSupervisor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -535,6 +514,7 @@ CREATE TABLE `provedores` (
 
 LOCK TABLES `provedores` WRITE;
 /*!40000 ALTER TABLE `provedores` DISABLE KEYS */;
+INSERT INTO `provedores` VALUES (53,'joaquin ','doriga','22201023004','','','');
 /*!40000 ALTER TABLE `provedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,7 +573,7 @@ CREATE TABLE `venta` (
   KEY `ventas_FK_2` (`fk_productos`),
   CONSTRAINT `venta_FK` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `venta_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,6 +582,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (305,515606,'pepsi','ertiquetra',52,2,94,'2022-12-04 18:53:52',NULL,1,2),(306,515606,'pepsi','ertiquetra',52,1,52,'2022-12-04 19:29:14',67,1,3);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1212,7 +1193,7 @@ begin
 set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s" );
 
 	select sum(monto)  from pv_canoa_segunda.caja 
-where fecha like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%') AND fk_usuarios  = idP AND movimiento = 'ENTRADA DE EFECTIVO';
+where fecha like concat('%', date_format(fechaRecibida1,"%Y-%m-%d"),'%') AND fk_usuarios  = idP AND movimiento != 'ENTRADA DE EFECTIVO INICIAL'AND movimiento != 'SALIDA DE EFECTIVO';
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2647,17 +2628,17 @@ declare fechaRecibida1 datetime;
 declare fechaRecibida2 datetime;
 declare intervalo int;
 
-set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s" );
-set fechaRecibida2  = str_to_date(dataFin ,"%Y-%m-%d %H:%i:%s");
+set fechaRecibida1  = str_to_date(dataInicio,"%Y-%m-%d %H:%i:%s"  );
+set fechaRecibida2  = str_to_date(dataFin, "%Y-%m-%d %H:%i:%s" );
 
 set intervalo =  timestampdiff (second,fechaRecibida1,fechaRecibida2); 
 
 if(fechaRecibida1 = fechaRecibida2) then
 
-select id,product ,tipo ,stock,precioCompra,precioVenta,fecha,caducidad from productos where  date_add( fechaRecibida1 , interval  15  day)  between  fechaRecibida1  and caducidad  ;
+select id,product ,tipo ,stock,precioCompra,precioVenta,fecha,caducidad from productos where caducidad  between str_to_date(now() ,"%Y-%m-%d" )  and DATE_ADD(str_to_date(now() ,"%Y-%m-%d" ) , INTERVAL 15 DAY);
 
 else 
-select id,product ,tipo ,stock,precioCompra,precioVenta,caducidad from pv_canoa_segunda.productos   where fecha   <=  date_add( fechaRecibida1, interval  intervalo  second);
+select id,product ,tipo ,stock,precioCompra,precioVenta,fecha,caducidad from pv_canoa_segunda.productos where caducidad   between str_to_date(fechaRecibida1,"%Y-%m-%d"  ) and str_to_date(fechaRecibida2,"%Y-%m-%d"  );
 
 
 end if;
@@ -3142,4 +3123,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-28 19:48:10
+-- Dump completed on 2022-12-06 10:27:18
