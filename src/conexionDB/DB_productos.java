@@ -17,17 +17,17 @@ import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.log.SysoCounter;
 
 public class DB_productos {
-
-/*	public static void main(String[] args) {
+/*
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 try {
-	System.out.println( DB_productos.compararproductos(786269));
+	DB_productos.obtenerProductosCaducados("2022-12-05", "2022-12-05");
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }		
-
+	}*/
 //		try {
 //			Object datosDB[] = new Object[17];
 //			datosDB[0] = 12313;
@@ -93,8 +93,8 @@ try {
 //	e.printStackTrace();
 //}
 //	
-	}
-*/
+//	}
+
 
 	public  static void anadir(Object datos_campos[]) throws SQLException{
 
@@ -927,7 +927,81 @@ return existeProducto;
 
        }
 }
+
+public static DefaultTableModel model_view_caducados(String fecha1, String fecha2) throws SQLException {
+	
+	List<Object> n_ver_caducos = new ArrayList<Object>();
+	Object[] dat ;
+	
+       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+CallableStatement cstm_barcode = con.prepareCall("{ CALL pv_canoa_segunda.verProductosCaducados(?,?) }"))// dentro statement connection and resulset
+       
+    		   {	       
+
+    	   
+    	   cstm_barcode.setString(1, fecha1);
+    	   cstm_barcode.setString(2, fecha2);
+    	   
+    	
+    	   
+    	   
+    	   
+    	   
+    	   ResultSet rs_barcode= cstm_barcode.executeQuery();
+    	   
+    	   
+    	   
+    	   
+    	   
+while(rs_barcode.next()) {
+
+	dat = new Object[8];
+	dat[0]=(rs_barcode.getInt(1));	
+	dat[1]=(rs_barcode.getString(2));	
+	dat[2]=(rs_barcode.getString(3));
+	dat[3]=(rs_barcode.getInt(4));
+	dat[4]=(rs_barcode.getInt(5));
+	dat[5]=(rs_barcode.getInt(6));
+	dat[6]=(rs_barcode.getString(7).substring(0, 10));
+	dat[7]=(rs_barcode.getString(8).substring(0, 10));
+	
+	n_ver_caducos.add(dat);	
+	
 }
+
+
+}
+	
+		String[] columnNames = {"ID","Producto","Tipo", "Stock " ,"Precio compra" ,"Precio Venta","Fecha Registro","Caducidad"};
+	
+		
+		data_ver_caducados = new Object[n_ver_caducos.size()][columnNames.length];
+		
+		for (int j =  0; j < n_ver_caducos.size();j++) {
+			
+			datos_caducados = (Object[]) n_ver_caducos.get(j);
+			
+			for (int i =  0; i < datos_caducados.length;i++) {
+				data_ver_caducados[j][i] = datos_caducados[i];
+
+			}			
+		}
+			
+
+		
+		modelo_ver_tablacaducados.setDataVector(data_ver_caducados, columnNames);
+
+	return modelo_ver_tablacaducados;
+	
+}
+private static Object[][] data_ver_caducados;	
+private static Object datos_caducados[];
+private	static DefaultTableModel modelo_ver_tablacaducados = new DefaultTableModel();
+
+
+}
+
+
 
 
 

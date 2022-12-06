@@ -87,7 +87,7 @@ private JSpinner spinner_tiempo_limite;
 	/**
 	 * Launch the application.
 	 */
-	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -101,7 +101,7 @@ private JSpinner spinner_tiempo_limite;
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */
@@ -250,7 +250,7 @@ private JSpinner spinner_tiempo_limite;
 		panel.add(lbl_calendario_1);
 		
 		JButton btn_ver_movimientos = new JButton("VER MOVIMIENTOS");
-		btn_ver_movimientos.setBounds(461, 608, 161, 23);
+		btn_ver_movimientos.setBounds(235, 593, 253, 38);
 		btn_ver_movimientos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -268,7 +268,7 @@ private JSpinner spinner_tiempo_limite;
 			    //frame.requestFocus();
 			}
 		});
-		btn_ver_movimientos.setFont(new Font("Dialog", Font.BOLD, 13));
+		btn_ver_movimientos.setFont(new Font("Tahoma", Font.BOLD, 20));
 		
 		/*btn_ver_movimientos.addMouseListener(new MouseAdapter() {
 			@Override
@@ -970,6 +970,40 @@ if(!txt_id.getText().equalsIgnoreCase("")) {
 		});
 		btn_añadir.setBounds(34, 121, 156, 23);
 		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 13));
+		
+		JButton btn_caducados = new JButton("A CADUCAR");
+		btn_caducados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
+				spinnerTimeInicial = formater.format(spinner_tiempo_inicial.getValue());
+				
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				spinnerTimefinal = formater.format(spinner_tiempo_limite.getValue());
+				
+				Productos_a_caducar A_caducar = new Productos_a_caducar();
+				
+								
+				
+				A_caducar.ver_datos(spinnerTimeInicial, spinnerTimefinal);
+				A_caducar.setVisible(true);
+				A_caducar.setLocationRelativeTo(null);
+				lbl_alerta_2.setForeground(new Color(0,0,0));
+				A_caducar.addWindowFocusListener(new WindowFocusListener() {
+					public void windowGainedFocus(WindowEvent e) {
+					}
+					public void windowLostFocus(WindowEvent e) {
+					
+					txt_id.requestFocus();
+					
+					
+					}
+				});
+			}
+		});
+		btn_caducados.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btn_caducados.setBounds(527, 593, 253, 38);
+		panel.add(btn_caducados);
 		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 			@Override
