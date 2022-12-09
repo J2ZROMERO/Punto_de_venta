@@ -103,7 +103,7 @@ try {
 //		
 //	
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
+	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.añadir_producto(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))   // dentro statement connection and resulset
 	        
 
 	       
@@ -176,8 +176,10 @@ if(datos_campos[16].toString().equals("")) {
 	cstm.setString(17, datos_campos[16].toString());	                 //int
 }
 cstm.setString(18, datos_campos[17].toString() );
+cstm.setString(19, datos_campos[18].toString() );
 cstm.setString(19, datos_campos[18].toString() );   
-
+cstm.setString(20, datos_campos[19].toString() );   
+cstm.setDouble(21, Double.parseDouble(datos_campos[20].toString() ));	
 	
 
 
