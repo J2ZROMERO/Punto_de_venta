@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -64,12 +65,11 @@ import javax.swing.event.CaretListener;
 import javax.swing.event.CaretEvent;
 import java.awt.SystemColor;
 import Ticket_Venta.Ticket;
-
-
-
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.WindowAdapter;
+import interfaces.ProductoUnitario;
+import metodos_externos_necesarios.Metodos_numericos;
 
 public class Ventas extends JFrame implements Printable {
 	public static String id_productos;	
@@ -100,7 +100,7 @@ public class Ventas extends JFrame implements Printable {
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -114,7 +114,7 @@ public class Ventas extends JFrame implements Printable {
 				}
 			}
 		});
-	}*/
+	}
 
 	/**
 	 * Create the frame.
@@ -216,52 +216,61 @@ public class Ventas extends JFrame implements Printable {
 			}
 		});
 		btn_buscar_productos.addMouseListener(new MouseAdapter() {
-			@Override
+			@Override	
 			public void mouseClicked(MouseEvent e) {
-	
-		//	ver_datos_ventas( Long.parseLong( txt_id.getText()));
-				 
-				 try {
-					 if(!"".equals(txt_id.getText())) {
-						 Object notas[] = DB_ventas.add_row(Long.parseLong(txt_id.getText()), def_tabla);
-						 System.out.println(notas.length+"asdada");
-						 lbl_alerta_1.setForeground(new Color(248, 196, 113));
-						 txt_id.setText("");
+
+				try {
 					
+    				 String inputid = txt_id.getText().equalsIgnoreCase("") ? "0": txt_id.getText();		           				 
+    				 long productAvailble = (long) (DB_ventas.checkStockAndDoublePrice(Long.parseLong(inputid))[0]);
+    				 
+					if(productAvailble == 0) {
+						JOptionPane.showMessageDialog(null,"No hay existencias");
+					}
+					
+					else {
+						String checkLabelInvidualOrEntire = (String) (DB_ventas.checkStockAndDoublePrice(Long.parseLong(txt_id.getText()))[2]);
 						
-						txt_notas_extra.setText(notas[7].toString());
+						if(Objects.isNull(checkLabelInvidualOrEntire)) 
+						{
+							evento_teclado_campo_id.add_row();	
+						}
+						
+						else {							
 							
-					total_txt(txt_total, def_tabla);
-					txt_id.requestFocus();
-					 }else {
-
-						 
-						 busqueda_productos busca_productos = new busqueda_productos();
-						 busca_productos.setVisible(true);
-						 busca_productos.setLocationRelativeTo(null);
-						 
-						busca_productos.addWindowFocusListener(new WindowFocusListener() {
-								public void windowGainedFocus(WindowEvent e) {
-								}
-								public void windowLostFocus(WindowEvent e) {
-								txt_id.setText(id_productos);
-								System.out.println("cerradnao");
+								Object dataMtable[] = DB_ventas.checkStockAndDoublePrice(Long.parseLong(txt_id.getText()));
+								Object precios[] = {dataMtable[3],dataMtable[4],0};
 								
+								ProductoUnitario tabla_seleciona_precio =  new ProductoUnitario(Long.parseLong(txt_id.getText()),def_tabla);
+								
+								tabla_seleciona_precio.set_items_data(Long.parseLong(dataMtable[0].toString()),dataMtable[1].toString(), precios);		
+								
+							
+								for (int i = 0; i < def_tabla.getRowCount();i++){
+
+									
+									if(txt_id.getText().equalsIgnoreCase( def_tabla.getValueAt(i,0).toString())  && Integer.parseInt(def_tabla.getValueAt(i,5).toString()) >= 1 ) {
+										System.out.println(def_tabla.getValueAt(i,5).toString());
+										tabla_seleciona_precio.dispose();
+										
+									}
 								}
-							});	 
+						
+								txt_id.setText("");
+						}
+						
+					}
+						
+				
+				
 
-						 //ALERTA
-						 lbl_alerta_1.setForeground(new Color(0,0,0));
-
-					 }
 					
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				 
+				
 				
 			}
 		});
@@ -436,6 +445,15 @@ if(e.getButton() == 2) {
 		lbl_total.setBounds(408, 423, 157, 22);
 		panel.add(lbl_total);
 		
+		
+		lbl_alerta_1 = new JLabel("*");
+		lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
+		lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_alerta_1.setForeground(new Color(248, 196, 113));
+		lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
+		lbl_alerta_1.setBounds(138, 136, 157, 24);
+		panel.add(lbl_alerta_1);
+		
 		txt_total = new JTextField();
 		txt_total.setText("0.0");
 			txt_total.addInputMethodListener(new InputMethodListener() {
@@ -454,9 +472,8 @@ if(e.getButton() == 2) {
 		
 		
 		//importante el flujo de datos primero se crean los elemetos despue se ejecuta el evento
-		 
-				evento_teclado_campo_id = new enventoTeclado(txt_id,def_tabla,txt_notas_extra, txt_total);
-				txt_id.addKeyListener(evento_teclado_campo_id);
+	
+				
 				
 				
 		JLabel lbl_paga_con = new JLabel("PAGA CON");
@@ -920,13 +937,7 @@ txt_cambio.setText(cambio);
 	lblNewLabel.setBounds(538, 483, 53, 26);
 	panel.add(lblNewLabel);
 
-	lbl_alerta_1 = new JLabel("*");
-	lbl_alerta_1.setHorizontalTextPosition(SwingConstants.CENTER);
-	lbl_alerta_1.setHorizontalAlignment(SwingConstants.CENTER);
-	lbl_alerta_1.setForeground(new Color(248, 196, 113));
-	lbl_alerta_1.setFont(new Font("Dialog", Font.BOLD, 23));
-	lbl_alerta_1.setBounds(138, 136, 157, 24);
-	panel.add(lbl_alerta_1);
+	
 	
 	lbl_alerta_2 = new JLabel("*");
 	lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -954,7 +965,7 @@ txt_cambio.setText(cambio);
 				}
 				
 				
-				System.out.println("acualizando");
+				
 				
 			}
 
@@ -975,34 +986,32 @@ txt_cambio.setText(cambio);
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	panel.add(spinner_tiempo_limite);
 
+	evento_teclado_campo_id = new enventoTeclado(
+			txt_id,
+			def_tabla,
+			txt_notas_extra, 
+			txt_total,
+			lbl_alerta_1,
+			txt_notas_extra,
+			txt_total,
+			id_productos);
+	
+	txt_id.addKeyListener(evento_teclado_campo_id);
 	}	
 				
 				
 				
 
-	public void total_txt(JTextField total_suma,DefaultTableModel modelo) {
-DecimalFormat df = new DecimalFormat("#.##");
-		
-		
-		
+	public void total_txt(JTextField total_suma,DefaultTableModel modelo) {		
 		 double total_sum=0;
 		 double cantidad_sum = 0;
-			double costo_sum= 0;
+		 double costo_sum= 0;
 		 for(int i = 0;i < modelo.getRowCount();i++) {
-			 
 			costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
 			cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-			
 			total_sum += (costo_sum * cantidad_sum) ;
-			 
-			 
-			 
 		 }
-		 
 		 String total_cadena =    String.valueOf(  total_sum);
-		 
-		 
-		 
 		 total_suma.setText( total_cadena);
 		  
 	 };
@@ -1016,6 +1025,7 @@ DecimalFormat df = new DecimalFormat("#.##");
 			e.printStackTrace();
 		}
 	}
+	
 	public void limpia_campos() {
 	txt_id.setText("");
 	txt_id_cliente.setText("");	
@@ -1035,24 +1045,45 @@ DecimalFormat df = new DecimalFormat("#.##");
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
+	
+
 }
 
 
 class enventoTeclado implements KeyListener{
 	
-	private JTextField campo;
+	private JTextField campo_id;
 	private DefaultTableModel modelo;
 	private JTextField campo_notas;
 	private JTextField total;
 	private JTextField extra;
 	private JTextField resta;
-	public  enventoTeclado(JTextField campo, DefaultTableModel modelo, JTextField campo_notas,JTextField total) {
-		this.campo = campo;
+	private String id_productos;
+	private JLabel lbl_alerta_1;
+	private JTextField txt_notas_extra;
+	private JTextField txt_total; 
+	 
+	public  enventoTeclado(JTextField campo_id,
+							DefaultTableModel modelo, 
+							JTextField campo_notas,
+							JTextField total,
+							JLabel alerta_campo,
+							JTextField notas_campo,
+							JTextField total_campo,
+							String id_productos)
+	{
+		this.campo_id = campo_id;
 		this.modelo = modelo;
 		this.campo_notas = campo_notas;
 		this.total = total;
 		this.extra = extra;
 		this.resta = resta;
+		this.id_productos = id_productos;
+		this.lbl_alerta_1 = alerta_campo;
+		this.txt_notas_extra = notas_campo;
+		this.txt_total = total_campo;
 	}
 	
 	@Override
@@ -1062,77 +1093,128 @@ class enventoTeclado implements KeyListener{
 		int key = e.getKeyChar();
 		boolean numeros = key >= 48 && key <=57;
 		if(!numeros) {
-			
 		e.consume();	
 		}
 			}
 	
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	
-
-
-						
+	public void keyReleased(KeyEvent e) {				
 				}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		
-DecimalFormat df = new DecimalFormat("#.##");
-		
-		
-		
     if(e.getKeyCode() == KeyEvent.VK_ENTER) {
-	
-	
-	if(campo.getText().equalsIgnoreCase("")) {
-		
+	if(campo_id.getText().equalsIgnoreCase("")) {
 	}else {
-		
+		try {
+			
+			 String inputid = campo_id.getText().equalsIgnoreCase("") ? "0": campo_id.getText();		           				 
+			 long productAvailble = (long) (DB_ventas.checkStockAndDoublePrice(Long.parseLong(inputid))[0]);
+			 
+			if(productAvailble == 0) {
+				JOptionPane.showMessageDialog(null,"No hay existencias");
+			}
+			
+			else {
+				String checkLabelInvidualOrEntire = (String) (DB_ventas.checkStockAndDoublePrice(Long.parseLong(campo_id.getText()))[2]);
+				
+				if(Objects.isNull(checkLabelInvidualOrEntire)) 
+				{
+					add_row();	
+				}
+				
+				else {							
+					
+						Object dataMtable[] = DB_ventas.checkStockAndDoublePrice(Long.parseLong(campo_id.getText()));
+						Object precios[] = {dataMtable[3],dataMtable[4],0};
+						
+						ProductoUnitario tabla_seleciona_precio =  new ProductoUnitario(Long.parseLong(campo_id.getText()),modelo);
+						
+						tabla_seleciona_precio.set_items_data(Long.parseLong(dataMtable[0].toString()),dataMtable[1].toString(), precios);		
+						
+					
+						for (int i = 0; i < modelo.getRowCount();i++){
 
-				try {
-					 
-					
-					
-					 
-					Object  datos_notas[] = DB_ventas.add_row(Long.parseLong(campo.getText()), modelo);
-					 
-					
-					
-					campo_notas.setText(datos_notas[7] != null ? datos_notas[7].toString():"" );
-					 
-					 double total=0;
-					
-					 for(int i = 0;i < modelo.getRowCount();i++) {
-						 
-						 double costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
-						 double cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-						total += (costo_sum * cantidad_sum) ; 
-					 }
-					 
-					 String total_cadena =    String.valueOf( df.format(total));
-					 
-					 this.total.setText(total_cadena);
-					 
-					 
-					 
-					campo.setText("");
-					
-				} catch (NumberFormatException e1) {
+							
+							if(campo_id.getText().equalsIgnoreCase( modelo.getValueAt(i,0).toString())  && Integer.parseInt(modelo.getValueAt(i,5).toString()) >= 1 ) {
+								System.out.println(modelo.getValueAt(i,5).toString());
+								tabla_seleciona_precio.dispose();
+								
+							}
+						
+						}
+						
+						}
+				campo_id.setText("");
+				}
+
+		}  catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-	}		
+	}}}
+	
+	public void add_row() {
+
+		 try {
+			 if(!"".equals(campo_id.getText())) {
+				 Object notas[] = DB_ventas.add_row(Long.parseLong(campo_id.getText()), modelo);
+				 
+				 lbl_alerta_1.setForeground(new Color(248, 196, 113));
+				 campo_id.setText("");
 			
-}
+				 
+				
+				txt_notas_extra.setText(notas[7].toString());
+					
+			total_txt(txt_total, modelo);
+			campo_id.requestFocus();
+			 }else {
+
+				 
+				 busqueda_productos busca_productos = new busqueda_productos();
+				 busca_productos.setVisible(true);
+				 busca_productos.setLocationRelativeTo(null);
+				 busca_productos.addWindowFocusListener(new WindowFocusListener() {
+						public void windowGainedFocus(WindowEvent e) {
+						}
+						public void windowLostFocus(WindowEvent e) {
+							campo_id.setText(id_productos);						
+						}});	 
+
+				 //ALERTA
+				 lbl_alerta_1.setForeground(new Color(0,0,0));
+
+			 }
+			
+		} catch (NumberFormatException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
-	
-
+	public void total_txt(JTextField total_suma,DefaultTableModel modelo) {		
+		 double total_sum=0;
+		 double cantidad_sum = 0;
+		 double costo_sum= 0;
+		 for(int i = 0;i < modelo.getRowCount();i++) {
+			costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
+			cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
+			total_sum += (costo_sum * cantidad_sum) ;
+		 }
+		 String total_cadena =    String.valueOf(  total_sum);
+		 total_suma.setText( total_cadena);
+		  
+	 };
 	
 }
+
+
 

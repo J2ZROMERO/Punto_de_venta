@@ -60,6 +60,7 @@ private boolean estaActivo = false;
 	 * Create the frame.
 	 */
 	public Ventas_Buscar() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1133, 493);
 		contentPane = new JPanel();
@@ -88,6 +89,7 @@ private boolean estaActivo = false;
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
 		scrollPane.setBounds(10, 11, 1097, 382);
 		panel.add(scrollPane);
 		
@@ -132,27 +134,33 @@ public static void ver_datos_productos_like(Object dato[]) {
 
 	}
 
-public  void ver_datos_evento(JTextField id) {
-table.addMouseListener( new MouseAdapter() {
-		
-		public void mousePressed(MouseEvent e) {
-			
-			String selectedCellValue = table.getValueAt(table.getSelectedRow() , 0).toString();
-	        
-			id.setText(selectedCellValue);
-	     
-		     if(e.getClickCount()==2) {
-		    	 
-		   		
-		   		
-		    	 			       dispose();
-	           
-	     estaActivo =true;
-		     }	}                              });
+
+
+
+private String selectedCellValue = "";
+public void setId(String id) {
+	this.selectedCellValue = id;
+}
+
+public String getId() {
+String d = this.selectedCellValue;
+	return d;
+}
+
+
+public void  ver_datos_evento() {
+	table.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			setId(table.getValueAt(table.getSelectedRow() , 0).toString());
+			System.out.println(getId()+ " funcionando");
+					}
+	});
 	
 	
 
-		
+	
+
 }
 
 

@@ -177,8 +177,15 @@ if(datos_campos[16].toString().equals("")) {
 }
 cstm.setString(18, datos_campos[17].toString() );
 cstm.setString(19, datos_campos[18].toString() );
-cstm.setString(19, datos_campos[18].toString() );   
-cstm.setString(20, datos_campos[19].toString() );   
+
+if(datos_campos[19].toString().equals("")) {
+	cstm.setNull(20, java.sql.Types.NULL);	                 //int
+}else {
+	cstm.setString(20, datos_campos[19].toString() );
+}
+      
+
+
 cstm.setDouble(21, Double.parseDouble(datos_campos[20].toString() ));	
 	
 
@@ -196,7 +203,7 @@ System.out.println("datos insertados");
 	
 	public  static Object[] buscar(long id) throws SQLException{
 	     
-		Object valores_campos[] = new Object[18];
+		Object valores_campos[] = new Object[21];
 		
 	       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 	    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.busca_producto(?) }"))   // dentro statement connection and resulset
@@ -230,7 +237,9 @@ while(rs.next()) {
 	valores_campos[15]= rs.getString(16);
 	valores_campos[16]= rs.getString(17);
 	valores_campos[17]= rs.getString(18);
-	
+	valores_campos[18]= rs.getString(19);
+	valores_campos[19]= rs.getString(20);
+	valores_campos[20]= rs.getString(21);
 	
     	
 }	 
@@ -579,7 +588,7 @@ public static DefaultTableModel model_view_ventas_buscar(Object datos_campos[]) 
 	Object[] dat ;
 	
        try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
-    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.productos_like(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))// dentro statement connection and resulset	       
+    		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.productos_like(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) }"))// dentro statement connection and resulset	       
        {	       
     	 
     	   
@@ -640,14 +649,18 @@ for(int i = 0; i < datos_campos.length;i++) {
     	   		if(datos_campos[15].toString().equals("")) { cstm.setNull(16, java.sql.Types.NULL );
     	   		}else {   									cstm.setString(16, datos_campos[15].toString() ); 		}
     	   		if(datos_campos[16].toString().equals("")) { cstm.setNull(17, java.sql.Types.NULL );
-    	   		}else {   									cstm.setString(17, datos_campos[16].toString() ); 		}	
+    	   		}else {   									cstm.setString(17, datos_campos[16].toString() ); 		}
+    	   		if(datos_campos[17].toString().equals("")) { cstm.setNull(18, java.sql.Types.NULL );
+    	   		}else {   									cstm.setString(18, datos_campos[17].toString() ); 		}	
     	   									
+
+    	   		
    ResultSet rs =   cstm.executeQuery();
     	
 
 
 while(rs.next()) {
-dat = new Object[18];
+dat = new Object[19];
 dat[0]=(rs.getBigDecimal(1));	
 dat[1]=(rs.getString(2));	
 dat[2]=(rs.getString(3));	
@@ -666,6 +679,7 @@ dat[14]=(rs.getString(15));
 dat[15]=(rs.getString(16));	
 dat[16]=(rs.getString(17));
 dat[17]=(rs.getString(18));
+dat[18]=(rs.getString(19));
 n_ventas_buscar.add(dat);
 
 for(Object t: dat) {
@@ -673,7 +687,7 @@ System.out.println(t);
 }
 }
 
-String[] columnNames = {"Id" ,"Producto","Caracteristica","Extra distintivo","Stock","Kilogramos","Medida","Mililitros","Color","Tamaño","Precio Compra","Precio Venta","Provedores","Marca","Linea","Categoria","Usuario","Notas de venta"};
+String[] columnNames = {"Id" ,"Producto","Caracteristica","Extra distintivo","Stock","Kilogramos","Medida","Mililitros","Color","Tamaño","Precio Compra","Precio Venta","Provedores","Marca","Linea","Categoria","Usuario","Notas de venta","Precio de venta 2"};
 
 
 data_row_ventas_buscar = new Object[n_ventas_buscar.size()][columnNames.length];

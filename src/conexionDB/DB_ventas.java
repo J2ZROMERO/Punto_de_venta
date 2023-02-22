@@ -10,14 +10,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import metodos_externos_necesarios.Metodos_numericos;
 
 //import com.itextpdf.text.log.SysoCounter;
 
 public class DB_ventas {
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
 		
@@ -26,14 +29,16 @@ public class DB_ventas {
 		    String fechaActual = sdfDate.format(now);
 
 
-			System.out.println(DB_ventas.calcularTotalVentasDia(fechaActual,1));
+			System.out.println(DB_ventas.calcularTotalVentasDia(fechaActual,1)); 
+			
+System.out.println(			DB_ventas.checkStockAndDoublePrice(100L)[0]);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 
-	}*/
+	}
 
 public static Long numero_venta() throws SQLException {
 long id_venta_generada = 0;
@@ -168,12 +173,9 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  		if(modelo.getValueAt(contador,0).equals(dat[0].toString())) {
 
 	  			int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
-	  			int solicitud = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
-	  			
-	  			System.out.println(stock_disponible);
+	  			int solicitud = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));	  			
 	  			
 	  			if( solicitud >= stock_disponible) {
-	  				
 	  			}else {
 
 	  					int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
@@ -196,6 +198,105 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
   
 	return  dat;
   }//class
+
+
+
+
+
+
+
+
+public static Object[] add_row_double_precio(long id,DefaultTableModel modelo,double segundo_precio) throws SQLException {
+	
+	
+	double precio = 0.0;
+	int cantidad = 0;
+	Object[] dat ;
+	   int conteo = 0;
+       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_ventas(?) }"))// dentro statement connection and resulset      
+    		   {	         	
+ cstm.setLong(1, id);
+    	   
+    	   
+    	   ResultSet rs= cstm.executeQuery();
+     int contador = 0;
+			dat = new Object[9];
+			
+  	  		 while(rs.next()) {
+  	    		for(int i =0 ; i <= modelo.getRowCount()-1;i++) {
+  	  	  		
+  					if(modelo.getValueAt(i, 0).equals(rs.getString(1))) {
+  					contador= i;	
+  					}else {
+
+  					}}
+
+  	    		dat[0]=(rs.getString(1));
+  	  			dat[1]=(rs.getString(2));	
+  	  			dat[2]=(rs.getString(3));	
+  	  			dat[3]=(rs.getInt(4));
+  	  			dat[4]= Metodos_numericos.convierteAdecimal(segundo_precio);
+  	  			dat[5]=(1);
+  	  			precio =(double) dat[4];
+  	  	        cantidad= (int)dat[5];
+  	  			dat[6]= (cantidad*precio);
+  	  			dat[7]= (rs.getString(6));
+  	  	      	
+  	  		 }//while
+  	  
+  	  		 if(dat[0] != null) {
+  	  			 
+  	  		 
+	  			if(modelo.getRowCount() == 0) {
+	  				
+	  				modelo.addRow(dat);
+	  				int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
+	  				
+	  				if(stock_disponible == 0) { 
+	  					
+	  					modelo.setValueAt(0, contador, 5);
+	  					
+	  				}
+
+  	  			}else {
+  	  			
+
+  	  				
+	  		if(modelo.getValueAt(contador,0).equals(dat[0].toString())) {
+
+	  			int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
+	  			int solicitud = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
+	  			
+	  			
+	  			if( solicitud >= stock_disponible) {
+	  			}else {
+	  					int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
+		  				suma+=1;
+		  				dat[8]= suma;
+		  				modelo.setValueAt (suma,contador , 5);
+		  				Double precioUnicoDoble = Double.parseDouble(modelo.getValueAt(contador, 4).toString());
+		  	  			modelo.setValueAt(suma*(Metodos_numericos.convierteAdecimal(precioUnicoDoble)*cantidad), contador ,6);		  			
+	  			}
+	  			
+	  	  	  }else {
+
+	  	  		  if(Integer.parseInt( dat[3].toString()) == 0) {
+	  	  			dat[5] = 0;  
+	  	  		  }
+	  	  		  modelo.addRow(dat);
+	  	  	  }}}
+  	  		 }
+  	 if(dat[6] == null) {
+			 dat[6] = "";
+		 }
+  
+	return  dat;
+  }//class
+
+
+
+
 
 
 
@@ -383,5 +484,35 @@ public static double calcularTotalVentasDia(String fecha, int id) throws SQLExce
 
 return sumaTotalVentas;
 }
+
+
+public static Object[] checkStockAndDoublePrice(Long id) throws SQLException {
+	Object data[] = new Object[5]; 
+	try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+			 CallableStatement cstm = con.prepareCall("{call checkDoublePrice(?)}")  )   // dentro statement connection and resulset
+	 
+	   
+	    {
+		 
+		 cstm.setLong(1, id);
+		 
+		 ResultSet rs = cstm.executeQuery();
+		 rs.next(); 
+	
+		 data[0] = rs.getLong(1) ;
+		 data[1] = rs.getString(2);
+		 data[2] = rs.getString(3);
+		 data[3] = rs.getInt(4);
+		 data[4] = rs.getInt(5);
+		 	  
+           
+		 }
+
+		
+	return data; 
+}
+private  Object[][] dataPrices;	
+private  Object columNamesPrecios[];
+private	 DefaultTableModel choosePrice = new DefaultTableModel();
 }
 
