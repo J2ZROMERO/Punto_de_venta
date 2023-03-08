@@ -17,10 +17,20 @@ import javax.swing.table.DefaultTableModel;
 import com.itextpdf.text.log.SysoCounter;
 
 public class DB_productos {
-/*
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
+	public static void main(String[] args) throws SQLException {
+		// TODO Auto-generated method stub
+		
+Object e[] = DB_productos.buscar(616973L);
+
+for (Object r : e) {
+	System.out.println(r);
+}
+		
+		
+}
+	
+	/*
 try {
 	DB_productos.obtenerProductosCaducados("2022-12-05", "2022-12-05");
 } catch (SQLException e) {
@@ -210,10 +220,8 @@ System.out.println("datos insertados");
 	        
 
 	       {	       
-
 	    	   
 cstm.setLong(1,id );
-
 
 ResultSet rs = cstm.executeQuery();
 
@@ -872,32 +880,7 @@ private	static DefaultTableModel modelo_ver_movimientos = new DefaultTableModel(
 		
 	};
 	
-//////// view nickname users
 
-public static boolean acceso (int id, String contrasena_usuario) throws SQLException {
-	boolean acceso_usuario = false;
-	
-    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
- 		   CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.validar_usuario(?,?,?) }"))	       
-    {	       
- 	 
- 	   cstm.setInt(1, id);
- 	   cstm.setString(2, contrasena_usuario);
- 	   cstm.registerOutParameter(3, java.sql.Types.BOOLEAN);
- 	   
- 	   cstm.execute();
- 	   
- 	   
- 	   acceso_usuario = cstm.getBoolean(3);
- 	   
- 	   
-
- 	   System.out.println(acceso_usuario);
- 	   
-    }
-	return acceso_usuario;
-	
-}
 public static boolean compararStock (long id) throws SQLException {
 	boolean confirmaCliente = false;
 	

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import conexionDB.DB_acceso;
 import conexionDB.DB_caja;
 import conexionDB.DB_productos;
 import conexionDB.DB_usuarios;
@@ -333,6 +334,7 @@ public class Login extends JFrame {
 		try {
 			users.addItem("");
 			this.idUsers = new int[DB_usuarios.nicknames().size()];
+			
 			for(int i = 1;  i < DB_usuarios.nicknames().size(); i++) {
 				
 				Object indice_lista[]  =(Object[]) DB_usuarios.nicknames().get(i);
@@ -354,7 +356,7 @@ public boolean acceso_usuario(JComboBox cbx, JTextField pass) throws SQLExceptio
 	System.out.println(cbx.getSelectedItem().toString()+" "+ pass.getText());
 	boolean confirma_acceso = false;
 		
-		confirma_acceso =  DB_productos.acceso(this.idUsers[cbx.getSelectedIndex()], pass.getText());
+		confirma_acceso =  DB_acceso.acceso(this.idUsers[cbx.getSelectedIndex()], pass.getText());
 		
 		this.indiceSeleccionado= cbx.getSelectedIndex();
 		

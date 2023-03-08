@@ -1,5 +1,5 @@
 package interfaces;
-
+import java.util.Date;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import conexionDB.DB_productos;
+import metodos_externos_necesarios.Metodos_numericos;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -26,9 +27,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
@@ -49,6 +53,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 
 public class Productos extends JFrame {
+	private JSpinner spinner_caducidad = new JSpinner(new SpinnerDateModel());
 	private JCheckBox ckb_pza;
 	private JCheckBox ckb_kg;
 	private JCheckBox ckb_cm;
@@ -282,16 +287,17 @@ public class Productos extends JFrame {
 
 		JButton btn_buscar = new JButton("");
 		btn_buscar.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/buscar_tabla.png")));
-		btn_buscar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btn_buscar.setBounds(245, 52, 46, 35);
 		btn_buscar.setFont(new Font("Dialog", Font.BOLD, 13));
 
 		btn_buscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				
+			
+				
 				if(!txt_id.getText().equals("") ) {
 
 
@@ -316,6 +322,14 @@ public class Productos extends JFrame {
 						txt_linea.setText(datos[14].toString());
 						txt_categoria.setText(datos[15].toString());
 						txt_notas_de_venta.setText(datos[17].toString());
+						
+						txt_pv2.setText(datos[18].toString());
+						
+						if(datos[19].toString().equalsIgnoreCase("")) {
+							spinner_caducidad.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd"));
+						}else {
+							spinner_caducidad.setEditor(convertData(datos[19].toString()));							
+						}		
 						
 						
 						if(!datos[20].toString().equals("")) {
@@ -953,11 +967,9 @@ public class Productos extends JFrame {
 		lbl_caducidad.setBounds(34, 500, 217, 23);
 		panel.add(lbl_caducidad);
 
-		JSpinner spinner_caducidad = new JSpinner(new SpinnerDateModel());
+
 		spinner_caducidad.setFont(new Font("Dialog", Font.BOLD, 12));
 		spinner_caducidad.setBounds(96, 527, 94, 20);
-
-
 		spinner_caducidad.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd"));
 
 
@@ -970,6 +982,20 @@ public class Productos extends JFrame {
 
 		panel.add(spinner_caducidad);
 
+		
+		btn_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			        LocalDate date = LocalDate.of(2000, 1, 1);
+			        spinner_caducidad.setValue(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			}
+		});
+		
+		
+		
+		
+		
 		JCheckBox ckb_confirmaCaducidad = new JCheckBox("");
 		ckb_confirmaCaducidad.setBounds(196, 523, 21, 23);
 		panel.add(ckb_confirmaCaducidad);
@@ -1083,13 +1109,23 @@ public class Productos extends JFrame {
 		recibeDecimal(txt_kilos);
 		recibeDecimal(txt_cm);
 		recibeDecimal(txt_mililitros);
+		
+		JButton btnConvertgrm = new JButton("Mix");
+		btnConvertgrm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String value = String.valueOf(Metodos_numericos.convierteAdecimal(Double.parseDouble(txt_stock.getText())));
+				
+			}
+		});
+		btnConvertgrm.setBounds(449, 67, 44, 23);
+		panel.add(btnConvertgrm);
 
 		btn_añadir.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
 
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				spinnerCaducidad = format.format(spinner_caducidad .getValue());
+				spinnerCaducidad = format.format(spinner_caducidad.getValue());
 
 				if(txt_id.getText().equals("") || txt_producto.getText().equals("") || txt_distintivo_1.getText().equals("") || txt_stock.getText().equals("") | txt_precio_de_venta.getText().equals("") || txt_precio_de_compra.getText().equals("")) {
 					JOptionPane.showMessageDialog(null,"POR FAVOR LOS CAMPOS CON ' ASTERISCO ' SON OBLIGATORIOS");	
@@ -1389,5 +1425,23 @@ public class Productos extends JFrame {
 		ckb_pza.setSelected(false);
 
 	}
+	private JSpinner.DateEditor convertData (String datedb) {
+		SpinnerDateModel model = new SpinnerDateModel();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			System.out.println(datedb);
+			date = format.parse(datedb);
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		model.setValue(date);
+		JSpinner spinner = new JSpinner(model);
+		JSpinner.DateEditor editor = new JSpinner.DateEditor(spinner, format.toPattern());
 
+		return editor;
+		
+		
+	}
 }
