@@ -94,6 +94,7 @@ public class Productos extends JFrame {
 	private JLabel lbl_alerta_7;
 	private JLabel lbl_alerta_8;
 	private JTextField txt_pv2;
+	private JLabel lbl_grm;
 
 	/**
 	 * Launch the application.
@@ -615,7 +616,7 @@ public class Productos extends JFrame {
 		panel.add(btn_limpiar_atributos_de_contenido);
 
 		txt_stock = new JTextField();
-		txt_stock.setBounds(322, 68, 117, 23);
+		txt_stock.setBounds(323, 98, 117, 23);
 		txt_stock.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_stock.setColumns(10);
 
@@ -634,13 +635,13 @@ public class Productos extends JFrame {
 		panel.add(lbl_stock);
 
 		JLabel lbl_precio_de_venta = new JLabel("PRECIO DE VENTA");
-		lbl_precio_de_venta.setBounds(287, 215, 183, 20);
+		lbl_precio_de_venta.setBounds(287, 283, 183, 20);
 		lbl_precio_de_venta.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_precio_de_venta);
 
 		txt_precio_de_venta = new JTextField();
-		txt_precio_de_venta.setBounds(320, 245, 117, 23);
+		txt_precio_de_venta.setBounds(320, 313, 117, 23);
 		txt_precio_de_venta.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_venta.setColumns(10);
 
@@ -653,13 +654,13 @@ public class Productos extends JFrame {
 		panel.add(txt_precio_de_venta);
 
 		JLabel lbl_precio_de_compra = new JLabel("PRECIO DE COMPRA");
-		lbl_precio_de_compra.setBounds(292, 121, 175, 32);
+		lbl_precio_de_compra.setBounds(292, 189, 175, 32);
 		lbl_precio_de_compra.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_precio_de_compra);
 
 		txt_precio_de_compra = new JTextField();
-		txt_precio_de_compra.setBounds(321, 153, 117, 23);
+		txt_precio_de_compra.setBounds(321, 221, 117, 23);
 		txt_precio_de_compra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_precio_de_compra.setColumns(10);
 
@@ -914,21 +915,21 @@ public class Productos extends JFrame {
 
 		lbl_alerta_4 = new JLabel("*");
 		lbl_alerta_4.setForeground(new Color(0,0,0));
-		lbl_alerta_4.setBounds(303, 86, 143, 24);
+		lbl_alerta_4.setBounds(303, 149, 143, 24);
 		lbl_alerta_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_4.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_4);
 
 		lbl_alerta_5 = new JLabel("*");
 		lbl_alerta_5.setForeground(new Color(0,0,0));
-		lbl_alerta_5.setBounds(271, 268, 227, 24);
+		lbl_alerta_5.setBounds(271, 336, 227, 24);
 		lbl_alerta_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_5.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_5);
 
 		lbl_alerta_6 = new JLabel("*");
 		lbl_alerta_6.setForeground(new Color(0,0,0));
-		lbl_alerta_6.setBounds(303, 184, 161, 23);
+		lbl_alerta_6.setBounds(303, 252, 161, 23);
 		lbl_alerta_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_6.setFont(new Font("Dialog", Font.BOLD, 23));
 		panel.add(lbl_alerta_6);
@@ -1050,23 +1051,23 @@ public class Productos extends JFrame {
 		panel.add(ckb_kg);
 
 		ckb_cm = new JCheckBox("CM");
-		ckb_cm.setBounds(113, 215, 21, 23);
+		ckb_cm.setBounds(113, 213, 21, 23);
 		panel.add(ckb_cm);
 
-		JLabel lbl_kg = new JLabel("GRM");
+		JLabel lbl_kg = new JLabel("GRM / ML");
 		lbl_kg.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_kg.setBounds(57, 218, 46, 14);
 		panel.add(lbl_kg);
 
 		JLabel lbl_cm = new JLabel("CM");
 		lbl_cm.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cm.setBounds(133, 221, 46, 14);
+		lbl_cm.setBounds(133, 219, 46, 14);
 		panel.add(lbl_cm);
 
 		JLabel lbl_precio_de_venta_2 = new JLabel("PRECIO DE VENTA 2");
 		lbl_precio_de_venta_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_precio_de_venta_2.setFont(new Font("Dialog", Font.BOLD, 13));
-		lbl_precio_de_venta_2.setBounds(287, 283, 183, 20);
+		lbl_precio_de_venta_2.setBounds(287, 351, 183, 20);
 		panel.add(lbl_precio_de_venta_2);
 
 		txt_pv2 = new JTextField();
@@ -1074,14 +1075,14 @@ public class Productos extends JFrame {
 		txt_pv2.setEditable(false);
 		txt_pv2.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_pv2.setColumns(10);
-		txt_pv2.setBounds(319, 317, 117, 23);
+		txt_pv2.setBounds(319, 385, 117, 23);
 		panel.add(txt_pv2);
 
 		JLabel lbl_alerta_pv2 = new JLabel("*");
 		lbl_alerta_pv2.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_alerta_pv2.setForeground(Color.BLACK);
 		lbl_alerta_pv2.setFont(new Font("Dialog", Font.BOLD, 23));
-		lbl_alerta_pv2.setBounds(271, 352, 227, 24);
+		lbl_alerta_pv2.setBounds(271, 420, 227, 24);
 		panel.add(lbl_alerta_pv2);
 
 		ckb_pza = new JCheckBox("PZA");
@@ -1097,10 +1098,15 @@ public class Productos extends JFrame {
 		btn_ver_movimientos_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		btn_ver_movimientos_1.setBounds(988, 485, 288, 38);
 		panel.add(btn_ver_movimientos_1);
-
-		confirmacionCheckbox(ckb_kg, ckb_cm, ckb_pza);
-		confirmacionCheckbox(ckb_cm,ckb_kg, ckb_pza);
-		confirmacionCheckbox(ckb_pza,ckb_kg, ckb_cm);
+		
+		lbl_grm = new JLabel("gramos");
+		lbl_grm.setBounds(450, 103, 46, 14);
+		panel.add(lbl_grm);
+		lbl_grm.setVisible(false);
+		
+		confirmacionCheckbox(ckb_kg, ckb_cm, ckb_pza, lbl_grm);
+		confirmacionCheckbox(ckb_cm,ckb_kg, ckb_pza,lbl_grm);
+		confirmacionCheckbox(ckb_pza,ckb_kg, ckb_cm,lbl_grm);
 		recibeEntero(txt_stock);
 		recibeEntero(txt_id);
 		recibeDecimal(txt_precio_de_compra);
@@ -1110,16 +1116,25 @@ public class Productos extends JFrame {
 		recibeDecimal(txt_cm);
 		recibeDecimal(txt_mililitros);
 		
-		JButton btnConvertgrm = new JButton("Mix");
-		btnConvertgrm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String value = String.valueOf(Metodos_numericos.convierteAdecimal(Double.parseDouble(txt_stock.getText())));
+		txt_grm = new JTextField();
+		txt_grm.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+			   String inputGrm = txt_grm.getText().equalsIgnoreCase("")? "0":txt_grm.getText() ;
+			   
+				String valor = String.valueOf(Metodos_numericos.convierteAkilogramos(Double.parseDouble( inputGrm) ) * 1000 );
 				
+				txt_stock.setText(valor);
 			}
 		});
-		btnConvertgrm.setBounds(449, 67, 44, 23);
-		panel.add(btnConvertgrm);
-
+		txt_grm.setBounds(340, 70, 86, 20);
+		panel.add(txt_grm);
+		txt_grm.setColumns(10);
+		
+		
+		 
+		txt_grm.setVisible(false);
+		
 		btn_añadir.addMouseListener(new MouseAdapter() {
 
 			public void mouseClicked(MouseEvent e) {
@@ -1306,21 +1321,27 @@ public class Productos extends JFrame {
 
 
 	int contador = 0;
-	public void confirmacionCheckbox(JCheckBox recibeEvento,JCheckBox bloqueado1, JCheckBox bloqueado2) {
+	public void confirmacionCheckbox(JCheckBox recibeEvento,JCheckBox bloqueado1, JCheckBox bloqueado2, JLabel grm_label) {
 
 		recibeEvento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				if(recibeEvento.isSelected() == false) {	
 					recibeEvento.setSelected(false);
 					txt_pv2.setEditable(false);
 					txt_pv2.setEnabled(false);
 					txt_pv2.setText("");
+					txt_grm.setVisible(false);
+					grm_label.setVisible(false);
+					txt_stock.setEditable(true);
 				}else if (recibeEvento.isSelected() == true){
-
+					txt_grm.setVisible(true);
 					recibeEvento.setSelected(true);
 					txt_pv2.setEditable(true);
 					txt_pv2.setEnabled(true);
+					txt_stock.setEditable(false);
+					grm_label.setVisible(true);
 					bloqueado1.setSelected(false);
 					bloqueado2.setSelected(false);
 				}
@@ -1332,6 +1353,7 @@ public class Productos extends JFrame {
 	}
 
 	int contadork = 0;
+	private JTextField txt_grm;
 	public void recibeDecimal (JTextField campo) {
 		campo.addKeyListener(new KeyAdapter() {
 

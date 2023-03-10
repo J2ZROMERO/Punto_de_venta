@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
 //import com.itextpdf.text.log.SysoCounter;
@@ -62,10 +63,13 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 
 import javax.swing.event.CaretListener;
+import javax.swing.event.CellEditorListener;
 import javax.swing.event.CaretEvent;
 import java.awt.SystemColor;
 import Ticket_Venta.Ticket;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.WindowAdapter;
 import interfaces.ProductoUnitario;
@@ -101,7 +105,7 @@ public class Ventas extends JFrame implements Printable {
 	 * Launch the application.
 	 */
 	
-	/*public static void main(String[] args) {
+public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -114,8 +118,7 @@ public class Ventas extends JFrame implements Printable {
 				}
 			}
 		});
-	}*/
-
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -249,8 +252,7 @@ public class Ventas extends JFrame implements Printable {
 								for (int i = 0; i < def_tabla.getRowCount();i++){
 
 									
-									if(txt_id.getText().equalsIgnoreCase( def_tabla.getValueAt(i,0).toString())  && Integer.parseInt(def_tabla.getValueAt(i,5).toString()) >= 1 ) {
-										System.out.println(def_tabla.getValueAt(i,5).toString());
+									if(txt_id.getText().equalsIgnoreCase( def_tabla.getValueAt(i,0).toString())  && Double.parseDouble(def_tabla.getValueAt(i,5).toString()) >= 1 ) {
 										tabla_seleciona_precio.dispose();
 										
 									}
@@ -328,8 +330,6 @@ if(e.getButton() == 3 ) {
 	
 	if(tbl_ventas.getSelectedRow() < 0) {
 		
-		
-			
 			
 	}else {
 		int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
@@ -368,21 +368,55 @@ if(e.getButton() == 2) {
 		btn_menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				
-			
-				if(def_tabla.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
-
-				int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
-				suma-=1;
-				def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
-				total_txt(txt_total, def_tabla);
-				
-				
-				if(Integer.parseInt( tbl_ventas.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()) <= 0) {
-					def_tabla.removeRow( tbl_ventas.getSelectedRow());
-					total_txt(txt_total, def_tabla);
+				if(def_tabla.getRowCount() > 0) {
+					
+					
+					String comparar_solicitud = def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString(); 
+					
+					if(comparar_solicitud.contains(".")) {
+						double decimal = Double.parseDouble(def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString());
+						if(decimal >= 0) {
+							
+							
+							double suma = Double.parseDouble((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
+							
+							
+							suma-=.25;
+							def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
+							total_resta_txt(txt_total, def_tabla,tbl_ventas);
+							
+							
+							if(Double.parseDouble(tbl_ventas.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()) <= 0) {
+								def_tabla.removeRow( tbl_ventas.getSelectedRow());
+								
+							}
+						}
+					}else {
+						int entero = Integer.parseInt(def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString());
+						if(entero >= 0) {
+							
+							
+							int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
+							
+							
+							suma-=1;
+							def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
+							total_resta_txt(txt_total, def_tabla,tbl_ventas);
+							
+							
+							if(Integer.parseInt( tbl_ventas.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()) <= 0) {
+								def_tabla.removeRow( tbl_ventas.getSelectedRow());
+								
+							}
+						}
+					}
 				}
-			}		}
+					
+				
+				
+				
+
+		}
 		});
 		btn_menos.setFont(new Font("Dialog", Font.BOLD, 18));
 		btn_menos.setBounds(792, 204, 50, 27);
@@ -938,6 +972,27 @@ txt_cambio.setText(cambio);
 	panel.add(lblNewLabel);
 
 	
+	TableCellEditor editor = tbl_ventas.getDefaultEditor(def_tabla.getColumnClass(5));
+
+	
+	editor.addCellEditorListener((CellEditorListener) new CellEditorListener() {
+	    public void editingStopped(ChangeEvent e) {
+	        // La edición de la celda se ha completado y se ha guardado el nuevo valor
+	   	 double valorstock = Double.parseDouble(def_tabla.getValueAt(tbl_ventas.getSelectedRow(),4 ).toString());
+		 double valorprecio = Double.parseDouble(def_tabla.getValueAt(tbl_ventas.getSelectedRow(),5 ).toString());
+	double cantidadTotal = Metodos_numericos.convierteAdecimal(valorprecio*valorstock);
+	
+	def_tabla.setValueAt(cantidadTotal,tbl_ventas.getSelectedRow(),6);
+	total_txt(txt_total ,def_tabla);		
+	    }
+	    public void editingCanceled(ChangeEvent e) {
+	        // La edición de la celda se ha cancelado y se ha restaurado el valor anterior
+	    	
+	    }
+	});
+
+
+	
 	
 	lbl_alerta_2 = new JLabel("*");
 	lbl_alerta_2.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -986,6 +1041,21 @@ txt_cambio.setText(cambio);
 	spinner_tiempo_limite.setEditor(new JSpinner.DateEditor(spinner_tiempo_limite, "yyyy-MM-dd HH:mm:ss"));
 	panel.add(spinner_tiempo_limite);
 
+	
+	
+	tbl_ventas.getModel().addTableModelListener(new TableModelListener() {
+	    @Override
+	    public void tableChanged(TableModelEvent e) {
+	        if (e.getType() == TableModelEvent.DELETE && tbl_ventas.getModel().getRowCount() == 0) {
+	            // La fila se quedó sin filas
+	            // Agregue su lógica aquí
+	        	txt_total.setText("0.0");
+	        }
+	    }
+	});
+	
+	
+	
 	evento_teclado_campo_id = new enventoTeclado(
 			txt_id,
 			def_tabla,
@@ -997,6 +1067,9 @@ txt_cambio.setText(cambio);
 			id_productos);
 	
 	txt_id.addKeyListener(evento_teclado_campo_id);
+	
+	
+	
 	}	
 				
 				
@@ -1009,12 +1082,41 @@ txt_cambio.setText(cambio);
 		 for(int i = 0;i < modelo.getRowCount();i++) {
 			costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
 			cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
-			total_sum += (costo_sum * cantidad_sum) ;
+			total_sum += ( costo_sum * cantidad_sum) ;
 		 }
-		 String total_cadena =    String.valueOf(  total_sum);
+		 String total_cadena =    String.valueOf( Metodos_numericos.convierteAdecimal(total_sum));
 		 total_suma.setText( total_cadena);
 		  
 	 };
+	 public void total_resta_txt(JTextField total_suma,DefaultTableModel modelo, JTable contenedorTabla) {		
+		 
+		
+		 double total_sum=0;
+		 double cantidad_sum = 0;
+		 double costo_sum= 0;
+		 
+		 double valorstock = Double.parseDouble(modelo.getValueAt(contenedorTabla.getSelectedRow(),4 ).toString());
+		 double valorprecio = Double.parseDouble(modelo.getValueAt(contenedorTabla.getSelectedRow(),5 ).toString());
+	double cantidadTotal = Metodos_numericos.convierteAdecimal(valorprecio*valorstock);
+	
+	modelo.setValueAt(cantidadTotal,contenedorTabla.getSelectedRow(),6);
+	
+	
+	
+		 
+		 
+		 
+		 		 
+		 for(int i = 0;i < modelo.getRowCount();i++) {
+			costo_sum = Double.parseDouble(	 modelo.getValueAt(i,5 ).toString());
+			cantidad_sum =	Double.parseDouble(	 modelo.getValueAt(i, 4).toString()); 
+			total_sum -= (costo_sum * cantidad_sum) ;
+		 }
+		 String total_cadena =    String.valueOf( Math.abs(total_sum));
+		 total_suma.setText( total_cadena);
+		  
+	 };
+	 
 	
 	public  void ver_datos_ventas(long id) {
 		
@@ -1137,7 +1239,7 @@ class enventoTeclado implements KeyListener{
 						for (int i = 0; i < modelo.getRowCount();i++){
 
 							
-							if(campo_id.getText().equalsIgnoreCase( modelo.getValueAt(i,0).toString())  && Integer.parseInt(modelo.getValueAt(i,5).toString()) >= 1 ) {
+							if(campo_id.getText().equalsIgnoreCase( modelo.getValueAt(i,0).toString())  && Double.parseDouble(modelo.getValueAt(i,5).toString()) >= 1 ) {
 								System.out.println(modelo.getValueAt(i,5).toString());
 								tabla_seleciona_precio.dispose();
 								

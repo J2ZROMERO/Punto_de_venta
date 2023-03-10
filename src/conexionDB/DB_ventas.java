@@ -158,40 +158,56 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  					
 	  					modelo.setValueAt(0, contador, 5);
 	  					
-	  				}
-	  				
-	  				
-	  				
-  	  				
-  	  			
-  	  			
-  	  			
+	  				}  	  			
   	  			}else {
-  	  			
 
-  	  				
 	  		if(modelo.getValueAt(contador,0).equals(dat[0].toString())) {
 
-	  			int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
-	  			int solicitud = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));	  			
+	  			double stock_disponible = Double.parseDouble((modelo.getValueAt(contador, 3).toString()));
+	  			double solicitud = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));	  			
 	  			
-	  			if( solicitud >= stock_disponible) {
-	  			}else {
-
-	  					int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
-							
+	  			if(stock_disponible % 1 == 0) {
+	  				
+	  				if( stock_disponible > solicitud  ) {
+		  				int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
+						
 		  				suma+=1;
 		  				modelo.setValueAt (suma,contador , 5);
-		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);		  			
+		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);
+		  			}
+	  			}else {
+	  				if( stock_disponible > solicitud  ) {
+		  				double suma = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
+						
+		  				suma+=.25;
+		  				modelo.setValueAt (suma,contador , 5);
+		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);
+		  			}
 	  			}
+
+	  			
+	  			
 	  			
 	  	  	  }else {
 
 	  	  		  if(Integer.parseInt( dat[3].toString()) == 0) {
 	  	  			dat[5] = 0;  
 	  	  		  }
+	  	  		  
+	  	  		  
+	  	  		  
+	  	  		  
+	  	  		  
 	  	  		  modelo.addRow(dat);
-	  	  	  }}}}
+	  	  	  }
+	  		}
+	  			
+	  			
+	  			}
+  	  		 }
+       
+       
+       
   	 if(dat[6] == null) {
 			 dat[6] = "";
 		 }
@@ -210,7 +226,7 @@ public static Object[] add_row_double_precio(long id,DefaultTableModel modelo,do
 	
 	
 	double precio = 0.0;
-	int cantidad = 0;
+	double cantidad = 0.000;
 	Object[] dat ;
 	   int conteo = 0;
        try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
@@ -235,11 +251,11 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
   	    		dat[0]=(rs.getString(1));
   	  			dat[1]=(rs.getString(2));	
   	  			dat[2]=(rs.getString(3));	
-  	  			dat[3]=(rs.getInt(4));
+  	  			dat[3]=(rs.getDouble(4)/1000);
   	  			dat[4]= Metodos_numericos.convierteAdecimal(segundo_precio);
-  	  			dat[5]=(1);
+  	  			dat[5]=(1.000);
   	  			precio =(double) dat[4];
-  	  	        cantidad= (int)dat[5];
+  	  	        cantidad= Metodos_numericos.convierteAkilogramos((double) dat[5]);
   	  			dat[6]= (cantidad*precio);
   	  			dat[7]= (rs.getString(6));
   	  	      	
@@ -251,9 +267,9 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  			if(modelo.getRowCount() == 0) {
 	  				
 	  				modelo.addRow(dat);
-	  				int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
+	  				double stock_disponible = Double.parseDouble((modelo.getValueAt(contador, 3).toString()));
 	  				
-	  				if(stock_disponible == 0) { 
+	  				if(stock_disponible == 0 || stock_disponible == 0.0) { 
 	  					
 	  					modelo.setValueAt(0, contador, 5);
 	  					
@@ -265,14 +281,14 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
   	  				
 	  		if(modelo.getValueAt(contador,0).equals(dat[0].toString())) {
 
-	  			int stock_disponible = Integer.parseInt((modelo.getValueAt(contador, 3).toString()));
-	  			int solicitud = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
+	  			double stock_disponible = Double.parseDouble((modelo.getValueAt(contador, 3).toString()));
+	  		double solicitud = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
 	  			
 	  			
 	  			if( solicitud >= stock_disponible) {
 	  			}else {
-	  					int suma = Integer.parseInt((modelo.getValueAt(contador, 5).toString()));
-		  				suma+=1;
+	  					Double suma = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
+		  				suma+=.25;
 		  				dat[8]= suma;
 		  				modelo.setValueAt (suma,contador , 5);
 		  				Double precioUnicoDoble = Double.parseDouble(modelo.getValueAt(contador, 4).toString());
@@ -281,7 +297,7 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  			
 	  	  	  }else {
 
-	  	  		  if(Integer.parseInt( dat[3].toString()) == 0) {
+	  	  		  if(Double.parseDouble( dat[3].toString()) == 0) {
 	  	  			dat[5] = 0;  
 	  	  		  }
 	  	  		  modelo.addRow(dat);

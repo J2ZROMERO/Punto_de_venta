@@ -18,5 +18,13 @@ public class Metodos_numericos {
 				
 	}
 	
+	public static double convierteAkilogramos(double double_number) {
+		
+		DecimalFormat df = new DecimalFormat("#.###");
+		
+		return Double.parseDouble(df.format(double_number));
+				
+	}
+
 
 }
