@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import com.itextpdf.text.log.SysoCounter;
 
 import conexionDB.DB_caja;
+import metodos_externos_necesarios.SoloDecimalTextField;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,14 +29,14 @@ import java.awt.event.KeyEvent;
 public class Caja_Inicial extends JFrame {
 
 	private JPanel contentPane;
-	public JTextField txt_monto;
+	public SoloDecimalTextField   txt_monto;
 	public static Caja_Inicial frame;
 	public JTextField txt_usuario;
 
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,7 +51,7 @@ public class Caja_Inicial extends JFrame {
 			}
 		});
 	}
-*/
+
 	/**
 	 * Create the frame.
 	 */
@@ -67,7 +68,7 @@ public class Caja_Inicial extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		txt_monto = new JTextField();
+		txt_monto = new SoloDecimalTextField();
 		txt_monto.setHorizontalAlignment(SwingConstants.CENTER);
 		txt_monto.setText("0.0");
 		txt_monto.setFont(new Font("Dialog", Font.BOLD, 17));
@@ -77,6 +78,9 @@ public class Caja_Inicial extends JFrame {
 		txt_monto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == 8) {
+					txt_monto.setText("");
+				}
 				
 				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 						
@@ -162,8 +166,9 @@ public class Caja_Inicial extends JFrame {
 		txt_usuario.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("$");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 37));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(10, 76, 28, 20);
+		lblNewLabel.setBounds(10, 61, 28, 32);
 		panel.add(lblNewLabel);
 		
 		
@@ -172,6 +177,22 @@ public class Caja_Inicial extends JFrame {
 
 	}
 
+
+
+	public class NumberOnlyTextField extends JTextField {
+
+	    public NumberOnlyTextField() {
+	        super();
+	        this.addKeyListener(new KeyAdapter() {
+	            public void keyTyped(KeyEvent e) {
+	                char c = e.getKeyChar();
+	                if (!((c >= '0' && c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+	                    e.consume();
+	                }
+	            }
+	        });
+	    }
+	}
 
 	
 public  static  String monto;
