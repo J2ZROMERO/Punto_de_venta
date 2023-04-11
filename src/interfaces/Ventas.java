@@ -23,6 +23,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
+import org.mariadb.jdbc.plugin.codec.BlobCodec;
+
 //import com.itextpdf.text.log.SysoCounter;
 
 import conexionDB.DB_productos;
@@ -74,6 +76,7 @@ import javax.swing.event.ChangeEvent;
 import java.awt.event.WindowAdapter;
 import interfaces.ProductoUnitario;
 import metodos_externos_necesarios.Metodos_numericos;
+import metodos_externos_necesarios.SoloDecimalTextField;
 
 public class Ventas extends JFrame implements Printable {
 	public static String id_productos;	
@@ -87,9 +90,9 @@ public class Ventas extends JFrame implements Printable {
 	public  JTextField txt_id;
 	private  JTextField txt_notas_extra;
 	private JTable tbl_ventas;
-	private JTextField txt_descuento;
-	private JTextField txt_extra;
-	private JTextField txt_total;
+	private SoloDecimalTextField txt_descuento;
+	private SoloDecimalTextField txt_extra;
+	private SoloDecimalTextField txt_total;
 	private JTextField txt_paga_con;
 	private JTextField txt_cambio;
 	private long numero_venta = 0;
@@ -368,7 +371,7 @@ if(e.getButton() == 2) {
 		btn_menos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				if(def_tabla.getRowCount() > 0) {
+				if(tbl_ventas.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
 					
 					
 					String comparar_solicitud = def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString(); 
@@ -426,21 +429,50 @@ if(e.getButton() == 2) {
 		btn_mas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				if(tbl_ventas.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
-					try {
-						Object notas[] = DB_ventas.add_row(Long.parseLong(txt_id.getText()),def_tabla);
-						txt_notas_extra.setText(notas[0].toString());
-						
-					total_txt(txt_total, def_tabla);
-					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+if(tbl_ventas.getRowCount() != 0 && tbl_ventas.getSelectedRow() != -1) {
+					
+					
+					String comparar_solicitud = def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString(); 
+					
+					if(comparar_solicitud.contains(".")) {
+						double decimal = Double.parseDouble(def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString());
+						if(decimal >= 0) {
+							
+							
+							double suma = Double.parseDouble((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
+							
+							
+							suma+=.25;
+							def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
+							total_resta_txt(txt_total, def_tabla,tbl_ventas);
+							
+							
+							if(Double.parseDouble(tbl_ventas.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()) <= 0) {
+								def_tabla.removeRow( tbl_ventas.getSelectedRow());
+								
+							}
+						}
+					}else {
+						int entero = Integer.parseInt(def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString());
+						if(entero >= 0) {
+							
+							
+							int suma = Integer.parseInt((def_tabla.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()));
+							
+							
+							suma+=1;
+							def_tabla.setValueAt (suma,tbl_ventas.getSelectedRow() , 5);
+							total_resta_txt(txt_total, def_tabla,tbl_ventas);
+							
+							
+							if(Integer.parseInt( tbl_ventas.getValueAt(tbl_ventas.getSelectedRow(), 5).toString()) <= 0) {
+								def_tabla.removeRow( tbl_ventas.getSelectedRow());
+								
+							}
+						}
 					}
-						
 				}
+				
 				
 			
 			}
@@ -455,7 +487,7 @@ if(e.getButton() == 2) {
 		lbl_descuento.setBounds(10, 423, 137, 22);
 		panel.add(lbl_descuento);
 		
-		txt_descuento = new JTextField();
+		txt_descuento = new SoloDecimalTextField();
 		txt_descuento.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_descuento.setColumns(10);
 		txt_descuento.setBounds(10, 450, 137, 22);
@@ -467,7 +499,7 @@ if(e.getButton() == 2) {
 		lbl_extra.setBounds(189, 423, 137, 22);
 		panel.add(lbl_extra);
 		
-		txt_extra = new JTextField();
+		txt_extra = new SoloDecimalTextField();
 		txt_extra.setFont(new Font("Dialog", Font.BOLD, 12));
 		txt_extra.setColumns(10);
 		txt_extra.setBounds(189, 450, 137, 22);
@@ -488,7 +520,7 @@ if(e.getButton() == 2) {
 		lbl_alerta_1.setBounds(138, 136, 157, 24);
 		panel.add(lbl_alerta_1);
 		
-		txt_total = new JTextField();
+		txt_total = new SoloDecimalTextField();
 		txt_total.setText("0.0");
 			txt_total.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent event) {
@@ -622,20 +654,57 @@ if(e.getButton() == 2) {
 					
 					Object datos_venta[] = new Object[6];
 					if(txt_extra.getText().equalsIgnoreCase("")  && txt_descuento.getText().equalsIgnoreCase("")) {
+						
+							
 						for(int i = 0; i <  def_tabla.getRowCount();i++) {
-							datos_venta[0] = def_tabla.getValueAt(i, 0);
-							datos_venta[1] = def_tabla.getValueAt(i, 5);
-							datos_venta[2] = txt_total.getText();
-							datos_venta[3] =  txt_id_cliente.getText();
-							datos_venta[4] = Login.idUsers[Login.indiceSeleccionado];
-							datos_venta[5] = txt_numero_venta.getText();
-			datos_venta_list.add(datos_venta);
+							try {
+								String buscaIdgml = DB_ventas.buscar_gramos_pza_litro(def_tabla.getValueAt(i, 0).toString());
+								if(buscaIdgml.equalsIgnoreCase("GRM")) {
+									System.out.println("imprimio arriba" + def_tabla.getValueAt(i, 5).toString());
+									
+									
+									
+									double metodov = Metodos_numericos.convierteAkilogramos(Double.parseDouble(def_tabla.getValueAt(i, 5).toString()));
+									double resultado = metodov*1000;
+									
+									System.out.println(buscaIdgml +"cantidad de campo"+  metodov +  "resltado " + resultado);
+									
+								
+									datos_venta[0] = def_tabla.getValueAt(i, 0);
+									datos_venta[1] = resultado;
+									datos_venta[2] = txt_total.getText();
+									datos_venta[3] =  txt_id_cliente.getText();
+									datos_venta[4] = Login.idUsers[Login.indiceSeleccionado];
+									datos_venta[5] = txt_numero_venta.getText();
+						
+									datos_venta_list.add(datos_venta);
+								}else {
+									
+									System.out.println("imprimio abahjo");
+ 									datos_venta[0] = def_tabla.getValueAt(i, 0);
+									datos_venta[1] = def_tabla.getValueAt(i, 5);
+									datos_venta[2] = txt_total.getText();
+									datos_venta[3] =  txt_id_cliente.getText();
+									datos_venta[4] = Login.idUsers[Login.indiceSeleccionado];
+									datos_venta[5] = txt_numero_venta.getText();
+									datos_venta_list.add(datos_venta);		
+								}
+								
+								
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							
+							
+							
 						}
 						
 						int conteo_elementos_sin_stock = 0;
 						
 						for(int i = 0; i < def_tabla.getRowCount();i++) {
-							if( Integer.parseInt( def_tabla.getValueAt(i, 3).toString()) == 0 && Integer.parseInt(def_tabla.getValueAt(i, 5).toString()) == 0 ) {
+							if( Double.parseDouble(def_tabla.getValueAt(i, 3).toString()) == 0 && Integer.parseInt(def_tabla.getValueAt(i, 5).toString()) == 0 ) {
 								conteo_elementos_sin_stock ++;
 							}
 							
@@ -675,7 +744,14 @@ if(e.getButton() == 2) {
 							txt_id.requestFocus();
 						}
 
-					}else {
+					}
+					
+					
+					
+					
+					
+					
+					else {
 					
 						JOptionPane.showMessageDialog(null,"Confirma tu descuento o extra");
 						txt_id.requestFocus();
@@ -749,26 +825,24 @@ if(e.getButton() == 2) {
 	JButton btn_confirma_desc = new JButton("confirmar");
 	btn_confirma_desc.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+			if(!txt_descuento.getText().equalsIgnoreCase("")) {
 			
+			double desc = Double.parseDouble( txt_descuento.getText());
+			double total_val= Double.parseDouble( txt_total.getText());
+			double total = 0;
 			
-		double desc = Double.parseDouble( txt_descuento.getText());
-		double total_val= Double.parseDouble( txt_total.getText());
-		double total = 0;
-		DecimalFormat df = new DecimalFormat("#.##");
-		
-		
-		total = Math.abs(  total_val - desc);
-		
-		String cast = String.valueOf(df.format(total));
-		
-		txt_total.setText(cast);
-		
-		txt_descuento.setText("");
-	
-		
-		
-			
-			
+			if(!(desc > total_val)) {
+				
+				total =  (total_val - desc);
+				Metodos_numericos.convierteAdecimal(total);
+				
+				String cast = String.valueOf(Math.abs(total));
+				
+				txt_total.setText(cast);
+				
+				txt_descuento.setText("");
+				
+			}
 	
 		
 	    double paga_con =  Double.parseDouble( txt_paga_con.getText() );
@@ -788,12 +862,12 @@ double totallast =   total_pagar-efectivo  ;
 
 
 
-String cambio = String.valueOf( df.format( totallast));
+String cambio = String.valueOf( Metodos_numericos.convierteAdecimal(totallast));
 txt_cambio.setText(cambio);
 }
 		
 		
-		}
+		}}
 	});
 	btn_confirma_desc.setFont(new Font("Dialog", Font.BOLD, 13));
 	btn_confirma_desc.setBounds(10, 510, 137, 22);
@@ -802,7 +876,9 @@ txt_cambio.setText(cambio);
 	JButton btn_confirma_extra = new JButton("confirmar ");
 	btn_confirma_extra.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-				
+			
+			System.out.println("entrando");
+			if(!txt_extra.getText().equalsIgnoreCase("")) {
 			
 			double extra = Double.parseDouble( txt_extra.getText());
 			double total_val= Double.parseDouble( txt_total.getText());
@@ -842,7 +918,7 @@ txt_cambio.setText(cambio);
 		    
 			
 				
-		
+			}
 			
 		}
 	});

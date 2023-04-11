@@ -33,7 +33,7 @@ CREATE TABLE `caja` (
   PRIMARY KEY (`id`),
   KEY `caja_FK_3` (`fk_usuarios`),
   CONSTRAINT `caja_FK_3` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=186 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `caja` (
 
 LOCK TABLES `caja` WRITE;
 /*!40000 ALTER TABLE `caja` DISABLE KEYS */;
-INSERT INTO `caja` VALUES (159,10,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',10,'2022-12-04 18:42:13',1),(160,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:44:24',1),(161,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:45:02',1),(162,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:46:30',1),(163,0,'ENTRADA DE EFECTIVO','ingreso extra',20,'2022-12-04 18:47:14',1),(164,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:58:21',1),(165,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:02:48',1),(166,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:07:05',1),(167,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:08:30',1),(168,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:09:24',1),(169,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:10:16',1),(170,0,'ENTRADA','SALDO INICIAL',0,'2022-12-04 19:11:43',NULL),(171,100,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',100,'2022-12-04 19:13:26',1),(172,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:13:40',1),(173,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:41:49',1),(174,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:42:33',1),(175,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:47:31',1),(176,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:52:51',1),(177,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:53:38',1),(178,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:54:23',1),(179,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:15:49',1),(180,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:07',1),(181,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:31',1),(182,45,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',45,'2022-12-04 20:22:11',1),(183,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:22:28',1),(184,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:25:43',1),(185,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-06 10:20:34',1);
+INSERT INTO `caja` VALUES (159,10,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',10,'2022-12-04 18:42:13',NULL),(160,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:44:24',NULL),(161,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:45:02',NULL),(162,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:46:30',NULL),(163,0,'ENTRADA DE EFECTIVO','ingreso extra',20,'2022-12-04 18:47:14',NULL),(164,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 18:58:21',NULL),(165,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:02:48',NULL),(166,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:07:05',NULL),(167,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:08:30',NULL),(168,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:09:24',NULL),(169,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:10:16',NULL),(170,0,'ENTRADA','SALDO INICIAL',0,'2022-12-04 19:11:43',NULL),(171,100,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',100,'2022-12-04 19:13:26',NULL),(172,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:13:40',NULL),(173,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:41:49',NULL),(174,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:42:33',NULL),(175,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:47:31',NULL),(176,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:52:51',NULL),(177,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:53:38',NULL),(178,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 19:54:23',NULL),(179,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:15:49',NULL),(180,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:07',NULL),(181,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:21:31',NULL),(182,45,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',45,'2022-12-04 20:22:11',NULL),(183,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:22:28',NULL),(184,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-04 20:25:43',NULL),(185,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2022-12-06 10:20:34',NULL),(186,500,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',500,'2023-02-22 21:52:13',1),(187,500,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',500,'2023-03-07 18:18:39',1),(188,500,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',500,'2023-03-10 00:25:36',1),(189,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 01:28:45',1),(190,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 01:51:11',1),(191,12.3,'ENTRADA','SALDO INICIAL',0,'2023-03-10 08:15:14',NULL),(192,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 08:25:25',1),(193,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 08:32:12',1),(194,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 08:34:08',1),(195,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 08:54:28',1),(196,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:05:37',1),(197,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:09:42',1),(198,0,'ENTRADA','SALDO INICIAL',0,'2023-03-10 09:14:33',NULL),(199,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:18:59',1),(200,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:20:43',1),(201,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:55:25',1),(202,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:56:37',1),(203,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-10 09:57:27',1),(204,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-13 18:19:00',1),(205,20,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',20,'2023-03-13 18:21:16',1),(206,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-13 18:23:24',1),(207,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-13 18:26:20',1),(208,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-13 18:30:23',1),(209,0,'ENTRADA','SALDO INICIAL',0,'2023-03-13 18:31:03',NULL),(210,0,'ENTRADA DE EFECTIVO INICIAL','SALDO INICIAL',0,'2023-03-13 18:32:08',1);
 /*!40000 ALTER TABLE `caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `categoria` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `categoria` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `cierre_caja` (
   PRIMARY KEY (`id`),
   KEY `cierre_caja_FK` (`fk_idusuario`),
   CONSTRAINT `cierre_caja_FK` FOREIGN KEY (`fk_idusuario`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +97,7 @@ CREATE TABLE `cierre_caja` (
 
 LOCK TABLES `cierre_caja` WRITE;
 /*!40000 ALTER TABLE `cierre_caja` DISABLE KEYS */;
-INSERT INTO `cierre_caja` VALUES (27,0,114,20,94,'2022-12-04 19:10:59',1),(28,100,114,20,194,'2022-12-04 19:13:35',1),(29,0,166,20,146,'2022-12-04 20:15:52',1),(30,0,166,20,146,'2022-12-04 20:21:14',1),(31,0,166,20,146,'2022-12-04 20:21:49',1),(32,45,166,20,191,'2022-12-04 20:22:19',1),(33,0,166,20,146,'2022-12-04 20:26:26',1),(34,0,0,0,0,'2022-12-06 10:22:04',1);
+INSERT INTO `cierre_caja` VALUES (27,0,114,20,94,'2022-12-04 19:10:59',NULL),(28,100,114,20,194,'2022-12-04 19:13:35',NULL),(29,0,166,20,146,'2022-12-04 20:15:52',NULL),(30,0,166,20,146,'2022-12-04 20:21:14',NULL),(31,0,166,20,146,'2022-12-04 20:21:49',NULL),(32,45,166,20,191,'2022-12-04 20:22:19',NULL),(33,0,166,20,146,'2022-12-04 20:26:26',NULL),(34,0,0,0,0,'2022-12-06 10:22:04',NULL),(35,0,0,0,0,'2023-03-10 09:09:32',1),(36,0,0,0,0,'2023-03-13 18:20:14',1);
 /*!40000 ALTER TABLE `cierre_caja` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +116,7 @@ CREATE TABLE `clientes` (
   `telefono` varchar(15) DEFAULT NULL,
   `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +239,7 @@ CREATE TABLE `linea` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `linea` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +263,7 @@ CREATE TABLE `marcas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `marca` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -301,7 +301,7 @@ CREATE TABLE `movimientos_productos` (
 
 LOCK TABLES `movimientos_productos` WRITE;
 /*!40000 ALTER TABLE `movimientos_productos` DISABLE KEYS */;
-INSERT INTO `movimientos_productos` VALUES (1,'gggggggss','ddddddd',0,0,'eliminado',1,'2022-11-28 19:28:49'),(2,'asdas','asdas',0,0,'eliminado',1,'2022-11-28 19:28:49'),(7,'asdas','asdas',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(60,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(80,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(90,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(1231,'aaaaaaa','ddddddd',365,0,'eliminado',NULL,'2022-11-28 19:28:49'),(2131,'3213','21312',32,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3145,'panes de dulce','de colores',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6565,'46546','45645645',6546,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12312,'231','321',2312314,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12313,'sda','ffsad',1,0,'eliminado',NULL,'2022-11-28 19:28:49'),(25518,'hgfhf','hgfhg',1,0,'eliminado',1,'2022-11-28 19:28:49'),(31456,'nuevos panes e duces','chocolate',66,0,'eliminado',NULL,'2022-11-28 19:28:49'),(31475,'fdsfsdfs','de colores',-2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(54654,'6546','546546',454,0,'eliminado',NULL,'2022-11-28 19:28:49'),(66152,'vcvxcv','vxcvxv',210,0,'eliminado',1,'2022-11-28 19:28:49'),(235599,'fsdfsdfs','fsdfdsf',20,0,'eliminado',1,'2022-11-28 19:28:49'),(322792,'hgf','hgfhgfh',212,0,'eliminado',1,'2022-11-28 19:28:49'),(398636,'hgfhfh','ghfhgf',10,0,'eliminado',1,'2022-11-28 19:28:49'),(456546,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(765055,'bvnbv','nbvnbv',12,0,'eliminado',1,'2022-11-28 19:28:49'),(786269,'hgfhgf','hgfhgf',2,0,'eliminado',1,'2022-11-28 19:28:49'),(999558,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3527525,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4646513,'sad','sad',10,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9995586,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(75925168,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(780083146221,'brosoflux','medicina',5,0,'eliminado',1,'2022-11-28 19:28:49'),(2190839452139,'adada','dsafasdfa',1312,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3576953937339,'<','asdsdasd',2123,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4420061396957,'gfdg','dfgdfgdf',343,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6243340423249,'ayyyyy','yyy',232323,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6679656518349,'ggg','gghhh',2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6825166629653,'jhgjf','j',30,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9578302976396,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(515606,'pepsi','ertiquetra',0,20,'agregado',1,'2022-12-04 18:50:15'),(515606,'pepsi','ertiquetra',20,18,'actualizado',1,'2022-12-04 18:53:52'),(515606,'pepsi','ertiquetra',18,17,'actualizado',1,'2022-12-04 19:29:14'),(1,'s2222','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:10'),(123,'pasado','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:51'),(124,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:08'),(66,'15 dias','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:25'),(689,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:15:38'),(66,'15 dias','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(123,'pasado','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(604488,'sssssssssssss','sssssssssssss',0,434,'agregado',1,'2022-12-06 10:20:51'),(589741,'kkk','kkk',0,54,'agregado',1,'2022-12-06 10:21:08'),(892278,'dddd','dddddddddddd',0,43,'agregado',1,'2022-12-06 10:21:32');
+INSERT INTO `movimientos_productos` VALUES (1,'gggggggss','ddddddd',0,0,'eliminado',1,'2022-11-28 19:28:49'),(2,'asdas','asdas',0,0,'eliminado',1,'2022-11-28 19:28:49'),(7,'asdas','asdas',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(60,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(80,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(90,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(1231,'aaaaaaa','ddddddd',365,0,'eliminado',NULL,'2022-11-28 19:28:49'),(2131,'3213','21312',32,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3145,'panes de dulce','de colores',0,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6565,'46546','45645645',6546,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12312,'231','321',2312314,0,'eliminado',NULL,'2022-11-28 19:28:49'),(12313,'sda','ffsad',1,0,'eliminado',NULL,'2022-11-28 19:28:49'),(25518,'hgfhf','hgfhg',1,0,'eliminado',1,'2022-11-28 19:28:49'),(31456,'nuevos panes e duces','chocolate',66,0,'eliminado',NULL,'2022-11-28 19:28:49'),(31475,'fdsfsdfs','de colores',-2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(54654,'6546','546546',454,0,'eliminado',NULL,'2022-11-28 19:28:49'),(66152,'vcvxcv','vxcvxv',210,0,'eliminado',1,'2022-11-28 19:28:49'),(235599,'fsdfsdfs','fsdfdsf',20,0,'eliminado',1,'2022-11-28 19:28:49'),(322792,'hgf','hgfhgfh',212,0,'eliminado',1,'2022-11-28 19:28:49'),(398636,'hgfhfh','ghfhgf',10,0,'eliminado',1,'2022-11-28 19:28:49'),(456546,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(765055,'bvnbv','nbvnbv',12,0,'eliminado',1,'2022-11-28 19:28:49'),(786269,'hgfhgf','hgfhgf',2,0,'eliminado',1,'2022-11-28 19:28:49'),(999558,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3527525,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4646513,'sad','sad',10,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9995586,'45645','6546456',5465,0,'eliminado',NULL,'2022-11-28 19:28:49'),(75925168,'jhj','gjghj',1231,0,'eliminado',NULL,'2022-11-28 19:28:49'),(780083146221,'brosoflux','medicina',5,0,'eliminado',1,'2022-11-28 19:28:49'),(2190839452139,'adada','dsafasdfa',1312,0,'eliminado',NULL,'2022-11-28 19:28:49'),(3576953937339,'<','asdsdasd',2123,0,'eliminado',NULL,'2022-11-28 19:28:49'),(4420061396957,'gfdg','dfgdfgdf',343,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6243340423249,'ayyyyy','yyy',232323,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6679656518349,'ggg','gghhh',2,0,'eliminado',NULL,'2022-11-28 19:28:49'),(6825166629653,'jhgjf','j',30,0,'eliminado',NULL,'2022-11-28 19:28:49'),(9578302976396,'s2222','dfas',12321,0,'eliminado',NULL,'2022-11-28 19:28:49'),(515606,'pepsi','ertiquetra',0,20,'agregado',1,'2022-12-04 18:50:15'),(515606,'pepsi','ertiquetra',20,18,'actualizado',1,'2022-12-04 18:53:52'),(515606,'pepsi','ertiquetra',18,17,'actualizado',1,'2022-12-04 19:29:14'),(1,'s2222','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:10'),(123,'pasado','dfas',0,12321,'agregado',NULL,'2022-12-05 14:09:51'),(124,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:08'),(66,'15 dias','dfas',0,12321,'agregado',NULL,'2022-12-05 14:10:25'),(689,'hoy','dfas',0,12321,'agregado',NULL,'2022-12-05 14:15:38'),(66,'15 dias','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(123,'pasado','dfas',12321,12321,'actualizado',NULL,'2022-12-05 14:16:38'),(604488,'sssssssssssss','sssssssssssss',0,434,'agregado',1,'2022-12-06 10:20:51'),(589741,'kkk','kkk',0,54,'agregado',1,'2022-12-06 10:21:08'),(892278,'dddd','dddddddddddd',0,43,'agregado',1,'2022-12-06 10:21:32'),(95890,'adasd','sadsad',0,43,'agregado',NULL,'2022-12-09 14:07:29'),(74458,'something','dasdas',0,32,'agregado',NULL,'2022-12-09 14:18:08'),(616973,'gfdgfdgd','vxcvxcv',0,654,'agregado',NULL,'2022-12-09 14:19:01'),(489299,'gfdgd','gdfgdg',0,20,'agregado',NULL,'2023-01-02 20:59:27'),(895175,',,,,',',,,,,,,',0,12,'agregado',NULL,'2023-01-02 21:00:47'),(895175,',,,,',',,,,,,,',12,0,'eliminado',NULL,'2023-01-02 21:01:06'),(427929,'pepitas','pepitas de calabaza',0,30,'agregado',NULL,'2023-01-02 21:02:19'),(56158,'tacos','tacos con salsa',0,20,'agregado',NULL,'2023-01-02 21:03:31'),(427929,'pepitas','pepitas de calabaza',30,0,'actualizado',NULL,'2023-01-09 20:19:23'),(427929,'pepitas','pepitas de calabaza',0,5,'actualizado',NULL,'2023-01-31 21:28:57'),(454870,'gansito','verde',0,40,'agregado',NULL,'2023-02-22 21:53:57'),(74458,'something','dasdas',32,0,'eliminado',NULL,'2023-03-07 17:14:27'),(641476,'weeeeeee','aaaaa',0,200000,'agregado',NULL,'2023-03-09 17:44:07'),(33728,'eeeeeeeee','asd',0,1500,'agregado',NULL,'2023-03-09 17:46:13'),(427929,'pepitas','pepitas de calabaza',5,0,'actualizado',NULL,'2023-03-09 18:11:15'),(1,'s2222','dfas',12321,0,'eliminado',NULL,'2023-03-09 23:56:15'),(66,'15 dias','dfas',12321,0,'eliminado',NULL,'2023-03-09 23:56:15'),(123,'pasado','dfas',12321,0,'eliminado',NULL,'2023-03-09 23:56:15'),(124,'hoy','dfas',12321,0,'eliminado',NULL,'2023-03-09 23:56:15'),(689,'hoy','dfas',12321,0,'eliminado',NULL,'2023-03-09 23:56:15'),(33728,'eeeeeeeee','asd',1500,0,'eliminado',NULL,'2023-03-09 23:56:15'),(95890,'adasd','sadsad',43,0,'eliminado',NULL,'2023-03-09 23:56:15'),(427929,'pepitas','pepitas de calabaza',0,0,'eliminado',NULL,'2023-03-09 23:56:15'),(489299,'gfdgd','gdfgdg',20,0,'eliminado',NULL,'2023-03-09 23:56:15'),(641476,'weeeeeee','aaaaa',200000,0,'eliminado',NULL,'2023-03-09 23:56:15'),(404367,'naranjas','naranja verde',0,50000,'agregado',NULL,'2023-03-10 01:30:40'),(1,'pan','aa',0,30,'agregado',NULL,'2023-03-10 01:51:34'),(767035,'peras','peras de la sierra',0,60000,'agregado',NULL,'2023-03-10 08:29:00'),(647392,'liston','tesa',0,500,'agregado',NULL,'2023-03-10 08:29:52'),(647392,'liston','tesa',500,5000,'actualizado',1,'2023-03-10 08:32:59'),(16320,'asdadad','asdad',0,3453,'agregado',NULL,'2023-03-10 08:49:44'),(853944,'asdad','asdad',0,20000,'agregado',NULL,'2023-03-10 08:50:51'),(440628,'asdad','asdad',0,345,'agregado',NULL,'2023-03-10 08:51:57'),(853944,'asdad','asdad',20000,20000,'actualizado',1,'2023-03-10 09:05:55'),(853944,'asdad','asdad',20000,0,'eliminado',1,'2023-03-10 09:06:09'),(1,'pan','aa',30,29,'actualizado',NULL,'2023-03-10 09:15:49'),(404367,'naranjas','naranja verde',50000,49998,'actualizado',NULL,'2023-03-10 09:21:14'),(404367,'naranjas','naranja verde',49998,49997,'actualizado',NULL,'2023-03-10 09:55:40'),(404367,'naranjas','naranja verde',49997,49996,'actualizado',NULL,'2023-03-10 09:55:57'),(404367,'naranjas','naranja verde',49996,49995,'actualizado',NULL,'2023-03-10 09:56:46'),(404367,'naranjas','naranja verde',49995,49994,'actualizado',NULL,'2023-03-10 09:57:40'),(16320,'asdadad','asdad',3453,0,'eliminado',NULL,'2023-03-10 10:00:39'),(404367,'naranjas','naranja verde',49994,0,'eliminado',NULL,'2023-03-10 10:00:39'),(440628,'asdad','asdad',345,0,'eliminado',NULL,'2023-03-10 10:00:39'),(647392,'liston','tesa',5000,0,'eliminado',1,'2023-03-10 10:00:39'),(767035,'peras','peras de la sierra',60000,0,'eliminado',NULL,'2023-03-10 10:00:39'),(305923,'papel','papel estrasa',0,5000,'agregado',1,'2023-03-13 18:20:00'),(1,'pan','aa',29,28,'actualizado',NULL,'2023-03-13 18:30:27'),(1,'pan','aa',28,27,'actualizado',NULL,'2023-03-13 18:31:09'),(305923,'papel','papel estrasa',5000,4998,'actualizado',1,'2023-03-13 18:32:21'),(305923,'papel','papel estrasa',4998,4000,'actualizado',1,'2023-03-13 18:35:40'),(305923,'papel','papel estrasa',4000,3000,'actualizado',1,'2023-03-13 18:36:14'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:36:48'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:37:04'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:37:14'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:37:26'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:37:42'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:37:53'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:42:38'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:42:55'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:43:12'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:45:18'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:45:27'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:45:50'),(305923,'papel','papel estrasa',3000,3000,'actualizado',1,'2023-03-13 18:46:07'),(305923,'papel','papel estrasa',3000,2997,'actualizado',1,'2023-03-13 18:46:15'),(305923,'papel','papel estrasa',2997,2997,'actualizado',1,'2023-03-13 18:46:30'),(305923,'papel','papel estrasa',2997,2997,'actualizado',1,'2023-03-13 18:47:24'),(305923,'papel','papel estrasa',2997,2997,'actualizado',1,'2023-03-13 18:47:46'),(305923,'papel','papel estrasa',2997,2997,'actualizado',1,'2023-03-13 18:48:02'),(305923,'papel','papel estrasa',2997,2997,'actualizado',1,'2023-03-13 18:48:10'),(305923,'papel','papel estrasa',2997,2996,'actualizado',1,'2023-03-13 18:48:36'),(305923,'papel','papel estrasa',2996,2995,'actualizado',1,'2023-03-13 18:48:44'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:48:54'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:49:08'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:49:18'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:49:28'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:49:41'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:49:51'),(305923,'papel','papel estrasa',2995,2995,'actualizado',1,'2023-03-13 18:50:00'),(305923,'papel','papel estrasa',2995,2994,'actualizado',1,'2023-03-13 18:51:06'),(305923,'papel','papel estrasa',2994,2993,'actualizado',1,'2023-03-13 18:51:25'),(305923,'papel','papel estrasa',2993,2992,'actualizado',1,'2023-03-13 18:51:37'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-03-13 18:51:45'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:16:38'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:16:50'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:17:08'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:24:58'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:25:20'),(305923,'papel','papel estrasa',2992,2992,'actualizado',1,'2023-04-10 17:25:29'),(305923,'papel','papel estrasa',2992,2892,'actualizado',1,'2023-04-10 17:25:48'),(305923,'papel','papel estrasa',2892,2792,'actualizado',1,'2023-04-10 17:25:57'),(305923,'papel','papel estrasa',2792,2692,'actualizado',1,'2023-04-10 17:26:24'),(305923,'papel','papel estrasa',2692,2592,'actualizado',1,'2023-04-10 17:27:13'),(305923,'papel','papel estrasa',2592,2500,'actualizado',1,'2023-04-10 17:27:22'),(305923,'papel','papel estrasa',2500,2495,'actualizado',1,'2023-04-10 17:27:33'),(305923,'papel','papel estrasa',2495,2494,'actualizado',1,'2023-04-10 17:28:07'),(305923,'papel','papel estrasa',2494,2494,'actualizado',1,'2023-04-10 17:28:17'),(305923,'papel','papel estrasa',2494,2493,'actualizado',1,'2023-04-10 17:28:36'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:28:56'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:29:06'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:29:14'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:30:03'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:30:18'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:33:58'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:34:03'),(305923,'papel','papel estrasa',2493,2493,'actualizado',1,'2023-04-10 17:34:08'),(305923,'papel','papel estrasa',2493,2492,'actualizado',1,'2023-04-10 17:34:20'),(305923,'papel','papel estrasa',2492,2492,'actualizado',1,'2023-04-10 17:34:30'),(305923,'papel','papel estrasa',2492,2492,'actualizado',1,'2023-04-10 17:34:40'),(305923,'papel','papel estrasa',2492,2492,'actualizado',1,'2023-04-10 17:34:52'),(305923,'papel','papel estrasa',2492,2492,'actualizado',1,'2023-04-10 17:35:11'),(305923,'papel','papel estrasa',2492,2491,'actualizado',1,'2023-04-10 17:35:18'),(305923,'papel','papel estrasa',2491,2491,'actualizado',1,'2023-04-10 17:39:15'),(305923,'papel','papel estrasa',2491,2491,'actualizado',1,'2023-04-10 17:39:25'),(305923,'papel','papel estrasa',2491,2489,'actualizado',1,'2023-04-10 17:39:34'),(305923,'papel','papel estrasa',2489,2001,'actualizado',1,'2023-04-10 17:39:49'),(305923,'papel','papel estrasa',2001,2000,'actualizado',1,'2023-04-10 17:40:00');
 /*!40000 ALTER TABLE `movimientos_productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +338,7 @@ CREATE TABLE `perdidas_devoluciones` (
 
 LOCK TABLES `perdidas_devoluciones` WRITE;
 /*!40000 ALTER TABLE `perdidas_devoluciones` DISABLE KEYS */;
-INSERT INTO `perdidas_devoluciones` VALUES (43,1,NULL,NULL,NULL,2,20,'CADUCADO','2022-12-04 18:22:48',67,1);
+INSERT INTO `perdidas_devoluciones` VALUES (43,1,NULL,NULL,NULL,2,20,'CADUCADO','2022-12-04 18:22:48',67,NULL);
 /*!40000 ALTER TABLE `perdidas_devoluciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,10 +354,10 @@ CREATE TABLE `productos` (
   `product` varchar(50) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `extra_distinctive` varchar(50) DEFAULT NULL,
-  `stock` int(11) NOT NULL,
-  `kilogramos` double DEFAULT NULL,
-  `medida` double DEFAULT NULL,
-  `mililitros` double DEFAULT NULL,
+  `stock` decimal(10,3) NOT NULL,
+  `kilogramos` decimal(10,3) DEFAULT NULL,
+  `medida` decimal(10,2) DEFAULT NULL,
+  `mililitros` decimal(10,3) DEFAULT NULL,
   `color` varchar(20) DEFAULT NULL,
   `tamano` varchar(17) DEFAULT NULL,
   `precioCompra` double NOT NULL,
@@ -370,6 +370,8 @@ CREATE TABLE `productos` (
   `fk_usuario` int(11) DEFAULT NULL,
   `notas_de_venta` varchar(300) DEFAULT NULL,
   `caducidad` datetime DEFAULT NULL,
+  `individuales_particionado` varchar(100) DEFAULT NULL,
+  `precioVenta2` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `productos_FK_3` (`fk_provedores`),
   KEY `productos_FK` (`fk_categoria`),
@@ -390,7 +392,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'s2222','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:09:10',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-30 00:00:00'),(66,'15 dias','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:10:25',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-20 00:00:00'),(123,'pasado','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:09:51',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-21 00:00:00'),(124,'hoy','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:10:08',NULL,NULL,NULL,NULL,NULL,'fasda','2022-11-25 00:00:00'),(689,'hoy','dfas',NULL,12321,NULL,NULL,NULL,NULL,'231',32131,2131,'2022-12-05 14:15:38',NULL,NULL,NULL,NULL,NULL,'fasda','2022-12-05 00:00:00'),(515606,'pepsi','ertiquetra','',17,20,5,40,'rojo','grande',1000,52,'2022-12-04 18:50:15',53,19,27,27,1,'se vende sueltos','0000-00-00 00:00:00'),(589741,'kkk','kkk','',54,NULL,NULL,NULL,'',NULL,545,65,'2022-12-06 10:21:08',NULL,NULL,NULL,NULL,1,'','2022-12-06 00:00:00'),(604488,'sssssssssssss','sssssssssssss','',434,NULL,NULL,NULL,'',NULL,324,33,'2022-12-06 10:20:51',NULL,NULL,NULL,NULL,1,'','0000-00-00 00:00:00'),(892278,'dddd','dddddddddddd','',43,NULL,NULL,NULL,'',NULL,43,43,'2022-12-06 10:21:32',NULL,NULL,NULL,NULL,1,'','2023-10-06 00:00:00');
+INSERT INTO `productos` VALUES (1,'pan','aa','aa',27.000,NULL,NULL,NULL,'',NULL,24,2,'2023-03-10 01:51:34',NULL,NULL,NULL,NULL,NULL,'aaa','2023-03-10 00:00:00',NULL,0),(305923,'papel','papel estrasa','de puersop',2000.000,NULL,NULL,NULL,'',NULL,20,25,'2023-03-13 18:20:00',NULL,NULL,NULL,NULL,1,'se vende por  pliegos','2027-03-13 00:00:00','GRM',20);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -505,7 +507,7 @@ CREATE TABLE `provedores` (
   `nombreSupervisor` varchar(50) DEFAULT NULL,
   `contactoSupervisor` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -514,7 +516,7 @@ CREATE TABLE `provedores` (
 
 LOCK TABLES `provedores` WRITE;
 /*!40000 ALTER TABLE `provedores` DISABLE KEYS */;
-INSERT INTO `provedores` VALUES (53,'joaquin ','doriga','22201023004','','','');
+INSERT INTO `provedores` VALUES (54,'jose j','Zepeda ','2228103004','bimbo','Juan','22251364016');
 /*!40000 ALTER TABLE `provedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -544,7 +546,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'ADMINISTRADOR','ADMIN ','','','ADMIN',':`ÊÃä¿tÝ5¦³ÿaD','2022-11-28 19:45:13');
+INSERT INTO `usuarios` VALUES (1,'ADMINISTRADOR','ADMIN ','','','ADMIN','™ê{–´ë×·U0Q','2023-02-22 21:49:58');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,7 +575,7 @@ CREATE TABLE `venta` (
   KEY `ventas_FK_2` (`fk_productos`),
   CONSTRAINT `venta_FK` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `venta_FK_1` FOREIGN KEY (`fk_clientes`) REFERENCES `clientes` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=384 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -582,7 +584,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
-INSERT INTO `venta` VALUES (305,515606,'pepsi','ertiquetra',52,2,94,'2022-12-04 18:53:52',NULL,1,2),(306,515606,'pepsi','ertiquetra',52,1,52,'2022-12-04 19:29:14',67,1,3);
+INSERT INTO `venta` VALUES (305,515606,'pepsi','ertiquetra',52,2,94,'2022-12-04 18:53:52',NULL,NULL,2),(306,515606,'pepsi','ertiquetra',52,1,52,'2022-12-04 19:29:14',67,NULL,3),(307,1,'pan','aa',2,1,51,'2023-03-10 09:15:49',67,1,4),(308,404367,'naranjas','naranja verde',400,2,600,'2023-03-10 09:21:14',NULL,1,5),(309,404367,'naranjas','naranja verde',400,1,1000,'2023-03-10 09:55:40',NULL,1,6),(310,404367,'naranjas','naranja verde',400,1,1000,'2023-03-10 09:55:57',NULL,1,7),(311,404367,'naranjas','naranja verde',400,1,1000,'2023-03-10 09:56:46',NULL,1,8),(312,404367,'naranjas','naranja verde',400,1,1000,'2023-03-10 09:57:40',NULL,1,9),(313,1,'pan','aa',2,1,2,'2023-03-13 18:30:27',NULL,1,10),(314,1,'pan','aa',2,1,2,'2023-03-13 18:31:09',NULL,1,11),(315,305923,'papel','papel estrasa',25,2,1500,'2023-03-13 18:32:21',NULL,1,12),(316,305923,'papel','papel estrasa',25,998,300,'2023-03-13 18:35:40',NULL,1,95),(317,305923,'papel','papel estrasa',25,1000,300,'2023-03-13 18:36:14',NULL,1,96),(318,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:36:48',NULL,1,98),(319,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:37:04',NULL,1,98),(320,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:37:14',NULL,1,98),(321,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:37:26',NULL,1,98),(322,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:37:42',NULL,1,98),(323,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:37:53',NULL,1,98),(324,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:42:38',NULL,1,98),(325,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:42:55',NULL,1,60),(326,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:43:12',NULL,1,60),(327,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:45:18',NULL,1,60),(328,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:45:27',NULL,1,4),(329,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:45:50',NULL,1,4),(330,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:46:07',NULL,1,36),(331,305923,'papel','papel estrasa',25,3,300,'2023-03-13 18:46:15',NULL,1,36),(332,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:46:30',NULL,1,36),(333,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:47:24',NULL,1,36),(334,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:47:46',NULL,1,36),(335,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:48:02',NULL,1,36),(336,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:48:10',NULL,1,36),(337,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:48:36',NULL,1,36),(338,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:48:44',NULL,1,36),(339,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:48:54',NULL,1,36),(340,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:49:08',NULL,1,36),(341,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:49:18',NULL,1,36),(342,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:49:28',NULL,1,77),(343,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:49:41',NULL,1,77),(344,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:49:51',NULL,1,77),(345,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:50:00',NULL,1,77),(346,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:51:06',NULL,1,77),(347,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:51:25',NULL,1,77),(348,305923,'papel','papel estrasa',25,1,300,'2023-03-13 18:51:37',NULL,1,77),(349,305923,'papel','papel estrasa',25,0,300,'2023-03-13 18:51:45',NULL,1,77),(350,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:16:38',NULL,1,77),(351,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:16:50',NULL,1,77),(352,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:17:08',NULL,1,77),(353,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:24:58',NULL,1,77),(354,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:25:20',NULL,1,77),(355,305923,'papel','papel estrasa',25,0,300,'2023-04-10 17:25:29',NULL,1,77),(356,305923,'papel','papel estrasa',25,100,300,'2023-04-10 17:25:48',NULL,1,77),(357,305923,'papel','papel estrasa',25,100,0.2,'2023-04-10 17:25:57',NULL,1,77),(358,305923,'papel','papel estrasa',25,100,2.1,'2023-04-10 17:26:24',NULL,1,77),(359,305923,'papel','papel estrasa',25,100,21312,'2023-04-10 17:27:13',NULL,1,77),(360,305923,'papel','papel estrasa',25,92,21312,'2023-04-10 17:27:22',NULL,1,77),(361,305923,'papel','papel estrasa',25,5,21312,'2023-04-10 17:27:32',NULL,1,77),(362,305923,'papel','papel estrasa',25,1,21312,'2023-04-10 17:28:07',NULL,1,77),(363,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:28:17',NULL,1,77),(364,305923,'papel','papel estrasa',25,1,21312,'2023-04-10 17:28:36',NULL,1,77),(365,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:28:56',NULL,1,77),(366,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:29:06',NULL,1,77),(367,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:29:14',NULL,1,77),(368,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:30:03',NULL,1,77),(369,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:30:18',NULL,1,77),(370,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:33:58',NULL,1,77),(371,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:34:03',NULL,1,77),(372,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:34:08',NULL,1,77),(373,305923,'papel','papel estrasa',25,1,21312,'2023-04-10 17:34:20',NULL,1,77),(374,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:34:30',NULL,1,77),(375,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:34:40',NULL,1,77),(376,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:34:52',NULL,1,77),(377,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:35:11',NULL,1,77),(378,305923,'papel','papel estrasa',25,1,21312,'2023-04-10 17:35:18',NULL,1,77),(379,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:39:15',NULL,1,77),(380,305923,'papel','papel estrasa',25,0,21312,'2023-04-10 17:39:25',NULL,1,77),(381,305923,'papel','papel estrasa',25,2,21312,'2023-04-10 17:39:34',NULL,1,77),(382,305923,'papel','papel estrasa',25,488,21312,'2023-04-10 17:39:49',NULL,1,77),(383,305923,'papel','papel estrasa',25,1,21312,'2023-04-10 17:40:00',NULL,1,77);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -918,7 +920,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `aÃ±adir_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB int, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB varchar(50), precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB varchar(30) , fk_marcaDB varchar(30), fk_lineaDB varchar(30), fk_categoriaDB varchar(30), fk_usuarioDB varchar(30),notas_ventaDB varchar(300), caducidadP varchar(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `aÃ±adir_producto`(idDB bigint, productDB varchar(50), tipoDB varchar(50) , extra_distinctiveDB varchar (50), stockDB double, kilogramosDB double, medidaDB double, mililitrosDB double, colorDB varchar(20), tamanoDB varchar(50), precioCompraDB double ,precioVentaDB double ,  fk_provedoresDB varchar(30) , fk_marcaDB varchar(30), fk_lineaDB varchar(30), fk_categoriaDB varchar(30), fk_usuarioDB varchar(30),notas_ventaDB varchar(300), caducidadP varchar(30),individuales_particionadoP varchar(10), precioVenta2P double)
 begin
 
 declare fechaRecibida1 datetime;
@@ -942,11 +944,12 @@ set razonDB = "anadido";
 
 	INSERT INTO pv_canoa_segunda.productos
 
-(id, product, tipo, extra_distinctive, stock, kilogramos, medida, mililitros, color, tamano, precioCompra, precioVenta, fecha, fk_provedores, fk_marca, fk_linea, fk_categoria,fk_usuario,notas_de_venta,caducidad)
+(id, product, tipo, extra_distinctive, stock, kilogramos, medida, mililitros, color, tamano, precioCompra, precioVenta, fecha, fk_provedores, fk_marca, fk_linea, fk_categoria, fk_usuario, notas_de_venta, caducidad, individuales_particionado, precioVenta2)
 
 
 
-VALUES(idDB, productDB, tipoDB, extra_distinctiveDB , stockDB, kilogramosDB, medidaDB, mililitrosDB, colorDB , tamanoDB, precioCompraDB ,precioVentaDB , now() ,  provedoresCast  ,marcaCast , lineaCast  , categoriaCast ,usuariosCast ,notas_ventaDB,fechaRecibida1);
+VALUES(idDB, productDB, tipoDB, extra_distinctiveDB , stockDB, kilogramosDB, medidaDB, mililitrosDB, colorDB , tamanoDB, precioCompraDB ,precioVentaDB , now() ,  provedoresCast  ,marcaCast , lineaCast  , categoriaCast ,usuariosCast ,notas_ventaDB,fechaRecibida1,individuales_particionadoP, precioVenta2P);
+
 
 
 
@@ -1161,8 +1164,13 @@ BEGIN
 
 
 
-SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive, productos.stock, productos.kilogramos, productos.medida, productos.mililitros, productos.color, productos.tamano, productos.precioCompra, productos.precioVenta, provedores.nombre ,marcas.marca , linea.linea , categoria.categoria , usuarios.nickname,productos.notas_de_venta  
-FROM pv_canoa_segunda.productos left join provedores on productos.fk_provedores = provedores.id  left join marcas on productos.fk_marca = marcas.id left join linea on productos.fk_linea = linea.id left join categoria on productos.fk_categoria = categoria.id  left join usuarios on productos.fk_usuario = usuarios.nickname where productos.id  = idDB ;
+SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive,
+productos.stock, productos.kilogramos, productos.medida, productos.mililitros, 
+productos.color, productos.tamano, productos.precioCompra, productos.precioVenta, 
+provedores.nombre ,marcas.marca , linea.linea , categoria.categoria , usuarios.nickname,
+productos.notas_de_venta,productos.precioVenta2 ,productos.caducidad,productos.individuales_particionado  
+FROM pv_canoa_segunda.productos left join provedores on productos.fk_provedores = provedores.id  
+left join marcas on productos.fk_marca = marcas.id left join linea on productos.fk_linea = linea.id left join categoria on productos.fk_categoria = categoria.id  left join usuarios on productos.fk_usuario = usuarios.nickname where productos.id  = idDB ;
 
 
 
@@ -1372,6 +1380,35 @@ begin
 (saldo_inicial, entradas, salidas, saldo_total, fecha, fk_idusuario)
 VALUES(saldo_inicialP, entradasP, salidasP, saldo_totalP, now(), fk_idusuarioP);
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `checkDoublePrice` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkDoublePrice`(idP bigint)
+begin
+
+
+declare checkStock int;
+
+set checkStock = (select stock  from pv_canoa_segunda.productos p where id = idP) ;
+if checkStock  > 0 then
+select id,product,individuales_particionado,precioVenta ,precioVenta2  from pv_canoa_segunda.productos p where id = idP; 
+else
+select false,false,false,false,false,false;
+end if;
+ 
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1816,38 +1853,31 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `generar_venta`(fk_productosDB bigint, cantidadDB double, totalDB double, fk_clientesDB int, fk_usuariosDB int,id_venta int)
-begin
+CREATE DEFINER=`root`@`localhost` PROCEDURE `generar_venta`(fk_productosDB bigint, cantidadDB decimal(10,3), totalDB decimal(10,2), fk_clientesDB int, fk_usuariosDB int,id_venta int)
+BEGIN
 	
-declare stock_disponible int;
-declare cantidad_recibida double;
-declare total_stock  double;
-
-declare productoIn varchar(100);
-declare distintivoIn  varchar(150); 
-declare precioIn  double;
-
-
-set productoIn = (select product from pv_canoa_segunda.productos where id = fk_productosDB);
-set distintivoIn  = (select tipo from pv_canoa_segunda.productos where id = fk_productosDB);
-set precioIn = (select precioVenta  from pv_canoa_segunda.productos where id = fk_productosDB);
-
-
-INSERT INTO pv_canoa_segunda.venta
-		
-(fk_productos, producto, distintivo1, precio, cantidad, total, fecha, fk_clientes, fk_usuarios,numero_venta)
-VALUES(fk_productosDB ,productoIn  ,distintivoIn  , precioIn  ,cantidadDB ,totalDB ,now(), fk_clientesDB ,fk_usuariosDB  ,id_venta);
+	DECLARE stock_disponible decimal(10,3);
+	DECLARE cantidad_recibida decimal(10,3);
+	DECLARE total_stock decimal(10,3);
 
-set stock_disponible = (select stock from pv_canoa_segunda.productos where  id = fk_productosDB  );
-set cantidad_recibida  = cantidadDB ;
+	DECLARE productoIn varchar(100);
+	DECLARE distintivoIn varchar(150);
+	DECLARE precioIn double;
 
-set total_stock  = (stock_disponible - cantidad_recibida );
+	SET productoIn = (SELECT product FROM pv_canoa_segunda.productos WHERE id = fk_productosDB);
+	SET distintivoIn = (SELECT tipo FROM pv_canoa_segunda.productos WHERE id = fk_productosDB);
+	SET precioIn = (SELECT precioVenta FROM pv_canoa_segunda.productos WHERE id = fk_productosDB);
 
-UPDATE pv_canoa_segunda.productos
+	INSERT INTO pv_canoa_segunda.venta (fk_productos, producto, distintivo1, precio, cantidad, total, fecha, fk_clientes, fk_usuarios, numero_venta)
+	VALUES (fk_productosDB, productoIn, distintivoIn, precioIn, cantidadDB, totalDB, NOW(), fk_clientesDB, fk_usuariosDB, id_venta);
 
-SET  stock= total_stock 
+	SET stock_disponible = (SELECT stock FROM pv_canoa_segunda.productos WHERE id = fk_productosDB);
+	SET cantidad_recibida = cantidadDB;
+	SET total_stock = (stock_disponible - cantidad_recibida);
 
-WHERE id= fk_productosDB ;
+	UPDATE pv_canoa_segunda.productos
+	SET stock = total_stock
+	WHERE id = fk_productosDB;
 
 END ;;
 DELIMITER ;
@@ -2215,7 +2245,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `productos_like`(in productDB varchar(50),in tipoDB varchar(50) ,in extra_distinctiveDB varchar (100),in stockDB varchar(50),in kilogramosDB varchar(50),in medidaDB varchar(50),in mililitrosDB varchar(50),in colorDB varchar(20),in tamanoDB varchar(20),in precioCompraDB varchar(10) ,in precioVentaDB varchar(10) ,in  fk_provedoresDB varchar(50) ,in fk_marcaDB varchar(50),in fk_lineaDB varchar(50),in fk_categoriaDB varchar(50),in fk_usuarioDB varchar(50),in notas_ventaDB varchar(300))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `productos_like`(in productDB varchar(50),in tipoDB varchar(50) ,in extra_distinctiveDB varchar (100),in stockDB varchar(50),in kilogramosDB varchar(50),in medidaDB varchar(50),in mililitrosDB varchar(50),in colorDB varchar(20),in tamanoDB varchar(20),in precioCompraDB varchar(10) ,in precioVentaDB varchar(10) ,in  fk_provedoresDB varchar(50) ,in fk_marcaDB varchar(50),in fk_lineaDB varchar(50),in fk_categoriaDB varchar(50),in fk_usuarioDB varchar(50),in notas_ventaDB varchar(300), in precioV2 varchar(15))
 begin
 	declare provedoresIn int;
 declare marcaIn int;
@@ -2231,7 +2261,7 @@ set usuarioIn  =  (select id from pv_canoa_segunda.usuarios  where   nickname  =
 
 
 
-	SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive, productos.stock, productos.kilogramos, productos.medida, productos.mililitros, productos.color, productos.tamano, productos.precioCompra, productos.precioVenta,  provedores.nombre , marcas.marca  , linea.linea , categoria.categoria , usuarios.nickname,notas_de_venta  
+	SELECT productos.id, productos.product, productos.tipo, productos.extra_distinctive, productos.stock, productos.kilogramos, productos.medida, productos.mililitros, productos.color, productos.tamano, productos.precioCompra, productos.precioVenta,  provedores.nombre , marcas.marca  , linea.linea , categoria.categoria , usuarios.nickname,notas_de_venta , precioVenta2  
 	FROM pv_canoa_segunda.productos 
 left join provedores on productos.fk_provedores = provedores.id  
 left join marcas on productos.fk_marca = marcas.id   
@@ -2239,7 +2269,7 @@ left join linea on productos.fk_linea = linea.id
 left join categoria on productos.fk_categoria  = categoria.id
 left join usuarios on productos.fk_usuario = usuarios.id 
 
-where product like concat('%',productDB,'%') || tipo  like concat('%',tipoDB,'%') || extra_distinctive  like concat('%',extra_distinctiveDB,'%') || stock  like concat('%',stockDB ,'%') || kilogramos  like concat('%',kilogramosDB,'%') || medida  like concat('%',medidaDB ,'%') || mililitros  like concat('%',mililitrosDB ,'%') || color  like concat('%',colorDB ,'%') || tamano  like concat('%',tamanoDB ,'%') || precioCompra  like concat('%',precioCompraDB ,'%') || precioVenta  like concat('%',precioVentaDB ,'%') || productos.fk_provedores   = provedoresIn  || productos.fk_marca = marcaIn  || productos.fk_linea = lineaIn  || productos.fk_categoria = categoriaIn || notas_de_venta  like concat("%",notas_ventaDB , "%") ;
+where product like concat('%',productDB,'%') || tipo  like concat('%',tipoDB,'%') || extra_distinctive  like concat('%',extra_distinctiveDB,'%') || stock  like concat('%',stockDB ,'%') || kilogramos  like concat('%',kilogramosDB,'%') || medida  like concat('%',medidaDB ,'%') || mililitros  like concat('%',mililitrosDB ,'%') || color  like concat('%',colorDB ,'%') || tamano  like concat('%',tamanoDB ,'%') || precioCompra  like concat('%',precioCompraDB ,'%') || precioVenta  like concat('%',precioVentaDB ,'%') || productos.fk_provedores   = provedoresIn  || productos.fk_marca = marcaIn  || productos.fk_linea = lineaIn  || productos.fk_categoria = categoriaIn || notas_de_venta  like concat("%",notas_ventaDB , "%") || precioVenta2  like concat('%',precioV2 ,'%');
 
 
 /*
@@ -2424,37 +2454,41 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `validar_usuario`(in iduser int, in 
 begin
 	
   declare  pass_in varchar (100) ;
-
 	declare salt varchar(50);
-
 set salt = '153624'; 
-
- /*SET nickname_in  = (SELECT nickname   FROM pv_canoa_segunda.usuarios   where id  = idDB);*/
-
-
  SET  pass_in  = (select cast (aes_decrypt( pass  ,153624) as char) from pv_canoa_segunda.usuarios  where id  = iduser);
-
-
-
-
 
  if (pass_in = passDB) then
 
-
 /*select "1" ;*/
- 
  set acceso = true;
 
 else
-
 
 /*select "0";*/
 set acceso = false;
 end if;
  
-
-
-
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `venta_glp` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `venta_glp`(idP bigint)
+begin
+	SELECT individuales_particionado
+FROM pv_canoa_segunda.productos where id = idP ;
 
 END ;;
 DELIMITER ;
@@ -3123,4 +3157,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-06 10:27:18
+-- Dump completed on 2023-04-10 17:40:55

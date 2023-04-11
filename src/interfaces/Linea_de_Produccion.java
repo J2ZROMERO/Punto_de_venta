@@ -44,7 +44,7 @@ public class Linea_de_Produccion extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,7 +58,7 @@ public class Linea_de_Produccion extends JFrame {
 		});
 		
 	}
-*/
+
 	
 	/**
 	 * Create the frame.

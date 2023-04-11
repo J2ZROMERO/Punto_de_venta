@@ -25,6 +25,8 @@ public class Metodos_numericos {
 		return Double.parseDouble(df.format(double_number));
 				
 	}
+	
+	
 
 
 }

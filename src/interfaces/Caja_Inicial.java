@@ -36,7 +36,7 @@ public class Caja_Inicial extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,7 +51,7 @@ public class Caja_Inicial extends JFrame {
 			}
 		});
 	}
-
+*/
 	/**
 	 * Create the frame.
 	 */

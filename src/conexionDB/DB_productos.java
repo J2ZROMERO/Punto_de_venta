@@ -305,7 +305,7 @@ cstm.setLong( 1,Long.parseLong(datos_campos[0].toString()));  //bigint (20)
 cstm.setString(2, datos_campos[1].toString() );	  				//varchar
 cstm.setString(3, datos_campos[2].toString() );	 				//varchar  				
 cstm.setString(4, datos_campos[3].toString() );                 //varchar
-cstm.setInt(5,Integer.parseInt( datos_campos[4].toString() ));	 				//smallint
+cstm.setDouble(5,Double.parseDouble(datos_campos[4].toString() ));	 				//smallin
 
 if(datos_campos[5].equals("")) {
 	cstm.setNull(6, java.sql.Types.NULL);

@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import conexionDB.DB_productos;
 import metodos_externos_necesarios.Metodos_numericos;
+import metodos_externos_necesarios.SoloDecimalTextField;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -94,8 +95,10 @@ public class Productos extends JFrame {
 	private JLabel lbl_alerta_7;
 	private JLabel lbl_alerta_8;
 	private JTextField txt_pv2;
-	private JLabel lbl_grm;
-
+	private JLabel lbl_grml;
+	private JLabel lbl_kl;
+	private JLabel lbl_metros;
+	private JLabel lbl_cent;
 	/**
 	 * Launch the application.
 	 */
@@ -171,6 +174,8 @@ public class Productos extends JFrame {
 	}
 
 	public Productos() {
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
 		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -185,7 +190,6 @@ public class Productos extends JFrame {
 			}
 		});
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1362, 681);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -337,14 +341,29 @@ public class Productos extends JFrame {
 						switch (datos[20].toString()){
 						case "CM":
 							ckb_cm.setSelected(true);
+								txt_grm.setVisible(true);
+								lbl_kl.setVisible(true);
+								lbl_grml.setVisible(true); 
+								txt_stock.setEditable(false);
+								txt_pv2.setEditable(true);
+								txt_pv2.setEnabled(true);
 							break;
 						case "GRM":
 							ckb_kg.setSelected(true);
-							
+								txt_metros.setVisible(true);
+								lbl_metros.setVisible(true);
+								lbl_cent.setVisible(true); 
+								txt_stock.setEditable(false);
+								txt_pv2.setEditable(true);
+								txt_pv2.setEnabled(true);
 							break;
 						case "PZA":
 							ckb_pza.setSelected(true);
+							txt_pv2.setEditable(true);
+							txt_pv2.setEnabled(true);
 							break;
+							
+							
 						}
 						}else {
 							ckb_pza.setSelected(false);
@@ -528,13 +547,13 @@ public class Productos extends JFrame {
 		panel.add(txt_distintivo_1);
 
 		JLabel lbl_atributos_basicos = new JLabel("<html><center>ATRIBUTOS PRODUCCION </center></html>");
-		lbl_atributos_basicos.setBounds(721, 30, 189, 23);
+		lbl_atributos_basicos.setBounds(797, 19, 189, 23);
 		lbl_atributos_basicos.setHorizontalAlignment(SwingConstants.LEFT);
 		lbl_atributos_basicos.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_atributos_basicos);
 
 		cbx_atributos_produccion = new JComboBox();
-		cbx_atributos_produccion.setBounds(507, 68, 167, 23);
+		cbx_atributos_produccion.setBounds(583, 57, 167, 23);
 		cbx_atributos_produccion.setFont(new Font("Dialog", Font.BOLD, 12));
 		cbx_atributos_produccion.setModel(new DefaultComboBoxModel(new String[] {"SELECCIONAR",  "KILOGRAMO", "MEDIDA","MILILITROS", "COLOR", "TAMAÑO"}));
 		cbx_atributos_produccion.addActionListener(new ActionListener() {
@@ -599,7 +618,7 @@ public class Productos extends JFrame {
 		panel.add(cbx_atributos_produccion);
 
 		JButton btn_limpiar_atributos_de_contenido = new JButton("");
-		btn_limpiar_atributos_de_contenido.setBounds(798, 204, 33, 32);
+		btn_limpiar_atributos_de_contenido.setBounds(874, 193, 33, 32);
 		btn_limpiar_atributos_de_contenido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -726,13 +745,13 @@ public class Productos extends JFrame {
 		panel.add(txt_producto);
 
 		JLabel lbl_detalles = new JLabel("<html><center>DETALLES FISICOS</center></html>");
-		lbl_detalles.setBounds(507, 28, 167, 23);
+		lbl_detalles.setBounds(583, 17, 167, 23);
 		lbl_detalles.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_detalles.setFont(new Font("Dialog", Font.BOLD, 13));
 		panel.add(lbl_detalles);
 
 		JButton btn_limpiar_atributos_de_contenido_1 = new JButton("");
-		btn_limpiar_atributos_de_contenido_1.setBounds(598, 251, 33, 32);
+		btn_limpiar_atributos_de_contenido_1.setBounds(674, 240, 33, 32);
 		btn_limpiar_atributos_de_contenido_1.setIcon(new ImageIcon(Productos.class.getResource("/imagenes/limpiar.png")));
 		btn_limpiar_atributos_de_contenido_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -742,7 +761,7 @@ public class Productos extends JFrame {
 		panel.add(btn_limpiar_atributos_de_contenido_1);
 
 		JButton btn_ver_atributos = new JButton("VER ATRIBUTOS");
-		btn_ver_atributos.setBounds(721, 52, 189, 23);
+		btn_ver_atributos.setBounds(797, 41, 189, 23);
 		btn_ver_atributos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Productos_Tabla_Buscar interfaz_busqueda = new Productos_Tabla_Buscar();
@@ -768,79 +787,79 @@ public class Productos extends JFrame {
 
 		txt_marca = new JTextField();
 		txt_marca.setEditable(false);
-		txt_marca.setBounds(721, 84, 189, 20);
+		txt_marca.setBounds(797, 73, 189, 20);
 		panel.add(txt_marca);
 		txt_marca.setColumns(10);
 
 		txt_linea = new JTextField();
 		txt_linea.setEditable(false);
-		txt_linea.setBounds(721, 115, 189, 20);
+		txt_linea.setBounds(797, 104, 189, 20);
 		txt_linea.setColumns(10);
 		panel.add(txt_linea);
 
 		txt_categoria = new JTextField();
 		txt_categoria.setEditable(false);
-		txt_categoria.setBounds(721, 142, 189, 20);
+		txt_categoria.setBounds(797, 131, 189, 20);
 		txt_categoria.setColumns(10);
 		panel.add(txt_categoria);
 
 		txt_provedores = new JTextField();
 		txt_provedores.setEditable(false);
-		txt_provedores.setBounds(721, 173, 189, 20);
+		txt_provedores.setBounds(797, 162, 189, 20);
 		txt_provedores.setColumns(10);
 		panel.add(txt_provedores);
 
 		txt_color = new JTextField();
-		txt_color.setBounds(557, 189, 117, 20);
+		txt_color.setBounds(633, 178, 117, 20);
 		txt_color.setColumns(10);
 		panel.add(txt_color);
 
 		txt_mililitros = new JTextField();
-		txt_mililitros.setBounds(557, 158, 117, 20);
+		txt_mililitros.setBounds(633, 147, 117, 20);
 		txt_mililitros.setColumns(10);
 		panel.add(txt_mililitros);
 
 		txt_cm = new JTextField();
-		txt_cm.setBounds(557, 131, 117, 20);
+		txt_cm.setBounds(633, 120, 117, 20);
 		txt_cm.setColumns(10);
 		panel.add(txt_cm);
 
 		txt_kilos = new JTextField();
-		txt_kilos.setBounds(557, 100, 117, 20);
+		txt_kilos.setBounds(633, 89, 117, 20);
 		txt_kilos.setColumns(10);
 		panel.add(txt_kilos);
 
 		txt_tamano = new JTextField();
-		txt_tamano.setBounds(557, 220, 117, 20);
+		txt_tamano.setBounds(633, 209, 117, 20);
 		txt_tamano.setColumns(10);
 		panel.add(txt_tamano);
 
 		JLabel lblNewLabel = new JLabel("KG / G");
-		lblNewLabel.setBounds(480, 103, 73, 14);
+		lblNewLabel.setBounds(556, 92, 73, 14);
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
 
 		JLabel lblCm = new JLabel("M / CM");
-		lblCm.setBounds(480, 134, 73, 14);
+		lblCm.setBounds(556, 123, 73, 14);
 		lblCm.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblCm.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblCm);
 
 		JLabel lblMl = new JLabel("L / ML");
-		lblMl.setBounds(480, 161, 73, 14);
+		lblMl.setBounds(556, 150, 73, 14);
 		lblMl.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblMl.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblMl);
 
 		JLabel lblColor = new JLabel("COLOR");
-		lblColor.setBounds(480, 192, 73, 14);
+		lblColor.setBounds(556, 181, 73, 14);
 		lblColor.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblColor.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblColor);
 
 		JLabel lblTamao = new JLabel("TAMAÑO");
-		lblTamao.setBounds(480, 223, 73, 14);
+		lblTamao.setBounds(556, 212, 73, 14);
 		lblTamao.setFont(new Font("Dialog", Font.BOLD, 12));
 		lblTamao.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblTamao);
@@ -1051,7 +1070,7 @@ public class Productos extends JFrame {
 		panel.add(ckb_kg);
 
 		ckb_cm = new JCheckBox("CM");
-		ckb_cm.setBounds(113, 213, 21, 23);
+		ckb_cm.setBounds(120, 208, 21, 23);
 		panel.add(ckb_cm);
 
 		JLabel lbl_kg = new JLabel("GRM / ML");
@@ -1061,7 +1080,7 @@ public class Productos extends JFrame {
 
 		JLabel lbl_cm = new JLabel("CM");
 		lbl_cm.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_cm.setBounds(133, 219, 46, 14);
+		lbl_cm.setBounds(139, 226, 46, 14);
 		panel.add(lbl_cm);
 
 		JLabel lbl_precio_de_venta_2 = new JLabel("PRECIO DE VENTA 2");
@@ -1099,14 +1118,14 @@ public class Productos extends JFrame {
 		btn_ver_movimientos_1.setBounds(988, 485, 288, 38);
 		panel.add(btn_ver_movimientos_1);
 		
-		lbl_grm = new JLabel("gramos");
-		lbl_grm.setBounds(450, 103, 46, 14);
-		panel.add(lbl_grm);
-		lbl_grm.setVisible(false);
+		lbl_grml = new JLabel("GRM / ML");
+		lbl_grml.setBounds(446, 106, 52, 14);
+		panel.add(lbl_grml);
+		lbl_grml.setVisible(false);
 		
-		confirmacionCheckbox(ckb_kg, ckb_cm, ckb_pza, lbl_grm);
-		confirmacionCheckbox(ckb_cm,ckb_kg, ckb_pza,lbl_grm);
-		confirmacionCheckbox(ckb_pza,ckb_kg, ckb_cm,lbl_grm);
+		confirmacionCheckbox(ckb_kg, ckb_cm, ckb_pza, lbl_grml);
+		confirmacionCheckbox(ckb_cm,ckb_kg, ckb_pza,lbl_grml);
+		confirmacionCheckbox(ckb_pza,ckb_kg, ckb_cm,lbl_grml);
 		recibeEntero(txt_stock);
 		recibeEntero(txt_id);
 		recibeDecimal(txt_precio_de_compra);
@@ -1116,7 +1135,7 @@ public class Productos extends JFrame {
 		recibeDecimal(txt_cm);
 		recibeDecimal(txt_mililitros);
 		
-		txt_grm = new JTextField();
+		txt_grm = new SoloDecimalTextField();
 		txt_grm.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -1127,9 +1146,41 @@ public class Productos extends JFrame {
 				txt_stock.setText(valor);
 			}
 		});
-		txt_grm.setBounds(340, 70, 86, 20);
+		txt_grm.setBounds(323, 73, 117, 20);
 		panel.add(txt_grm);
 		txt_grm.setColumns(10);
+		
+		lbl_kl = new JLabel("KG / LT");
+		lbl_kl.setBounds(446, 79, 46, 14);
+		panel.add(lbl_kl);
+		
+		txt_metros = new JTextField();
+		txt_metros.setBounds(323, 73, 117, 20);
+		panel.add(txt_metros);
+		txt_metros.setColumns(10);
+		txt_metros.setVisible(false);
+		txt_metros.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+			   String inputmetros = txt_metros.getText().equalsIgnoreCase("")? "0":txt_metros.getText() ;
+			   
+				String valor = String.valueOf(Metodos_numericos.convierteAdecimal(Double.parseDouble( inputmetros) ) * 100 );
+				
+				txt_stock.setText(valor);
+			}
+		});
+		
+		lbl_metros = new JLabel("Metros");
+		lbl_metros.setBounds(446, 79, 46, 14);
+		panel.add(lbl_metros);
+		lbl_metros.setVisible(false);
+		
+		
+		lbl_cent = new JLabel("Centimetros");
+		lbl_cent.setBounds(446, 103, 76, 14);
+		panel.add(lbl_cent);
+		lbl_cent.setVisible(false);
+		lbl_kl.setVisible(false);
 		
 		
 		 
@@ -1178,7 +1229,7 @@ public class Productos extends JFrame {
 								datosDB[18] =  ckb_confirmaCaducidad.isSelected()? spinnerCaducidad : "";
 								datosDB[19] =  "";
 								datosDB[20] =  0.0;
-
+			
 							}
 							JCheckBox Punitario [] = {ckb_cm,ckb_kg,ckb_pza};
 							String datoEncontrado = "";
@@ -1201,7 +1252,7 @@ public class Productos extends JFrame {
 									datosDB[13] = txt_marca.getText();
 									datosDB[14] = txt_linea.getText();
 									datosDB[15] = txt_categoria.getText();
-									datosDB[16] =  "enu_principal.nombre_usuario";
+									datosDB[16] =  Menu_principal.nombre_usuario;
 									datosDB[17] =  txt_notas_de_venta.getText();
 									datosDB[18] =  ckb_confirmaCaducidad.isSelected()? spinnerCaducidad : "";
 									datosDB[19] =  datoEncontrado;
@@ -1220,8 +1271,16 @@ public class Productos extends JFrame {
 							{
 
 								DB_productos.anadir(datosDB);
-								System.out.println("datos enviados");
+								
+								txt_grm.setVisible(false);
+								txt_metros.setVisible(false);
+								lbl_kl.setVisible(false);
+								lbl_metros.setVisible(false);
+								lbl_grml.setVisible(false);
+								lbl_grml.setVisible(false);			
+								JOptionPane.showMessageDialog(null,"Añadido");
 								ckb_confirmaCaducidad.setSelected(false);
+								txt_stock.setEditable(true);
 								Limpiar_Campos();
 							} catch (SQLException e1) {
 								// TODO Auto-generated catch block
@@ -1327,25 +1386,43 @@ public class Productos extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				
 				if(recibeEvento.isSelected() == false) {	
 					recibeEvento.setSelected(false);
 					txt_pv2.setEditable(false);
 					txt_pv2.setEnabled(false);
 					txt_pv2.setText("");
 					txt_grm.setVisible(false);
-					grm_label.setVisible(false);
+					lbl_kl.setVisible(false);
+					lbl_grml.setVisible(false);
 					txt_stock.setEditable(true);
+					txt_metros.setVisible(false);
+					lbl_metros.setVisible(false);
+					lbl_cent.setVisible(false); 
+					txt_stock.setText(id_productos);
 				}else if (recibeEvento.isSelected() == true){
-					txt_grm.setVisible(true);
+					
 					recibeEvento.setSelected(true);
 					txt_pv2.setEditable(true);
 					txt_pv2.setEnabled(true);
-					txt_stock.setEditable(false);
-					grm_label.setVisible(true);
+					
+					
 					bloqueado1.setSelected(false);
 					bloqueado2.setSelected(false);
 				}
 
+				if((recibeEvento.getText().equalsIgnoreCase("GRM") && recibeEvento.isSelected() == true)) {
+					txt_grm.setVisible(true);
+					lbl_kl.setVisible(true);
+					lbl_grml.setVisible(true); 
+					txt_stock.setEditable(false);
+				}
+				if((recibeEvento.getText().equalsIgnoreCase("CM") && recibeEvento.isSelected() == true)) {
+					txt_metros.setVisible(true);
+					lbl_metros.setVisible(true);
+					lbl_cent.setVisible(true); 
+					txt_stock.setEditable(false);
+				}
 
 
 			}
@@ -1353,7 +1430,8 @@ public class Productos extends JFrame {
 	}
 
 	int contadork = 0;
-	private JTextField txt_grm;
+	private SoloDecimalTextField txt_grm;
+	private JTextField txt_metros;
 	public void recibeDecimal (JTextField campo) {
 		campo.addKeyListener(new KeyAdapter() {
 

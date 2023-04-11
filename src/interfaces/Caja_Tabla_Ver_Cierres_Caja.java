@@ -28,7 +28,7 @@ public class Caja_Tabla_Ver_Cierres_Caja extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,12 +44,12 @@ public class Caja_Tabla_Ver_Cierres_Caja extends JFrame {
 			}
 		});
 	}
-*/
+
 	/**
 	 * Create the frame.
 	 */
 	public Caja_Tabla_Ver_Cierres_Caja() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 870, 416);
 		contentPane = new JPanel();

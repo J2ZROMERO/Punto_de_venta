@@ -24,15 +24,8 @@ public class DB_ventas {
 		// TODO Auto-generated method stub
 		try {
 		
-			SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
-		    Date now = new Date();
-		    String fechaActual = sdfDate.format(now);
-
-
-			System.out.println(DB_ventas.calcularTotalVentasDia(fechaActual,1)); 
 			
-System.out.println(			DB_ventas.checkStockAndDoublePrice(100L)[0]);
-			
+			System.out.println(DB_ventas.buscar_gramos_pza_litro("305923"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,8 +67,10 @@ long id_venta_generada = 0;
 
 
 
+System.out.println("necesiamos ver que imprimer" + datos_campos[1]);
+
 cstm.setLong( 1,Long.parseLong(datos_campos[0].toString()));  
-cstm.setLong(2,  Long.parseLong(  datos_campos[1].toString()) );	  				//varchar
+cstm.setDouble(2,  Double.parseDouble(datos_campos[1].toString()) );	  				//varchar
 cstm.setDouble(3, Double.parseDouble(  datos_campos[2].toString()) );	 				//varchar  				
 if(datos_campos[3].equals("")) {
 	cstm.setNull(4, java.sql.Types.NULL);
@@ -530,5 +525,40 @@ public static Object[] checkStockAndDoublePrice(Long id) throws SQLException {
 private  Object[][] dataPrices;	
 private  Object columNamesPrecios[];
 private	 DefaultTableModel choosePrice = new DefaultTableModel();
+
+public  static String buscar_gramos_pza_litro(String id) throws SQLException{
+
+		
+	String valor = "";
+	    try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+	 		   CallableStatement cstm = con.prepareCall("{ CALL  pv_canoa_segunda.venta_glp(?) }") )   // dentro statement connection and resulset
+	   
+	    {	
+	    	
+	    	
+	    	Long idl = Long.parseLong(id);
+	    	
+	    	 cstm.setLong(1, idl );
+			 
+			 ResultSet rs = cstm.executeQuery();
+			 rs.next(); 
+			 
+			 	  
+	           
+			
+	    	 valor =  rs.getString(1);
+	    	
+	     
+	  
+
+	    	
+	    	
+	    	
+	    	
+	    }
+		return  valor;
+	}
+
+
 }
 
