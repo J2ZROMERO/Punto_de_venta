@@ -1,5 +1,5 @@
 package interfaces.Provedores;
-
+ 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import conexionDB.DB_provedores;
 import conexionDB.DB_usuarios;
+import interfaces.Menu_principal;
 
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
@@ -62,7 +63,7 @@ public class Proveedores extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -76,7 +77,7 @@ public class Proveedores extends JFrame {
 			}
 		});
 	}
-	*/
+	
 	public void Validar_Campos() {
 		if(!"".equals(txt_nombre.getText())) {
 			lbl_alerta_2.setForeground(new Color(186, 104, 200));
@@ -234,20 +235,20 @@ public class Proveedores extends JFrame {
 		});
 		panel.add(btn_limpiar_campos);
 		
-		JButton btn_añadir = new JButton("");
-		btn_añadir.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/anadir.png")));
-		btn_añadir.addActionListener(new ActionListener() {
+		JButton btn_anadir = new JButton("");
+		btn_anadir.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/anadir.png")));
+		btn_anadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_añadir.setFont(new Font("Dialog", Font.BOLD, 12));
-		btn_añadir.setBounds(468, 60, 159, 46);
+		btn_anadir.setFont(new Font("Dialog", Font.BOLD, 12));
+		btn_anadir.setBounds(468, 60, 159, 46);
 		
 		
 		
 		
 		
-		btn_añadir.addMouseListener(new MouseAdapter() {
+		btn_anadir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -328,7 +329,7 @@ public class Proveedores extends JFrame {
 				
 			}
 		});
-		panel.add(btn_añadir);
+		panel.add(btn_anadir);
 		
 		JButton btn_actualizar = new JButton("");
 		btn_actualizar.setIcon(new ImageIcon(Proveedores.class.getResource("/imagenes/actualizar.png")));
