@@ -25,6 +25,7 @@ import conexionDB.DB_caja;
 import conexionDB.DB_productos;
 import conexionDB.DB_usuarios;
 import conexionDB.DB_ventas;
+import interfaces.Caja.Caja_Inicial;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;

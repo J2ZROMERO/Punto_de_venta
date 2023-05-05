@@ -33,6 +33,18 @@ import javax.swing.border.LineBorder;
 import conexionDB.DB_caja;
 import conexionDB.DB_devoluciones_perdidas;
 import conexionDB.DB_ventas;
+import interfaces.Bar_code.Bar_Code;
+import interfaces.Caja.Caja;
+import interfaces.Caja.Caja_Inicial;
+import interfaces.Categoria.Categorias;
+import interfaces.Client.Clientes;
+import interfaces.Linea.Linea_de_Produccion;
+import interfaces.Marcas.Marcas;
+import interfaces.Producto.Devoluciones_Perdidas;
+import interfaces.Producto.Productos;
+import interfaces.Provedores.Proveedores;
+import interfaces.Usuarios.Usuarios;
+import interfaces.Ventas.Ventas;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

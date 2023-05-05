@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
-import interfaces.Clientes_Tabla_Ver_Clientes;
+import interfaces.Client.Clientes_Tabla_Ver_Clientes;
 
 public class DB_devoluciones_perdidas {
 

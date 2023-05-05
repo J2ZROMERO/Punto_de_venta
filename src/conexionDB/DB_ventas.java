@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import metodos_externos_necesarios.Metodos_numericos;
+import metodos_personalizados.Metodos_numericos;
 
 //import com.itextpdf.text.log.SysoCounter;
 
@@ -170,17 +170,7 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 		  				modelo.setValueAt (suma,contador , 5);
 		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);
 		  			}
-	  			}else {
-	  				if( stock_disponible > solicitud  ) {
-		  				double suma = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
-						
-		  				suma+=.25;
-		  				modelo.setValueAt (suma,contador , 5);
-		  	  			modelo.setValueAt(suma*(precio*cantidad), contador ,6);
-		  			}
-	  			}
-
-	  			
+	  			} 			
 	  			
 	  			
 	  	  	  }else {
@@ -223,16 +213,18 @@ public static Object[] add_row_double_precio(long id,DefaultTableModel modelo,do
 	double precio = 0.0;
 	double cantidad = 0.000;
 	Object[] dat ;
-	   int conteo = 0;
-       try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
+	int conteo = 0;
+    
+	try(Connection con = DriverManager.getConnection(Maria_db.URL,Maria_db.user,Maria_db.pass); 
 CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_ventas(?) }"))// dentro statement connection and resulset      
     		   {	         	
- cstm.setLong(1, id);
+			cstm.setLong(1, id);
     	   
     	   
-    	   ResultSet rs= cstm.executeQuery();
+    	    ResultSet rs= cstm.executeQuery();
      int contador = 0;
-			dat = new Object[9];
+	
+     dat = new Object[9];
 			
   	  		 while(rs.next()) {
   	    		for(int i =0 ; i <= modelo.getRowCount()-1;i++) {
@@ -250,7 +242,7 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
   	  			dat[4]= Metodos_numericos.convierteAdecimal(segundo_precio);
   	  			dat[5]=(1.000);
   	  			precio =(double) dat[4];
-  	  	        cantidad= Metodos_numericos.convierteAkilogramos((double) dat[5]);
+  	  	        cantidad= Double.parseDouble(Metodos_numericos.convierteAkilogramos(Double.parseDouble(dat[5].toString())));
   	  			dat[6]= (cantidad*precio);
   	  			dat[7]= (rs.getString(6));
   	  	      	
@@ -279,15 +271,15 @@ CallableStatement cstm = con.prepareCall("{ CALL pv_canoa_segunda.buscar_id_vent
 	  			double stock_disponible = Double.parseDouble((modelo.getValueAt(contador, 3).toString()));
 	  		double solicitud = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
 	  			
-	  			
-	  			if( solicitud >= stock_disponible) {
-	  			}else {
-	  					Double suma = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
-		  				suma+=.25;
-		  				dat[8]= suma;
-		  				modelo.setValueAt (suma,contador , 5);
-		  				Double precioUnicoDoble = Double.parseDouble(modelo.getValueAt(contador, 4).toString());
-		  	  			modelo.setValueAt(suma*(Metodos_numericos.convierteAdecimal(precioUnicoDoble)*cantidad), contador ,6);		  			
+	  			// workign in this feature
+	  			if( solicitud <= stock_disponible) {
+	  				
+	  				Double suma = Double.parseDouble((modelo.getValueAt(contador, 5).toString()));
+	  				suma+=.100;
+	  				dat[8]= suma;
+	  				modelo.setValueAt (suma,contador , 5);
+	  				Double precioUnicoDoble = Double.parseDouble(modelo.getValueAt(contador, 4).toString());
+	  				modelo.setValueAt(suma*(Metodos_numericos.convierteAdecimal(precioUnicoDoble)*cantidad), contador ,6);		  			
 	  			}
 	  			
 	  	  	  }else {
